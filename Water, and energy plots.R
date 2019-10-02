@@ -165,7 +165,6 @@ p_energy <- ggplot(energy, aes(x=reorder(NAME_1,-total_demand),fill=scenario)) +
   facet_grid(energy_type~country,scales='free_x',space='free_x') +
   theme_minimal() + theme(legend.position="bottom",legend.title = element_blank(),axis.text.x = element_text(angle = 45,hjust = 1)) #+ coord_flip()
 
-print(p_energy)
 
 # ggsave('/Users/camo/Desktop/KTH Work/NWSAS project/water_demand.tiff',p_water,width = 7, height = 5, units='in',dpi=300)
 ggsave(paste0(folder,'water_demand.png'),p_water,width = 8, height = 4, units='in', dpi = 300)
@@ -176,6 +175,8 @@ ggsave(paste0(folder,'water_demand.pdf'),p_water,width = 8, height = 5, units='i
 ggsave(paste0(folder,'water_intensity.pdf'),p_water_int,width = 8, height = 5, units='in')
 ggsave(paste0(folder,'energy_demand.pdf'),p_energy,width = 8, height = 7, units='in')
 
+
+####### sttatistics calculations ###########
 algeria_water = sum(subset(water, scenario == 'Scenario 1: Surface irrigation' & country == 'Algeria')['water'])/1000000
 libya_water = sum(subset(water, scenario == 'Scenario 1: Surface irrigation' & country == 'Libya')['water'])/1000000
 tunisia_water = sum(subset(water, scenario == 'Scenario 1: Surface irrigation' & country == 'Tunisia')['water'])/1000000
