@@ -1,11 +1,6 @@
 #Standard library imports
-import pandas as pd
 from pandas import read_csv
-import numpy as np
-import math
-
-#Related third party imports
-import pyeto
+from pandas import read_excel
 
 #Local application/library specific imports
 from agrodem.water_demand import (
@@ -15,16 +10,12 @@ from agrodem.water_demand import (
     get_kc_list,
     get_evap_i,
     get_eto,
+    get_eff_rainfall_i,
     get_effective_rainfall,
-    get_kc_i,
+    get_season_days,
+    get_calendar_days,
     get_kc_values,
-    get_harvest_fraction,
 )
-
-math.exp = np.exp
-math.pow = np.power
-math.sqrt = np.sqrt
-
 
 class Model():
     property_1 = None
@@ -36,7 +27,17 @@ class Model():
     tmin = 'tmin'
     tmax = 'tmax'
     tavg = 'tavg'
-    crop_share = 'CropShare'
+    eff = 'eff_'
+    prec = 'prec'
+    kc = 'kc_'
+    crop_share = 'crop_share'
+    crop_area = 'crop_area'
+    seasons = ['init', 'dev', 'mid', 'late']
+    start = 'start'
+    end = 'end'
+    crop_calendar = None
+    ky_dict = {}
+    kc_dict = {}
     pumping_hours_per_day = 10
     deff = 1
     aeff = 0.65
@@ -44,7 +45,9 @@ class Model():
     kc_values = {}
     def __init__(self, df, eto = eto, lat = lat, elevation = elevation,
                  wind = wind, srad = srad, tmin = tmin, tmax = tmax, 
-                 tavg = tavg, crop_share = crop_share,
+                 tavg = tavg, crop_share = crop_share, crop_area = crop_area,
+                 seasons = seasons, start = start, end = end, 
+                 crop_calendar = crop_calendar,
                  pumping_hours_per_day = pumping_hours_per_day,
                  deff = deff, aeff = aeff):
         self.df = df
@@ -57,6 +60,11 @@ class Model():
         self.tmax = tmax
         self.tavg = tavg
         self.crop_share = crop_share
+        self.crop_area = crop_area
+        self.seasons = seasons
+        self.start = start 
+        self.end = end
+        self.crop_calendar = crop_calendar
         self.pumping_hours_per_day = 10
         self.deff = 1
         self.aeff = 0.65
@@ -84,7 +92,7 @@ class Model():
             set_cropland_share(self.df, crop_var, geo_boundary = geo_boundary, 
                        boundary_name = boundary_name, crop_share = self.crop_share)
         else:
-            return set_cropland_share(self.df, crop_var, 
+            return set_cropland_share(self.df.copy(), crop_var, 
                                       geo_boundary = geo_boundary, 
                                       boundary_name = boundary_name, 
                                       crop_share = self.crop_share)
@@ -93,23 +101,48 @@ class Model():
         if inplace:
             get_ky_list(self.df, crop_share = self.crop_share)
         else:
-            return get_ky_list(self.df, crop_share = self.crop_share)
+            return get_ky_list(self.df.copy(), crop_share = self.crop_share)
            
     def get_kc_list(self, inplace = False):
         if inplace:
             get_kc_list(self.df, crop_share = self.crop_share)
         else:
-            return get_kc_list(self.df, crop_share = self.crop_share)
+            return get_kc_list(self.df.copy(), crop_share = self.crop_share)
     
     def get_eto(self, inplace = False):
         if inplace:
-            get_eto(self.df, self.eto, self.lat, self.elevation, self.wind, 
-                    self.srad, self.tmin, self.tmax, self.tavg)
+            get_eto(self.df, eto = self.eto, lat = self.lat, 
+                    elevation = self.elevation, wind = self.wind, 
+                    srad = self.srad, tmin = self.tmin, 
+                    tmax = self.tmax, tavg = self.tavg)
         else:
-            return get_eto(self.df, self.eto, self.lat, self.elevation, self.wind, 
-                           self.srad, self.tmin, self.tmax, self.tavg)
-                
-    get_evap_i = staticmethod(get_evap_i)
-    get_effective_rainfall = staticmethod(get_effective_rainfall)
-    get_kc_i = staticmethod(get_kc_i)
-    get_harvest_fraction = staticmethod(get_harvest_fraction)
+            return get_eto(self.df.copy(), eto = self.eto, lat = self.lat, 
+                           elevation = self.elevation, wind = self.wind, 
+                           srad = self.srad, tmin = self.tmin, 
+                           tmax = self.tmax, tavg = self.tavg)
+    
+    def get_effective_rainfall(self, inplace = False):
+        if inplace:
+            get_effective_rainfall(self.df, eff = self.eff, prec = self.prec, 
+                                   eto = self.eto)
+        else:
+            return get_effective_rainfall(self.df.copy(), eff = self.eff, 
+                                          prec = self.prec, eto = self.eto)
+                                          
+    def get_calendar_days(self, inplace = False):
+        if inplace:
+            get_calendar_days(self.crop_calendar, seasons = self.seasons, 
+                              start = self.start, end = self.end)
+        else:
+            return get_calendar_days(self.crop_calendar.copy(), seasons = self.seasons, 
+                                     start = self.start, end = self.end)
+                                     
+    def get_kc_values(self, inplace = False):
+        if inplace:
+            get_kc_values(crop_calendar = self.crop_calendar, 
+                          seasons = self.seasons, kc_dict = self.kc_dict,
+                          start = self.start, end = self.end, kc = self.kc)
+        else:
+            return get_kc_values(crop_calendar = self.crop_calendar.copy(), 
+                                 seasons = self.seasons, kc_dict = self.kc_dict,
+                                 start = self.start, end = self.end, kc = self.kc)

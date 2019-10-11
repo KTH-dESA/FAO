@@ -1,3 +1,15 @@
+#Standard library imports
+import pandas as pd
+import numpy as np
+import math
+
+#Related third party imports
+import pyeto
+
+math.exp = np.exp
+math.pow = np.power
+math.sqrt = np.sqrt
+
 #### default values:
 eto = 'ETo_'
 lat = 'lat'
@@ -10,7 +22,10 @@ tavg = 'tavg'
 eff = 'eff_'
 prec = 'prec'
 kc = 'kc_'
-crop_share = 'CropShare'
+crop_share = 'crop_share'
+crop_area = 'crop_area'
+start = 'start'
+end = 'end'
 
 def test(var):
     print(var)
@@ -98,12 +113,26 @@ def get_eto(df, eto = eto, lat = lat, elevation = elevation,
 def get_eff_rainfall_i(prec,eto):
     return (1.253*((prec**0.824)-2.935))*10**(0.001*eto)
     
-def get_effective_rainfall(df, eff = 'eff_', prec = 'prec', eto = eto):
-    df['{}{}'.format(eff, i)]=0
+def get_effective_rainfall(df, eff = eff, prec = prec, eto = eto):
     for i in range(1,13):
+        df['{}{}'.format(eff, i)]=0
         df.loc[df['{}{}'.format(prec, i)] < 12.5, '{}{}'.format(eff, i)] = df['{}{}'.format(prec, i)]/30
         df.loc[df['{}{}'.format(prec, i)] >= 12.5, '{}{}'.format(eff, i)] = get_eff_rainfall_i(df['{}{}'.format(prec, i)],df['{}{}'.format(eto, i)])/30 
+    return df
     
+def get_season_days(crop_calendar, season, start = start, end = end):
+    season_start = pd.to_datetime(crop_calendar["_".join([season, start])], 
+                                  format='%d/%m')
+    season_end = pd.to_datetime(crop_calendar["_".join([season, end])], 
+                                format='%d/%m')
+    crop_calendar["_".join([season, 'days'])] = ((season_end - season_start).dt.days+1) % 365
+    return crop_calendar
+
+def get_calendar_days(crop_calendar, seasons, start = start, end = end):
+    for season in seasons:
+        crop_calendar = get_season_days(crop_calendar, season, start = start, end = end)
+    return crop_calendar
+
 def get_kc_i(plantation,Li,Ld,Lm,Le,kci,kcd,kcm,kce,isodate):
     """
     Each crop goes through four growing stages: 
@@ -180,30 +209,38 @@ def get_kc_i(plantation,Li,Ld,Lm,Le,kci,kcd,kcm,kce,isodate):
     
     return ckc
 
-def get_kc_values(df, kc = kc):
+def get_kc_values(crop_calendar, seasons, kc_dict, start = start, 
+                  end = end, kc = kc):
     for i in range(1,13):
-        mode['{}{}'.format(kc, i)]=0
+        crop_calendar['{}{}'.format(kc, i)]=0
         
-    for index,row in mode.iterrows():
-        crop = row['Mode']
+    for index,row in crop_calendar.iterrows():
+        crop = row['crop']
         for i in range(0,12):
-            init1_start = pd.to_datetime(mode['init_start'].iloc[index], format='%d/%m') #read the plant start date from excel. 
-            day_start= (init1_start.day+1-31)%31   #what does this represent??   
+            init_start = pd.to_datetime(crop_calendar['_'.join([seasons[0], start])].iloc[index], 
+                                         format='%d/%m') #read the plant start date from excel. 
+            day_start= (init_start.day+1-31)%31   #what does this represent??   
             
-            if (init1_start.day-1==30):
-                month_start = (init1_start.month+1-12)%12  #next month
+            if (init_start.day-1==30):
+                month_start = (init_start.month+1-12)%12  #next month
             else:
-                month_start = (init1_start.month-12)%12  #the current month
+                month_start = (init_start.month-12)%12  #the current month
                 
             month_start = (month_start+i)%12
             if (month_start==0):
                 month_start = 12
-            mode.loc[index,'kc_{}'.format(month_start)] = get_kc_i(mode['init_start'].iloc[index],mode['init_days'].iloc[index],
-                                                             mode['dev_days'].iloc[index],mode['mid_days'].iloc[index],
-                                                             mode['late_days'].iloc[index],
-                                                             kc_dict[crop][0],kc_dict[crop][1],kc_dict[crop][2],kc_dict[crop][3],
-                                                             '{}/{}'.format(day_start,month_start))
-    return df
+            crop_calendar.loc[index,'{}{}'.format(kc, month_start)] = \
+                get_kc_i(crop_calendar['_'.join([seasons[0], start])].iloc[index],
+                crop_calendar['_'.join([seasons[0], 'days'])].iloc[index],
+                crop_calendar['_'.join([seasons[1], 'days'])].iloc[index],
+                crop_calendar['_'.join([seasons[2], 'days'])].iloc[index],
+                crop_calendar['_'.join([seasons[3], 'days'])].iloc[index],
+                kc_dict[crop][0],
+                kc_dict[crop][1],
+                kc_dict[crop][2],
+                kc_dict[crop][3],
+                '{}/{}'.format(day_start,month_start))
+    return crop_calendar
 
 def get_harvest_fraction(i,crop,init,late):
     if i != 12:
