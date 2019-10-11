@@ -10,11 +10,44 @@ tavg = 'tavg'
 eff = 'eff_'
 prec = 'prec'
 kc = 'kc_'
+crop_share = 'CropShare'
 
 def test(var):
     print(var)
+    
+def set_cropland_share(df, crop_var, geo_boundary = 'global', 
+                       boundary_name = None, crop_share = crop_share):
+    if type(crop_var)!= dict:
+        df[crop_share] = [{}]*df.shape[0]
+        crop_list = set(df[crop_var])
+        crop_dic = {i: 0 for i in crop_list}
+        crop_dic_list = []
+        for crop in crop_list:
+            temp_dic = crop_dic.copy()
+            temp_dic[crop] = 1
+            df.loc[df[crop_var] == crop, crop_share] = [temp_dic]
+    else:
+        if geo_boundary == 'global':
+            df[crop_share] = [crop_var]*df.shape[0]
+        else:
+            if boundary_name != None:
+                if crop_share not in df.columns:
+                    df[crop_share] = [{}]*df.shape[0]
 
-def evap_i(lat,elev,wind,srad,tmin,tmax,tavg,month):
+                df.loc[df[geo_boundary]==boundary_name, crop_share] = [crop_var]
+            else:
+                print('Please provide a geo_boundary (e.g. "Province") and a boundary_name (e.g. "Name of province")')
+    return df
+  
+def get_ky_list(df, crop_share = crop_share):
+    temp_dic = {i: 0 for i in df.loc[0,crop_share].keys()}
+    return temp_dic
+    
+def get_kc_list(df, crop_share = crop_share):
+    temp_dic = {i: [0, 0, 0, 0] for i in df.loc[0,crop_share].keys()}
+    return temp_dic
+
+def get_evap_i(lat,elev,wind,srad,tmin,tmax,tavg,month):
     if month ==1:
         J = 15
     else:
@@ -44,7 +77,7 @@ def evap_i(lat,elev,wind,srad,tmin,tmax,tavg,month):
                                        atmosphericVapourPressure,
                                        slopeSvp, psyConstant, shf=0.0)
 
-def eto(df, eto = eto, lat = lat, elevation = elevation, 
+def get_eto(df, eto = eto, lat = lat, elevation = elevation, 
         wind = wind, srad = srad, tmin = tmin, tmax = tmax,
         tavg = tavg):
     '''
@@ -52,7 +85,7 @@ def eto(df, eto = eto, lat = lat, elevation = elevation,
     '''
     for i in range(1,13):
         df['{}{}'.format(eto, i)]=0
-        df['{}{}'.format(eto, i)] = evap_i(df[lat],
+        df['{}{}'.format(eto, i)] = get_evap_i(df[lat],
                                                df[elevation],
                                                df['{}{}'.format(wind, i)],
                                                df['{}{}'.format(srad, i)],
@@ -62,16 +95,16 @@ def eto(df, eto = eto, lat = lat, elevation = elevation,
                                                i)
     return df
 
-def eff_rainfall_i(prec,eto):
+def get_eff_rainfall_i(prec,eto):
     return (1.253*((prec**0.824)-2.935))*10**(0.001*eto)
     
-def effective_rainfall(df, eff = 'eff_', prec = 'prec', eto = eto):
+def get_effective_rainfall(df, eff = 'eff_', prec = 'prec', eto = eto):
     df['{}{}'.format(eff, i)]=0
     for i in range(1,13):
         df.loc[df['{}{}'.format(prec, i)] < 12.5, '{}{}'.format(eff, i)] = df['{}{}'.format(prec, i)]/30
-        df.loc[df['{}{}'.format(prec, i)] >= 12.5, '{}{}'.format(eff, i)] = eff_rainfall_i(df['{}{}'.format(prec, i)],df['{}{}'.format(eto, i)])/30 
+        df.loc[df['{}{}'.format(prec, i)] >= 12.5, '{}{}'.format(eff, i)] = get_eff_rainfall_i(df['{}{}'.format(prec, i)],df['{}{}'.format(eto, i)])/30 
     
-def kc(plantation,Li,Ld,Lm,Le,kci,kcd,kcm,kce,isodate):
+def get_kc_i(plantation,Li,Ld,Lm,Le,kci,kcd,kcm,kce,isodate):
     """
     Each crop goes through four growing stages: 
     initial - development - mid-season and end-season 
@@ -147,7 +180,7 @@ def kc(plantation,Li,Ld,Lm,Le,kci,kcd,kcm,kce,isodate):
     
     return ckc
 
-def get_kc_values(df, kc = kc, ):
+def get_kc_values(df, kc = kc):
     for i in range(1,13):
         mode['{}{}'.format(kc, i)]=0
         
@@ -165,7 +198,7 @@ def get_kc_values(df, kc = kc, ):
             month_start = (month_start+i)%12
             if (month_start==0):
                 month_start = 12
-            mode.loc[index,'kc_{}'.format(month_start)] = kc(mode['init_start'].iloc[index],mode['init_days'].iloc[index],
+            mode.loc[index,'kc_{}'.format(month_start)] = get_kc_i(mode['init_start'].iloc[index],mode['init_days'].iloc[index],
                                                              mode['dev_days'].iloc[index],mode['mid_days'].iloc[index],
                                                              mode['late_days'].iloc[index],
                                                              kc_dict[crop][0],kc_dict[crop][1],kc_dict[crop][2],kc_dict[crop][3],
