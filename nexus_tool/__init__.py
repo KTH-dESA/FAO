@@ -3,8 +3,7 @@ from pandas import read_csv
 from pandas import read_excel
 
 #Local application/library specific imports
-from agrodem.water_demand import (
-    test,
+from nexus_tool.water_demand import (
     set_cropland_share,
     get_ky_list,
     get_kc_list,
@@ -15,6 +14,8 @@ from agrodem.water_demand import (
     get_season_days,
     get_calendar_days,
     get_kc_values,
+    get_water_demand,
+    print_summary,
 )
 
 class Model():
@@ -35,7 +36,12 @@ class Model():
     seasons = ['init', 'dev', 'mid', 'late']
     start = 'start'
     end = 'end'
+    acwr = 'ACWR_' 
+    pcwr = 'PCWR_'
+    pwd = 'PWD_'
+    sswd = 'SSWD_'
     crop_calendar = None
+    crop_column = 'crop'
     ky_dict = {}
     kc_dict = {}
     pumping_hours_per_day = 10
@@ -68,12 +74,6 @@ class Model():
         self.pumping_hours_per_day = 10
         self.deff = 1
         self.aeff = 0.65
-    
-    def test(self, var, inplace = False):
-        if inplace:
-            self.property_1 = var
-        else: 
-            return test(var)
             
     def print_properties(self):
         print('Properties names:')
@@ -141,8 +141,46 @@ class Model():
         if inplace:
             get_kc_values(crop_calendar = self.crop_calendar, 
                           seasons = self.seasons, kc_dict = self.kc_dict,
-                          start = self.start, end = self.end, kc = self.kc)
+                          crop_column = self.crop_column, start = self.start, 
+                          end = self.end, kc = self.kc)
         else:
             return get_kc_values(crop_calendar = self.crop_calendar.copy(), 
                                  seasons = self.seasons, kc_dict = self.kc_dict,
-                                 start = self.start, end = self.end, kc = self.kc)
+                                 crop_column = self.crop_column,
+                                 start = self.start, end = self.end, 
+                                 kc = self.kc)
+                                 
+    def get_water_demand(self, inplace = False):
+        if inplace:
+            get_water_demand(self.df, self.crop_calendar, self.ky_dict, 
+                             self.crop_column, self.aeff, self.deff, 
+                             self.seasons[0], self.seasons[3], 
+                             self.pumping_hours_per_day, 
+                             crop_area = self.crop_area, _eto = self.eto, 
+                             _kc = self.kc, _eff = self.eff, _acwr = self.acwr, 
+                             _pcwr = self.pcwr, _pwd = self.pwd, _sswd = self.sswd, 
+                             start = self.start, end = self.end, 
+                             crop_share = self.crop_share)
+        else:
+            return get_water_demand(self.df.copy(), self.crop_calendar, 
+                             self.ky_dict, self.crop_column, self.aeff, 
+                             self.deff, self.seasons[0], self.seasons[3], 
+                             self.pumping_hours_per_day, 
+                             crop_area = self.crop_area, _eto = self.eto, 
+                             _kc = self.kc, _eff = self.eff, _acwr = self.acwr, 
+                             _pcwr = self.pcwr, _pwd = self.pwd, 
+                             _sswd = self.sswd, start = self.start, 
+                             end = self.end, crop_share = self.crop_share)
+                             
+    def print_summary(self, geo_boundary = 'global'):
+        return print_summary(self.df.copy(), geo_boundary = geo_boundary, 
+                             crop_area = self.crop_area, sswd = self.sswd)
+            
+            
+            
+            
+            
+            
+            
+            
+            

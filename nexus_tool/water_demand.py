@@ -26,9 +26,11 @@ crop_share = 'crop_share'
 crop_area = 'crop_area'
 start = 'start'
 end = 'end'
-
-def test(var):
-    print(var)
+crop_column = 'crop'
+acwr = 'ACWR_' 
+pcwr = 'PCWR_'
+pwd = 'PWD_'
+sswd = 'SSWD_'
     
 def set_cropland_share(df, crop_var, geo_boundary = 'global', 
                        boundary_name = None, crop_share = crop_share):
@@ -209,13 +211,13 @@ def get_kc_i(plantation,Li,Ld,Lm,Le,kci,kcd,kcm,kce,isodate):
     
     return ckc
 
-def get_kc_values(crop_calendar, seasons, kc_dict, start = start, 
-                  end = end, kc = kc):
+def get_kc_values(crop_calendar, seasons, kc_dict, crop_column = crop_column, 
+                  start = start, end = end, kc = kc):
     for i in range(1,13):
         crop_calendar['{}{}'.format(kc, i)]=0
         
     for index,row in crop_calendar.iterrows():
-        crop = row['crop']
+        crop = row[crop_column]
         for i in range(0,12):
             init_start = pd.to_datetime(crop_calendar['_'.join([seasons[0], start])].iloc[index], 
                                          format='%d/%m') #read the plant start date from excel. 
@@ -242,22 +244,23 @@ def get_kc_values(crop_calendar, seasons, kc_dict, start = start,
                 '{}/{}'.format(day_start,month_start))
     return crop_calendar
 
-def get_harvest_fraction(i,crop,init,late):
+def get_harvest_fraction(i, crop_calendar, crop, init, late, 
+                         crop_column, start_name = start, end_name = end):
     if i != 12:
         current_date = pd.to_datetime((i+1),format='%m')
     else:
         current_date = pd.to_datetime(1,format='%m')
-    start = pd.to_datetime(mode.loc[mode['Mode']==crop,init+'_start'], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
-    length = mode.loc[mode['Mode']==crop,init+'_days'].iloc[0]
+    start = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([init,start_name])], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
+    length = crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([init,'days'])].iloc[0]
     days = ((current_date - start).iloc[0].days) % 365
-    late_end = pd.to_datetime(mode.loc[mode['Mode']==crop,late+'_end'], format='%d/%m').iloc[0]
+    late_end = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([late,end_name])], format='%d/%m').iloc[0]
     all_days = ((late_end - start).iloc[0].days+1) % 365
     if all_days == 0:
         all_days = 365
    
     if days == 0:
-        start = pd.to_datetime(mode.loc[mode['Mode']==crop,late+'_start'], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
-        length = mode.loc[mode['Mode']==crop,late+'_days'].iloc[0]
+        start = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([late,start_name])], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
+        length = crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([late,'days'])].iloc[0]
         days = ((current_date - start).iloc[0].days) % 365
         if days <= length:
             return 1 #- days / length
@@ -269,3 +272,56 @@ def get_harvest_fraction(i,crop,init,late):
         return 1
     else:
         return 0
+        
+def get_water_demand(df, crop_calendar, ky_dict, crop_column, aeff, deff, 
+                     init_season, late_season, pumping_hours_per_day, 
+                     crop_area = crop_area, _eto = eto, _kc = kc, _eff = eff, 
+                     _acwr = acwr, _pcwr = pcwr, _pwd = pwd, _sswd = sswd, 
+                     start = start, end = end, crop_share = crop_share):
+    for i in range (1,13):
+        df['{}{}'.format(_pcwr,i)]=0 #PCWR: Peak Crop Water Requirement (l/s/ha) or "Duty", Previously PDWR
+        df['{}{}'.format(_pwd,i)]=0  #PWD: Peak Water Demand in (l/s)
+        df['{}{}'.format(_sswd,i)]=0 #SSWD: Seasonal Scheme Water Demand in (m3)
+        
+    #STEP 1: Compute the ACWR from ETc - check FAO1992- page 43-
+
+    #acwr=row['ETo_{}'.format(i)]*30*row['kc_{}'.format(i)] - row['eff_{}'.format(i)]*30 - row['awc']/12 ))
+    #once the available water content layer is obtained, the last past should be added to the equation
+
+    for crop in crop_calendar[crop_column]:
+        for i in range(1,13):
+            eto = f'{_eto}{i}'
+            kc = f'{_kc}{i}'
+            eff = f'{_eff}{i}'
+            acwr = f'{_acwr}{i}_'+crop
+            pcwr = f'{_pcwr}{i}'
+            pwd = f'{_pwd}{i}'
+            sswd = f'{_sswd}{i}'
+            df[kc+'_'+crop] = float(crop_calendar.loc[crop_calendar[crop_column]==crop,kc])
+            ky=ky_dict[crop] #Yield response factor coeff = 0.8 for date palms, source TABLE 53-FAO: http://www.fao.org/3/y4360e/y4360e0b.htm 
+            df[acwr] = (df[eto]*30*df[kc+'_'+crop]*ky - df[eff]*30 - (0.12*df[eff])*30) #Assumption: awc=12% effective rainfall
+            df.loc[df[acwr]<0,acwr] = 0
+            df[pcwr] += ((df[acwr]*10)/30)*2*0.012
+            
+            df[f'harvest_{i}_'+crop] = df[crop_area] * \
+                    np.array([x[crop] for x in df[crop_share]]) * \
+                    get_harvest_fraction(i,crop_calendar, crop, init_season, 
+                                         late_season, crop_column, 
+                                         start_name = start, end_name = end)
+            df[pwd] += (df[pcwr] *(df[f'harvest_{i}_'+crop]*24))/(pumping_hours_per_day*aeff*deff)
+            df[sswd] += (df[acwr]*10*(df[f'harvest_{i}_'+crop])/(aeff*deff))
+            
+def print_summary(df, geo_boundary = 'global', crop_area = crop_area, sswd = sswd):
+    if geo_boundary == 'global':
+        temp_df = df.sum()
+        summary = pd.DataFrame({'Irrigated area (ha)':[temp_df[crop_area]],
+                        'Water intensity (m3/ha)':[temp_df.filter(like=sswd).sum()/temp_df[crop_area]],
+                        'Water demand (Mm3)':[temp_df.filter(like=sswd).sum()/1000000]})
+        summary.index = ['Global']
+    else:
+        temp_df = df.groupby(geo_boundary).sum()
+        summary = pd.DataFrame({'Irrigated area (ha)':temp_df[crop_area],
+                                'Water intensity (m3/ha)':temp_df.filter(like=sswd).sum(axis=1)/temp_df[crop_area],
+                                'Water demand (Mm3)':temp_df.filter(like=sswd).sum(axis=1)/1000000})
+    summary.round(decimals=3)
+    return summary.T
