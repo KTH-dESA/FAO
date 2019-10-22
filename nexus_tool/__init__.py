@@ -18,6 +18,10 @@ from nexus_tool.water_demand import (
     print_summary,
 )
 
+from nexus_tool.energy_for_pumping import (
+    get_gw_tdh,
+)
+
 class Model():
     property_1 = None
     eto = 'ETo_'
@@ -49,13 +53,16 @@ class Model():
     aeff = 0.65
     ky_values = {}
     kc_values = {}
+    gw_depth = 'gw_depth'
+    tdh_gw = 'tdh_gw'
     def __init__(self, df, eto = eto, lat = lat, elevation = elevation,
                  wind = wind, srad = srad, tmin = tmin, tmax = tmax, 
                  tavg = tavg, crop_share = crop_share, crop_area = crop_area,
                  seasons = seasons, start = start, end = end, 
                  crop_calendar = crop_calendar,
                  pumping_hours_per_day = pumping_hours_per_day,
-                 deff = deff, aeff = aeff):
+                 deff = deff, aeff = aeff, gw_depth = gw_depth, 
+                 tdh_gw = tdh_gw):
         self.df = df
         self.eto = eto
         self.lat = lat
@@ -71,9 +78,11 @@ class Model():
         self.start = start 
         self.end = end
         self.crop_calendar = crop_calendar
-        self.pumping_hours_per_day = 10
-        self.deff = 1
-        self.aeff = 0.65
+        self.pumping_hours_per_day = pumping_hours_per_day
+        self.deff = deff
+        self.aeff = aeff
+        self.gw_depth = gw_depth
+        self.tdh_gw = tdh_gw
             
     def print_properties(self):
         print('Properties names:')
@@ -86,6 +95,7 @@ class Model():
                               'Avegarage temperature (.tavg)']):
             print('    - {}: {}'.format(name, val))
           
+    ####### water related methods ###########
     def set_cropland_share(self, crop_var, geo_boundary = 'global', 
                            boundary_name = None, inplace = False):
         if inplace:
@@ -175,6 +185,16 @@ class Model():
     def print_summary(self, geo_boundary = 'global'):
         return print_summary(self.df.copy(), geo_boundary = geo_boundary, 
                              crop_area = self.crop_area, sswd = self.sswd)
+                             
+    ####### energy related methods ###########
+    def get_gw_tdh(self, inplace = False):
+        if inplace:
+            get_gw_tdh(self.df, gw_depth = self.gw_depth, wdd = 0, oap = 0, pld = 0, 
+                       interp_method = 'nearest', tdh_gw = self.tdh_gw)
+        else:
+            return get_gw_tdh(self.df.copy(), gw_depth = self.gw_depth, wdd = 0, oap = 0, 
+                              pld = 0, interp_method = 'nearest', 
+                              tdh_gw = self.tdh_gw)
             
             
             
