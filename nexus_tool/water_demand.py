@@ -24,8 +24,8 @@ prec = 'prec'
 kc = 'kc_'
 crop_share = 'crop_share'
 crop_area = 'crop_area'
-start = 'start'
-end = 'end'
+start = '_start'
+end = '_end'
 crop_column = 'crop'
 acwr = 'ACWR_' 
 pcwr = 'PCWR_'
@@ -123,9 +123,9 @@ def get_effective_rainfall(df, eff = eff, prec = prec, eto = eto):
     return df
     
 def get_season_days(crop_calendar, season, start = start, end = end):
-    season_start = pd.to_datetime(crop_calendar["_".join([season, start])], 
+    season_start = pd.to_datetime(crop_calendar["".join([season, start])], 
                                   format='%d/%m')
-    season_end = pd.to_datetime(crop_calendar["_".join([season, end])], 
+    season_end = pd.to_datetime(crop_calendar["".join([season, end])], 
                                 format='%d/%m')
     crop_calendar["_".join([season, 'days'])] = ((season_end - season_start).dt.days+1) % 365
     return crop_calendar
@@ -219,7 +219,7 @@ def get_kc_values(crop_calendar, seasons, kc_dict, crop_column = crop_column,
     for index,row in crop_calendar.iterrows():
         crop = row[crop_column]
         for i in range(0,12):
-            init_start = pd.to_datetime(crop_calendar['_'.join([seasons[0], start])].iloc[index], 
+            init_start = pd.to_datetime(crop_calendar[''.join([seasons[0], start])].iloc[index], 
                                          format='%d/%m') #read the plant start date from excel. 
             day_start= (init_start.day+1-31)%31   #what does this represent??   
             
@@ -232,7 +232,7 @@ def get_kc_values(crop_calendar, seasons, kc_dict, crop_column = crop_column,
             if (month_start==0):
                 month_start = 12
             crop_calendar.loc[index,'{}{}'.format(kc, month_start)] = \
-                get_kc_i(crop_calendar['_'.join([seasons[0], start])].iloc[index],
+                get_kc_i(crop_calendar[''.join([seasons[0], start])].iloc[index],
                 crop_calendar['_'.join([seasons[0], 'days'])].iloc[index],
                 crop_calendar['_'.join([seasons[1], 'days'])].iloc[index],
                 crop_calendar['_'.join([seasons[2], 'days'])].iloc[index],
@@ -250,16 +250,16 @@ def get_harvest_fraction(i, crop_calendar, crop, init, late,
         current_date = pd.to_datetime((i+1),format='%m')
     else:
         current_date = pd.to_datetime(1,format='%m')
-    start = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([init,start_name])], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
+    start = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,''.join([init,start_name])], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
     length = crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([init,'days'])].iloc[0]
     days = ((current_date - start).iloc[0].days) % 365
-    late_end = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([late,end_name])], format='%d/%m').iloc[0]
+    late_end = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,''.join([late,end_name])], format='%d/%m').iloc[0]
     all_days = ((late_end - start).iloc[0].days+1) % 365
     if all_days == 0:
         all_days = 365
    
     if days == 0:
-        start = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([late,start_name])], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
+        start = pd.to_datetime(crop_calendar.loc[crop_calendar[crop_column]==crop,''.join([late,start_name])], format='%d/%m') #defining the plant start date from excel and setting the correct month and days sequence to read.
         length = crop_calendar.loc[crop_calendar[crop_column]==crop,'_'.join([late,'days'])].iloc[0]
         days = ((current_date - start).iloc[0].days) % 365
         if days <= length:
@@ -293,7 +293,7 @@ def get_water_demand(df, crop_calendar, ky_dict, crop_column, aeff, deff,
             eto = f'{_eto}{i}'
             kc = f'{_kc}{i}'
             eff = f'{_eff}{i}'
-            acwr = f'{_acwr}{i}_'+crop
+            acwr = f'{_acwr}{i}_{crop}'
             pcwr = f'{_pcwr}{i}'
             pwd = f'{_pwd}{i}'
             sswd = f'{_sswd}{i}'
