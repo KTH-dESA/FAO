@@ -251,11 +251,11 @@ class Model():
     def get_wind_cf(self, inplace = False):
         if inplace:
             get_wind_cf(self.df, wind = self.wind, mu = self.mu, t = self.t,
-                        p_rated self.p_rated, z = self.z, zr = self.zr, 
+                        p_rated = self.p_rated, z = self.z, zr = self.zr, 
                         es = self.es, u_arr = self.u_arr, p_curve = self.p_curve)
         else:
             return get_wind_cf(self.df.copy(), wind = self.wind, mu = self.mu, 
-                               t = self.t, p_rated self.p_rated, z = self.z, 
+                               t = self.t, p_rated = self.p_rated, z = self.z, 
                                zr = self.zr, es = self.es, u_arr = self.u_arr, 
                                p_curve = self.p_curve)
                                       

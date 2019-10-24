@@ -2,8 +2,7 @@
 import pandas as pd
 import numpy as np
 
-def get_gw_tdh(df, gw_depth, wdd, oap, pld, 
-               interp_method = 'nearest', tdh_gw = tdh_gw):
+def get_gw_tdh(df, gw_depth, wdd, oap, pld, tdh_gw, interp_method = 'nearest'):
     df[tdh_gw] = df[gw_depth] + wdd + oap + pld
     df[tdh_gw].replace(0, np.nan, inplace=True)
     # df[tdh_gw].interpolate(method = interp_method, axis=0, inplace=True)
