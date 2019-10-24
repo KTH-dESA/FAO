@@ -1,4 +1,5 @@
 #Standard library imports
+import pandas as pd
 from pandas import read_csv
 from pandas import read_excel
 
@@ -15,7 +16,6 @@ from nexus_tool.water_demand import (
     get_calendar_days,
     get_kc_values,
     get_water_demand,
-    print_summary,
 )
 
 from nexus_tool.energy_for_pumping import (
@@ -23,8 +23,12 @@ from nexus_tool.energy_for_pumping import (
     get_pumping_energy,
 )
 
+from nexus_tool.lcoe import (
+    get_wind_cf,
+)
+
 class Model():
-    property_1 = None
+    # water properties:
     eto = 'ETo_'
     lat = 'lat'
     elevation = 'elevation'
@@ -51,9 +55,10 @@ class Model():
     kc_dict = {}
     pumping_hours_per_day = 10
     deff = 1
-    aeff = 0.65
+    aeff = 0.45
     ky_values = {}
     kc_values = {}
+    # energy properties:
     gw_depth = 'gw_depth'
     tdh_gw = 'tdh_gw'
     des_int = 'Einten_KWh/m3'
@@ -62,6 +67,16 @@ class Model():
     ed_e = 'ED_E_'
     trans_eff = 0
     pump_eff = 0
+    # wind power properties:
+    mu = 0.97  # availability factor
+    t = 24*30
+    p_rated = 600
+    z = 55  # hub height
+    zr = 80  # velocity measurement height
+    es = 0.85  # losses in wind electricity
+    u_arr = range(1, 26)
+    p_curve = [0, 0, 0, 0, 30, 77, 135, 208, 287, 371, 450, 514, 558,
+               582, 594, 598, 600, 600, 600, 600, 600, 600, 600, 600, 600]
     def __init__(self, df, eto = eto, lat = lat, elevation = elevation,
                  wind = wind, srad = srad, tmin = tmin, tmax = tmax, 
                  tavg = tavg, crop_share = crop_share, crop_area = crop_area,
@@ -207,10 +222,6 @@ class Model():
                              _sswd = self.sswd, start = self.start, 
                              end = self.end, crop_share = self.crop_share)
                              
-    def print_summary(self, geo_boundary = 'global'):
-        return print_summary(self.df.copy(), geo_boundary = geo_boundary, 
-                             crop_area = self.crop_area, sswd = self.sswd)
-                             
     ####### energy related methods ###########
     def get_gw_tdh(self, inplace = False):
         if inplace:
@@ -235,6 +246,41 @@ class Model():
                                       tdh_gw = self.tdh_gw, desalination = False, 
                                       des_int = self.des_int, 
                                       des_ener = self.des_ener)
+                                      
+    ####### technologies and LCOE related methods #########
+    def get_wind_cf(self, inplace = False):
+        if inplace:
+            get_wind_cf(self.df, wind = self.wind, mu = self.mu, t = self.t,
+                        p_rated self.p_rated, z = self.z, zr = self.zr, 
+                        es = self.es, u_arr = self.u_arr, p_curve = self.p_curve)
+        else:
+            return get_wind_cf(self.df.copy(), wind = self.wind, mu = self.mu, 
+                               t = self.t, p_rated self.p_rated, z = self.z, 
+                               zr = self.zr, es = self.es, u_arr = self.u_arr, 
+                               p_curve = self.p_curve)
+                                      
+    ####### additional methods #############
+    def print_summary(self, geo_boundary = 'global'):
+        if geo_boundary == 'global':
+            temp_df = self.df.sum()
+            summary = pd.DataFrame()
+            
+            summary['Irrigated area (ha)'] = [temp_df[self.crop_area]]
+            summary['Water intensity (m3/ha)'] = [temp_df.filter(like=self.sswd).sum()/temp_df[self.crop_area]]
+            summary['Water demand (Mm3)'] = [temp_df.filter(like=self.sswd).sum()/1000000]
+            
+            summary.index = ['Global']
+        else:
+            temp_df = self.df.groupby(geo_boundary).sum()
+            summary = pd.DataFrame()
+            
+            summary['Irrigated area (ha)'] = temp_df[self.crop_area]
+            summary['Water intensity (m3/ha)'] = temp_df.filter(like=self.sswd).sum(axis=1)/temp_df[self.crop_area]
+            summary['Water demand (Mm3)'] = temp_df.filter(like=self.sswd).sum(axis=1)/1000000
+            summary['Total demand (GWh)'] = temp_df.filter(like=self.ed_e).sum(axis=1)/1000000
+        
+        summary.round(decimals=3)
+        return summary
             
             
             

@@ -310,18 +310,4 @@ def get_water_demand(df, crop_calendar, ky_dict, crop_column, aeff, deff,
                                          start_name = start, end_name = end)
             df[pwd] += (df[pcwr] *(df[f'harvest_{i}_'+crop]*24))/(pumping_hours_per_day*aeff*deff)
             df[sswd] += (df[acwr]*10*(df[f'harvest_{i}_'+crop])/(aeff*deff))
-            
-def print_summary(df, geo_boundary = 'global', crop_area = crop_area, sswd = sswd):
-    if geo_boundary == 'global':
-        temp_df = df.sum()
-        summary = pd.DataFrame({'Irrigated area (ha)':[temp_df[crop_area]],
-                        'Water intensity (m3/ha)':[temp_df.filter(like=sswd).sum()/temp_df[crop_area]],
-                        'Water demand (Mm3)':[temp_df.filter(like=sswd).sum()/1000000]})
-        summary.index = ['Global']
-    else:
-        temp_df = df.groupby(geo_boundary).sum()
-        summary = pd.DataFrame({'Irrigated area (ha)':temp_df[crop_area],
-                                'Water intensity (m3/ha)':temp_df.filter(like=sswd).sum(axis=1)/temp_df[crop_area],
-                                'Water demand (Mm3)':temp_df.filter(like=sswd).sum(axis=1)/1000000})
-    summary.round(decimals=3)
-    return summary.T
+           
