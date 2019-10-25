@@ -25,6 +25,8 @@ from nexus_tool.energy_for_pumping import (
 
 from nexus_tool.lcoe import (
     get_wind_cf,
+    get_installed_capacity,
+    get_max_capacity,
 )
 
 class Model():
@@ -244,10 +246,22 @@ class Model():
         
     def get_wind_cf(self, wind_turbine):
         tech = self.technologies[wind_turbine]
-        self.technologies[wind_turbine].cf = get_wind_cf(self.df, wind = self.wind, 
+        self.technologies[wind_turbine].df = get_wind_cf(self.df, wind = self.wind, 
                     mu = tech.mu, t = tech.t, p_rated = tech.p_rated, 
                     z = tech.z, zr = tech.zr, es = tech.es, u_arr = tech.u_arr,
                     p_curve = tech.p_curve)
+                    
+    def get_installed_capacity(self, technology):
+        tech = self.technologies[technology]
+        self.technologies[technology].df = tech.df.join(
+                                                get_installed_capacity(self.df, 
+                                                    tech.df, 
+                                                    self.pd_e)
+                                                )
+                                            
+    def get_max_capacity(self, technology):
+        tech = self.technologies[technology]
+        self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df))
                                   
     ####### additional methods #############
     def print_summary(self, geo_boundary = 'global'):
@@ -284,7 +298,7 @@ class Model():
         u_arr = range(1, 26)
         p_curve = [0, 0, 0, 0, 30, 77, 135, 208, 287, 371, 450, 514, 558,
                    582, 594, 598, 600, 600, 600, 600, 600, 600, 600, 600, 600]
-        cf = pd.DataFrame()
+        df = pd.DataFrame()
         def __init__(self, mu = mu, t = t, p_rated = p_rated, z = z, zr = zr,
                      es = es, u_arr = u_arr, p_curve = p_curve):
             self.mu = mu

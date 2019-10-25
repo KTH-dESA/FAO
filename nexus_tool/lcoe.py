@@ -20,6 +20,16 @@ def get_wind_cf(df, wind, mu, t, p_rated, z, zr, es, u_arr, p_curve):
     cf_df = pd.DataFrame()
     for i in range (1,13):
         wind='wind{}'.format(i)
-        cf_df['wind_cf_{}'.format(i)] = wind_cf(df, wind, mu, t, p_rated, z, 
+        cf_df['cf_{}'.format(i)] = wind_cf(df, wind, mu, t, p_rated, z, 
                                              zr, es, u_arr, p_curve)
     return cf_df
+    
+def get_installed_capacity(df, cf, pd_e):
+    ic_df = pd.DataFrame()
+    for i in range(1,13):
+        _cf = cf if type(cf) == float else cf[f'cf_{i}']
+        ic_df[f'ic_{i}'] = df[f'{pd_e}{i}'] / _cf
+    return ic_df
+    
+def get_max_capacity(df):
+    return pd.DataFrame({'max_cap': df.filter(like='ic_').max(axis=1)})
