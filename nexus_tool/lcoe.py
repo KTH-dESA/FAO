@@ -17,7 +17,9 @@ def wind_cf(df, wind, mu, t, p_rated, z, zr, es, u_arr, p_curve):
     return energy_produced/(p_rated * t)
     
 def get_wind_cf(df, wind, mu, t, p_rated, z, zr, es, u_arr, p_curve):
+    cf_df = pd.DataFrame()
     for i in range (1,13):
         wind='wind{}'.format(i)
-        df['wind_cf_{}'.format(i)] = wind_cf(df, wind, mu, t, p_rated, z, 
+        cf_df['wind_cf_{}'.format(i)] = wind_cf(df, wind, mu, t, p_rated, z, 
                                              zr, es, u_arr, p_curve)
+    return cf_df

@@ -67,16 +67,7 @@ class Model():
     ed_e = 'ED_E_'
     trans_eff = 0
     pump_eff = 0
-    # wind power properties:
-    mu = 0.97  # availability factor
-    t = 24*30
-    p_rated = 600
-    z = 55  # hub height
-    zr = 80  # velocity measurement height
-    es = 0.85  # losses in wind electricity
-    u_arr = range(1, 26)
-    p_curve = [0, 0, 0, 0, 30, 77, 135, 208, 287, 371, 450, 514, 558,
-               582, 594, 598, 600, 600, 600, 600, 600, 600, 600, 600, 600]
+    technologies = {}
     def __init__(self, df, eto = eto, lat = lat, elevation = elevation,
                  wind = wind, srad = srad, tmin = tmin, tmax = tmax, 
                  tavg = tavg, crop_share = crop_share, crop_area = crop_area,
@@ -248,17 +239,16 @@ class Model():
                                       des_ener = self.des_ener)
                                       
     ####### technologies and LCOE related methods #########
-    def get_wind_cf(self, inplace = False):
-        if inplace:
-            get_wind_cf(self.df, wind = self.wind, mu = self.mu, t = self.t,
-                        p_rated = self.p_rated, z = self.z, zr = self.zr, 
-                        es = self.es, u_arr = self.u_arr, p_curve = self.p_curve)
-        else:
-            return get_wind_cf(self.df.copy(), wind = self.wind, mu = self.mu, 
-                               t = self.t, p_rated = self.p_rated, z = self.z, 
-                               zr = self.zr, es = self.es, u_arr = self.u_arr, 
-                               p_curve = self.p_curve)
-                                      
+    def create_wind_turbine(self, wind_turbine):
+        self.technologies[wind_turbine] = self.WindTurbine()
+        
+    def get_wind_cf(self, wind_turbine):
+        tech = self.technologies[wind_turbine]
+        self.technologies[wind_turbine].cf = get_wind_cf(self.df, wind = self.wind, 
+                    mu = tech.mu, t = tech.t, p_rated = tech.p_rated, 
+                    z = tech.z, zr = tech.zr, es = tech.es, u_arr = tech.u_arr,
+                    p_curve = tech.p_curve)
+                                  
     ####### additional methods #############
     def print_summary(self, geo_boundary = 'global'):
         if geo_boundary == 'global':
@@ -282,6 +272,29 @@ class Model():
         summary.round(decimals=3)
         return summary
             
+            
+    class WindTurbine():
+        # properties:
+        mu = 0.97  # availability factor
+        t = 24*30
+        p_rated = 600
+        z = 55  # hub height
+        zr = 80  # velocity measurement height
+        es = 0.85  # losses in wind electricity
+        u_arr = range(1, 26)
+        p_curve = [0, 0, 0, 0, 30, 77, 135, 208, 287, 371, 450, 514, 558,
+                   582, 594, 598, 600, 600, 600, 600, 600, 600, 600, 600, 600]
+        cf = pd.DataFrame()
+        def __init__(self, mu = mu, t = t, p_rated = p_rated, z = z, zr = zr,
+                     es = es, u_arr = u_arr, p_curve = p_curve):
+            self.mu = mu
+            self.t = t
+            self.p_rated = p_rated
+            self.z = z
+            self.zr = zr
+            self.es = es
+            self.u_arr = u_arr
+            self.p_curve = p_curve
             
             
             
