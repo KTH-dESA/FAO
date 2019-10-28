@@ -21,12 +21,15 @@ from nexus_tool.water_demand import (
 from nexus_tool.energy_for_pumping import (
     get_gw_tdh,
     get_pumping_energy,
+    get_annual_electricity,
 )
 
 from nexus_tool.lcoe import (
     get_wind_cf,
+    get_pv_cf,
     get_installed_capacity,
     get_max_capacity,
+    get_lcoe,
 )
 
 class Model():
@@ -70,6 +73,9 @@ class Model():
     trans_eff = 0
     pump_eff = 0
     technologies = {}
+    discount_rate = 0
+    start_year = 0
+    end_year = 30
     def __init__(self, df, eto = eto, lat = lat, elevation = elevation,
                  wind = wind, srad = srad, tmin = tmin, tmax = tmax, 
                  tavg = tavg, crop_share = crop_share, crop_area = crop_area,
@@ -78,7 +84,7 @@ class Model():
                  pumping_hours_per_day = pumping_hours_per_day,
                  deff = deff, aeff = aeff, gw_depth = gw_depth, 
                  des_int = des_int, des_ener = des_ener, pd_e = pd_e,
-                 ed_e = ed_e, trans_eff = trans_eff, pump_eff = trans_eff):
+                 ed_e = ed_e, trans_eff = trans_eff, pump_eff = trans_eff, ):
         self.df = df
         self.eto = eto
         self.lat = lat
@@ -240,9 +246,24 @@ class Model():
                                       des_int = self.des_int, 
                                       des_ener = self.des_ener)
                                       
+    def get_annual_electricity(self, inplace = False):
+        if inplace:
+            get_annual_electricity(self.df, self.ed_e)
+        else:
+            return get_annual_electricity(self.df.copy(), self.ed_e)
+                                      
     ####### technologies and LCOE related methods #########
-    def create_wind_turbine(self, wind_turbine):
-        self.technologies[wind_turbine] = self.WindTurbine()
+    def create_wind_turbine(self, wind_turbine, life, om_cost, 
+                            capital_cost, efficiency):
+        self.technologies[wind_turbine] = self.WindTurbine(life, om_cost, 
+                                                           capital_cost, 
+                                                           efficiency)
+                                                           
+    def create_pv_system(self, pv_system, life, om_cost, 
+                         capital_cost, efficiency):
+        self.technologies[pv_system] = self.PVSystem(life, om_cost, 
+                                                     capital_cost, 
+                                                     efficiency)
         
     def get_wind_cf(self, wind_turbine):
         tech = self.technologies[wind_turbine]
@@ -250,6 +271,10 @@ class Model():
                     mu = tech.mu, t = tech.t, p_rated = tech.p_rated, 
                     z = tech.z, zr = tech.zr, es = tech.es, u_arr = tech.u_arr,
                     p_curve = tech.p_curve)
+                    
+    def get_pv_cf(self, pv_system):
+        tech = self.technologies[pv_system]
+        self.technologies[pv_system].df = get_pv_cf(self.df, self.srad)
                     
     def get_installed_capacity(self, technology):
         tech = self.technologies[technology]
@@ -262,6 +287,17 @@ class Model():
     def get_max_capacity(self, technology):
         tech = self.technologies[technology]
         self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df))
+        
+    def get_lcoe(self, technology):
+        tech = self.technologies[technology]
+        self.technologies[technology].df['lcoe'] = get_lcoe(
+                                    max_capacity = tech.df['max_cap'],
+                                    total_demand = self.df['annual_el_demand'],
+                                    tech_life=tech.life, om_cost = tech.om_cost,
+                                    capital_cost = tech.capital_cost,
+                                    discount_rate = self.discount_rate,
+                                    project_life = self.end_year - self.start_year,
+                                    efficiency = tech.efficiency)
                                   
     ####### additional methods #############
     def print_summary(self, geo_boundary = 'global'):
@@ -281,13 +317,20 @@ class Model():
             summary['Irrigated area (ha)'] = temp_df[self.crop_area]
             summary['Water intensity (m3/ha)'] = temp_df.filter(like=self.sswd).sum(axis=1)/temp_df[self.crop_area]
             summary['Water demand (Mm3)'] = temp_df.filter(like=self.sswd).sum(axis=1)/1000000
-            summary['Total demand (GWh)'] = temp_df.filter(like=self.ed_e).sum(axis=1)/1000000
+            summary['Energy demand (GWh)'] = temp_df.filter(like=self.ed_e).sum(axis=1)/1000000
         
         summary.round(decimals=3)
         return summary
             
-            
-    class WindTurbine():
+    class Technology():
+        df = pd.DataFrame()
+        def __init__(self, life, om_cost, capital_cost, efficiency):
+            self.life = life
+            self.om_cost = om_cost
+            self.capital_cost = capital_cost
+            self.efficiency = efficiency
+    
+    class WindTurbine(Technology):
         # properties:
         mu = 0.97  # availability factor
         t = 24*30
@@ -298,9 +341,10 @@ class Model():
         u_arr = range(1, 26)
         p_curve = [0, 0, 0, 0, 30, 77, 135, 208, 287, 371, 450, 514, 558,
                    582, 594, 598, 600, 600, 600, 600, 600, 600, 600, 600, 600]
-        df = pd.DataFrame()
-        def __init__(self, mu = mu, t = t, p_rated = p_rated, z = z, zr = zr,
-                     es = es, u_arr = u_arr, p_curve = p_curve):
+        def __init__(self, life, om_cost, capital_cost, efficiency, mu = mu, 
+                     t = t, p_rated = p_rated, z = z, zr = zr, es = es, 
+                     u_arr = u_arr, p_curve = p_curve):
+            super().__init__(life, om_cost, capital_cost, efficiency)
             self.mu = mu
             self.t = t
             self.p_rated = p_rated
@@ -309,6 +353,10 @@ class Model():
             self.es = es
             self.u_arr = u_arr
             self.p_curve = p_curve
+    
+    class PVSystem(Technology):
+        pass
+            
             
             
             

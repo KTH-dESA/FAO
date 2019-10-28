@@ -25,3 +25,7 @@ def get_pumping_energy(df, trans_eff, pump_eff, pd_e, pwd, sswd, ed_e, tdh_gw,
             df[_pd_e] += (df[_pwd]*df[des_int]*3600/1000)
             df[_ed_e] += (df['{}{}'.format(des_ener, i)]*1000000)
     return df
+    
+def get_annual_electricity(df, ed_e):
+    df['annual_el_demand'] = df.filter(like=ed_e).sum(axis=1)
+    return df
