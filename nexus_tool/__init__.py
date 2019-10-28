@@ -264,41 +264,73 @@ class Model():
         self.technologies[pv_system] = self.PVSystem(life, om_cost, 
                                                      capital_cost, 
                                                      efficiency)
+                                                     
+    def create_diesel_genset(self, diesel_genset, life, om_cost, capital_cost, 
+                             efficiency, cf, fuel_cost, fuel_req, emission_factor, 
+                             env_cost):
+        self.technologies[diesel_genset] = self.DieselGenset(life, om_cost, 
+                                                capital_cost, efficiency, cf, 
+                                                fuel_cost, fuel_req, 
+                                                emission_factor, env_cost)
+                                                
+    def create_grid_powered_pump(self, grid_system, life, om_cost, 
+                                 capital_cost, efficiency, cf, fuel_cost, fuel_req,
+                                 emission_factor, env_cost):
+        self.technologies[grid_system] = self.Grid(life, om_cost, 
+                                                   capital_cost, efficiency, cf, 
+                                                   fuel_cost, fuel_req, 
+                                                   emission_factor, env_cost)
         
+    def get_cf(self, technologies):
+        if type(technologies) == str:
+            technologies = [technologies]
+        for technology in technologies:
+            if type(self.technologies[technology]) == self.WindTurbine:
+                self.get_wind_cf(technology)
+            elif type(self.technologies[technology]) == self.PVSystem:
+                self.get_pv_cf(technology)
+    
     def get_wind_cf(self, wind_turbine):
         tech = self.technologies[wind_turbine]
-        self.technologies[wind_turbine].df = get_wind_cf(self.df, wind = self.wind, 
+        self.technologies[wind_turbine].cf = get_wind_cf(self.df, wind = self.wind, 
                     mu = tech.mu, t = tech.t, p_rated = tech.p_rated, 
                     z = tech.z, zr = tech.zr, es = tech.es, u_arr = tech.u_arr,
                     p_curve = tech.p_curve)
                     
     def get_pv_cf(self, pv_system):
         tech = self.technologies[pv_system]
-        self.technologies[pv_system].df = get_pv_cf(self.df, self.srad)
+        self.technologies[pv_system].cf = get_pv_cf(self.df, self.srad)
                     
-    def get_installed_capacity(self, technology):
-        tech = self.technologies[technology]
-        self.technologies[technology].df = tech.df.join(
-                                                get_installed_capacity(self.df, 
-                                                    tech.df, 
-                                                    self.pd_e)
-                                                )
-                                            
-    def get_max_capacity(self, technology):
-        tech = self.technologies[technology]
-        self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df))
+    def get_installed_capacity(self, technologies):
+        if type(technologies) == str:
+            technologies = [technologies]
+        for technology in technologies:
+            tech = self.technologies[technology]
+            self.technologies[technology].df = get_installed_capacity(self.df, 
+                                                                      tech.cf, 
+                                                                      self.pd_e)
+                                                
+    def get_max_capacity(self, technologies):
+        if type(technologies) == str:
+            technologies = [technologies]
+        for technology in technologies:
+            tech = self.technologies[technology]
+            self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df))
         
-    def get_lcoe(self, technology):
-        tech = self.technologies[technology]
-        self.technologies[technology].df['lcoe'] = get_lcoe(
-                                    max_capacity = tech.df['max_cap'],
-                                    total_demand = self.df['annual_el_demand'],
-                                    tech_life=tech.life, om_cost = tech.om_cost,
-                                    capital_cost = tech.capital_cost,
-                                    discount_rate = self.discount_rate,
-                                    project_life = self.end_year - self.start_year,
-                                    efficiency = tech.efficiency)
-                                  
+    def get_lcoe(self, technologies):
+        if type(technologies) == str:
+            technologies = [technologies]
+        for technology in technologies:
+            tech = self.technologies[technology]
+            self.technologies[technology].df['lcoe'] = get_lcoe(
+                                        max_capacity = tech.df['max_cap'],
+                                        total_demand = self.df['annual_el_demand'],
+                                        tech_life=tech.life, om_cost = tech.om_cost,
+                                        capital_cost = tech.capital_cost,
+                                        discount_rate = self.discount_rate,
+                                        project_life = self.end_year - self.start_year,
+                                        efficiency = tech.efficiency)
+                                      
     ####### additional methods #############
     def print_summary(self, geo_boundary = 'global'):
         if geo_boundary == 'global':
@@ -356,7 +388,19 @@ class Model():
     
     class PVSystem(Technology):
         pass
+        
+    class DieselGenset(Technology):
+        def __init__(self, life, om_cost, capital_cost, efficiency, cf,
+                     fuel_cost, fuel_req, emission_factor, env_cost):
+            super().__init__(life, om_cost, capital_cost, efficiency)
+            self.fuel_cost = fuel_cost
+            self.fuel_req = fuel_req
+            self.emission_factor = emission_factor
+            self.env_cost = env_cost
+            self.cf = cf
             
+    class Grid(DieselGenset):
+        pass
             
             
             
