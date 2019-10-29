@@ -263,23 +263,16 @@ class Model():
                          capital_cost, efficiency):
         self.technologies[pv_system] = self.PVSystem(life, om_cost, 
                                                      capital_cost, 
-                                                     efficiency)
+                                                     efficiency, None, 
+                                                     0, 1, 0, 0)
                                                      
-    def create_diesel_genset(self, diesel_genset, life, om_cost, capital_cost, 
+    def create_standard_tech(self, tech_name, life, om_cost, capital_cost, 
                              efficiency, cf, fuel_cost, fuel_req, emission_factor, 
                              env_cost):
-        self.technologies[diesel_genset] = self.DieselGenset(life, om_cost, 
+        self.technologies[tech_name] = self.Technology(life, om_cost, 
                                                 capital_cost, efficiency, cf, 
                                                 fuel_cost, fuel_req, 
                                                 emission_factor, env_cost)
-                                                
-    def create_grid_powered_pump(self, grid_system, life, om_cost, 
-                                 capital_cost, efficiency, cf, fuel_cost, fuel_req,
-                                 emission_factor, env_cost):
-        self.technologies[grid_system] = self.Grid(life, om_cost, 
-                                                   capital_cost, efficiency, cf, 
-                                                   fuel_cost, fuel_req, 
-                                                   emission_factor, env_cost)
         
     def get_cf(self, technologies):
         if type(technologies) == str:
@@ -329,7 +322,11 @@ class Model():
                                         capital_cost = tech.capital_cost,
                                         discount_rate = self.discount_rate,
                                         project_life = self.end_year - self.start_year,
-                                        efficiency = tech.efficiency)
+                                        fuel_cost = tech.fuel_cost, 
+                                        fuel_req = tech.fuel_req, 
+                                        efficiency = tech.efficiency, 
+                                        emission_factor = tech.emission_factor,
+                                        env_cost = tech.env_cost)
                                       
     ####### additional methods #############
     def print_summary(self, geo_boundary = 'global'):
@@ -356,11 +353,23 @@ class Model():
             
     class Technology():
         df = pd.DataFrame()
-        def __init__(self, life, om_cost, capital_cost, efficiency):
+        fuel_cost = 0
+        fuel_req = 0
+        efficiency = 1
+        emission_factor = 0
+        env_cost = 0
+        def __init__(self, life, om_cost, capital_cost, efficiency, cf,
+                     fuel_cost, fuel_req, emission_factor, env_cost):
             self.life = life
             self.om_cost = om_cost
             self.capital_cost = capital_cost
             self.efficiency = efficiency
+            self.cf = cf
+            self.fuel_cost = fuel_cost
+            self.fuel_req = fuel_req
+            self.emission_factor = emission_factor
+            self.env_cost = env_cost
+
     
     class WindTurbine(Technology):
         # properties:
@@ -376,7 +385,8 @@ class Model():
         def __init__(self, life, om_cost, capital_cost, efficiency, mu = mu, 
                      t = t, p_rated = p_rated, z = z, zr = zr, es = es, 
                      u_arr = u_arr, p_curve = p_curve):
-            super().__init__(life, om_cost, capital_cost, efficiency)
+            super().__init__(life, om_cost, capital_cost, efficiency, None, 
+                             0, 1, 0, 0)
             self.mu = mu
             self.t = t
             self.p_rated = p_rated
@@ -385,21 +395,8 @@ class Model():
             self.es = es
             self.u_arr = u_arr
             self.p_curve = p_curve
-    
+           
     class PVSystem(Technology):
-        pass
-        
-    class DieselGenset(Technology):
-        def __init__(self, life, om_cost, capital_cost, efficiency, cf,
-                     fuel_cost, fuel_req, emission_factor, env_cost):
-            super().__init__(life, om_cost, capital_cost, efficiency)
-            self.fuel_cost = fuel_cost
-            self.fuel_req = fuel_req
-            self.emission_factor = emission_factor
-            self.env_cost = env_cost
-            self.cf = cf
-            
-    class Grid(DieselGenset):
         pass
             
             

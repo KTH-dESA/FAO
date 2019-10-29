@@ -55,8 +55,8 @@ def get_emissions(el_gen, efficiency, fuel_req, emission_factor):
     return emissions
 
 def get_lcoe(max_capacity, total_demand, tech_life, om_cost, capital_cost,
-             discount_rate, project_life, fuel_cost=0, fuel_req=0, 
-             efficiency=1, emission_factor=0, env_cost=0):
+             discount_rate, project_life, fuel_cost, fuel_req, 
+             efficiency, emission_factor, env_cost):
     # Perform the time-value LCOE calculation
     reinvest_year = 0
     capital_cost = capital_cost * max_capacity
