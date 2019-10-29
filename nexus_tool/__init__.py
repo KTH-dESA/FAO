@@ -274,9 +274,8 @@ class Model():
                                                 fuel_cost, fuel_req, 
                                                 emission_factor, env_cost)
         
-    def get_cf(self, technologies):
-        if type(technologies) == str:
-            technologies = [technologies]
+    def get_cf(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             if type(self.technologies[technology]) == self.WindTurbine:
                 self.get_wind_cf(technology)
@@ -294,25 +293,22 @@ class Model():
         tech = self.technologies[pv_system]
         self.technologies[pv_system].cf = get_pv_cf(self.df, self.srad)
                     
-    def get_installed_capacity(self, technologies):
-        if type(technologies) == str:
-            technologies = [technologies]
+    def get_installed_capacity(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             tech = self.technologies[technology]
             self.technologies[technology].df = get_installed_capacity(self.df, 
                                                                       tech.cf, 
                                                                       self.pd_e)
                                                 
-    def get_max_capacity(self, technologies):
-        if type(technologies) == str:
-            technologies = [technologies]
+    def get_max_capacity(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             tech = self.technologies[technology]
             self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df))
         
-    def get_lcoe(self, technologies):
-        if type(technologies) == str:
-            technologies = [technologies]
+    def get_lcoe(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             tech = self.technologies[technology]
             self.technologies[technology].df['lcoe'] = get_lcoe(
@@ -329,6 +325,14 @@ class Model():
                                         env_cost = tech.env_cost)
                                       
     ####### additional methods #############
+    def __check_tech_input(self, technologies):
+        if type(technologies) == str:
+            if technologies.lower() in ['all', 'a', 'everything']:
+                technologies = self.technologies.keys()
+            else:
+                technologies = [technologies]
+        return technologies
+    
     def print_summary(self, geo_boundary = 'global'):
         if geo_boundary == 'global':
             temp_df = self.df.sum()
