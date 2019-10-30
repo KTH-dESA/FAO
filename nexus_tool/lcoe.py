@@ -90,11 +90,27 @@ def get_lcoe(max_capacity, total_demand, tech_life, om_cost, capital_cost,
     fuel = get_fuel_cost(fuel_cost,el_gen,efficiency,fuel_req)
     emissions = get_emissions(el_gen,efficiency,fuel_req,emission_factor)
     
-    discounted_costs = (investments + operation_and_maintenance + fuel + emissions*env_cost - salvage) / discount_factor
+    discounted_costs = (investments + operation_and_maintenance + fuel + 
+                        emissions * env_cost - salvage) / discount_factor
     discounted_generation = el_gen / discount_factor
     
     return discounted_costs.sum(axis=1) / discounted_generation.sum(axis=1)
    
+def get_least_cost(df, geo_boundary_col = None, geo_boundary_name = None):
+    if geo_boundary_col == None:
+        filter_vec = [True] * df.shape[0]
+        i = 0
+    else:
+        filter_vec = df[geo_boundary_col]==geo_boundary_name
+        i = 1
+    df.loc[filter_vec, 'least_cost_technology'] = \
+                                df.loc[filter_vec, list(df)[i:]].idxmin(axis=1)
+    df.loc[filter_vec, 'lcoe'] = df.loc[filter_vec, list(df)[i:]].min(axis=1)
+    return df.loc[filter_vec, 'least_cost_technology'], df.loc[filter_vec, 'lcoe']
 
-    
-    
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 #Standard library imports
 import pandas as pd
+import numpy as np
 from pandas import read_csv
 from pandas import read_excel
 
@@ -30,6 +31,7 @@ from nexus_tool.lcoe import (
     get_installed_capacity,
     get_max_capacity,
     get_lcoe,
+    get_least_cost,
 )
 
 class Model():
@@ -222,7 +224,7 @@ class Model():
                              end = self.end, crop_share = self.crop_share)
                              
     ####### energy related methods ###########
-    def get_gw_tdh(self, inplace = False):
+    def get_gw_tdh(self, inplace = False, wdd = 0, oap = 0, pld = 0):
         if inplace:
             get_gw_tdh(self.df, gw_depth = self.gw_depth, wdd = 0, oap = 0, pld = 0, 
                        interp_method = 'nearest', tdh_gw = self.tdh_gw)
@@ -323,6 +325,27 @@ class Model():
                                         efficiency = tech.efficiency, 
                                         emission_factor = tech.emission_factor,
                                         env_cost = tech.env_cost)
+                                        
+    def get_least_cost(self,  technologies = 'all', geo_boundary = None):
+        self.df['least_cost_tech'] = np.nan
+        self.df['lcoe'] = np.nan
+        if (geo_boundary != None) and (type(technologies) == dict):
+            for key, value in technologies.items():
+                _technologies = self.__check_tech_input(value)
+                lcoe_df = pd.DataFrame()
+                lcoe_df[geo_boundary] = self.df[geo_boundary]
+                for _technology in _technologies:
+                    lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
+                self.df.loc[self.df[geo_boundary]==key, 'least_cost_tech'], \
+                self.df.loc[self.df[geo_boundary]==key, 'lcoe'] = \
+                                    get_least_cost(lcoe_df, geo_boundary, key)
+        else:
+            _technologies = self.__check_tech_input(technologies)
+            lcoe_df = pd.DataFrame()
+            for _technology in _technologies:
+                lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
+            self.df['least_cost_tech'], self.df['lcoe'] = \
+                                    get_least_cost(lcoe_df)
                                       
     ####### additional methods #############
     def __check_tech_input(self, technologies):
