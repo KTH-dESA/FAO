@@ -346,6 +346,11 @@ class Model():
                 lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
             self.df['least_cost_tech'], self.df['lcoe'] = \
                                     get_least_cost(lcoe_df)
+    
+    def get_tech_generation(self):
+        for key in self.technologies.keys():
+            self.df.loc[self.df['least_cost_tech']==key, f'{key} generation'] = \
+                self.df.loc[self.df['least_cost_tech']==key, 'annual_el_demand']
                                       
     ####### additional methods #############
     def __check_tech_input(self, technologies):
@@ -357,23 +362,49 @@ class Model():
         return technologies
     
     def print_summary(self, geo_boundary = 'global'):
+        temp_df = pd.DataFrame()
+        temp_df['Irrigated area (ha)'] = self.df[self.crop_area]
+
+        def least_cost(row):
+            _least_cost = set(row)
+            if np.nan in _least_cost:
+                _least_cost.remove(np.nan)
+            return ", ".join(_least_cost)
+        
         if geo_boundary == 'global':
-            temp_df = self.df.sum()
-            summary = pd.DataFrame()
-            
-            summary['Irrigated area (ha)'] = [temp_df[self.crop_area]]
-            summary['Water intensity (m3/ha)'] = [temp_df.filter(like=self.sswd).sum()/temp_df[self.crop_area]]
-            summary['Water demand (Mm3)'] = [temp_df.filter(like=self.sswd).sum()/1000000]
-            
-            summary.index = ['Global']
+            temp_df[geo_boundary] = geo_boundary
         else:
-            temp_df = self.df.groupby(geo_boundary).sum()
-            summary = pd.DataFrame()
+            temp_df[geo_boundary] = self.df[geo_boundary]
+        
+        summary = temp_df.groupby(geo_boundary).agg({'Irrigated area (ha)': 'sum'})
             
-            summary['Irrigated area (ha)'] = temp_df[self.crop_area]
-            summary['Water intensity (m3/ha)'] = temp_df.filter(like=self.sswd).sum(axis=1)/temp_df[self.crop_area]
-            summary['Water demand (Mm3)'] = temp_df.filter(like=self.sswd).sum(axis=1)/1000000
-            summary['Energy demand (GWh)'] = temp_df.filter(like=self.ed_e).sum(axis=1)/1000000
+        ### water related data
+        try:
+            temp_df['Water demand (Mm3)'] = self.df.filter(like=self.sswd).sum(axis=1) / 1000000
+            summary = summary.join(temp_df.groupby(geo_boundary)['Water demand (Mm3)'].sum())
+            summary.insert(2, 'Water intensity (m3/ha)', 
+                           summary['Water demand (Mm3)'] * 1000000 / \
+                           summary['Irrigated area (ha)'])
+        except:
+            pass
+            
+        ### energy related data
+        try:
+            temp_df['Energy demand (GWh)'] = self.df['annual_el_demand']/1000000
+            summary = summary.join(temp_df.groupby(geo_boundary)['Energy demand (GWh)'].sum())
+        except:
+            pass
+        
+        ### lcoe related data
+        try:
+            temp_df['Average lcoe ($/kWh)'] = self.df['lcoe']
+            temp_df['Least-cost technologies'] = self.df['least_cost_tech']
+            
+            summary = summary.join(temp_df.groupby(geo_boundary)['Average lcoe ($/kWh)'].mean())
+            summary = summary.join(temp_df.groupby(geo_boundary).agg({'Least-cost technologies': least_cost}))
+        
+        except:
+            pass
         
         summary.round(decimals=3)
         return summary
