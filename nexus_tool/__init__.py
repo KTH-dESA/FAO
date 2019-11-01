@@ -25,7 +25,7 @@ from nexus_tool.energy_for_pumping import (
     get_annual_electricity,
 )
 
-from nexus_tool.lcoe import (
+from nexus_tool.least_cost import (
     get_wind_cf,
     get_pv_cf,
     get_installed_capacity,
