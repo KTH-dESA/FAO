@@ -2,8 +2,7 @@
 import pandas as pd
 import numpy as np
 
-def get_gw_tdh(df, gw_depth, wdd, oap, pld, 
-               interp_method = 'nearest', tdh_gw = tdh_gw):
+def get_gw_tdh(df, gw_depth, wdd, oap, pld, tdh_gw, interp_method = 'nearest'):
     df[tdh_gw] = df[gw_depth] + wdd + oap + pld
     df[tdh_gw].replace(0, np.nan, inplace=True)
     # df[tdh_gw].interpolate(method = interp_method, axis=0, inplace=True)
@@ -25,4 +24,8 @@ def get_pumping_energy(df, trans_eff, pump_eff, pd_e, pwd, sswd, ed_e, tdh_gw,
         if desalination:
             df[_pd_e] += (df[_pwd]*df[des_int]*3600/1000)
             df[_ed_e] += (df['{}{}'.format(des_ener, i)]*1000000)
+    return df
+    
+def get_annual_electricity(df, ed_e):
+    df['annual_el_demand'] = df.filter(like=ed_e).sum(axis=1)
     return df

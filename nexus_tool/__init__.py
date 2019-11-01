@@ -1,5 +1,6 @@
 #Standard library imports
 import pandas as pd
+import numpy as np
 from pandas import read_csv
 from pandas import read_excel
 
@@ -21,10 +22,19 @@ from nexus_tool.water_demand import (
 from nexus_tool.energy_for_pumping import (
     get_gw_tdh,
     get_pumping_energy,
+    get_annual_electricity,
 )
 
-from nexus_tool.lcoe import (
+from nexus_tool.least_cost import (
     get_wind_cf,
+    get_pv_cf,
+    get_installed_capacity,
+    get_max_capacity,
+    get_lcoe,
+    get_least_cost,
+    get_tech_generation,
+    get_pumping_cost,
+    get_unit_pumping_cost,
 )
 
 class Model():
@@ -67,16 +77,10 @@ class Model():
     ed_e = 'ED_E_'
     trans_eff = 0
     pump_eff = 0
-    # wind power properties:
-    mu = 0.97  # availability factor
-    t = 24*30
-    p_rated = 600
-    z = 55  # hub height
-    zr = 80  # velocity measurement height
-    es = 0.85  # losses in wind electricity
-    u_arr = range(1, 26)
-    p_curve = [0, 0, 0, 0, 30, 77, 135, 208, 287, 371, 450, 514, 558,
-               582, 594, 598, 600, 600, 600, 600, 600, 600, 600, 600, 600]
+    technologies = {}
+    discount_rate = 0
+    start_year = 0
+    end_year = 30
     def __init__(self, df, eto = eto, lat = lat, elevation = elevation,
                  wind = wind, srad = srad, tmin = tmin, tmax = tmax, 
                  tavg = tavg, crop_share = crop_share, crop_area = crop_area,
@@ -85,7 +89,7 @@ class Model():
                  pumping_hours_per_day = pumping_hours_per_day,
                  deff = deff, aeff = aeff, gw_depth = gw_depth, 
                  des_int = des_int, des_ener = des_ener, pd_e = pd_e,
-                 ed_e = ed_e, trans_eff = trans_eff, pump_eff = trans_eff):
+                 ed_e = ed_e, trans_eff = trans_eff, pump_eff = trans_eff, ):
         self.df = df
         self.eto = eto
         self.lat = lat
@@ -223,7 +227,7 @@ class Model():
                              end = self.end, crop_share = self.crop_share)
                              
     ####### energy related methods ###########
-    def get_gw_tdh(self, inplace = False):
+    def get_gw_tdh(self, inplace = False, wdd = 0, oap = 0, pld = 0):
         if inplace:
             get_gw_tdh(self.df, gw_depth = self.gw_depth, wdd = 0, oap = 0, pld = 0, 
                        interp_method = 'nearest', tdh_gw = self.tdh_gw)
@@ -247,41 +251,246 @@ class Model():
                                       des_int = self.des_int, 
                                       des_ener = self.des_ener)
                                       
-    ####### technologies and LCOE related methods #########
-    def get_wind_cf(self, inplace = False):
+    def get_annual_electricity(self, inplace = False):
         if inplace:
-            get_wind_cf(self.df, wind = self.wind, mu = self.mu, t = self.t,
-                        p_rated self.p_rated, z = self.z, zr = self.zr, 
-                        es = self.es, u_arr = self.u_arr, p_curve = self.p_curve)
+            get_annual_electricity(self.df, self.ed_e)
         else:
-            return get_wind_cf(self.df.copy(), wind = self.wind, mu = self.mu, 
-                               t = self.t, p_rated self.p_rated, z = self.z, 
-                               zr = self.zr, es = self.es, u_arr = self.u_arr, 
-                               p_curve = self.p_curve)
+            return get_annual_electricity(self.df.copy(), self.ed_e)
+                                      
+    ####### technologies and LCOE related methods #########
+    def create_wind_turbine(self, wind_turbine, life, om_cost, 
+                            capital_cost, efficiency):
+        self.technologies[wind_turbine] = self.WindTurbine(life, om_cost, 
+                                                           capital_cost, 
+                                                           efficiency)
+                                                           
+    def create_pv_system(self, pv_system, life, om_cost, 
+                         capital_cost, efficiency):
+        self.technologies[pv_system] = self.PVSystem(life, om_cost, 
+                                                     capital_cost, 
+                                                     efficiency, None, 
+                                                     0, 1, 0, 0)
+                                                     
+    def create_standard_tech(self, tech_name, life, om_cost, capital_cost, 
+                             efficiency, cf, fuel_cost, fuel_req, emission_factor, 
+                             env_cost):
+        self.technologies[tech_name] = self.Technology(life, om_cost, 
+                                                capital_cost, efficiency, cf, 
+                                                fuel_cost, fuel_req, 
+                                                emission_factor, env_cost)
+        
+    def get_cf(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
+        for technology in technologies:
+            if type(self.technologies[technology]) == self.WindTurbine:
+                self.get_wind_cf(technology)
+            elif type(self.technologies[technology]) == self.PVSystem:
+                self.get_pv_cf(technology)
+    
+    def get_wind_cf(self, wind_turbine):
+        tech = self.technologies[wind_turbine]
+        self.technologies[wind_turbine].cf = get_wind_cf(self.df, wind = self.wind, 
+                    mu = tech.mu, t = tech.t, p_rated = tech.p_rated, 
+                    z = tech.z, zr = tech.zr, es = tech.es, u_arr = tech.u_arr,
+                    p_curve = tech.p_curve)
+                    
+    def get_pv_cf(self, pv_system):
+        tech = self.technologies[pv_system]
+        self.technologies[pv_system].cf = get_pv_cf(self.df, self.srad)
+                    
+    def get_installed_capacity(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
+        for technology in technologies:
+            tech = self.technologies[technology]
+            self.technologies[technology].df = get_installed_capacity(self.df, 
+                                                                      tech.cf, 
+                                                                      self.pd_e)
+                                                
+    def get_max_capacity(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
+        for technology in technologies:
+            tech = self.technologies[technology]
+            self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df))
+        
+    def get_lcoe(self, technologies = 'all'):
+        technologies = self.__check_tech_input(technologies)
+        for technology in technologies:
+            tech = self.technologies[technology]
+            self.technologies[technology].df['lcoe'] = get_lcoe(
+                                        max_capacity = tech.df['max_cap'],
+                                        total_demand = self.df['annual_el_demand'],
+                                        tech_life=tech.life, om_cost = tech.om_cost,
+                                        capital_cost = tech.capital_cost,
+                                        discount_rate = self.discount_rate,
+                                        project_life = self.end_year - self.start_year,
+                                        fuel_cost = tech.fuel_cost, 
+                                        fuel_req = tech.fuel_req, 
+                                        efficiency = tech.efficiency, 
+                                        emission_factor = tech.emission_factor,
+                                        env_cost = tech.env_cost)
+                                        
+    def get_least_cost(self,  technologies = 'all', geo_boundary = None):
+        self.df['least_cost_tech'] = np.nan
+        self.df['lcoe'] = np.nan
+        if (geo_boundary != None) and (type(technologies) == dict):
+            for key, value in technologies.items():
+                _technologies = self.__check_tech_input(value)
+                lcoe_df = pd.DataFrame()
+                lcoe_df[geo_boundary] = self.df[geo_boundary]
+                for _technology in _technologies:
+                    lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
+                self.df.loc[self.df[geo_boundary]==key, 'least_cost_tech'], \
+                self.df.loc[self.df[geo_boundary]==key, 'lcoe'] = \
+                                    get_least_cost(lcoe_df, geo_boundary, key)
+        else:
+            _technologies = self.__check_tech_input(technologies)
+            lcoe_df = pd.DataFrame()
+            for _technology in _technologies:
+                lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
+            self.df['least_cost_tech'], self.df['lcoe'] = \
+                                    get_least_cost(lcoe_df)
+    
+    def get_tech_generation(self):
+        get_tech_generation(self.df, self.technologies.keys())
+        
+    def get_pumping_cost(self, inplace = False):
+        if inplace:
+            get_pumping_cost(self.df, 'annual_el_demand', 'lcoe')
+        else:
+            return get_pumping_cost(self.df.copy(), 'annual_el_demand', 'lcoe')
+            
+    def get_unit_pumping_cost(self, inplace = False):
+        if inplace:
+            get_unit_pumping_cost(self.df, 'pumping_cost',
+                                  self.df.filter(like=self.sswd).sum(axis=1))
+        else:
+            return get_unit_pumping_cost(self.df.copy(), 'pumping_cost',
+                                self.df.filter(like=self.sswd).sum(axis=1))
                                       
     ####### additional methods #############
+    def __check_tech_input(self, technologies):
+        if type(technologies) == str:
+            if technologies.lower() in ['all', 'a', 'everything']:
+                technologies = self.technologies.keys()
+            else:
+                technologies = [technologies]
+        return technologies
+    
     def print_summary(self, geo_boundary = 'global'):
-        if geo_boundary == 'global':
-            temp_df = self.df.sum()
-            summary = pd.DataFrame()
+        if 'month' in geo_boundary:
+            _id_vars = [geo_boundary] if type(geo_boundary) == str else geo_boundary.copy()
+            _id_vars.remove('month')
+            temp_df = self.df.melt(id_vars=['crop_area']+_id_vars, 
+                        value_vars=self.df.columns[self.df.columns.str.contains(self.sswd)])
+            temp_df.rename(columns={'crop_area': 'Irrigated area (ha)', 
+                                    'variable': 'month', 
+                                    'value': 'Water demand (Mm3)'}, 
+                                    inplace=True)
+            for i in range(1,13):
+                temp_df.loc[temp_df['month']==f'{self.sswd}{i}','month'] = i
             
-            summary['Irrigated area (ha)'] = [temp_df[self.crop_area]]
-            summary['Water intensity (m3/ha)'] = [temp_df.filter(like=self.sswd).sum()/temp_df[self.crop_area]]
-            summary['Water demand (Mm3)'] = [temp_df.filter(like=self.sswd).sum()/1000000]
-            
-            summary.index = ['Global']
+            temp_df['energy demand'] = self.df.melt(value_vars=self.df.columns[self.df.columns.str.contains(self.ed_e)])['value']
+            summary = temp_df.groupby(geo_boundary).agg({'Irrigated area (ha)': 'sum',
+                                                         'Water demand (Mm3)': lambda row: sum(row)/1000000})
+            summary.insert(2, 'Water intensity (m3/ha)', 
+                           summary['Water demand (Mm3)'] * 1000000 / \
+                           summary['Irrigated area (ha)'])
+            try:
+                temp_df['Energy demand (GWh)'] = self.df.melt(value_vars=self.df.columns[self.df.columns.str.contains(self.ed_e)])['value']/1000000
+                summary = summary.join(temp_df.groupby(geo_boundary)['Energy demand (GWh)'].sum())
+            except:
+                pass           
+                
         else:
-            temp_df = self.df.groupby(geo_boundary).sum()
-            summary = pd.DataFrame()
+        
+            temp_df = pd.DataFrame()
+            temp_df['Irrigated area (ha)'] = self.df[self.crop_area]
             
-            summary['Irrigated area (ha)'] = temp_df[self.crop_area]
-            summary['Water intensity (m3/ha)'] = temp_df.filter(like=self.sswd).sum(axis=1)/temp_df[self.crop_area]
-            summary['Water demand (Mm3)'] = temp_df.filter(like=self.sswd).sum(axis=1)/1000000
-            summary['Total demand (GWh)'] = temp_df.filter(like=self.ed_e).sum(axis=1)/1000000
+            if geo_boundary == 'global':
+                temp_df[geo_boundary] = geo_boundary
+            else:
+                temp_df[geo_boundary] = self.df[geo_boundary]
+            
+            summary = temp_df.groupby(geo_boundary).agg({'Irrigated area (ha)': 'sum'})
+                
+            ### water related data
+            try:
+                temp_df['Water demand (Mm3)'] = self.df.filter(like=self.sswd).sum(axis=1) / 1000000
+                summary = summary.join(temp_df.groupby(geo_boundary)['Water demand (Mm3)'].sum())
+                summary.insert(2, 'Water intensity (m3/ha)', 
+                               summary['Water demand (Mm3)'] * 1000000 / \
+                               summary['Irrigated area (ha)'])
+            except:
+                pass
+                
+            ### energy related data
+            try:
+                temp_df['Energy demand (GWh)'] = self.df['annual_el_demand']/1000000
+                summary = summary.join(temp_df.groupby(geo_boundary)['Energy demand (GWh)'].sum())
+            except:
+                pass
+            
+            ### lcoe related data
+            try:
+                temp_df['Average lcoe ($/kWh)'] = self.df['lcoe']
+                temp_df['Pumping cost (M$)'] = self.df['pumping_cost']/1000000
+                summary = summary.join(temp_df.groupby(geo_boundary)['Average lcoe ($/kWh)'].mean())
+                summary = summary.join(temp_df.groupby(geo_boundary)['Pumping cost (M$)'].sum())
+                summary['Pumping cost ($/m3)'] = summary['Pumping cost (M$)'] / \
+                                                      summary['Water demand (Mm3)']
+            except:
+                pass
         
         summary.round(decimals=3)
         return summary
             
+    class Technology():
+        df = pd.DataFrame()
+        fuel_cost = 0
+        fuel_req = 0
+        efficiency = 1
+        emission_factor = 0
+        env_cost = 0
+        def __init__(self, life, om_cost, capital_cost, efficiency, cf,
+                     fuel_cost, fuel_req, emission_factor, env_cost):
+            self.life = life
+            self.om_cost = om_cost
+            self.capital_cost = capital_cost
+            self.efficiency = efficiency
+            self.cf = cf
+            self.fuel_cost = fuel_cost
+            self.fuel_req = fuel_req
+            self.emission_factor = emission_factor
+            self.env_cost = env_cost
+
+    
+    class WindTurbine(Technology):
+        # properties:
+        mu = 0.97  # availability factor
+        t = 24*30
+        p_rated = 600
+        z = 55  # hub height
+        zr = 80  # velocity measurement height
+        es = 0.85  # losses in wind electricity
+        u_arr = range(1, 26)
+        p_curve = [0, 0, 0, 0, 30, 77, 135, 208, 287, 371, 450, 514, 558,
+                   582, 594, 598, 600, 600, 600, 600, 600, 600, 600, 600, 600]
+        def __init__(self, life, om_cost, capital_cost, efficiency, mu = mu, 
+                     t = t, p_rated = p_rated, z = z, zr = zr, es = es, 
+                     u_arr = u_arr, p_curve = p_curve):
+            super().__init__(life, om_cost, capital_cost, efficiency, None, 
+                             0, 1, 0, 0)
+            self.mu = mu
+            self.t = t
+            self.p_rated = p_rated
+            self.z = z
+            self.zr = zr
+            self.es = es
+            self.u_arr = u_arr
+            self.p_curve = p_curve
+           
+    class PVSystem(Technology):
+        pass
             
             
             
