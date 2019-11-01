@@ -114,5 +114,10 @@ def get_tech_generation(df, technologies):
                         df.loc[df['least_cost_tech']==key, 'annual_el_demand']
     return df
 
+def get_pumping_cost(df, energy_demand, lcoe):
+    df['pumping_cost'] = df[energy_demand] * df[lcoe]
+    return df
 
-
+def get_unit_pumping_cost(df, pumping_cost, water_demand):
+    df['unit_pumping_cost'] = df[pumping_cost] / water_demand
+    return df

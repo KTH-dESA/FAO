@@ -33,6 +33,8 @@ from nexus_tool.lcoe import (
     get_lcoe,
     get_least_cost,
     get_tech_generation,
+    get_pumping_cost,
+    get_unit_pumping_cost,
 )
 
 class Model():
@@ -350,6 +352,20 @@ class Model():
     
     def get_tech_generation(self):
         get_tech_generation(self.df, self.technologies.keys())
+        
+    def get_pumping_cost(self, inplace = False):
+        if inplace:
+            get_pumping_cost(self.df, 'annual_el_demand', 'lcoe')
+        else:
+            return get_pumping_cost(self.df.copy(), 'annual_el_demand', 'lcoe')
+            
+    def get_unit_pumping_cost(self, inplace = False):
+        if inplace:
+            get_unit_pumping_cost(self.df, 'pumping_cost',
+                                  self.df.filter(like=self.sswd).sum(axis=1))
+        else:
+            return get_unit_pumping_cost(self.df.copy(), 'pumping_cost',
+                                self.df.filter(like=self.sswd).sum(axis=1))
                                       
     ####### additional methods #############
     def __check_tech_input(self, technologies):
@@ -417,8 +433,11 @@ class Model():
             ### lcoe related data
             try:
                 temp_df['Average lcoe ($/kWh)'] = self.df['lcoe']
+                temp_df['Pumping cost (M$)'] = self.df['pumping_cost']/1000000
                 summary = summary.join(temp_df.groupby(geo_boundary)['Average lcoe ($/kWh)'].mean())
-
+                summary = summary.join(temp_df.groupby(geo_boundary)['Pumping cost (M$)'].sum())
+                summary['Pumping cost ($/m3)'] = summary['Pumping cost (M$)'] / \
+                                                      summary['Water demand (Mm3)']
             except:
                 pass
         
