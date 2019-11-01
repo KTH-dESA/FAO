@@ -108,9 +108,11 @@ def get_least_cost(df, geo_boundary_col = None, geo_boundary_name = None):
     df.loc[filter_vec, 'lcoe'] = df.loc[filter_vec, list(df)[i:]].min(axis=1)
     return df.loc[filter_vec, 'least_cost_technology'], df.loc[filter_vec, 'lcoe']
 
-
-
-
+def get_tech_generation(df, technologies):
+    for key in technologies:
+                df.loc[df['least_cost_tech']==key, f'{key} generation'] = \
+                        df.loc[df['least_cost_tech']==key, 'annual_el_demand']
+    return df
 
 
 
