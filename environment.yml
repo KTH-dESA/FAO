@@ -30,8 +30,8 @@ dependencies:
   - openssl=1.1.1c=hfa6e2cd_0
   - pandas=0.25.3=py36he350917_0
   - pip=19.3.1=py36_0
-  - pip:
-    - "--editable=git+https://github.com/woodcrafty/PyETo.git#egg=PyETo"
+  # - pip:
+    # - "--editable=git+https://github.com/woodcrafty/PyETo.git#egg=PyETo"
   - psutil=5.6.3=py36hfa6e2cd_0
   - pycparser=2.19=py36_1
   - pyopenssl=19.0.0=py36_0

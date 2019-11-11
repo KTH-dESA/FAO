@@ -19,7 +19,9 @@ To install the required dependencies, the easiest way is to install the
 miniconda or conda package manager and create a conda environment running 
 `conda env create -n <name-of-environment> -f environment.yml` in the conda 
 shell or git bash (replace \<name-of-environment\> by a custom name for your 
-environment).
+environment). Afterwards, activate the environment with `conda activate 
+<name-of-environment>` and install the `pyeto` package with `pip install 
+git+https://github.com/woodcrafty/PyETo.git@8ca15bd6f70eda39f42b40581e7d5cab4bf76fbc#egg=PyETo`
 
 ## Running the model
 To run the model, first activate the previously created conda environment by 
