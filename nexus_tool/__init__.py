@@ -21,6 +21,7 @@ from nexus_tool.water_demand import (
 
 from nexus_tool.energy_for_pumping import (
     get_gw_tdh,
+    get_sw_tdh,
     get_pumping_energy,
     get_annual_electricity,
 )
@@ -71,6 +72,7 @@ class Model():
     # energy properties:
     gw_depth = 'gw_depth'
     tdh_gw = 'tdh_gw'
+    tdh_sw = 'tdh_sw'
     des_int = 'Einten_KWh/m3'
     des_ener = 'Edesal_GWh_'
     pd_e = 'PD_E_'
@@ -123,7 +125,8 @@ class Model():
                               self.srad, self.tmin, self.tmax, self.tavg,
                               self.crop_share, self.crop_area, self.seasons,
                               self.start, self.end, self.crop_column,
-                              self.gw_depth, self.tdh_gw],
+                              self.gw_depth, self.tdh_gw,
+                              self.tdh_sw,],
                              ['Reference evapotranspiration (.eto)', 
                               'Latitude (.lat)', 'Elevation (.elevation)', 
                               'Wind speed (.wind)', 'Solar radiation (.srad)', 
