@@ -78,12 +78,12 @@ def get_SWpumping_energy(df, tdh_sw, SWpump_eff, swpp_e, swpa_e, g, pwd, sswd, d
     for i in range (1,13):
         _swpp_e = '{}{}'.format(swpp_e, i) #surface water pumping peak electric demand 
         _swpa_e = '{}{}'.format(swpa_e, i) #surface water pumping average electric demand
-        _pQ = '{}{}'.format(pwd, i) #peak water flow in the pipeline. To be updated WEAP output. 
-        _aQ = '{}{}'.format(sswd, i) #average water flow in the pipeline. To be updated with WEAP output 
+        _peak_Q = '{}{}'.format(pwd, i) #peak water flow in the pipeline. To be updated WEAP output. 
+        _avg_Q = '{}{}'.format(sswd, i) #average water flow in the pipeline. To be updated with WEAP output 
         
         
-        df[_swpp_e]=(df[_pQ]*df[tdh_sw]*g*dens)/SWpump_eff
-        df[_swpa_e]=(df[_aQ]*df[tdh_sw]*g*dens)/SWpump_eff
+        df[_swpp_e]=(df[_peak_Q]*df[tdh_sw]*g*dens)/SWpump_eff
+        df[_swpa_e]=(df[_avg_Q]*df[tdh_sw]*g*dens)/SWpump_eff
         
     return df
 

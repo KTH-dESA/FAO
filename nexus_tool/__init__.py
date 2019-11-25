@@ -81,15 +81,18 @@ class Model():
     D='Pipe_diameter' #new
     L='Pipeline_length' #new
     A='Pipe_area' #new
+    V='Flow_velocity' #new
     tdh_sw = 'tdh_sw' #new
     des_int = 'Einten_KWh/m3'
     des_ener = 'Edesal_GWh_'
     pd_e = 'PD_E_'
     ed_e = 'ED_E_'
-    pQ = 'PQ_' #new, Peak flow in the pipeline, WEAP
-    aQ = 'AQ_' #new, Average flow in the pipeline, WEAP
+    peak_Q = 'PeakQ_' #new, Peak flow in the pipeline, WEAP
+    avg_Q = 'AvgQ_'   #new, Average flow in the pipeline, WEAP
     swpp_e= 'SWPP_E_' #new, Surface Water Pumping PEAK Electric demand
     swpa_e= 'SWPA_E_' #new, Surface Water Pumping AVERAGE Electric demand
+    Re='Reynolds_number' #new
+    f='Friction_losses' #new
     trans_eff = 0
     pump_eff = 0
     SWpump_eff =0.6 #new
@@ -148,7 +151,7 @@ class Model():
                               self.crop_share, self.crop_area, self.seasons,
                               self.start, self.end, self.crop_column,
                               self.gw_depth, self.tdh_gw,
-                              self.tdh_sw,],
+                              self.tdh_sw],
                              ['Reference evapotranspiration (.eto)', 
                               'Latitude (.lat)', 'Elevation (.elevation)', 
                               'Wind speed (.wind)', 'Solar radiation (.srad)', 
@@ -269,7 +272,7 @@ class Model():
                               
     def get_GWpumping_energy(self, inplace = False):
         if inplace:
-            get_GWpumping_energy(self.df, self.trans_eff, self.pump_eff, 
+            self.GWpumping_energy=get_GWpumping_energy(self.df, self.trans_eff, self.pump_eff, 
                                pd_e = self.pd_e, pwd = self.pwd, 
                                sswd = self.sswd, ed_e = self.ed_e, 
                                tdh_gw = self.tdh_gw, desalination = False, 
@@ -284,63 +287,55 @@ class Model():
     
     def get_A(self, inplace=False):
         if inplace:
-            get_A(self.df, pi=3.14, D=self.df['Pipe_diameter'],interp_method = 'nearest')
+            self.df[self.A]= get_A(self.df, pi=3.14, D=self.df[self.D], interp_method = 'nearest')
             
-            else:
-                return get_A(self.df.copy(), pi=3.14, D=self.df['Pipe_diameter'], interp_method = 'nearest')
+        else:
+            return get_A(self.df.copy(), pi=3.14, D=self.df[self.D], interp_method = 'nearest')
     
     def get_V(self, inplace=False):
         if inplace:
-            get_V(self.df, Q=self.df['Q'], A=self.df['Pipe_area'], interp_method = 'nearest')
+            self.V=get_V(self.df, Q=self.df[self.avg_Q], A=self.df[self.A], interp_method = 'nearest')
             
-            else:
-                return get_V(self.df.copy(), Q=self.df['Q'], A=self.df['Pipe_area'], interp_method = 'nearest')
+        else:
+            return get_V(self.df.copy(), Q=self.df[self.avg_Q], A=self.df[self.A], interp_method = 'nearest')
     
     
     def get_Re(self, inplace=False):
         if inplace: 
-            get_Re(self.df, V=self.df['V'], D=self.df['Pipe_diameter'], Ken_visc=1000, interp_method = 'nearest')
+            self.Re=get_Re(self.df, V=self.df[self.V], D=self.df[self.D], Ken_visc=1000, interp_method = 'nearest')
             
-            else:
-                return get_Re(self.df.copy(), V=self.df['V'], D=self.df['Pipe_diameter'],Ken_visc=1000, interp_method = 'nearest')
+        else:
+            return get_Re(self.df.copy(), V=self.df[self.V], D=self.df[self.D],Ken_visc=1000, interp_method = 'nearest')
     
     def get_f(self, inplace=False):
         if inplace:
-            get_f(self.df, k=0.26, D=self.df['Pipe_diameter'], Re=self.df['Re'], interp_method = 'nearest')
-            else:
-                return get_f(self.df.copy(), k=0.26, D=self.df['Pipe_diameter'], Re=self.df['Re'], interp_method = 'nearest')
+            self.f=get_f(self.df, k=0.26, D=self.df[self.D], Re=self.df[self.Re], interp_method = 'nearest')
+        else:
+            return get_f(self.df.copy(), k=0.26, D=self.df[self.D], Re=self.df[self.Re], interp_method = 'nearest')
     
-
+                                   
     def get_sw_tdh(self, inplace = False):
         if inplace:
-            get_sw_tdh(self.df, tdh_sw =self.tdh_sw, elevation=self.elevation, 
-                       f =self.df['f'], L=self.df['Pipeline_length'], 
-                       Q=self.df['Q'], D=self.df['Pipe_diameter'], 
-                       g, pi=3.14, interp_method = 'nearest')
-            
+            self.tdh_sw=get_sw_tdh(self.df, tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.df[self.f], L=self.df[self.L],Q=self.df[self.avg_Q], D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')
         else:
-            return get_sw_tdh(self.df.copy(), tdh_sw =self.tdh_sw, elevation=self.elevation, 
-                       f =self.df['f'], L=self.df['Pipeline_length'], 
-                       Q=self.df['Q'], D=self.df['Pipe_diameter'], 
-                       g, pi=3.14, interp_method = 'nearest')   
+            return get_sw_tdh(self.df.copy(), tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.df[self.f], L=self.df[self.L], Q=self.df[self.avg_Q], D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')   
     
     
     def get_SWpumping_energy(self, inplace = False):
         if inplace:
-            get_SWpumping_energy(self.df, SWpump_eff = self.SWpump_eff, 
-                               tdh_sw = self.tdh_sw,swpp_e = self.swpp_e, pwd = self.pwd, 
-                               swpa_e = self.swpa_e, sswd = self.sswd,
-                                g = self.g, dens=self.dens)
+            self.SWpumping_energy=get_SWpumping_energy(self.df, SWpump_eff = self.SWpump_eff, 
+                       tdh_sw = self.tdh_sw, swpp_e = self.swpp_e, pwd = self.pwd, 
+                       swpa_e = self.swpa_e, sswd = self.sswd,g=self.g, dens=self.dens)
         else:
             return get_SWpumping_energy(self.df.copy(), SWpump_eff=self.SWpump_eff, 
-                                       tdh_sw = self.tdh_sw,swpp_e = self.swpp_e, pwd = self.pwd, 
-                                       swpa_e = self.swpa_e, sswd = self.sswd,
-                                        g = self.g, dens=self.dens)
+                       tdh_sw = self.tdh_sw, swpp_e = self.swpp_e, pwd = self.pwd, 
+                       swpa_e = self.swpa_e, sswd = self.sswd, g=self.g, dens=self.dens)
+    
     def get_total_pumping_energy(self, inplace =False):
         if inplace:
             get_total_pumping_energy(self.df, self.GWpumping_energy, self.SWpumping_energy, inter_method='nearest')
-            else:
-                return get_total_pumping_energy(self.df.copy(), self.GWpumping_energy, self.SWpumping_energy, inter_method='nearest')
+        else:
+            return get_total_pumping_energy(self.df.copy(), self.GWpumping_energy, self.SWpumping_energy, inter_method='nearest')
     
     
     
