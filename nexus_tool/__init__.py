@@ -21,8 +21,14 @@ from nexus_tool.water_demand import (
 
 from nexus_tool.energy_for_pumping import (
     get_gw_tdh,
+    get_A,
+    get_V,
+    get_Re,
+    get_f,
     get_sw_tdh,
-    get_pumping_energy,
+    get_GWpumping_energy,
+    get_SWpumping_energy,
+    get_totalpumping_energy,
     get_annual_electricity,
 )
 
@@ -72,15 +78,28 @@ class Model():
     # energy properties:
     gw_depth = 'gw_depth'
     tdh_gw = 'tdh_gw'
-    tdh_sw = 'tdh_sw'
+    D='Pipe_diameter' #new
+    L='Pipeline_length' #new
+    A='Pipe_area' #new
+    tdh_sw = 'tdh_sw' #new
     des_int = 'Einten_KWh/m3'
     des_ener = 'Edesal_GWh_'
     pd_e = 'PD_E_'
     ed_e = 'ED_E_'
+    pQ = 'PQ_' #new, Peak flow in the pipeline, WEAP
+    aQ = 'AQ_' #new, Average flow in the pipeline, WEAP
+    swpp_e= 'SWPP_E_' #new, Surface Water Pumping PEAK Electric demand
+    swpa_e= 'SWPA_E_' #new, Surface Water Pumping AVERAGE Electric demand
     trans_eff = 0
     pump_eff = 0
+    SWpump_eff =0.6 #new
     technologies = {}
     discount_rate = 0
+    g= 9.81 #new
+    pi=3.14 #new
+    Ken_visc=1.004**-6 #new
+    dens = 1000 #new
+    k=0.26  #New - roughness for cast iron
     start_year = 0
     end_year = 30
     def __init__(self, df, eto = eto, lat = lat, elevation = elevation,
@@ -91,7 +110,7 @@ class Model():
                  pumping_hours_per_day = pumping_hours_per_day,
                  deff = deff, aeff = aeff, gw_depth = gw_depth, 
                  des_int = des_int, des_ener = des_ener, pd_e = pd_e,
-                 ed_e = ed_e, trans_eff = trans_eff, pump_eff = trans_eff, ):
+                 ed_e = ed_e, swpp_e = swpp_e, swpa_e = swpa_e,  trans_eff = trans_eff, SWpump_eff=SWpump_eff, pump_eff = pump_eff, ):
         self.df = df
         self.eto = eto
         self.lat = lat
@@ -116,8 +135,11 @@ class Model():
         self.des_ener = des_ener
         self.pd_e = pd_e
         self.ed_e = ed_e
+        self.swpp_e = swpp_e #new
+        self.swpa_e = swpa_e #new
         self.trans_eff = trans_eff
-        self.pump_eff = trans_eff
+        self.SWpump_eff = SWpump_eff
+        self.pump_eff = pump_eff #changed from self.pump_eff = trans_eff
             
     def print_properties(self):
         print('Properties names:')
@@ -139,8 +161,13 @@ class Model():
                               'Seasson end suffix (.end)', 
                               'Cropland column (.crop_column)',
                               'Groundwater table depth (.gw_depth)',
-                              'Total dynamic head (.tdh_gw)']):
-            print('    - {}: {}'.format(name, val))
+                              'Total dynamic head ground water (.tdh_gw)',
+                              'Total dynamic head surface water (.tdh_sw)',
+                              'Pipe area (.A)',
+                              'Flow velocity (.V)',
+                              'Friction losses (.f)',
+                              'Reynolds Number (.Re)',]):
+            print('    - {}: {}'.format(name, val)) 
           
     ####### water related methods ###########
     def set_cropland_share(self, crop_var, geo_boundary = 'global', 
@@ -229,7 +256,8 @@ class Model():
                              _sswd = self.sswd, start = self.start, 
                              end = self.end, crop_share = self.crop_share)
                              
-    ####### energy related methods ###########
+    ####### energy related methods ########### 
+   
     def get_gw_tdh(self, inplace = False, wdd = 0, oap = 0, pld = 0):
         if inplace:
             get_gw_tdh(self.df, gw_depth = self.gw_depth, wdd = 0, oap = 0, pld = 0, 
@@ -239,21 +267,83 @@ class Model():
                               pld = 0, interp_method = 'nearest', 
                               tdh_gw = self.tdh_gw)
                               
-    def get_pumping_energy(self, inplace = False):
+    def get_GWpumping_energy(self, inplace = False):
         if inplace:
-            get_pumping_energy(self.df, self.trans_eff, self.pump_eff, 
+            get_GWpumping_energy(self.df, self.trans_eff, self.pump_eff, 
                                pd_e = self.pd_e, pwd = self.pwd, 
                                sswd = self.sswd, ed_e = self.ed_e, 
                                tdh_gw = self.tdh_gw, desalination = False, 
                                des_int = self.des_int, des_ener = self.des_ener)
         else:
-            return get_pumping_energy(self.df.copy(), self.trans_eff, self.pump_eff, 
+            return get_GWpumping_energy(self.df.copy(), self.trans_eff, self.pump_eff, 
                                       pd_e = self.pd_e, pwd = self.pwd, 
                                       sswd = self.sswd, ed_e = self.ed_e, 
                                       tdh_gw = self.tdh_gw, desalination = False, 
                                       des_int = self.des_int, 
                                       des_ener = self.des_ener)
-                                      
+    
+    def get_A(self, inplace=False):
+        if inplace:
+            get_A(self.df, pi=3.14, D=self.df['Pipe_diameter'],interp_method = 'nearest')
+            
+            else:
+                return get_A(self.df.copy(), pi=3.14, D=self.df['Pipe_diameter'], interp_method = 'nearest')
+    
+    def get_V(self, inplace=False):
+        if inplace:
+            get_V(self.df, Q=self.df['Q'], A=self.df['Pipe_area'], interp_method = 'nearest')
+            
+            else:
+                return get_V(self.df.copy(), Q=self.df['Q'], A=self.df['Pipe_area'], interp_method = 'nearest')
+    
+    
+    def get_Re(self, inplace=False):
+        if inplace: 
+            get_Re(self.df, V=self.df['V'], D=self.df['Pipe_diameter'], Ken_visc=1000, interp_method = 'nearest')
+            
+            else:
+                return get_Re(self.df.copy(), V=self.df['V'], D=self.df['Pipe_diameter'],Ken_visc=1000, interp_method = 'nearest')
+    
+    def get_f(self, inplace=False):
+        if inplace:
+            get_f(self.df, k=0.26, D=self.df['Pipe_diameter'], Re=self.df['Re'], interp_method = 'nearest')
+            else:
+                return get_f(self.df.copy(), k=0.26, D=self.df['Pipe_diameter'], Re=self.df['Re'], interp_method = 'nearest')
+    
+
+    def get_sw_tdh(self, inplace = False):
+        if inplace:
+            get_sw_tdh(self.df, tdh_sw =self.tdh_sw, elevation=self.elevation, 
+                       f =self.df['f'], L=self.df['Pipeline_length'], 
+                       Q=self.df['Q'], D=self.df['Pipe_diameter'], 
+                       g, pi=3.14, interp_method = 'nearest')
+            
+        else:
+            return get_sw_tdh(self.df.copy(), tdh_sw =self.tdh_sw, elevation=self.elevation, 
+                       f =self.df['f'], L=self.df['Pipeline_length'], 
+                       Q=self.df['Q'], D=self.df['Pipe_diameter'], 
+                       g, pi=3.14, interp_method = 'nearest')   
+    
+    
+    def get_SWpumping_energy(self, inplace = False):
+        if inplace:
+            get_SWpumping_energy(self.df, SWpump_eff = self.SWpump_eff, 
+                               tdh_sw = self.tdh_sw,swpp_e = self.swpp_e, pwd = self.pwd, 
+                               swpa_e = self.swpa_e, sswd = self.sswd,
+                                g = self.g, dens=self.dens)
+        else:
+            return get_SWpumping_energy(self.df.copy(), SWpump_eff=self.SWpump_eff, 
+                                       tdh_sw = self.tdh_sw,swpp_e = self.swpp_e, pwd = self.pwd, 
+                                       swpa_e = self.swpa_e, sswd = self.sswd,
+                                        g = self.g, dens=self.dens)
+    def get_total_pumping_energy(self, inplace =False):
+        if inplace:
+            get_total_pumping_energy(self.df, self.GWpumping_energy, self.SWpumping_energy, inter_method='nearest')
+            else:
+                return get_total_pumping_energy(self.df.copy(), self.GWpumping_energy, self.SWpumping_energy, inter_method='nearest')
+    
+    
+    
     def get_annual_electricity(self, inplace = False):
         if inplace:
             get_annual_electricity(self.df, self.ed_e)
