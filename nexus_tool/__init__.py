@@ -28,7 +28,7 @@ from nexus_tool.energy_for_pumping import (
     get_sw_tdh,
     get_GWpumping_energy,
     get_SWpumping_energy,
-    get_totalpumping_energy,
+    get_total_pumping_energy,
     get_annual_electricity,
 )
 
@@ -81,18 +81,18 @@ class Model():
     D='Pipe_diameter' #new
     L='Pipeline_length' #new
     A='Pipe_area' #new
-    V='Flow_velocity' #new
+    mV='Flow_velocity_' #new, monthly Velocity mV
     tdh_sw = 'tdh_sw' #new
     des_int = 'Einten_KWh/m3'
     des_ener = 'Edesal_GWh_'
     pd_e = 'PD_E_'
     ed_e = 'ED_E_'
-    peak_Q = 'PeakQ_' #new, Peak flow in the pipeline, WEAP
-    avg_Q = 'AvgQ_'   #new, Average flow in the pipeline, WEAP
+    peak_Q = 'PWD_' #new, Peak flow in the pipeline, WEAP
+    avg_Q = 'SSWD_'   #new, Average flow in the pipeline, WEAP
     swpp_e= 'SWPP_E_' #new, Surface Water Pumping PEAK Electric demand
     swpa_e= 'SWPA_E_' #new, Surface Water Pumping AVERAGE Electric demand
-    Re='Reynolds_number' #new
-    f='Friction_losses' #new
+    Re='Re_' #new
+    f='f_' #new
     trans_eff = 0
     pump_eff = 0
     SWpump_eff =0.6 #new
@@ -151,7 +151,7 @@ class Model():
                               self.crop_share, self.crop_area, self.seasons,
                               self.start, self.end, self.crop_column,
                               self.gw_depth, self.tdh_gw,
-                              self.tdh_sw],
+                              self.tdh_sw,],
                              ['Reference evapotranspiration (.eto)', 
                               'Latitude (.lat)', 'Elevation (.elevation)', 
                               'Wind speed (.wind)', 'Solar radiation (.srad)', 
@@ -287,45 +287,45 @@ class Model():
     
     def get_A(self, inplace=False):
         if inplace:
-            self.df[self.A]= get_A(self.df, pi=3.14, D=self.df[self.D], interp_method = 'nearest')
+            self.df[self.A]= get_A(pi=3.14, D=self.df[self.D])
             
         else:
-            return get_A(self.df.copy(), pi=3.14, D=self.df[self.D], interp_method = 'nearest')
+            return get_A(pi=3.14, D=self.df[self.D])
     
     def get_V(self, inplace=False):
         if inplace:
-            self.V=get_V(self.df, Q=self.df[self.avg_Q], A=self.df[self.A], interp_method = 'nearest')
+            self.df=get_V(self.df, avg_Q=self.avg_Q, A=self.df[self.A], mV=self.mV)
             
         else:
-            return get_V(self.df.copy(), Q=self.df[self.avg_Q], A=self.df[self.A], interp_method = 'nearest')
+            return get_V(self.df.copy(), avg_Q=self.avg_Q, A=self.df[self.A], mV=self.mV)
     
     
     def get_Re(self, inplace=False):
         if inplace: 
-            self.Re=get_Re(self.df, V=self.df[self.V], D=self.df[self.D], Ken_visc=1000, interp_method = 'nearest')
+            self.df=get_Re(self.df, Re=self.Re, mV=self.mV, D=self.df[self.D], Ken_visc=1000)
             
         else:
-            return get_Re(self.df.copy(), V=self.df[self.V], D=self.df[self.D],Ken_visc=1000, interp_method = 'nearest')
+            return get_Re(self.df.copy(), Re=self.Re, mV=self.mV, D=self.df[self.D],Ken_visc=1000)
     
     def get_f(self, inplace=False):
         if inplace:
-            self.f=get_f(self.df, k=0.26, D=self.df[self.D], Re=self.df[self.Re], interp_method = 'nearest')
+            self.df=get_f(self.df, f=self.f, k=0.26, D=self.df[self.D], Re=self.Re)
         else:
-            return get_f(self.df.copy(), k=0.26, D=self.df[self.D], Re=self.df[self.Re], interp_method = 'nearest')
+            return get_f(self.df.copy(), f=self.f, k=0.26, D=self.df[self.D], Re=self.Re)
     
                                    
     def get_sw_tdh(self, inplace = False):
         if inplace:
-            self.tdh_sw=get_sw_tdh(self.df, tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.df[self.f], L=self.df[self.L],Q=self.df[self.avg_Q], D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')
+            self.df[self.tdh_sw]=get_sw_tdh(self.df, tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.f, L=self.df[self.L], avg_Q=self.avg_Q, D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')
         else:
-            return get_sw_tdh(self.df.copy(), tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.df[self.f], L=self.df[self.L], Q=self.df[self.avg_Q], D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')   
+            return get_sw_tdh(self.df.copy(), tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.f, L=self.df[self.L], Q=self.avg_Q, D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')   
     
     
     def get_SWpumping_energy(self, inplace = False):
         if inplace:
             self.SWpumping_energy=get_SWpumping_energy(self.df, SWpump_eff = self.SWpump_eff, 
                        tdh_sw = self.tdh_sw, swpp_e = self.swpp_e, pwd = self.pwd, 
-                       swpa_e = self.swpa_e, sswd = self.sswd,g=self.g, dens=self.dens)
+                       swpa_e = self.swpa_e, avg_Q = self.avg_Q,g=self.g, dens=self.dens)
         else:
             return get_SWpumping_energy(self.df.copy(), SWpump_eff=self.SWpump_eff, 
                        tdh_sw = self.tdh_sw, swpp_e = self.swpp_e, pwd = self.pwd, 
@@ -333,9 +333,9 @@ class Model():
     
     def get_total_pumping_energy(self, inplace =False):
         if inplace:
-            get_total_pumping_energy(self.df, self.GWpumping_energy, self.SWpumping_energy, inter_method='nearest')
+            get_total_pumping_energy(self.df, swpa_e = self.swpa_e, ed_e = self.ed_e)
         else:
-            return get_total_pumping_energy(self.df.copy(), self.GWpumping_energy, self.SWpumping_energy, inter_method='nearest')
+            return get_total_pumping_energy(self.df.copy(), swpa_e=self.swpa_e, ed_e = self.ed_e)
     
     
     
