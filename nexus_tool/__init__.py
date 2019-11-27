@@ -81,7 +81,7 @@ class Model():
     D='Pipe_diameter' #new
     L='Pipeline_length' #new
     A='Pipe_area' #new
-    mV='Flow_velocity_' #new, monthly Velocity mV
+    mV='Flow_velocity_' #new, monthly Velocity mV in (m/sec)
     tdh_sw = 'tdh_sw' #new
     des_int = 'Einten_KWh/m3'
     des_ener = 'Edesal_GWh_'
@@ -98,7 +98,7 @@ class Model():
     SWpump_eff =0.6 #new
     technologies = {}
     discount_rate = 0
-    g= 9.81 #new
+    g= 9.81 #new gravitational acceleration in(m/sec2)
     pi=3.14 #new
     Ken_visc=1.004**-6 #new
     dens = 1000 #new
@@ -316,7 +316,7 @@ class Model():
                                    
     def get_sw_tdh(self, inplace = False):
         if inplace:
-            self.df[self.tdh_sw]=get_sw_tdh(self.df, tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.f, L=self.df[self.L], avg_Q=self.avg_Q, D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')
+            self.df=get_sw_tdh(self.df, tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.f, L=self.df[self.L], avg_Q=self.avg_Q, D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')
         else:
             return get_sw_tdh(self.df.copy(), tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.f, L=self.df[self.L], Q=self.avg_Q, D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')   
     
@@ -484,7 +484,7 @@ class Model():
                            summary['Water demand (Mm3)'] * 1000000 / \
                            summary['Irrigated area (ha)'])
             try:
-                temp_df['Energy demand (GWh)'] = self.df.melt(value_vars=self.df.columns[self.df.columns.str.contains(self.ed_e)])['value']/1000000
+                temp_df['Energy demand (GWh)'] = self.df.melt(value_vars=self.df.columns[self.df.columns.str.contains(self.total_pumping_energy)])['value']/1000000
                 summary = summary.join(temp_df.groupby(geo_boundary)['Energy demand (GWh)'].sum())
             except:
                 pass           

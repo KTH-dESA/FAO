@@ -7,11 +7,12 @@ def get_gw_tdh(df, gw_depth, wdd, oap, pld, tdh_gw, interp_method = 'nearest'):
     df[tdh_gw].replace(0, np.nan, inplace=True)
     # df[tdh_gw].interpolate(method = interp_method, axis=0, inplace=True)
     return df
-
+#D in m and A in m2
 def get_A(pi,D):
     A = (pi*D**2)/4
     return A
 
+#Q in m3/sec , A in m2 and V in m/sec
 def get_V(df,avg_Q,A,mV):
     for i in range (1,13):
         _avg_Q = '{}{}'.format(avg_Q, i)
@@ -21,6 +22,7 @@ def get_V(df,avg_Q,A,mV):
     
     return df
 
+#Re=Reynold number (unitless), Ken_visc=Kinematic viscosity (m2 /s) 
 def get_Re(df,Re,mV,D, Ken_visc):
     for i in range (1,13):
         _mV = '{}{}'.format(mV, i)
@@ -29,6 +31,7 @@ def get_Re(df,Re,mV,D, Ken_visc):
         df[_Re] = (df[_mV]*D)/Ken_visc
     return df
 
+#f=friction coefficient (unitless), k =  Roughness factor (m)
 def get_f(df,f, k,D,Re):
     for i in range (1,13):
         _Re = '{}{}'.format(Re, i)
@@ -38,12 +41,13 @@ def get_f(df,f, k,D,Re):
     
     return df
 
+#tds in (m)
 def get_sw_tdh(df, tdh_sw, elevation, f, L, avg_Q, D, g, pi, interp_method = 'nearest'):
     for i in range (1,13):
         _avg_Q = '{}{}'.format(avg_Q, i)
         _f = '{}{}'.format(f, i)
     
-        df[tdh_sw] = df[elevation] + ((df[_f]*L*16*((df[_avg_Q])**2))/((D**5)*2*g*(pi**2)))  #the elevation should be delta elevation between the two points
+        df[tdh_sw] = (df[elevation] + ((df[_f]*L*16*((df[_avg_Q])**2))/((D**5)*2*g*(pi**2))))  #the elevation should be delta elevation between the two points
         df[tdh_sw].replace(0, np.nan, inplace=True)
     # df[tdh_sw].interpolate(method = interp_method, axis=0, inplace=True)
     return df
@@ -68,6 +72,7 @@ def get_GWpumping_energy(df, trans_eff, pump_eff, pd_e, pwd, sswd, ed_e, tdh_gw,
     return df
 
 
+#P=  Power in (W), dens=Density (Kg/m3), g=gravitational acceleration in (m/sec2)
 def get_SWpumping_energy(df, tdh_sw, SWpump_eff, swpp_e, swpa_e, g, pwd, avg_Q, dens):
     SWpump_eff = SWpump_eff
     
@@ -78,8 +83,8 @@ def get_SWpumping_energy(df, tdh_sw, SWpump_eff, swpp_e, swpa_e, g, pwd, avg_Q, 
         _avg_Q = '{}{}'.format(avg_Q, i) #average water flow in the pipeline. To be updated with WEAP output 
         
         
-        df[_swpp_e]=((df[_peak_Q]*df[tdh_sw]*g*dens)/SWpump_eff)
-        df[_swpa_e]=((df[_avg_Q]*df[tdh_sw]*g*dens)/SWpump_eff)
+        df[_swpp_e]=((df[_peak_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000)) #to convert P from W to KW
+        df[_swpa_e]=((df[_avg_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000)) #to convert P from W to KW
         
     return df
 
