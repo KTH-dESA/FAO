@@ -23,7 +23,6 @@ WebMercator = 4326
 for gdf in [demand_points, supply_points, pipelines]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
-
 def load_data(scenario, eto, level):
     data_folder = os.path.join(my_path, 'data')
     if not eto:
@@ -112,12 +111,12 @@ sidebar_header = dbc.Row(
             # vertically align the toggle in the center
             align="center",
         ),
-    ]
+    ],
+    id='sidebar-header'
 )
 
 scenario_options = html.Div(
     [
-        html.Hr(),
         html.H6('Select scenario'),
         html.Div(
             dbc.RadioItems(
@@ -131,15 +130,14 @@ scenario_options = html.Div(
                 value='Reference',
             ),
         ),
-    ]
+        html.Hr(),
+    ],
 )
 
 eto_options = html.Div(
     [
-        html.Hr(),
         dbc.Row(
             [
-
                 dbc.Col(
                     dbc.Checklist(
                         options=[
@@ -155,13 +153,12 @@ eto_options = html.Div(
             ],
             no_gutters=True
         ),
-
+        html.Hr(),
     ]
 )
 
 level_options = html.Div(
     [
-        html.Hr(),
         html.H6('Select level of variable'),
         html.Div(
             dcc.Dropdown(
@@ -174,12 +171,12 @@ level_options = html.Div(
                 clearable=False
             ),
         ),
+        html.Hr(),
     ]
 )
 
 energy_options = html.Div(
     [
-        html.Hr(),
         html.H6('Select energy pumping efficiency'),
         dbc.Row([
             # dcc.Slider(
@@ -227,29 +224,37 @@ scenario_tools = html.Div(
         level_options,
         energy_options
     ],
+    id='tools',
+    className='container',
 )
+
+footer = dbc.Row(
+            [
+                dbc.Button("Apply", color="info", className="mr-1",
+                           style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-apply'),
+            ],
+            align='center',
+            justify="end",
+            className='footer',
+        )
 
 sidebar = html.Div(
     [
         sidebar_header,
+        dbc.Nav(
+            [
+                dbc.NavItem(dbc.NavLink("Scenario", active=True, href="#")),
+                dbc.NavItem(dbc.NavLink("Visualisation", href="#")),
+            ],
+            id="tabs",
+        ),
         # we wrap the horizontal rule and short blurb in a div that can be
         # hidden on a small screen
         scenario_tools,
-        html.Div([
-            html.Hr(),
-            dbc.Row(
-                [
-                    dbc.Button("Apply", color="info", className="mr-1", id='button-apply'),
-                ],
-                align='center',
-                justify="end",
-                style={'padding': '0px 20px'},
-            )],
-        )
+        footer
         # id="blurb",
         # use the Collapse component to animate hiding / revealing links
     ],
-    style=dict(overflow='auto'),
     id="sidebar",
 )
 
@@ -260,14 +265,26 @@ results_header = dbc.Row(
                                                            html.H6(id='scenarioTitle', style={'color': 'gray',
                                                                                               'display': 'inline'})],
                                                           className='flex')]),
-    ]
+    ],
+    id='results-header',
 )
+
+footer_results = dbc.Row(
+            [
+                dbc.Button("Download", color="info", className="mr-1",
+                           style={'font-size': '0.85rem', 'font-weight': '600'}, id='button-download'),
+            ],
+            align='center',
+            justify="center",
+            className='footer',
+        )
 
 map = dcc.Graph(id="map",
                 className='col-lg-7 col-md-12 col-sm-12 col-xs-12')
 
-graphs = html.Div([results_header, html.Hr(),
-                   html.Div(dbc.Col(id='graphs'))
+graphs = html.Div([results_header,
+                   html.Div(dbc.Col(id='graphs'), id='graphs-container'),
+                   footer_results
                    ],
                   id='results-container',
                   className='col-lg-5 col-md-12 col-sm-12 col-xs-12')
@@ -541,8 +558,9 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
     plots = []
     for key, value in data.items():
         layout_plot = layout.copy()
-        layout_plot['title'] = key
+        layout_plot['title'] = dict(text=key)
         layout_plot['height'] = 400
+        layout_plot['font'] = dict(size=11, color="#7f7f7f")
         # layout_plot['showlegend'] = False
         plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot)))
         # data[value][0]['line'] = dict(shape='lines+markers', color=colors[i])
