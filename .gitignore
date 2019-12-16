@@ -3,3 +3,8 @@
 __pycache__
 .ipynb_checkpoints
 nwsas_results/*
+data/*
+Plots/*
+WEAP data/*
+dashboard/data/*
+dashboard/.idea/*
