@@ -99,8 +99,7 @@ class Model():
     technologies = {}
     discount_rate = 0
     g= 9.81 #new gravitational acceleration in(m/sec2)
-    pi=3.14 #new
-    Ken_visc=1.004**-6 #new
+    Ken_visc=1.004e-06 #new
     dens = 1000 #new
     k=0.26  #New - roughness for cast iron
     start_year = 0
@@ -287,49 +286,69 @@ class Model():
     
     def get_A(self, inplace=False):
         if inplace:
-            self.df[self.A]= get_A(pi=3.14, D=self.df[self.D])
+            self.df[self.A]= get_A(D=self.df[self.D])
             
         else:
-            return get_A(pi=3.14, D=self.df[self.D])
+            return get_A(D=self.df[self.D])
     
-    def get_V(self, inplace=False):
+    def get_V(self, inplace=False, axis=1):
         if inplace:
-            self.df=get_V(self.df, avg_Q=self.avg_Q, A=self.df[self.A], mV=self.mV)
+            self.df=get_V(self.df, avg_Q=self.avg_Q, A=self.df[self.A], 
+                          mV=self.mV, pump_hours = self.pumping_hours_per_day, 
+                          axis=axis)
             
         else:
-            return get_V(self.df.copy(), avg_Q=self.avg_Q, A=self.df[self.A], mV=self.mV)
+            return get_V(self.df.copy(), avg_Q=self.avg_Q, A=self.df[self.A], 
+                         mV=self.mV, axis=axis)
     
     
-    def get_Re(self, inplace=False):
+    def get_Re(self, inplace=False, axis=1):
         if inplace: 
-            self.df=get_Re(self.df, Re=self.Re, mV=self.mV, D=self.df[self.D], Ken_visc=1000)
+            self.df=get_Re(self.df, Re=self.Re, mV=self.mV, D=self.df[self.D], 
+                           Ken_visc=1000, axis=axis)
             
         else:
-            return get_Re(self.df.copy(), Re=self.Re, mV=self.mV, D=self.df[self.D],Ken_visc=1000)
+            return get_Re(self.df.copy(), Re=self.Re, mV=self.mV, 
+                          D=self.df[self.D], Ken_visc=1000, axis=axis)
     
-    def get_f(self, inplace=False):
+    def get_f(self, inplace=False, axis=1):
         if inplace:
-            self.df=get_f(self.df, f=self.f, k=0.26, D=self.df[self.D], Re=self.Re)
+            self.df=get_f(self.df, f=self.f, k=0.26, D=self.df[self.D], 
+                          Re=self.Re, axis=axis)
         else:
-            return get_f(self.df.copy(), f=self.f, k=0.26, D=self.df[self.D], Re=self.Re)
+            return get_f(self.df.copy(), f=self.f, k=0.26, D=self.df[self.D], 
+                         Re=self.Re, axis=axis)
     
                                    
-    def get_sw_tdh(self, inplace = False):
+    def get_sw_tdh(self, inplace = False, axis=1):
         if inplace:
-            self.df=get_sw_tdh(self.df, tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.f, L=self.df[self.L], avg_Q=self.avg_Q, D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')
+            self.df=get_sw_tdh(self.df, tdh_sw=self.tdh_sw, 
+                               elevation=self.elevation, f =self.f, 
+                               L=self.df[self.L], avg_Q=self.avg_Q, 
+                               D=self.df[self.D], g= 9.81,
+                               pump_hours = self.pumping_hours_per_day, 
+                               axis=axis)
         else:
-            return get_sw_tdh(self.df.copy(), tdh_sw=self.tdh_sw, elevation=self.elevation, f =self.f, L=self.df[self.L], Q=self.avg_Q, D=self.df[self.D], g= 9.81, pi=3.14, interp_method = 'nearest')   
+            return get_sw_tdh(self.df.copy(), tdh_sw=self.tdh_sw, 
+                              elevation=self.elevation, f =self.f, 
+                              L=self.df[self.L], Q=self.avg_Q, 
+                              D=self.df[self.D], g= 9.81, 
+                              pump_hours = self.pumping_hours_per_day, 
+                              axis=axis)   
     
     
-    def get_SWpumping_energy(self, inplace = False):
+    def get_SWpumping_energy(self, inplace = False, axis=1):
         if inplace:
-            self.SWpumping_energy=get_SWpumping_energy(self.df, SWpump_eff = self.SWpump_eff, 
-                       tdh_sw = self.tdh_sw, swpp_e = self.swpp_e, pwd = self.pwd, 
-                       swpa_e = self.swpa_e, avg_Q = self.avg_Q,g=self.g, dens=self.dens)
+            self.SWpumping_energy=get_SWpumping_energy(self.df, 
+                    SWpump_eff = self.SWpump_eff, tdh_sw = self.tdh_sw, 
+                    swpp_e = self.swpp_e, peak_Q = self.peak_Q, swpa_e = self.swpa_e,
+                    avg_Q = self.avg_Q, g=self.g, dens=self.dens, axis=axis)
         else:
-            return get_SWpumping_energy(self.df.copy(), SWpump_eff=self.SWpump_eff, 
-                       tdh_sw = self.tdh_sw, swpp_e = self.swpp_e, pwd = self.pwd, 
-                       swpa_e = self.swpa_e, sswd = self.sswd, g=self.g, dens=self.dens)
+            return get_SWpumping_energy(self.df.copy(), 
+                           SWpump_eff=self.SWpump_eff, tdh_sw = self.tdh_sw, 
+                           swpp_e = self.swpp_e, peak_Q = self.peak_Q, 
+                           swpa_e = self.swpa_e, sswd = self.sswd, g=self.g, 
+                           dens=self.dens, axis=axis)
     
     def get_total_pumping_energy(self, inplace =False):
         if inplace:

@@ -1,0 +1,13 @@
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - jmcmurray
+dependencies:
+  - dash
+  - dash-bootstrap-components
+  - dash-renderer
+  - geopandas
+  - json
+  - xlrd
+  
