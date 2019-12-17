@@ -72,8 +72,9 @@
   .footer {
     position: relative;
 	z-index: 100;
-	height: 10vh;
-	padding: 0rem 1rem;
+	/* height: 80px; */
+	flex: 0 1 auto;
+	padding: 1rem 1rem;
 	margin: 0;
 	box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
@@ -82,16 +83,16 @@
   #sidebar-header {
     position: relative;
     text-align: left;
-	height: 15vh;
+	flex: 0 1 auto;
 	margin: 0;
-	padding: 1rem 0rem;
+	padding: 1rem 0rem 0rem 0rem;
 	/* box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.08); */
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
   
   #tabs {
     position: relative;
-	height: 7vh;
+	flex: 0 1 auto;
 	margin: 0;
 	padding: 0rem 0rem;
 	box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
@@ -101,7 +102,7 @@
   #tools {
     position: relative;
     text-align: left;
-	height: 68vh;
+	flex: 1 1 auto;
 	overflow: auto;
 	padding: 1rem 1rem;
 	/* background-color: #F8F8FF; */
@@ -111,7 +112,7 @@
   #results-header {
     position: relative;
     text-align: left;
-	height: 15vh;
+	flex: 0 1 auto;
 	margin: 0;
 	padding: 1rem 1rem;
 	box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
@@ -120,7 +121,7 @@
   #graphs-container {
     position: relative;
     text-align: left;
-	height: 75vh;
+	flex: 1 1 auto;
 	overflow: auto;
 	padding: 1rem 0rem 1rem 1rem;
   }
@@ -130,11 +131,13 @@
     top: 0;
     left: 0;
     bottom: 0;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
 	z-index: 100;
     width: 20rem;
 	box-shadow: 0 16px 4px rgba(20,33,61,.08);
     text-align: left;
-	height: 100vh;
 	/* overflow: auto; */
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
@@ -203,7 +206,9 @@
 	position: sticky;
 	top: 0;
 	left: 0;
-	height: 100vh;
+	display: flex;
+	flex-flow: column;
+	height: 100%;
 	z-index: 100;
 	box-shadow: 0 0 16px 4px rgba(20,33,61,.08);
 	overflow: auto;

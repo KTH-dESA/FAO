@@ -65,7 +65,7 @@ layout = dict(
 )
 
 app = dash.Dash(__name__,
-                external_stylesheets=[dbc.themes.BOOTSTRAP],
+                external_stylesheets=[dbc.themes.BOOTSTRAP, 'https://use.fontawesome.com/releases/v5.12.0/css/all.css'],
                 # these meta_tags ensure content is scaled correctly on different devices
                 # see: https://www.w3schools.com/css/css_rwd_viewport.asp for more
                 meta_tags=[
@@ -230,7 +230,7 @@ scenario_tools = html.Div(
 
 footer = dbc.Row(
             [
-                dbc.Button("Apply", color="info", className="mr-1",
+                dbc.Button([html.I(className='fa fa-redo-alt'), " Apply"], color="info", className="mr-1",
                            style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-apply'),
             ],
             align='center',
@@ -271,7 +271,7 @@ results_header = dbc.Row(
 
 footer_results = dbc.Row(
             [
-                dbc.Button("Download", color="info", className="mr-1",
+                dbc.Button([html.I(className='fa fa-download'), " Download"], color="info", className="mr-1",
                            style={'font-size': '0.85rem', 'font-weight': '600'}, id='button-download'),
             ],
             align='center',
