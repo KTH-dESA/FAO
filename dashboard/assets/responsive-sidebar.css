@@ -18,6 +18,46 @@
   background: rgba(20,33,61,.5); 
 }
 
+h2, h3, h4, h5 {
+  font-variant: small-caps;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.tabs {
+  color: rgba(50,50,50,1);
+  font-weight: 600;
+  font-variant: small-caps
+}
+
+.tabs:hover {
+  color: rgba(23,162,184,1);
+  font-weight: 600;
+  /* background-color: rgba(23,162,184,0.2); */
+}
+
+.active {
+  color: rgba(23,162,184,1);
+  font-weight: 600;
+  /* background-color: rgba(23,162,184,0.2); */
+}
+
+
+#rb-scenario
+  .custom-control-input:checked
+  ~ .custom-control-label::before {
+  background-color: rgba(23,162,184,1);
+  border-color: rgba(23,162,184,1);
+}
+
+#eto-input
+  .custom-control-input:checked
+  ~ .custom-control-label::before {
+  background-color: rgba(23,162,184,1);
+  border-color: rgba(23,162,184,1);
+}
 
 #sidebar {
   text-align: center;
@@ -67,6 +107,10 @@
   background-color: #f8f9fa;
 }
 
+.options {
+  padding: 0rem 1rem;
+  font-size: 1rem;
+}
 
 @media (min-width: 48em) {
   .footer {
@@ -99,12 +143,12 @@
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
   
-  #tools {
+  #tools, #visual-tools {
     position: relative;
     text-align: left;
 	flex: 1 1 auto;
 	overflow: auto;
-	padding: 1rem 1rem;
+	padding: 1rem 0rem;
 	/* background-color: #F8F8FF; */
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
@@ -151,19 +195,19 @@
 
   /* add negative margin to sidebar to achieve the collapse */
   #sidebar.collapsed {
-    margin-left: -15.5rem;
+    margin-left: -16.5rem;
     padding-right: 0.5rem;
   }
 
   /* move the sidebar toggle up to the top left corner */
   #sidebar.collapsed #sidebar-toggle {
-    top: -1rem;
+    top: -1.5rem;
 	right: -1rem;
   }
 
   /* also adjust margin of page content */
   #sidebar.collapsed ~ #page-content {
-    margin-left: 4.5rem;
+    margin-left: 3.5rem;
   }
 
   /* move all contents of navbar other than header (containing toggle) further
