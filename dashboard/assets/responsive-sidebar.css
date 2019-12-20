@@ -60,13 +60,14 @@ button {
 }
 
 #sidebar {
-  text-align: center;
+  text-align: left;
   padding: 0rem 0rem;
   background-color: #f8f9fa;
 }
 
 #map {
   padding: 0rem 0rem;
+  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
 }
 
 #sidebar h2 {
@@ -75,17 +76,17 @@ button {
 }
 
 /* Hide the blurb on a small screen */
-#blurb {
-  display: none;
-}
+/* #blurb { */
+  /* display: none; */
+/* } */
 
 #sidebar-toggle {
   display: none;
 }
 
-#collapse *:first-child {
-  margin-top: 1rem;
-}
+/* #collapse *:first-child { */
+  /* margin-top: 1rem; */
+/* } */
 
 .mr-1 {
   box-shadow: 0 -1px 1px 0 rgba(20,33,61,.08), 0 2px 6px 0 rgba(20,33,61,.24);
@@ -105,6 +106,43 @@ button {
   padding: 0rem 0rem;
   /* display: inline-block; */
   background-color: #f8f9fa;
+  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
+}
+
+#tabs {
+  position: relative;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 0rem 0rem;
+  box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.footer {
+  position: relative;
+  z-index: 100;
+  flex: 0 1 auto;
+  padding: 1rem 1rem;
+  margin: 0;
+  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+#sidebar-header {
+  position: relative;
+  text-align: left;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 1rem 0rem 0rem 0rem;
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+#tools, #visual-tools {
+  position: relative;
+  text-align: left;
+  flex: 1 1 auto;
+  padding: 1rem 0rem;
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 .options {
@@ -112,62 +150,32 @@ button {
   font-size: 1rem;
 }
 
-@media (min-width: 48em) {
-  .footer {
-    position: relative;
-	z-index: 100;
-	/* height: 80px; */
-	flex: 0 1 auto;
-	padding: 1rem 1rem;
-	margin: 0;
-	box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
-    transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
-  }
-  
-  #sidebar-header {
-    position: relative;
-    text-align: left;
-	flex: 0 1 auto;
-	margin: 0;
-	padding: 1rem 0rem 0rem 0rem;
-	/* box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.08); */
-    transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
-  }
-  
-  #tabs {
-    position: relative;
-	flex: 0 1 auto;
-	margin: 0;
-	padding: 0rem 0rem;
-	box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
-    transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
-  }
-  
-  #tools, #visual-tools {
+#results-header {
+  position: relative;
+  text-align: left;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 1rem 1rem;
+  box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
+}
+
+#graphs-container {
     position: relative;
     text-align: left;
 	flex: 1 1 auto;
-	overflow: auto;
-	padding: 1rem 0rem;
-	/* background-color: #F8F8FF; */
-    transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
-  }
-  
-  #results-header {
-    position: relative;
-    text-align: left;
-	flex: 0 1 auto;
-	margin: 0;
-	padding: 1rem 1rem;
-	box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
-  }
-  
+	padding: 1rem 0rem 1rem 1rem;
+}
+
+@media (min-width: 48em) {    
   #graphs-container {
     position: relative;
-    text-align: left;
-	flex: 1 1 auto;
 	overflow: auto;
-	padding: 1rem 0rem 1rem 1rem;
+  }
+
+  #map {
+    position: relative;
+	left: 0;
+	top: 0;
   }
   
   #sidebar {
@@ -182,7 +190,6 @@ button {
     width: 20rem;
 	box-shadow: 0 16px 4px rgba(20,33,61,.08);
     text-align: left;
-	/* overflow: auto; */
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
 
@@ -230,6 +237,7 @@ button {
 
   #collapse {
     display: block;
+	overflow: auto;
   }
 
   /* set margins of the main content so that it doesn't overlap the sidebar */
@@ -237,6 +245,8 @@ button {
 	height: 100vh;
     margin-left: 20rem;
     margin-right: 0rem;
+	display: flex;
+	flex-flow: row;
     transition: margin-left 0.3s ease-in-out;
   }
   

@@ -83,31 +83,15 @@ sidebar_header = dbc.Row(
         dbc.Col(
             [
                 dbc.Button(
-                    # use the Bootstrap navbar-toggler classes to style
-                    html.Span(className="navbar-toggler-icon"),
-                    #className="navbar-toggler",
-                    # the navbar-toggler classes don't set color
-                    # style={
-                    #     "color": "rgba(0,0,0,.5)",
-                    #     "border-color": "rgba(0,0,0,.1)",
-                    # },
-                    color="info",
+                    html.Span(className="fa fa-bars"),
+                    color="secondary",
                     outline=True,
-                    className="mr-1",
                     id="navbar-toggle",
                 ),
                 dbc.Button(
-                    # use the Bootstrap navbar-toggler classes to style
                     html.Span(className="fa fa-bars"),
-                    # className="navbar-toggler",
-                    # # the navbar-toggler classes don't set color
-                    # style={
-                    #     "color": "rgba(0,0,0,.5)",
-                    #     "border-color": "rgba(0,0,0,.1)",
-                    # },
                     color="secondary",
                     outline=True,
-                    #className="mr-1",
                     id="sidebar-toggle",
                 ),
             ],
@@ -186,15 +170,6 @@ energy_options = html.Div(
     [
         html.H6('Select energy pumping efficiency'),
         dbc.Row([
-            # dcc.Slider(
-            #     id="pump-eff-level",
-            #     min=0.4,
-            #     max=0.9,
-            #     value=0.6,
-            #     step=0.05,
-            #     marks={i/100: f'{i}%' for i in range(40, 100, 10)}
-            #     #marks={y: y for y in range(int(years.min()), 2031, 2)},
-            # ),
             dbc.Col(
                 dbc.InputGroup(
                     [
@@ -265,13 +240,14 @@ sidebar = html.Div(
             ],
             id="tabs",
         ),
-        # we wrap the horizontal rule and short blurb in a div that can be
-        # hidden on a small screen
-        scenario_tools,
-        visual_tools,
-        footer
-        # id="blurb",
+        dbc.Collapse([
+            scenario_tools,
+            visual_tools,
         # use the Collapse component to animate hiding / revealing links
+            ],
+        id="collapse",
+        ),
+        footer,
     ],
     id="sidebar",
 )
@@ -298,16 +274,18 @@ footer_results = dbc.Row(
         )
 
 map = dcc.Graph(id="map",
-                className='col-lg-7 col-md-12 col-sm-12 col-xs-12')
+                className='col-lg-7 col-md-7 col-sm-12 col-xs-12',
+                config=dict(showSendToCloud=True, toImageButtonOptions=dict(format='png', filename='map', height=700,
+                                                                            width=700, scale=2)))
 
 graphs = html.Div([results_header,
                    html.Div(dbc.Col(id='graphs'), id='graphs-container'),
                    footer_results
                    ],
                   id='results-container',
-                  className='col-lg-5 col-md-12 col-sm-12 col-xs-12')
+                  className='col-lg-5 col-md-5 col-sm-12 col-xs-12')
 
-content = html.Div([map, graphs], id="page-content", className='row')
+content = html.Div([map, graphs], id="page-content")
 
 app.layout = html.Div([dcc.Store(id='water'), sidebar, content])
 
@@ -455,6 +433,15 @@ def toggle_classname(n, classname):
         return "collapsed"
     return ""
 
+@app.callback(
+    Output("collapse", "is_open"),
+    [Input("navbar-toggle", "n_clicks")],
+    [State("collapse", "is_open")],
+)
+def toggle_collapse(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
 @app.callback(
     [Output("graphs", "children"), Output('resultsTitle', 'children')],
@@ -570,7 +557,9 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
         layout_plot['title'] = dict(text=key)
         layout_plot['height'] = 400
         layout_plot['font'] = dict(size=10, color="#7f7f7f")
-        plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot)))
+        plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
+                                                                            format='png', filename=key, height=500,
+                                                                            width=700, scale=2))))
     return plots, name
 
 
