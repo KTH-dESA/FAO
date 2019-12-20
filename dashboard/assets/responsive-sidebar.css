@@ -1,11 +1,73 @@
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f8f9fa; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(20,33,61,.32); 
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(20,33,61,.5); 
+}
+
+h2, h3, h4, h5 {
+  font-variant: small-caps;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.tabs {
+  color: rgba(50,50,50,1);
+  font-weight: 600;
+  font-variant: small-caps
+}
+
+.tabs:hover {
+  color: rgba(23,162,184,1);
+  font-weight: 600;
+  /* background-color: rgba(23,162,184,0.2); */
+}
+
+.active {
+  color: rgba(23,162,184,1);
+  font-weight: 600;
+  /* background-color: rgba(23,162,184,0.2); */
+}
+
+
+#rb-scenario
+  .custom-control-input:checked
+  ~ .custom-control-label::before {
+  background-color: rgba(23,162,184,1);
+  border-color: rgba(23,162,184,1);
+}
+
+#eto-input
+  .custom-control-input:checked
+  ~ .custom-control-label::before {
+  background-color: rgba(23,162,184,1);
+  border-color: rgba(23,162,184,1);
+}
+
 #sidebar {
-  text-align: center;
-  padding: 2rem 1rem;
+  text-align: left;
+  padding: 0rem 0rem;
   background-color: #f8f9fa;
 }
 
 #map {
   padding: 0rem 0rem;
+  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
 }
 
 #sidebar h2 {
@@ -14,16 +76,20 @@
 }
 
 /* Hide the blurb on a small screen */
-#blurb {
-  display: none;
-}
+/* #blurb { */
+  /* display: none; */
+/* } */
 
 #sidebar-toggle {
   display: none;
 }
 
-#collapse *:first-child {
-  margin-top: 1rem;
+/* #collapse *:first-child { */
+  /* margin-top: 1rem; */
+/* } */
+
+.mr-1 {
+  box-shadow: 0 -1px 1px 0 rgba(20,33,61,.08), 0 2px 6px 0 rgba(20,33,61,.24);
 }
 
 /* add the three horizontal bars icon for the toggle */
@@ -37,23 +103,93 @@
 }
 
 #results-container {
-  padding: 1rem 1rem;
+  padding: 0rem 0rem;
   /* display: inline-block; */
   background-color: #f8f9fa;
+  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
 }
 
+#tabs {
+  position: relative;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 0rem 0rem;
+  box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
 
-@media (min-width: 48em) {
+.footer {
+  position: relative;
+  z-index: 100;
+  flex: 0 1 auto;
+  padding: 1rem 1rem;
+  margin: 0;
+  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+#sidebar-header {
+  position: relative;
+  text-align: left;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 1rem 0rem 0rem 0rem;
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+#tools, #visual-tools {
+  position: relative;
+  text-align: left;
+  flex: 1 1 auto;
+  padding: 1rem 0rem;
+  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.options {
+  padding: 0rem 1rem;
+  font-size: 1rem;
+}
+
+#results-header {
+  position: relative;
+  text-align: left;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 1rem 1rem;
+  box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
+}
+
+#graphs-container {
+    position: relative;
+    text-align: left;
+	flex: 1 1 auto;
+	padding: 1rem 0rem 1rem 1rem;
+}
+
+@media (min-width: 48em) {    
+  #graphs-container {
+    position: relative;
+	overflow: auto;
+  }
+
+  #map {
+    position: relative;
+	left: 0;
+	top: 0;
+  }
+  
   #sidebar {
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
+	height: 100%;
+	display: flex;
+	flex-flow: column;
 	z-index: 100;
     width: 20rem;
 	box-shadow: 0 16px 4px rgba(20,33,61,.08);
     text-align: left;
-	/* overflow: auto; */
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
 
@@ -66,18 +202,19 @@
 
   /* add negative margin to sidebar to achieve the collapse */
   #sidebar.collapsed {
-    margin-left: -15.5rem;
+    margin-left: -16.5rem;
     padding-right: 0.5rem;
   }
 
   /* move the sidebar toggle up to the top left corner */
   #sidebar.collapsed #sidebar-toggle {
-    top: -2rem;
+    top: -1.5rem;
+	right: -1rem;
   }
 
   /* also adjust margin of page content */
   #sidebar.collapsed ~ #page-content {
-    margin-left: 4.5rem;
+    margin-left: 3.5rem;
   }
 
   /* move all contents of navbar other than header (containing toggle) further
@@ -100,6 +237,7 @@
 
   #collapse {
     display: block;
+	overflow: auto;
   }
 
   /* set margins of the main content so that it doesn't overlap the sidebar */
@@ -107,6 +245,8 @@
 	height: 100vh;
     margin-left: 20rem;
     margin-right: 0rem;
+	display: flex;
+	flex-flow: row;
     transition: margin-left 0.3s ease-in-out;
   }
   
@@ -120,7 +260,9 @@
 	position: sticky;
 	top: 0;
 	left: 0;
-	height: 100vh;
+	display: flex;
+	flex-flow: column;
+	height: 100%;
 	z-index: 100;
 	box-shadow: 0 0 16px 4px rgba(20,33,61,.08);
 	overflow: auto;

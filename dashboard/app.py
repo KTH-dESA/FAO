@@ -23,7 +23,6 @@ WebMercator = 4326
 for gdf in [demand_points, supply_points, pipelines]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
-
 def load_data(scenario, eto, level):
     data_folder = os.path.join(my_path, 'data')
     if not eto:
@@ -55,7 +54,7 @@ token = "pk.eyJ1IjoiY2FtaWxvcmciLCJhIjoiY2p1bTl0MGpkMjgyYjQ0b2E0anRibWJ1MSJ9.GhU
 layout = dict(
     autosize=True,
     automargin=True,
-    margin=dict(l=30, r=30, b=100, t=100),
+    margin=dict(l=30, r=20, b=50, t=100),
     hovermode="closest",
     plot_bgcolor="#f8f9fa",
     paper_bgcolor="#f8f9fa",
@@ -66,7 +65,7 @@ layout = dict(
 )
 
 app = dash.Dash(__name__,
-                external_stylesheets=[dbc.themes.BOOTSTRAP],
+                external_stylesheets=[dbc.themes.BOOTSTRAP, 'https://use.fontawesome.com/releases/v5.12.0/css/all.css'],
                 # these meta_tags ensure content is scaled correctly on different devices
                 # see: https://www.w3schools.com/css/css_rwd_viewport.asp for more
                 meta_tags=[
@@ -83,26 +82,16 @@ sidebar_header = dbc.Row(
         dbc.Col([html.H3("Jordan"), html.H6('NEXUS model', style={'color': 'gray'})]),
         dbc.Col(
             [
-                html.Button(
-                    # use the Bootstrap navbar-toggler classes to style
-                    html.Span(className="navbar-toggler-icon"),
-                    className="navbar-toggler",
-                    # the navbar-toggler classes don't set color
-                    style={
-                        "color": "rgba(0,0,0,.5)",
-                        "border-color": "rgba(0,0,0,.1)",
-                    },
+                dbc.Button(
+                    html.Span(className="fa fa-bars"),
+                    color="secondary",
+                    outline=True,
                     id="navbar-toggle",
                 ),
-                html.Button(
-                    # use the Bootstrap navbar-toggler classes to style
-                    html.Span(className="navbar-toggler-icon"),
-                    className="navbar-toggler",
-                    # the navbar-toggler classes don't set color
-                    style={
-                        "color": "rgba(0,0,0,.5)",
-                        "border-color": "rgba(0,0,0,.1)",
-                    },
+                dbc.Button(
+                    html.Span(className="fa fa-bars"),
+                    color="secondary",
+                    outline=True,
                     id="sidebar-toggle",
                 ),
             ],
@@ -112,12 +101,12 @@ sidebar_header = dbc.Row(
             # vertically align the toggle in the center
             align="center",
         ),
-    ]
+    ],
+    id='sidebar-header'
 )
 
 scenario_options = html.Div(
     [
-        html.Hr(),
         html.H6('Select scenario'),
         html.Div(
             dbc.RadioItems(
@@ -129,17 +118,17 @@ scenario_options = html.Div(
                     {"label": "Reduce non-revenue water", "value": 'Reduce NRW'},
                 ],
                 value='Reference',
+                className='checklist-selected-style',
             ),
         ),
-    ]
+    ],
+    className='options'
 )
 
 eto_options = html.Div(
     [
-        html.Hr(),
         dbc.Row(
             [
-
                 dbc.Col(
                     dbc.Checklist(
                         options=[
@@ -155,13 +144,12 @@ eto_options = html.Div(
             ],
             no_gutters=True
         ),
-
-    ]
+    ],
+    className='options'
 )
 
 level_options = html.Div(
     [
-        html.Hr(),
         html.H6('Select level of variable'),
         html.Div(
             dcc.Dropdown(
@@ -174,23 +162,14 @@ level_options = html.Div(
                 clearable=False
             ),
         ),
-    ]
+    ],
+    className='options'
 )
 
 energy_options = html.Div(
     [
-        html.Hr(),
         html.H6('Select energy pumping efficiency'),
         dbc.Row([
-            # dcc.Slider(
-            #     id="pump-eff-level",
-            #     min=0.4,
-            #     max=0.9,
-            #     value=0.6,
-            #     step=0.05,
-            #     marks={i/100: f'{i}%' for i in range(40, 100, 10)}
-            #     #marks={y: y for y in range(int(years.min()), 2031, 2)},
-            # ),
             dbc.Col(
                 dbc.InputGroup(
                     [
@@ -217,39 +196,59 @@ energy_options = html.Div(
         ],
             no_gutters=True,
         ),
-    ]
+    ],
+    className='options'
 )
 
 scenario_tools = html.Div(
     [
         scenario_options,
+        html.Hr(),
         eto_options,
+        html.Hr(),
         level_options,
+        html.Hr(),
         energy_options
     ],
+    id='tools',
 )
+
+visual_tools = html.Div(
+    [],
+    id='visual-tools',
+)
+
+footer = dbc.Row(
+            [
+                dbc.Button([html.I(className='fa fa-redo-alt'), " Reset"], color="info", outline=True, className="mr-1",
+                           style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-reset'),
+                dbc.Button([html.I(className='fa fa-check-double'), " Apply"], color="info", className="mr-1",
+                           style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-apply'),
+            ],
+            align='center',
+            justify="around",
+            className='footer',
+        )
 
 sidebar = html.Div(
     [
         sidebar_header,
-        # we wrap the horizontal rule and short blurb in a div that can be
-        # hidden on a small screen
-        scenario_tools,
-        html.Div([
-            html.Hr(),
-            dbc.Row(
-                [
-                    dbc.Button("Apply", color="info", className="mr-1", id='button-apply'),
-                ],
-                align='center',
-                justify="end",
-                style={'padding': '0px 20px'},
-            )],
-        )
-        # id="blurb",
+        dbc.Nav(
+            [
+                dbc.NavItem(dbc.NavLink("Scenario", active=True, href="#", id='page-1', className='tabs')),
+                dbc.NavItem(dbc.NavLink("Visualisation", href="#", id='page-2', className='tabs')),
+            ],
+            id="tabs",
+        ),
+        dbc.Collapse([
+            scenario_tools,
+            visual_tools,
         # use the Collapse component to animate hiding / revealing links
+            ],
+        id="collapse",
+        ),
+        footer,
     ],
-    style=dict(overflow='auto'),
     id="sidebar",
 )
 
@@ -260,19 +259,33 @@ results_header = dbc.Row(
                                                            html.H6(id='scenarioTitle', style={'color': 'gray',
                                                                                               'display': 'inline'})],
                                                           className='flex')]),
-    ]
+    ],
+    id='results-header',
 )
 
-map = dcc.Graph(id="map",
-                className='col-lg-7 col-md-12 col-sm-12 col-xs-12')
+footer_results = dbc.Row(
+            [
+                dbc.Button([html.I(className='fa fa-download'), " Download"], color="info", className="mr-1",
+                           style={'font-size': '0.85rem', 'font-weight': '600'}, id='button-download'),
+            ],
+            align='center',
+            justify="center",
+            className='footer',
+        )
 
-graphs = html.Div([results_header, html.Hr(),
-                   html.Div(dbc.Col(id='graphs'))
+map = dcc.Graph(id="map",
+                className='col-lg-7 col-md-7 col-sm-12 col-xs-12',
+                config=dict(showSendToCloud=True, toImageButtonOptions=dict(format='png', filename='map', height=700,
+                                                                            width=700, scale=2)))
+
+graphs = html.Div([results_header,
+                   html.Div(dbc.Col(id='graphs'), id='graphs-container'),
+                   footer_results
                    ],
                   id='results-container',
-                  className='col-lg-5 col-md-12 col-sm-12 col-xs-12')
+                  className='col-lg-5 col-md-5 col-sm-12 col-xs-12')
 
-content = html.Div([map, graphs], id="page-content", className='row')
+content = html.Div([map, graphs], id="page-content")
 
 app.layout = html.Div([dcc.Store(id='water'), sidebar, content])
 
@@ -307,7 +320,6 @@ def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_da
         type="scattermapbox",
         mode='lines+markers',
         marker=dict(opacity=0),
-        # line=dict(color='gray'),
         lon=list(itertools.chain.from_iterable([list(line.coords.xy[0]) + [None] for line in df_pipelines.geometry])),
         lat=list(itertools.chain.from_iterable([list(line.coords.xy[1]) + [None] for line in df_pipelines.geometry])),
         text=list(itertools.chain.from_iterable([len(list(line.coords.xy[0])) * [pipe] + [None] for line, pipe in
@@ -331,11 +343,8 @@ def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_da
     dff_delivered = dff_delivered.reset_index()
     dff_required = water_required.groupby(['Year', 'type', 'point'])['value'].sum() / 1000000
     dff_required = dff_required.reset_index()
-    # dff_unmet = dff_required.copy()
-    # dff_unmet['value'] = dff_unmet.value - dff_unmet.set_index(['Year','point']).index.map(dff_delivered.set_index(['Year','point']).value)
-    # dff_unmet.loc[dff_unmet['value']<0.001, 'value'] = 0
     names = ['Water delivered (Mm3)', 'Water required (Mm3)']
-    # dff['Date'] = [pd.Timestamp(year=i, month=j, day=1) for i, j in zip(dff.Year, dff.Month)]
+
     data += [dict(
         type="scattermapbox",
         lon=[point.x for point in df_demand.loc[df_demand['type'] == type].geometry],
@@ -350,8 +359,6 @@ def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_da
                      names[1]: [dff_required.loc[(dff_required.point == point)].value,
                                 dff_required.loc[(dff_required.point == point)].Year],
                      'type': 'demand',
-                     # names[2]: [dff_unmet.loc[(dff_unmet.point == point)].value,
-                     #            dff_unmet.loc[(dff_unmet.point == point)].Year],
                      } for point in df_demand.loc[df_demand.type == type].point],
     ) for type in sorted(df_demand['type'].unique())]
 
@@ -426,6 +433,15 @@ def toggle_classname(n, classname):
         return "collapsed"
     return ""
 
+@app.callback(
+    Output("collapse", "is_open"),
+    [Input("navbar-toggle", "n_clicks")],
+    [State("collapse", "is_open")],
+)
+def toggle_collapse(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
 @app.callback(
     [Output("graphs", "children"), Output('resultsTitle', 'children')],
@@ -437,18 +453,15 @@ def toggle_classname(n, classname):
     [State('rb-scenario', 'value'), State('eto-input', 'value'), State('drop-level', 'value')]
 )
 def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, level):
-    # time.sleep(1)
 
     names = ['Water delivered (Mm3)', 'Water required (Mm3)']
     colors = {'water': "#59C3C3", 'energy': "#F9ADA0", 'food': "#849E68"}
     data = {}
-    if type(selection) == type(None):
+    if selection is None:
         emission_factor = 0.643924449
         water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
                                                                                                eto,
                                                                                                level)
-        # water_delivered = pd.DataFrame(water_data[0])
-        # water_required = pd.DataFrame(water_data[0])
         name = 'Jordan country'
         dff_delivered = water_delivered.groupby(['Year', 'type'])['value'].sum() / 1000000
         dff_delivered = dff_delivered.reset_index()
@@ -456,9 +469,8 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
         dff_required = dff_required.reset_index()
 
         dff_unmet = dff_required.copy()
-        dff_unmet['value'] = (dff_unmet.value - \
-                             dff_unmet.set_index(['Year', 'type']).index.map(
-                                 dff_delivered.set_index(['Year', 'type']).value)) / dff_unmet.value * 100
+        dff_unmet['value'] = (dff_unmet.value - dff_unmet.set_index(['Year', 'type']).index.map(
+                                            dff_delivered.set_index(['Year', 'type']).value)) / dff_unmet.value * 100
         dff_unmet.loc[dff_unmet['value'] < 0.001, 'value'] = 0
 
         dff_energy = pd.DataFrame()
@@ -497,7 +509,6 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
                                             '<br><b>Emissions</b>: %{text: 0.2f} MtCO2'
                            } for type in sorted(df['type'].unique())]
 
-
     elif selection['points'][0]['customdata']['type'] in ['demand']:
         name = selection['points'][0]['text']
         name_key = selection['points'][0]['customdata']['type']
@@ -508,6 +519,7 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
                                                'mode': 'lines',
                                                'name': name,
                                                } for name in names]
+
     elif selection['points'][0]['customdata']['type'] in ['Groundwater supply', 'WWTP', 'pipeline', 'Desalination']:
         name = selection['points'][0]['text']
         name_key = selection['points'][0]['customdata']['type']
@@ -529,6 +541,7 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
                                                 'y': np.array(selection['points'][0]['customdata']['energy'][0])/eff,
                                                 'fill': 'tozeroy', 'mode': 'lines', 'showlegend': False,
                                                 'line': {'color': colors['energy']}}]
+
     elif selection['points'][0]['customdata']['type'] in ['River/pipeline supply']:
         name = selection['points'][0]['text']
         name_key = selection['points'][0]['customdata']['type']
@@ -541,11 +554,12 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
     plots = []
     for key, value in data.items():
         layout_plot = layout.copy()
-        layout_plot['title'] = key
+        layout_plot['title'] = dict(text=key)
         layout_plot['height'] = 400
-        # layout_plot['showlegend'] = False
-        plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot)))
-        # data[value][0]['line'] = dict(shape='lines+markers', color=colors[i])
+        layout_plot['font'] = dict(size=10, color="#7f7f7f")
+        plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
+                                                                            format='png', filename=key, height=500,
+                                                                            width=700, scale=2))))
     return plots, name
 
 
@@ -582,8 +596,6 @@ def update_level_dropdown(n_1, n_2, scenario, eto, level):
 
     name = f' - {scenario} {level_dict[scenario][level]} scenario'
 
-    # global water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, map
-
     water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
                                                                                            eto,
                                                                                            level)
@@ -591,6 +603,33 @@ def update_level_dropdown(n_1, n_2, scenario, eto, level):
 
     return map, name
 
+@app.callback(
+    [Output('page-1', 'active'), Output('page-2', 'active'),
+     Output('tools', 'hidden'), Output('visual-tools', 'hidden')],
+    [Input('page-1', 'n_clicks_timestamp'), Input('page-2', 'n_clicks_timestamp')],
+)
+def selected_tab(n_1, n_2):
+    if n_2 is None:
+        n_1 = 1
+        n_2 = 0
+        tools = False
+        visual = True
+    elif n_1 is None:
+        n_1 = 0
+        n_2 = 1
+        tools = True
+        visual = False
+    if n_1 > n_2:
+        state_1 = True
+        state_2 = False
+        tools = False
+        visual = True
+    else:
+        state_1 = False
+        state_2 = True
+        tools = True
+        visual = False
+    return state_1, state_2, tools, visual
 
 if __name__ == "__main__":
     app.run_server(debug=True)
