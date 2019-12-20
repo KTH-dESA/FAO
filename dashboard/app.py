@@ -266,7 +266,7 @@ results_header = dbc.Row(
 footer_results = dbc.Row(
             [
                 dbc.Button([html.I(className='fa fa-download'), " Download"], color="info", className="mr-1",
-                           style={'font-size': '0.85rem', 'font-weight': '600'}, id='button-download'),
+                           style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
             ],
             align='center',
             justify="center",

@@ -238,6 +238,7 @@ button {
   #collapse {
     display: block;
 	overflow: auto;
+	flex: 1 1 auto;
   }
 
   /* set margins of the main content so that it doesn't overlap the sidebar */
