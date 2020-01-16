@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
 import json
 import pandas as pd
 import numpy as np
@@ -287,7 +288,7 @@ graphs = html.Div([results_header,
 
 content = html.Div([map, graphs], id="page-content")
 
-app.layout = html.Div([dcc.Store(id='water'), sidebar, content])
+app.layout = html.Div([dcc.Store(id='current'), sidebar, content])
 
 
 # Helper funtions
@@ -409,19 +410,74 @@ def plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, des
     map = dict(data=data, layout=layout_map)
     return map
 
+def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end, eff_init):
+    emission_factor = 0.643924449
+    names = ['Water delivered (Mm3)', 'Water required (Mm3)']
+    dff_delivered = water_delivered.groupby(['Year', 'type'])['value'].sum() / 1000000
+    dff_delivered = dff_delivered.reset_index()
+    dff_required = water_required.groupby(['Year', 'type'])['value'].sum() / 1000000
+    dff_required = dff_required.reset_index()
 
-# @app.callback(
-#     Output("water", "data"),
-#     [Input("button-apply", "n_clicks"), Input("sidebar-toggle", "n_clicks"), Input('water', 'modified_timestamp')],
-#     [State('rb-scenario', 'value'), State('eto-input', 'value'), State('drop-level', 'value')]
-# )
-# def update_production_text(n_1, n_2, ts, scenario, eto, level):
-#     if ts is None:
-#         raise PreventUpdate
-#     water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
-#                                                                                            eto,
-#                                                                                            level)
-#     return [water_delivered.to_dict(), water_required.to_dict()]
+    dff_unmet = dff_required.copy()
+    dff_unmet['value'] = (dff_unmet.value - dff_unmet.set_index(['Year', 'type']).index.map(
+        dff_delivered.set_index(['Year', 'type']).value)) / dff_unmet.value * 100
+    dff_unmet.loc[dff_unmet['value'] < 0.001, 'value'] = 0
+
+    dff_energy = pd.DataFrame()
+    pl_flow['type'] = 'Water conveyance'
+    l = len(pl_flow.Year.unique())
+    eff = np.array([(eff_end - eff_init) / (l - 1) * i + eff_init for i in range(l)])
+    for df in [gw_pumped, pl_flow]:
+        dff = df.groupby(['Year', 'type'])['SWPA_E_'].sum() / (eff * 1000000)
+        dff = dff.reset_index()
+        dff_energy = dff_energy.append(dff, sort=False)
+    for df in [wwtp_data, desal_data]:
+        dff = df.groupby(['Year', 'type'])['SWPA_E_'].sum() / (1000000)
+        dff = dff.reset_index()
+        dff_energy = dff_energy.append(dff, sort=False)
+    dff_energy.rename(columns={'SWPA_E_': 'value'}, inplace=True)
+
+    for df, name in zip([dff_delivered, dff_required], [names[0], names[1]]):
+        data[name] = [{'x': df.loc[df['type'] == type].Year,
+                       'y': df.loc[df['type'] == type].value,
+                       'name': type,
+                       'stackgroup': 'one',
+                       'mode': 'lines',
+                       'text': dff_unmet.loc[dff_unmet['type'] == type].value,
+                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}' +
+                                        '<br><b>Unmet demand</b>: %{text:.2f}%'
+                       } for type in sorted(df['type'].unique())]
+
+    for df, name in zip([dff_energy], ['Energy demand (GWh)']):
+        data[name] = [{'x': df.loc[df['type'] == type].Year,
+                       'y': df.loc[df['type'] == type].value,
+                       'name': type,
+                       'stackgroup': 'one',
+                       'mode': 'lines',
+                       'text': df.loc[df['type'] == type].value * emission_factor / 1000,
+                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}' +
+                                        '<br><b>Emissions</b>: %{text: 0.2f} MtCO2'
+                       } for type in sorted(df['type'].unique())]
+
+    return data
+
+@app.callback(
+    [Output("current", "data"), Output('map', 'selectedData')],
+    [
+        Input("button-apply", "n_clicks"),
+    ],
+    [State('pump-eff-init', 'value'), State('pump-eff-end', 'value'), State('rb-scenario', 'value'),
+     State('eto-input', 'value'), State('drop-level', 'value')]
+)
+def update_current_data(n_1, eff_init, eff_end, scenario, eto, level):
+    water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
+                                                                                           eto,
+                                                                                           level)
+
+    map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
+    graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end, eff_init)
+    data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
+    return data_dict, None
 
 @app.callback(
     Output("sidebar", "className"),
@@ -448,66 +504,17 @@ def toggle_collapse(n, is_open):
     [Input('map', 'selectedData'),
      Input("sidebar-toggle", "n_clicks"),
      Input('scenarioTitle', 'children'),
-     Input('pump-eff-init', 'value'),
-     Input('pump-eff-end', 'value')],
-    [State('rb-scenario', 'value'), State('eto-input', 'value'), State('drop-level', 'value')]
+     Input('current', 'data')]
 )
-def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, level):
-
+def update_results(selection, n_1, title, data_current):
+    if data_current is None:
+        raise PreventUpdate
     names = ['Water delivered (Mm3)', 'Water required (Mm3)']
     colors = {'water': "#59C3C3", 'energy': "#F9ADA0", 'food': "#849E68"}
     data = {}
     if selection is None:
-        emission_factor = 0.643924449
-        water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
-                                                                                               eto,
-                                                                                               level)
         name = 'Jordan country'
-        dff_delivered = water_delivered.groupby(['Year', 'type'])['value'].sum() / 1000000
-        dff_delivered = dff_delivered.reset_index()
-        dff_required = water_required.groupby(['Year', 'type'])['value'].sum() / 1000000
-        dff_required = dff_required.reset_index()
-
-        dff_unmet = dff_required.copy()
-        dff_unmet['value'] = (dff_unmet.value - dff_unmet.set_index(['Year', 'type']).index.map(
-                                            dff_delivered.set_index(['Year', 'type']).value)) / dff_unmet.value * 100
-        dff_unmet.loc[dff_unmet['value'] < 0.001, 'value'] = 0
-
-        dff_energy = pd.DataFrame()
-        pl_flow['type'] = 'Water conveyance'
-        l = len(pl_flow.Year.unique())
-        eff = np.array([(eff_end - eff_init) / (l - 1) * i + eff_init for i in range(l)])
-        for df in [gw_pumped, pl_flow]:
-            dff = df.groupby(['Year', 'type'])['SWPA_E_'].sum() / (eff * 1000000)
-            dff = dff.reset_index()
-            dff_energy = dff_energy.append(dff, sort=False)
-        for df in [wwtp_data, desal_data]:
-            dff = df.groupby(['Year', 'type'])['SWPA_E_'].sum() / (1000000)
-            dff = dff.reset_index()
-            dff_energy = dff_energy.append(dff, sort=False)
-        dff_energy.rename(columns={'SWPA_E_': 'value'}, inplace=True)
-
-        for df, name in zip([dff_delivered, dff_required], [names[0], names[1]]):
-            data[name] = [{'x': df.loc[df['type'] == type].Year,
-                           'y': df.loc[df['type'] == type].value,
-                           'name': type,
-                           'stackgroup': 'one',
-                           'mode': 'lines',
-                           'text': dff_unmet.loc[dff_unmet['type'] == type].value,
-                           'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}' +
-                                            '<br><b>Unmet demand</b>: %{text:.2f}%'
-                           } for type in sorted(df['type'].unique())]
-
-        for df, name in zip([dff_energy], ['Energy demand (GWh)']):
-            data[name] = [{'x': df.loc[df['type'] == type].Year,
-                           'y': df.loc[df['type'] == type].value,
-                           'name': type,
-                           'stackgroup': 'one',
-                           'mode': 'lines',
-                           'text': df.loc[df['type'] == type].value * emission_factor/1000,
-                           'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}' +
-                                            '<br><b>Emissions</b>: %{text: 0.2f} MtCO2'
-                           } for type in sorted(df['type'].unique())]
+        data = data_current['graphs']
 
     elif selection['points'][0]['customdata']['type'] in ['demand']:
         name = selection['points'][0]['text']
@@ -530,7 +537,7 @@ def update_results(selection, n_1, title, eff_init, eff_end, scenario, eto, leve
 
         if name_key in ['Groundwater supply', 'pipeline']:
             l = len(selection['points'][0]['customdata']['water'][1])
-            eff = np.array([(eff_end - eff_init) / (l - 1) * i + eff_init for i in range(l)])
+            eff = np.array([(data_current['eff_end'] - data_current['eff_init']) / (l - 1) * i + data_current['eff_init'] for i in range(l)])
         else:
             eff = 1
         data[name_dict[name_key]['water']] = [{'x': selection['points'][0]['customdata']['water'][1],
@@ -582,26 +589,38 @@ def update_level_dropdown(scenario):
 
 
 @app.callback(
-    [Output("map", "figure"), Output('scenarioTitle', 'children')],
-    [Input("button-apply", "n_clicks"), Input("sidebar-toggle", "n_clicks")],
-    [State('rb-scenario', 'value'), State('eto-input', 'value'), State('drop-level', 'value')]
+    Output('scenarioTitle', 'children'),
+    [
+        Input("button-apply", "n_clicks"),
+        Input("sidebar-toggle", "n_clicks"),
+        Input("current", "data")
+    ],
 )
-def update_level_dropdown(n_1, n_2, scenario, eto, level):
+def update_level_dropdown(n_1, n_2, data):
+    if data is None:
+        raise PreventUpdate
     level_dict = {'Reference': {'level_1': ''},
                   'Improve AG eff': {'level_1': 'by 10 percent',
                                      'level_2': 'by 20 percent'},
                   'New Resources': {'level_1': ''},
                   'Reduce NRW': {'level_1': 'to 40 percent',
                                  'level_2': 'to 20 percent'}}
-
+    scenario = data['scenario']
+    level = data['level']
     name = f' - {scenario} {level_dict[scenario][level]} scenario'
 
-    water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
-                                                                                           eto,
-                                                                                           level)
-    map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
+    return name
 
-    return map, name
+@app.callback(
+    Output("map", "figure"),
+    [
+        Input("current", "data"),
+        Input('scenarioTitle', 'children'),
+    ],
+)
+def update_level_dropdown(data, n):
+    map = data['map']
+    return map
 
 @app.callback(
     [Output('page-1', 'active'), Output('page-2', 'active'),
