@@ -108,7 +108,18 @@ sidebar_header = dbc.Row(
 
 scenario_options = html.Div(
     [
-        html.H6('Select scenario'),
+        html.H6('Select scenario', style=dict(display='inline-block')),
+        html.Button(html.Span(className="fa fa-info-circle"), className='info', id='scenario-info'),
+        dbc.Modal(
+            [
+                dbc.ModalHeader("Scenario info"),
+                dbc.ModalBody("This is the content of the modal"),
+                dbc.ModalFooter(
+                    dbc.Button("Close", id="close", className="ml-auto")
+                ),
+            ],
+            id="scenario-info-modal",
+        ),
         html.Div(
             dbc.RadioItems(
                 id="rb-scenario",
@@ -142,16 +153,18 @@ eto_options = html.Div(
                     width=2,
                 ),
                 dbc.Col(html.H6('Increase Evapotranspiration (climate change)'), width=8),
+                dbc.Col(html.Button(html.Span(className="fa fa-info-circle"), className='info'))
             ],
-            no_gutters=True
-        ),
+            no_gutters=True,
+        )
     ],
     className='options'
 )
 
 level_options = html.Div(
     [
-        html.H6('Select level of variable'),
+        html.H6('Select level of variable', style=dict(display='inline-block')),
+        html.Button(html.Span(className="fa fa-info-circle"), className='info'),
         html.Div(
             dcc.Dropdown(
                 id="drop-level",
@@ -169,7 +182,8 @@ level_options = html.Div(
 
 energy_options = html.Div(
     [
-        html.H6('Select energy pumping efficiency'),
+        html.H6('Select energy pumping efficiency', style=dict(display='inline-block')),
+        html.Button(html.Span(className="fa fa-info-circle"), className='info'),
         dbc.Row([
             dbc.Col(
                 dbc.InputGroup(
@@ -649,6 +663,16 @@ def selected_tab(n_1, n_2):
         tools = True
         visual = False
     return state_1, state_2, tools, visual
+
+@app.callback(
+    Output("scenario-info-modal", "is_open"),
+    [Input("scenario-info", "n_clicks")],
+    [State("scenario-info-modal", "is_open")],
+)
+def toggle_popover(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
 if __name__ == "__main__":
     app.run_server(debug=True)

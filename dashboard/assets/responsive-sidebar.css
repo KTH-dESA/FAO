@@ -163,6 +163,26 @@ button {
 	padding: 1rem 0rem 1rem 1rem;
 }
 
+.info {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  background-color: #f8f9fa; /* Green */
+  border: none;
+  color: gray;
+  padding: 0px 4px;
+  text-align: center;
+  /* text-decoration: none; */
+  display: inline-block;
+  font-size: 15px;
+  float: right;
+  border-radius: 6px;
+}
+
+.info:hover {
+  background-color: #F0F0F0; /* Green */
+  color: gray;
+}
+
 @media (min-width: 48em) {    
   #graphs-container {
     position: relative;
@@ -187,18 +207,18 @@ button {
     width: 20rem;
 	box-shadow: 0 16px 4px rgba(20,33,61,.08);
     text-align: left;
-    transition: margin 0.8s ease-in-out, padding 0.8s ease-in-out;
+    transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
 
   #sidebar-toggle {
     display: inline-block;
     position: relative;
     top: 0;
-    transition: top 0.8s ease-in-out, margin-right 0.8s ease-in-out;
+    transition: top 0.3s ease-in-out, margin-right 0.3s ease-in-out;
   }
   
   #tabs, .footer {
-	transition: margin 0.8s ease-in-out;
+	transition: margin 0.3s ease-in-out;
   }
 
   /* add negative margin to sidebar to achieve the collapse */
@@ -240,7 +260,7 @@ button {
     display: block;
 	overflow: auto;
 	flex: 1 1 auto;
-	transition: margin 0.8s ease-in-out;
+	transition: margin 0.3s ease-in-out;
   }
 
   /* set margins of the main content so that it doesn't overlap the sidebar */
@@ -250,7 +270,7 @@ button {
     margin-right: 0rem;
 	display: flex;
 	flex-flow: row;
-    transition: margin-left 0.8s ease-in-out;
+    transition: margin-left 0.3s ease-in-out;
   }
   
   #map {
@@ -269,6 +289,6 @@ button {
 	z-index: 100;
 	box-shadow: 0 0 16px 4px rgba(20,33,61,.08);
 	overflow: auto;
-	transition: margin-left 0.8s ease-in-out;
+	transition: margin-left 0.3s ease-in-out;
   }
 }
