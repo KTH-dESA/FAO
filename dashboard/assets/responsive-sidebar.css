@@ -115,7 +115,7 @@ button {
   margin: 0;
   padding: 0rem 0rem;
   box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+  /* transition: margin 0.5s ease-in-out; */
 }
 
 .footer {
@@ -125,7 +125,6 @@ button {
   padding: 1rem 1rem;
   margin: 0;
   box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 #sidebar-header {
@@ -134,7 +133,6 @@ button {
   flex: 0 1 auto;
   margin: 0;
   padding: 1rem 0rem 0rem 0rem;
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 #tools, #visual-tools {
@@ -142,7 +140,6 @@ button {
   text-align: left;
   flex: 1 1 auto;
   padding: 1rem 0rem;
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 .options {
@@ -190,26 +187,30 @@ button {
     width: 20rem;
 	box-shadow: 0 16px 4px rgba(20,33,61,.08);
     text-align: left;
-    transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+    transition: margin 0.8s ease-in-out, padding 0.8s ease-in-out;
   }
 
   #sidebar-toggle {
     display: inline-block;
     position: relative;
     top: 0;
-    transition: top 0.3s ease-in-out;
+    transition: top 0.8s ease-in-out, margin-right 0.8s ease-in-out;
+  }
+  
+  #tabs, .footer {
+	transition: margin 0.8s ease-in-out;
   }
 
   /* add negative margin to sidebar to achieve the collapse */
   #sidebar.collapsed {
     margin-left: -16.5rem;
-    padding-right: 0.5rem;
+    padding-right: 0rem;
   }
 
   /* move the sidebar toggle up to the top left corner */
   #sidebar.collapsed #sidebar-toggle {
-    top: -1.5rem;
-	right: -1rem;
+    top: -1rem;
+	margin-right: -0.5rem;
   }
 
   /* also adjust margin of page content */
@@ -226,9 +227,9 @@ button {
   
 
   /* reveal the blurb on a large screen */
-  #blurb {
-    display: block;
-  }
+  /* #blurb { */
+    /* display: block; */
+  /* } */
 
   /* Hide the toggle on a large screen */
   #navbar-toggle {
@@ -239,6 +240,7 @@ button {
     display: block;
 	overflow: auto;
 	flex: 1 1 auto;
+	transition: margin 0.8s ease-in-out;
   }
 
   /* set margins of the main content so that it doesn't overlap the sidebar */
@@ -248,7 +250,7 @@ button {
     margin-right: 0rem;
 	display: flex;
 	flex-flow: row;
-    transition: margin-left 0.3s ease-in-out;
+    transition: margin-left 0.8s ease-in-out;
   }
   
   #map {
@@ -267,5 +269,6 @@ button {
 	z-index: 100;
 	box-shadow: 0 0 16px 4px rgba(20,33,61,.08);
 	overflow: auto;
+	transition: margin-left 0.8s ease-in-out;
   }
 }

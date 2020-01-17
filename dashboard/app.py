@@ -246,7 +246,7 @@ sidebar = html.Div(
             visual_tools,
         # use the Collapse component to animate hiding / revealing links
             ],
-        id="collapse",
+            id="collapse",
         ),
         footer,
     ],
