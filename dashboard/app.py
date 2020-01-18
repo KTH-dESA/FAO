@@ -24,6 +24,7 @@ WebMercator = 4326
 for gdf in [demand_points, supply_points, pipelines]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
+
 def load_data(scenario, eto, level):
     data_folder = os.path.join(my_path, 'data')
     if not eto:
@@ -38,6 +39,25 @@ def load_data(scenario, eto, level):
     desal_data = pd.read_csv(os.path.join(data, 'desal_data.csv'))
 
     return water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data
+
+
+info_ids = []
+
+
+def title_info(title, info_id, info_title, modal_content):
+    info_ids.append(info_id)
+    return dbc.Row([dbc.Col(html.H6(title), width=10),
+           dbc.Col(html.Button(html.Span(className="fa fa-info-circle"), className='info', id=info_id), width=2),
+           dbc.Modal(
+                [
+                    dbc.ModalHeader(info_title),
+                    dbc.ModalBody(modal_content),
+                    dbc.ModalFooter(
+                        dbc.Button("Close", id=f"{info_id}-close", className="ml-auto")
+                    ),
+                ],
+                id=f"{info_id}-modal",
+           )])
 
 
 # water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data('New Resources', ['Eto trend'],
@@ -62,7 +82,7 @@ layout = dict(
     legend=dict(font=dict(size=10), orientation="h"),
     xaxis={'tickformat': 'd'},
     showlegend=True,
-    hoverlabel= {'align': 'left'},
+    hoverlabel={'align': 'left'},
 )
 
 app = dash.Dash(__name__,
@@ -108,18 +128,8 @@ sidebar_header = dbc.Row(
 
 scenario_options = html.Div(
     [
-        html.H6('Select scenario', style=dict(display='inline-block')),
-        html.Button(html.Span(className="fa fa-info-circle"), className='info', id='scenario-info'),
-        dbc.Modal(
-            [
-                dbc.ModalHeader("Scenario info"),
-                dbc.ModalBody("This is the content of the modal"),
-                dbc.ModalFooter(
-                    dbc.Button("Close", id="close", className="ml-auto")
-                ),
-            ],
-            id="scenario-info-modal",
-        ),
+        title_info(title='Select scenario', info_id='scenario-info', info_title='Scenario info',
+                   modal_content='This is the content of the modal'),
         html.Div(
             dbc.RadioItems(
                 id="rb-scenario",
@@ -152,8 +162,9 @@ eto_options = html.Div(
                     ),
                     width=2,
                 ),
-                dbc.Col(html.H6('Increase Evapotranspiration (climate change)'), width=8),
-                dbc.Col(html.Button(html.Span(className="fa fa-info-circle"), className='info'))
+                dbc.Col(title_info(title='Increase Evapotranspiration (climate change)', info_id='Eto-info',
+                                   info_title='Evapotranspiration info',
+                                   modal_content='This is the content of the modal')),
             ],
             no_gutters=True,
         )
@@ -163,8 +174,8 @@ eto_options = html.Div(
 
 level_options = html.Div(
     [
-        html.H6('Select level of variable', style=dict(display='inline-block')),
-        html.Button(html.Span(className="fa fa-info-circle"), className='info'),
+        title_info(title='Select level of variable', info_id='level-info', info_title='Variable level info',
+                   modal_content='This is the content of the modal'),
         html.Div(
             dcc.Dropdown(
                 id="drop-level",
@@ -182,8 +193,8 @@ level_options = html.Div(
 
 energy_options = html.Div(
     [
-        html.H6('Select energy pumping efficiency', style=dict(display='inline-block')),
-        html.Button(html.Span(className="fa fa-info-circle"), className='info'),
+        title_info(title='Select energy pumping efficiency', info_id='pump-eff-info',
+                   info_title='Energy pumping efficiency info', modal_content='This is the content of the modal'),
         dbc.Row([
             dbc.Col(
                 dbc.InputGroup(
@@ -234,16 +245,16 @@ visual_tools = html.Div(
 )
 
 footer = dbc.Row(
-            [
-                dbc.Button([html.I(className='fa fa-redo-alt'), " Reset"], color="info", outline=True, className="mr-1",
-                           style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-reset'),
-                dbc.Button([html.I(className='fa fa-check-double'), " Apply"], color="info", className="mr-1",
-                           style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-apply'),
-            ],
-            align='center',
-            justify="around",
-            className='footer',
-        )
+    [
+        dbc.Button([html.I(className='fa fa-redo-alt'), " Reset"], color="info", outline=True, className="mr-1",
+                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-reset'),
+        dbc.Button([html.I(className='fa fa-check-double'), " Apply"], color="info", className="mr-1",
+                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-apply'),
+    ],
+    align='center',
+    justify="around",
+    className='footer',
+)
 
 sidebar = html.Div(
     [
@@ -258,8 +269,8 @@ sidebar = html.Div(
         dbc.Collapse([
             scenario_tools,
             visual_tools,
-        # use the Collapse component to animate hiding / revealing links
-            ],
+            # use the Collapse component to animate hiding / revealing links
+        ],
             id="collapse",
         ),
         footer,
@@ -279,14 +290,14 @@ results_header = dbc.Row(
 )
 
 footer_results = dbc.Row(
-            [
-                dbc.Button([html.I(className='fa fa-download'), " Download"], color="info", className="mr-1",
-                           style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
-            ],
-            align='center',
-            justify="center",
-            className='footer',
-        )
+    [
+        dbc.Button([html.I(className='fa fa-download'), " Download"], color="info", className="mr-1",
+                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
+    ],
+    align='center',
+    justify="center",
+    className='footer',
+)
 
 map = dcc.Graph(id="map",
                 className='col-lg-7 col-md-7 col-sm-12 col-xs-12',
@@ -424,6 +435,7 @@ def plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, des
     map = dict(data=data, layout=layout_map)
     return map
 
+
 def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end, eff_init):
     emission_factor = 0.643924449
     names = ['Water delivered (Mm3)', 'Water required (Mm3)']
@@ -475,6 +487,7 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
 
     return data
 
+
 @app.callback(
     [Output("current", "data"), Output('map', 'selectedData')],
     [
@@ -489,9 +502,11 @@ def update_current_data(n_1, eff_init, eff_end, scenario, eto, level):
                                                                                            level)
 
     map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
-    graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end, eff_init)
+    graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end,
+                        eff_init)
     data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
     return data_dict, None
+
 
 @app.callback(
     Output("sidebar", "className"),
@@ -503,6 +518,7 @@ def toggle_classname(n, classname):
         return "collapsed"
     return ""
 
+
 @app.callback(
     Output("collapse", "is_open"),
     [Input("navbar-toggle", "n_clicks")],
@@ -512,6 +528,7 @@ def toggle_collapse(n, is_open):
     if n:
         return not is_open
     return is_open
+
 
 @app.callback(
     [Output("graphs", "children"), Output('resultsTitle', 'children')],
@@ -551,7 +568,9 @@ def update_results(selection, n_1, title, data_current):
 
         if name_key in ['Groundwater supply', 'pipeline']:
             l = len(selection['points'][0]['customdata']['water'][1])
-            eff = np.array([(data_current['eff_end'] - data_current['eff_init']) / (l - 1) * i + data_current['eff_init'] for i in range(l)])
+            eff = np.array(
+                [(data_current['eff_end'] - data_current['eff_init']) / (l - 1) * i + data_current['eff_init'] for i in
+                 range(l)])
         else:
             eff = 1
         data[name_dict[name_key]['water']] = [{'x': selection['points'][0]['customdata']['water'][1],
@@ -559,7 +578,7 @@ def update_results(selection, n_1, title, data_current):
                                                'fill': 'tozeroy', 'mode': 'lines', 'showlegend': False,
                                                'line': {'color': colors['water']}}]
         data[name_dict[name_key]['energy']] = [{'x': selection['points'][0]['customdata']['energy'][1],
-                                                'y': np.array(selection['points'][0]['customdata']['energy'][0])/eff,
+                                                'y': np.array(selection['points'][0]['customdata']['energy'][0]) / eff,
                                                 'fill': 'tozeroy', 'mode': 'lines', 'showlegend': False,
                                                 'line': {'color': colors['energy']}}]
 
@@ -579,8 +598,8 @@ def update_results(selection, n_1, title, data_current):
         layout_plot['height'] = 400
         layout_plot['font'] = dict(size=10, color="#7f7f7f")
         plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
-                                                                            format='png', filename=key, height=500,
-                                                                            width=700, scale=2))))
+            format='png', filename=key, height=500,
+            width=700, scale=2))))
     return plots, name
 
 
@@ -625,6 +644,7 @@ def update_level_dropdown(n_1, n_2, data):
 
     return name
 
+
 @app.callback(
     Output("map", "figure"),
     [
@@ -635,6 +655,7 @@ def update_level_dropdown(n_1, n_2, data):
 def update_level_dropdown(data, n):
     map = data['map']
     return map
+
 
 @app.callback(
     [Output('page-1', 'active'), Output('page-2', 'active'),
@@ -664,15 +685,17 @@ def selected_tab(n_1, n_2):
         visual = False
     return state_1, state_2, tools, visual
 
-@app.callback(
-    Output("scenario-info-modal", "is_open"),
-    [Input("scenario-info", "n_clicks")],
-    [State("scenario-info-modal", "is_open")],
-)
-def toggle_popover(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+for info_id in info_ids:
+    @app.callback(
+        Output(f"{info_id}-modal", "is_open"),
+        [Input(info_id, "n_clicks"), Input(f"{info_id}-close", "n_clicks")],
+        [State(f"{info_id}-modal", "is_open")],
+    )
+    def toggle_popover(n_1, n_2, is_open):
+        if n_1 or n_2:
+            return not is_open
+        return is_open
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
