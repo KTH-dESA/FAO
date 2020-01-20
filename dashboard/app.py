@@ -47,17 +47,18 @@ info_ids = []
 def title_info(title, info_id, info_title, modal_content):
     info_ids.append(info_id)
     return dbc.Row([dbc.Col(html.H6(title), width=10),
-           dbc.Col(html.Button(html.Span(className="fa fa-info-circle"), className='info', id=info_id), width=2),
-           dbc.Modal(
-                [
-                    dbc.ModalHeader(info_title),
-                    dbc.ModalBody(modal_content),
-                    dbc.ModalFooter(
-                        dbc.Button("Close", id=f"{info_id}-close", className="ml-auto")
-                    ),
-                ],
-                id=f"{info_id}-modal",
-           )])
+                    dbc.Col(html.Button(html.Span(className="fa fa-info-circle"), className='info', id=info_id),
+                            width=2),
+                    dbc.Modal(
+                        [
+                            dbc.ModalHeader(info_title),
+                            dbc.ModalBody(modal_content),
+                            dbc.ModalFooter(
+                                dbc.Button("Close", id=f"{info_id}-close", className="ml-auto")
+                            ),
+                        ],
+                        id=f"{info_id}-modal",
+                    )])
 
 
 # water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data('New Resources', ['Eto trend'],
@@ -239,8 +240,114 @@ scenario_tools = html.Div(
     id='tools',
 )
 
+unit_options = html.Div(
+    [
+        title_info(title='Select display units', info_id='units-info',
+                   info_title='Units info', modal_content='This is the content of the modal'),
+        html.P(dbc.InputGroup(
+            [
+                dbc.InputGroupAddon("Water demand", addon_type="prepend"),
+                dbc.Select(id='water-units',
+                           options=[
+                               {"label": "Mm3", "value": "Mm3"},
+                               {"label": "m3", "value": "m3"},
+                           ],
+                           value='Mm3'
+                           ),
+            ],
+            size="sm"
+        )),
+        html.P(dbc.InputGroup(
+            [
+                dbc.InputGroupAddon("Energy demand", addon_type="prepend"),
+                dbc.Select(id='energy-units',
+                           options=[
+                               {"label": "GWh", "value": "GWh"},
+                               {"label": "MWh", "value": "MWh"},
+                               {"label": "Wh", "value": "MWh"},
+                               {"label": "PJ", "value": "PJ"},
+                           ],
+                           value='GWh'
+                           ),
+            ],
+            size="sm"
+        )),
+    ],
+    className='options'
+)
+
+map_options = html.Div(
+    [
+        title_info(title='Map visualization options', info_id='map-info',
+                   info_title='Map visualization info', modal_content='This is the content of the modal'),
+        html.Div(
+            dbc.RadioItems(
+                id="map-options",
+                options=[
+                    {"label": "System schematic", "value": 'sch-map'},
+                    {"label": "Choropleth map", "value": 'cho-map'},
+                ],
+                value='sch-map',
+                className='checklist-selected-style',
+            ),
+        ),
+        dbc.Collapse(dbc.Card(dbc.CardBody(
+            [
+                html.P(dcc.Dropdown(id='cho-map-drop',
+                                    options=[
+                                        {"label": "Cropland density", "value": 'crop'},
+                                        {"label": "Water delivered", "value": 'water'},
+                                        {"label": "Energy demand", "value": 'energy'},
+                                    ],
+                                    value='crop',
+                                    placeholder='Select variable...',
+                                    clearable=False
+                                    )),
+                dcc.Dropdown(id='cho-map-filter',
+                             options=[
+                                 {"label": "Governorate", "value": 'gov'},
+                                 {"label": "Water basin", "value": 'basin'},
+                             ],
+                             value='crop',
+                             placeholder='Filter by...',
+                             clearable=False
+                             ),
+            ])),
+            id="cho-map-collapse",
+        ),
+    ],
+    className='options'
+)
+
+compare_scenarios = html.Div(
+    [
+        title_info(title='Select scenarios to display', info_id='compare-info',
+                   info_title='Compare scenarios info', modal_content='This is the content of the modal'),
+        html.Div(
+            dcc.Dropdown(
+                id="compare-options",
+                options=[
+                    {"label": "Current", "value": 'current'},
+                    {"label": "Scenario 1", "value": 's1'},
+                    {"label": "Scenario 2", "value": 's2'},
+                ],
+                value='current',
+                multi=True,
+                # className='checklist-selected-style',
+            ),
+        ),
+    ],
+    className='options'
+)
+
 visual_tools = html.Div(
-    [],
+    [
+        unit_options,
+        html.Hr(),
+        map_options,
+        html.Hr(),
+        compare_scenarios
+    ],
     id='visual-tools',
 )
 
@@ -685,6 +792,7 @@ def selected_tab(n_1, n_2):
         visual = False
     return state_1, state_2, tools, visual
 
+
 for info_id in info_ids:
     @app.callback(
         Output(f"{info_id}-modal", "is_open"),
@@ -695,6 +803,21 @@ for info_id in info_ids:
         if n_1 or n_2:
             return not is_open
         return is_open
+
+
+@app.callback(
+    [Output('cho-map-drop', 'disabled'),
+     Output('cho-map-drop', 'value'),
+     Output('cho-map-filter', 'disabled'),
+     Output('cho-map-filter', 'value'),
+     Output("cho-map-collapse", "is_open"),
+     ],
+    [Input('map-options', 'value')],
+)
+def enable_choromap_options(value):
+    if value == 'cho-map':
+        return False, None, False, None, True
+    return True, None, True, None, False
 
 
 if __name__ == "__main__":

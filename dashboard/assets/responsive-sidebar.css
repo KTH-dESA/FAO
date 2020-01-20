@@ -44,15 +44,7 @@ button {
   /* background-color: rgba(23,162,184,0.2); */
 }
 
-
-#rb-scenario
-  .custom-control-input:checked
-  ~ .custom-control-label::before {
-  background-color: rgba(23,162,184,1);
-  border-color: rgba(23,162,184,1);
-}
-
-#eto-input
+#sidebar
   .custom-control-input:checked
   ~ .custom-control-label::before {
   background-color: rgba(23,162,184,1);
