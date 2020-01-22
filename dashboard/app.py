@@ -40,7 +40,7 @@ def load_data(scenario, eto, level):
 
     return water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data
 
-
+button_color = 'primary'
 info_ids = []
 
 
@@ -78,8 +78,8 @@ layout = dict(
     automargin=True,
     margin=dict(l=30, r=20, b=50, t=100),
     hovermode="closest",
-    plot_bgcolor="#f8f9fa",
-    paper_bgcolor="#f8f9fa",
+    plot_bgcolor="#fff",
+    paper_bgcolor="#fff",
     legend=dict(font=dict(size=10), orientation="h"),
     xaxis={'tickformat': 'd'},
     showlegend=True,
@@ -353,9 +353,9 @@ visual_tools = html.Div(
 
 footer = dbc.Row(
     [
-        dbc.Button([html.I(className='fa fa-redo-alt'), " Reset"], color="info", outline=True, className="mr-1",
+        dbc.Button([html.I(className='fa fa-redo-alt'), " Reset"], color=button_color, outline=True, className="mr-1",
                    style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-reset'),
-        dbc.Button([html.I(className='fa fa-check-double'), " Apply"], color="info", className="mr-1",
+        dbc.Button([html.I(className='fa fa-check-double'), " Apply"], color=button_color, className="mr-1",
                    style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-apply'),
     ],
     align='center',
@@ -398,7 +398,7 @@ results_header = dbc.Row(
 
 footer_results = dbc.Row(
     [
-        dbc.Button([html.I(className='fa fa-download'), " Download"], color="info", className="mr-1",
+        dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color, className="mr-1",
                    style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
     ],
     align='center',
