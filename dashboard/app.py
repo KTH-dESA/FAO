@@ -185,11 +185,11 @@ level_options = html.Div(
                     # {"label": "Level 2", "value": 2},
                 ],
                 value='level_1',
-                clearable=False
+                clearable=False,
             ),
         ),
     ],
-    className='options'
+    className='options',
 )
 
 energy_options = html.Div(
@@ -244,7 +244,7 @@ unit_options = html.Div(
     [
         title_info(title='Select display units', info_id='units-info',
                    info_title='Units info', modal_content='This is the content of the modal'),
-        html.P(dbc.InputGroup(
+        dbc.InputGroup(
             [
                 dbc.InputGroupAddon("Water demand", addon_type="prepend"),
                 dbc.Select(id='water-units',
@@ -252,26 +252,28 @@ unit_options = html.Div(
                                {"label": "Mm3", "value": "Mm3"},
                                {"label": "m3", "value": "m3"},
                            ],
-                           value='Mm3'
+                           value='Mm3',
+                           className='form-control'
                            ),
             ],
-            size="sm"
-        )),
-        html.P(dbc.InputGroup(
+            size="sm",
+            style={'marginBottom': '1em'}
+        ),
+        dbc.InputGroup(
             [
                 dbc.InputGroupAddon("Energy demand", addon_type="prepend"),
                 dbc.Select(id='energy-units',
                            options=[
                                {"label": "GWh", "value": "GWh"},
                                {"label": "MWh", "value": "MWh"},
-                               {"label": "Wh", "value": "MWh"},
+                               {"label": "Wh", "value": "Wh"},
                                {"label": "PJ", "value": "PJ"},
                            ],
                            value='GWh'
                            ),
             ],
             size="sm"
-        )),
+        ),
     ],
     className='options'
 )
@@ -293,7 +295,7 @@ map_options = html.Div(
         ),
         dbc.Collapse(dbc.Card(dbc.CardBody(
             [
-                html.P(dcc.Dropdown(id='cho-map-drop',
+                dcc.Dropdown(id='cho-map-drop',
                                     options=[
                                         {"label": "Cropland density", "value": 'crop'},
                                         {"label": "Water delivered", "value": 'water'},
@@ -301,8 +303,9 @@ map_options = html.Div(
                                     ],
                                     value='crop',
                                     placeholder='Select variable...',
-                                    clearable=False
-                                    )),
+                                    clearable=False,
+                                    style={'marginBottom': '1em'}
+                                    ),
                 dcc.Dropdown(id='cho-map-filter',
                              options=[
                                  {"label": "Governorate", "value": 'gov'},
@@ -376,6 +379,7 @@ sidebar = html.Div(
         dbc.Collapse([
             scenario_tools,
             visual_tools,
+            # dbc.Input(type='range', className='custom-range')
             # use the Collapse component to animate hiding / revealing links
         ],
             id="collapse",
