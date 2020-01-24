@@ -1,11 +1,45 @@
+@keyframes fadein {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0.5;
+	}
+}
+
+._dash-loading-callback {
+  font-family: sans-serif;
+  padding-top: 50px;
+  color: rgb(90, 90, 90);
+  
+  /* The banner */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  cursor: progress;
+
+  opacity: 0;
+  background-color: rgb(250, 250, 250);
+  /* Delay animation by 1s to prevent flashing 
+     and smoothly transition the animation over 0.5s 
+   */
+  -moz-animation: fadein 0.5s ease-in 1s forwards; /* Firefox */
+  -webkit-animation: fadein 0.5s ease-in 1s forwards; /* Safari and Chrome */
+  -o-animation: fadein 0.5s ease-in 1s forwards; /* Opera */
+	animation: fadein 0.5s ease-in 1s forwards;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
-  background: #f8f9fa; 
-}
+/* ::-webkit-scrollbar-track { */
+  /* background: var(--main-bg-color);  */
+/* } */
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -33,36 +67,28 @@ button {
 }
 
 .tabs:hover {
-  color: rgba(23,162,184,1);
+  color: var(--primary);
   font-weight: 600;
   /* background-color: rgba(23,162,184,0.2); */
 }
 
 .active {
-  color: rgba(23,162,184,1);
+  color: var(--primary);
   font-weight: 600;
   /* background-color: rgba(23,162,184,0.2); */
 }
 
-
-#rb-scenario
+#sidebar
   .custom-control-input:checked
   ~ .custom-control-label::before {
-  background-color: rgba(23,162,184,1);
-  border-color: rgba(23,162,184,1);
-}
-
-#eto-input
-  .custom-control-input:checked
-  ~ .custom-control-label::before {
-  background-color: rgba(23,162,184,1);
-  border-color: rgba(23,162,184,1);
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 #sidebar {
   text-align: left;
   padding: 0rem 0rem;
-  background-color: #f8f9fa;
+  /* background-color: var(--main-bg-color); */
 }
 
 #map {
@@ -105,7 +131,7 @@ button {
 #results-container {
   padding: 0rem 0rem;
   /* display: inline-block; */
-  background-color: #f8f9fa;
+  /* background-color: var(--main-bg-color); */
   box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
 }
 
@@ -115,7 +141,7 @@ button {
   margin: 0;
   padding: 0rem 0rem;
   box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
+  /* transition: margin 0.5s ease-in-out; */
 }
 
 .footer {
@@ -125,7 +151,6 @@ button {
   padding: 1rem 1rem;
   margin: 0;
   box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 #sidebar-header {
@@ -134,7 +159,6 @@ button {
   flex: 0 1 auto;
   margin: 0;
   padding: 1rem 0rem 0rem 0rem;
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 #tools, #visual-tools {
@@ -142,7 +166,6 @@ button {
   text-align: left;
   flex: 1 1 auto;
   padding: 1rem 0rem;
-  transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 .options {
@@ -164,6 +187,26 @@ button {
     text-align: left;
 	flex: 1 1 auto;
 	padding: 1rem 0rem 1rem 1rem;
+}
+
+.info {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  background-color: var(--main-bg-color);
+  border: none;
+  color: var(--secondary);
+  padding: 0px 4px;
+  text-align: center;
+  /* text-decoration: none; */
+  display: inline-block;
+  font-size: 15px;
+  float: right;
+  border-radius: 6px;
+}
+
+.info:hover {
+  background-color: #F0F0F0; /* Green */
+  color: var(--secondary);
 }
 
 @media (min-width: 48em) {    
@@ -197,19 +240,23 @@ button {
     display: inline-block;
     position: relative;
     top: 0;
-    transition: top 0.3s ease-in-out;
+    transition: top 0.3s ease-in-out, margin-right 0.3s ease-in-out;
+  }
+  
+  #tabs, .footer {
+	transition: margin 0.3s ease-in-out;
   }
 
   /* add negative margin to sidebar to achieve the collapse */
   #sidebar.collapsed {
     margin-left: -16.5rem;
-    padding-right: 0.5rem;
+    padding-right: 0rem;
   }
 
   /* move the sidebar toggle up to the top left corner */
   #sidebar.collapsed #sidebar-toggle {
-    top: -1.5rem;
-	right: -1rem;
+    top: -1rem;
+	margin-right: -0.5rem;
   }
 
   /* also adjust margin of page content */
@@ -226,9 +273,9 @@ button {
   
 
   /* reveal the blurb on a large screen */
-  #blurb {
-    display: block;
-  }
+  /* #blurb { */
+    /* display: block; */
+  /* } */
 
   /* Hide the toggle on a large screen */
   #navbar-toggle {
@@ -238,6 +285,8 @@ button {
   #collapse {
     display: block;
 	overflow: auto;
+	flex: 1 1 auto;
+	transition: margin 0.3s ease-in-out;
   }
 
   /* set margins of the main content so that it doesn't overlap the sidebar */
@@ -266,5 +315,6 @@ button {
 	z-index: 100;
 	box-shadow: 0 0 16px 4px rgba(20,33,61,.08);
 	overflow: auto;
+	transition: margin-left 0.3s ease-in-out;
   }
 }
