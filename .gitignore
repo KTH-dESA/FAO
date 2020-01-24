@@ -6,5 +6,5 @@ nwsas_results/*
 data/*
 Plots/*
 WEAP data/*
-dashboard/data/*
-dashboard/.idea/*
+* dashboard/data/*
+* dashboard/.idea/*
