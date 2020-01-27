@@ -1,0 +1,1726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Transmission Links.kml</name>
+	<Style id="Introduction">
+		<BalloonStyle>
+			<text><![CDATA[<style><--{}
+		table.data { border-color: #EEEEEE; }
+		table.inner td { padding: 0 4px; }
+		table.data td { padding: 0 4px; font-size: 8pt; }
+	--></style>
+	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
+    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
+    <tr><td align="center">
+	     <table border="0" width="630" cellspacing="0" cellpadding="2">
+		     <tr><td align="left">$[MainText]</td></tr>
+      </table>
+    </td></tr>
+	   <tr><td align="center">
+    </td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 20 January 2020</td></tr>
+ </table>]]></text>
+			<bgColor>ff80a5b3</bgColor>
+		</BalloonStyle>
+	</Style>
+	<Folder>
+		<name>Transmission Links</name>
+		<Icon>
+			<href>http://www.weap21.org/img/Transmission-Link.png</href>
+		</Icon>
+		<Placemark id="Object-335-Introduction">
+			<name>Transmission Link from AAM to AEPR</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from AAM to AEPR</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.20064,29.51839,0 -9.348140000000001,29.52576,0 -9.33708,29.70645,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-585-Introduction">
+			<name>Transmission Link from Ahl Souss to Ait Baha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Ahl Souss to Ait Baha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.11974,30.05935,0 -9.18324,29.99476,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-325-Introduction">
+			<name>Transmission Link from Ahl Souss to I_PMH Anti Atlas Ait Baha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Ahl Souss to I_PMH Anti Atlas Ait Baha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.11974,30.05935,0 -9.127330000000001,29.94674,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-563-Introduction">
+			<name>Transmission Link from Anti Atlas Groundwater to AEP Rural</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Anti Atlas Groundwater to AEP Rural</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.81551,30.19516,0 -8.9657,30.19602,0 -8.963699999999999,30.09209,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-562-Introduction">
+			<name>Transmission Link from Anti Atlas Groundwater to AEP_Ighrem</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Anti Atlas Groundwater to AEP_Ighrem</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.81551,30.19516,0 -8.454050000000001,30.19602,0 -8.45626,30.23337,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-387-Introduction">
+			<name>Transmission Link from Chtouka Groundwater to Biougra</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Chtouka Groundwater to Biougra</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.363160000000001,30.04192,0 -9.253080000000001,30.04345,0 -9.246969999999999,30.14053,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-382-Introduction">
+			<name>Transmission Link from Chtouka Groundwater to I_Modern Privé Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Chtouka Groundwater to I_Modern Privé Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.363160000000001,30.04192,0 -9.318820000000001,30.04268,0 -9.316050000000001,30.25283,0 -9.486420000000001,30.16739000000001,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-380-Introduction">
+			<name>Transmission Link from Chtouka Groundwater to I_Moderne Privé Chtouka</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Chtouka Groundwater to I_Moderne Privé Chtouka</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.363160000000001,30.04192,0 -9.36134,30.31388,0 -9.50708,30.30994,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-307-Introduction">
+			<name>Transmission Link from Chtouka Groundwater to I_Oughzifen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Chtouka Groundwater to I_Oughzifen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.363160000000001,30.04192,0 -9.57185,30.04115,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-437-Introduction">
+			<name>Transmission Link from Complexe Abdelmoumen Dkhika to Agadir</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Abdelmoumen Dkhika to Agadir</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.29576,30.56446,0 -9.59572,30.38739,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-429-Introduction">
+			<name>Transmission Link from Complexe Abdelmoumen Dkhika to I_Modern Privé Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Abdelmoumen Dkhika to I_Modern Privé Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.29576,30.56446,0 -9.38744,30.55766,0 -9.385920000000001,30.34938,0 -9.250220000000001,30.35014,0 -9.259740000000001,30.38587,0 -9.19657,30.36665,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-427-Introduction">
+			<name>Transmission Link from Complexe Abdelmoumen Dkhika to I_Modern Public Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Abdelmoumen Dkhika to I_Modern Public Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.29576,30.56446,0 -9.104670000000001,30.56526,0 -9.104670000000001,30.51357,0 -9.18981,30.50293,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-643-Introduction">
+			<name>Transmission Link from Complexe Abdelmoumen Dkhika to I_Traditionnel Rehabilité</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Abdelmoumen Dkhika to I_Traditionnel Rehabilité</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.29576,30.56446,0 -9.287039999999999,30.64205000000001,0 -9.219300000000001,30.64205000000001,0 -9.22372,30.53157,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-591-Introduction">
+			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to AEP_SEl Guerdane</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to AEP_SEl Guerdane</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.124890000000001,30.69973,0 -8.131270000000001,30.37757,0 -8.946210000000001,30.35913,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-590-Introduction">
+			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to El Guerdane</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to El Guerdane</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.124890000000001,30.69973,0 -8.131270000000001,30.30751,0 -8.131270000000001,30.28907,0 -8.972020000000001,30.29276,0 -8.974119999999999,30.3981,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-523-Introduction">
+			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to I_G1 Aoulouz</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to I_G1 Aoulouz</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.124890000000001,30.69973,0 -8.127090000000001,30.73213,0 -8.25737,30.73213,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-521-Introduction">
+			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to I_PMH Taliouine Tifnou</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to I_PMH Taliouine Tifnou</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.124890000000001,30.69973,0 -8.1241,30.63779,0 -7.731760000000001,30.63929,0 -7.72991,30.7501,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-535-Introduction">
+			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to I_Traditionnel Rehabil</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to I_Traditionnel Rehabil</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.124890000000001,30.69973,0 -8.324920000000001,30.69714,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-537-Introduction">
+			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to Recharge Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to Recharge Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.124890000000001,30.69973,0 -8.21833,31.01411,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-549-Introduction">
+			<name>Transmission Link from Groundwater of Haut Montagne Souss to AEPR 2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Groundwater of Haut Montagne Souss to AEPR 2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-7.90037,30.97153,0 -7.991580000000001,30.86536,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-569-Introduction">
+			<name>Transmission Link from Groundwater of Haut Montagne Souss to C_Sdass</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Groundwater of Haut Montagne Souss to C_Sdass</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-7.90037,30.97153,0 -7.49913,30.96472,0 -7.49607,30.01262,0 -8.475720000000001,29.99731,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-579-Introduction">
+			<name>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Anti Atlas Ig</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Anti Atlas Ig</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-7.90037,30.97153,0 -8.009589999999999,31.01182,0 -8.02065,31.21094,0 -7.452780000000001,31.20725,0 -7.46015,30.24114,0 -8.328770000000001,30.23916,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-518-Introduction">
+			<name>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Taliouine Tif</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Taliouine Tif</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-7.90037,30.97153,0 -7.72991,30.7501,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-520-Introduction">
+			<name>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH de Montagne S</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH de Montagne S</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-7.90037,30.97153,0 -7.900969999999999,31.01216,0 -7.75123,31.01216,0 -7.74726,30.98873,0 -7.746740000000001,30.9867,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-540-Introduction">
+			<name>Transmission Link from Imi El Kheng to I_Traditionnel nn Réahbilité 2 Tranche</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Imi El Kheng to I_Traditionnel nn Réahbilité 2 Tranche</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.5571,30.72866000000001,0 -8.79477,30.7266,0 -8.81978,30.69186,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-395-Introduction">
+			<name>Transmission Link from Moulay Abdellah to Agadir</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Moulay Abdellah to Agadir</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.596970000000001,30.82216,0 -9.91954,30.82371,0 -9.922610000000001,30.38843,0 -9.59572,30.38739,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-393-Introduction">
+			<name>Transmission Link from Moulay Abdellah to I_PMH Tamri_Tamraght</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Moulay Abdellah to I_PMH Tamri_Tamraght</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.596970000000001,30.82216,0 -9.571389999999999,30.76442,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-533-Introduction">
+			<name>Transmission Link from Nappe Aluviale de Souss to AEP_Aoulouz</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Nappe Aluviale de Souss to AEP_Aoulouz</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-7.97735,30.69469,0 -7.97569,30.77148,0 -8.16503,30.77148,0 -8.163029999999999,30.71566,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-532-Introduction">
+			<name>Transmission Link from Nappe Aluviale de Souss to AEP_Taliouine</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Nappe Aluviale de Souss to AEP_Taliouine</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-7.97735,30.69469,0 -7.78417,30.55393,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-576-Introduction">
+			<name>Transmission Link from Prélevement 3 to I_PMH Montagne Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Prélevement 3 to I_PMH Montagne Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.613910000000001,30.12975,0 -9.512280000000001,30.12975,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-481-Introduction">
+			<name>Transmission Link from Souss Grounwater to AEP Taroudant</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to AEP Taroudant</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -8.902760000000001,30.46283,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-514-Introduction">
+			<name>Transmission Link from Souss Grounwater to AEP_ouled berhil</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to AEP_ouled berhil</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -8.577579999999999,30.55853,0 -8.53445,30.55566,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-484-Introduction">
+			<name>Transmission Link from Souss Grounwater to Agadir</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to Agadir</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -10.00643,30.91259000000001,0 -10.00873,30.28450000000001,0 -9.649609999999999,30.28524,0 -9.6157,30.30483,0 -9.59572,30.38739,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-476-Introduction">
+			<name>Transmission Link from Souss Grounwater to El Guerdane</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to El Guerdane</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -8.974119999999999,30.3981,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-472-Introduction">
+			<name>Transmission Link from Souss Grounwater to I_Modern Privé de Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to I_Modern Privé de Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -9.028890000000001,30.51428,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-470-Introduction">
+			<name>Transmission Link from Souss Grounwater to I_Modern Public Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to I_Modern Public Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -9.18981,30.50293,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-478-Introduction">
+			<name>Transmission Link from Souss Grounwater to I_Modern Public du Souss Amont</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to I_Modern Public du Souss Amont</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -8.75671,30.44955,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-512-Introduction">
+			<name>Transmission Link from Souss Grounwater to I_Traditionnel Rehabilite du Souss Am</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to I_Traditionnel Rehabilite du Souss Am</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -8.51576,30.91649,0 -8.510009999999999,30.60885,0 -8.50858,30.6031,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-474-Introduction">
+			<name>Transmission Link from Souss Grounwater to I_Traditionnel Réhabilité du Souss Pe</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to I_Traditionnel Réhabilité du Souss Pe</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -8.987399999999999,30.4844,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-483-Introduction">
+			<name>Transmission Link from Souss Grounwater to I_Traditionnel nn Réahbilité 2 Tranch</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss Grounwater to I_Traditionnel nn Réahbilité 2 Tranch</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.929309999999999,30.91259000000001,0 -8.81978,30.69186,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-321-Introduction">
+			<name>Transmission Link from Tiznit Groundwater to I_PMH de Tiznit</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Tiznit Groundwater to I_PMH de Tiznit</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.769780000000001,29.46813,0 -9.856299999999999,29.46629,0 -9.848929999999999,29.34479,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-364-Introduction">
+			<name>Transmission Link from Youssef Ben Tachefine to I_Modern Public Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Youssef Ben Tachefine to I_Modern Public Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.475429999999999,29.81078,0 -9.42136,29.80795000000001,0 -9.42136,30.09064,0 -9.448790000000001,30.08432,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-306-Introduction">
+			<name>Transmission Link from Youssef Ben Tachefine to I_Tassila</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Youssef Ben Tachefine to I_Tassila</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.475429999999999,29.81078,0 -9.46604,29.97251,0 -9.53415,29.96883,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-316-Introduction">
+			<name>Transmission Link from Youssef Ben Tachefine to Lakhssass</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Youssef Ben Tachefine to Lakhssass</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.475429999999999,29.81078,0 -9.46604,29.39818,0 -9.65381,29.40002,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-317-Introduction">
+			<name>Transmission Link from Youssef Ben Tachefine to Sidi Ifni</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Youssef Ben Tachefine to Sidi Ifni</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.475429999999999,29.81078,0 -10.08195,29.80233,0 -10.09376,29.44972,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-587-Introduction">
+			<name>Transmission Link from Youssef Ben Tachefine to Tafraout</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Youssef Ben Tachefine to Tafraout</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.475429999999999,29.81078,0 -10.40645,29.80601,0 -10.40645,29.53314,0 -9.93445,29.53314,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-313-Introduction">
+			<name>Transmission Link from Youssef Ben Tachefine to Tiznit</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Youssef Ben Tachefine to Tiznit</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.475429999999999,29.81078,0 -9.47157,29.63564,0 -9.71087,29.63196,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

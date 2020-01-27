@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Wastewater Treatment Plants.kml</name>
+	<Style id="Introduction">
+		<BalloonStyle>
+			<text><![CDATA[<style><--{}
+		table.data { border-color: #EEEEEE; }
+		table.inner td { padding: 0 4px; }
+		table.data td { padding: 0 4px; font-size: 8pt; }
+	--></style>
+	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
+    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
+    <tr><td align="center">
+	     <table border="0" width="630" cellspacing="0" cellpadding="2">
+		     <tr><td align="left">$[MainText]</td></tr>
+      </table>
+    </td></tr>
+	   <tr><td align="center">
+    </td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 20 January 2020</td></tr>
+ </table>]]></text>
+			<bgColor>ff80a5b3</bgColor>
+		</BalloonStyle>
+	</Style>
+	<Folder>
+		<name>Wastewater Treatment Plants</name>
+		<Icon>
+			<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+		</Icon>
+		<Placemark id="Object-565-Introduction">
+			<name>Waste Water Treatment Plant of Agadir</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Waste Water Treatment Plant of Agadir</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.58446,30.26983,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-384-Introduction">
+			<name>Waste Water Treatment Plant of Biougra</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Waste Water Treatment Plant of Biougra</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.334110000000001,30.13976,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-430-Introduction">
+			<name>Waste Water Treatment Plant of Ouled Teima</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Waste Water Treatment Plant of Ouled Teima</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.25989,30.52240000000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-312-Introduction">
+			<name>Waste Water Treatment Plant of Tiznit</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Waste Water Treatment Plant of Tiznit</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.963060000000001,29.6246,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

@@ -15,7 +15,7 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 # my_path = ''
 spatial_data = os.path.join(my_path, 'spatial_data')
 
-provinces = gpd.read_file(os.path.join(spatial_data,'Admin','Admin borders.gpkg'))
+provinces = gpd.read_file(os.path.join(spatial_data,'Admin','Provinces.gpkg'))
 demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.geojson'))
 supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.geojson'))
 pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.geojson'))
@@ -309,8 +309,8 @@ map_options = html.Div(
                                     ),
                 dcc.Dropdown(id='cho-map-filter',
                              options=[
-                                 {"label": "Governorate", "value": 'gov'},
-                                 {"label": "Water basin", "value": 'basin'},
+                                 {"label": "Province", "value": 'prov'},
+                                 {"label": "Irrigation district", "value": 'irr'},
                              ],
                              value='crop',
                              placeholder='Filter by...',
@@ -459,40 +459,66 @@ def get_lines(pols):
 
 
 def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data):
-    df_pipelines = pipelines.groupby('index').agg({'pipeline': 'first',
-                                                   'segment_length_m': 'first',
-                                                   'geometry': 'first'}).reset_index()
-    dff_pipeflow = pl_flow.groupby(['Year', 'pipeline']).agg({'water_use': lambda value: sum(value) / 1000000,
-                                                              'SWPA_E_': lambda value: sum(value) / 1000000,
-                                                              'pipeline_length': 'first'}).reset_index()
     data = [dict(
+        type="scattermapbox",
+        mode='lines',
+        line=dict(color='rgb(80,100,80)', width=1),
+        fill='toself',
+        fillcolor='rgba(80,100,80,0.1)',
+        layer="below",
+        lon=list(itertools.chain.from_iterable(list(itertools.chain.from_iterable([[list(l.coords.xy[0]) + [None] for l in line.boundary] for line in provinces.geometry])))),
+        lat=list(itertools.chain.from_iterable(list(itertools.chain.from_iterable([[list(l.coords.xy[1]) + [None] for l in line.boundary] for line in provinces.geometry])))),
+        hoverinfo='skip',
+        showlegend=False,
+    )]
+
+    data += [dict(
+        type='scattermapbox',
+        mode='text',
+        name='Province',
+        textfont=dict(color='rgba(80,80,80,0.8)'),
+        lon=[point.coords[0][0] for point in provinces.boundary.centroid],
+        lat=[point.coords[0][1] for point in provinces.boundary.centroid],
+        text=provinces.Province,
+        hoverinfo='skip',
+    )]
+
+    df_pipelines = pipelines
+
+    # df_pipelines = pipelines.groupby('index').agg({'pipeline': 'first',
+    #                                                'segment_length_m': 'first',
+    #                                                'geometry': 'first'}).reset_index()
+    # dff_pipeflow = pl_flow.groupby(['Year', 'pipeline']).agg({'water_use': lambda value: sum(value) / 1000000,
+    #                                                           'SWPA_E_': lambda value: sum(value) / 1000000,
+    #                                                           'pipeline_length': 'first'}).reset_index()
+    data += [dict(
         type="scattermapbox",
         mode='lines+markers',
         marker=dict(opacity=0),
         lon=list(itertools.chain.from_iterable([list(line.coords.xy[0]) + [None] for line in df_pipelines.geometry])),
         lat=list(itertools.chain.from_iterable([list(line.coords.xy[1]) + [None] for line in df_pipelines.geometry])),
         text=list(itertools.chain.from_iterable([len(list(line.coords.xy[0])) * [pipe] + [None] for line, pipe in
-                                                 zip(df_pipelines.geometry, df_pipelines.pipeline)])),
+                                                 zip(df_pipelines.geometry, df_pipelines.diversion)])),
         hoverinfo='name+text',
         name='Pipeline',
         showlegend=True,
-        customdata=list(itertools.chain.from_iterable([[{
-            'water': [dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].water_use,
-                      dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].Year],
-            'energy': [dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].SWPA_E_,
-                       dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].Year],
-            'type': "pipeline"} for i in range(len(list(line.coords.xy[0])))] + [{}] for line, pipe in
-                                                       zip(df_pipelines.geometry, df_pipelines.pipeline)])),
+        # customdata=list(itertools.chain.from_iterable([[{
+        #     'water': [dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].water_use,
+        #               dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].Year],
+        #     'energy': [dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].SWPA_E_,
+        #                dff_pipeflow.loc[dff_pipeflow.pipeline == pipe].Year],
+        #     'type': "pipeline"} for i in range(len(list(line.coords.xy[0])))] + [{}] for line, pipe in
+        #                                                zip(df_pipelines.geometry, df_pipelines.pipeline)])),
     )]
 
     df_demand = demand_points.groupby('point').agg({'type': 'first',
-                                                    'elevation_m': 'first',
+                                                    # 'elevation_m': 'first',
                                                     'geometry': 'first'}).reset_index()
-    dff_delivered = water_delivered.groupby(['Year', 'type', 'point'])['value'].sum() / 1000000
-    dff_delivered = dff_delivered.reset_index()
-    dff_required = water_required.groupby(['Year', 'type', 'point'])['value'].sum() / 1000000
-    dff_required = dff_required.reset_index()
-    names = ['Water delivered (Mm3)', 'Water required (Mm3)']
+    # dff_delivered = water_delivered.groupby(['Year', 'type', 'point'])['value'].sum() / 1000000
+    # dff_delivered = dff_delivered.reset_index()
+    # dff_required = water_required.groupby(['Year', 'type', 'point'])['value'].sum() / 1000000
+    # dff_required = dff_required.reset_index()
+    # names = ['Water delivered (Mm3)', 'Water required (Mm3)']
 
     data += [dict(
         type="scattermapbox",
@@ -503,28 +529,28 @@ def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_da
         hoverinfo='name+text',
         name=type,
         showlegend=True,
-        customdata=[{names[0]: [dff_delivered.loc[(dff_delivered.point == point)].value,
-                                dff_delivered.loc[(dff_delivered.point == point)].Year],
-                     names[1]: [dff_required.loc[(dff_required.point == point)].value,
-                                dff_required.loc[(dff_required.point == point)].Year],
-                     'type': 'demand',
-                     } for point in df_demand.loc[df_demand.type == type].point],
+        # customdata=[{names[0]: [dff_delivered.loc[(dff_delivered.point == point)].value,
+        #                         dff_delivered.loc[(dff_delivered.point == point)].Year],
+        #              names[1]: [dff_required.loc[(dff_required.point == point)].value,
+        #                         dff_required.loc[(dff_required.point == point)].Year],
+        #              'type': 'demand',
+        #              } for point in df_demand.loc[df_demand.type == type].point],
     ) for type in sorted(df_demand['type'].unique())]
 
     df_supply = supply_points.groupby('point').agg({'type': 'first',
-                                                    'wtd_m': 'first',
-                                                    'elevation_m': 'first',
+                                                    # 'wtd_m': 'first',
+                                                    # 'elevation_m': 'first',
                                                     'geometry': 'first'}).reset_index()
-    dff_gw = gw_pumped.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
-    dff_wwtp = wwtp_data.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
-    dff_desal = desal_data.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
-    dff_surface = pl_flow.groupby(['Year', 'type', 'point'])[['water_use']].sum() / 1000000
-    dff_surface.rename(columns={'water_use': 'value'}, inplace=True)
-    dff_surface = dff_surface.reset_index()
-    dff_gw = dff_gw.reset_index()
-    dff_wwtp = dff_wwtp.reset_index()
-    dff_desal = dff_desal.reset_index()
-    dff = dff_gw.append([dff_wwtp, dff_surface, dff_desal], sort=False, ignore_index=True)
+    # dff_gw = gw_pumped.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
+    # dff_wwtp = wwtp_data.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
+    # dff_desal = desal_data.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
+    # dff_surface = pl_flow.groupby(['Year', 'type', 'point'])[['water_use']].sum() / 1000000
+    # dff_surface.rename(columns={'water_use': 'value'}, inplace=True)
+    # dff_surface = dff_surface.reset_index()
+    # dff_gw = dff_gw.reset_index()
+    # dff_wwtp = dff_wwtp.reset_index()
+    # dff_desal = dff_desal.reset_index()
+    # dff = dff_gw.append([dff_wwtp, dff_surface, dff_desal], sort=False, ignore_index=True)
     data += [dict(
         type="scattermapbox",
         lon=[point.x for point in df_supply.loc[df_supply['type'] == type].geometry],
@@ -534,26 +560,13 @@ def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_da
         hoverinfo='name+text',
         name=type,
         showlegend=True,
-        customdata=[{'water': [dff.loc[(dff.point == point)].value,
-                               dff.loc[(dff.point == point)].Year],
-                     'energy': [dff.loc[(dff.point == point)].SWPA_E_,
-                                dff.loc[(dff.point == point)].Year],
-                     'type': type,
-                     } for point in df_supply.loc[df_supply.type == type].point],
+        # customdata=[{'water': [dff.loc[(dff.point == point)].value,
+        #                        dff.loc[(dff.point == point)].Year],
+        #              'energy': [dff.loc[(dff.point == point)].SWPA_E_,
+        #                         dff.loc[(dff.point == point)].Year],
+        #              'type': type,
+        #              } for point in df_supply.loc[df_supply.type == type].point],
     ) for type in sorted(df_supply['type'].unique())]
-
-
-    ########## new code #################
-
-    data += [dict(
-        type="scattermapbox",
-        mode='lines',
-        lon=list(itertools.chain.from_iterable(list(itertools.chain.from_iterable([[list(l.coords.xy[0]) + [None] for l in line.boundary] for line in provinces.geometry])))),
-        lat=list(itertools.chain.from_iterable(list(itertools.chain.from_iterable([[list(l.coords.xy[1]) + [None] for l in line.boundary] for line in provinces.geometry])))),
-        hoverinfo='skip',
-        showlegend=False,
-    )]
-    ######################################
 
     return data
 
@@ -563,7 +576,7 @@ def plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, des
 
     data = scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
 
-    layout_map["mapbox"] = {"center": {"lon": 36.5, 'lat': 31.2}, 'zoom': 6,
+    layout_map["mapbox"] = {"center": {"lon": -8.9, 'lat': 30.2}, 'zoom': 7,
                             'style': "light", 'accesstoken': token}
     layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
     layout_map['clickmode'] = 'event+select'
