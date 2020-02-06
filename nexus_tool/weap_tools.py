@@ -1,10 +1,13 @@
 #Standard library imports
 import os
+import glob
 import geopandas as gpd
+import numpy as np
 import fiona
 import shapely
 import rasterio
 import rasterio.mask
+from rasterio.merge import merge
 from rasterio.warp import calculate_default_transform, reproject, Resampling
 from rasterio.fill import fillnodata
 fiona.drvsupport.supported_drivers['kml'] = 'rw' # enable KML support
@@ -58,4 +61,32 @@ def reproject_raster(raster_path, dst_crs, outpul_file):
                     dst_transform=transform,
                     dst_crs=dst_crs,
                     resampling=Resampling.nearest)
+                    
+def sample_raster(path, gdf):
+    with rasterio.open(path) as src:
+        return [float(val) for val in src.sample([(x.coords.xy[0][0], 
+                                                   x.coords.xy[1][0]) for x in 
+                                                   gdf['geometry']])]
+                                                   
+def merge_rasters(files_path, dst_crs, outpul_file):
+    files = glob.glob(files_path)
+    src_files_to_mosaic = []
+    
+    for fp in files:
+        src = rasterio.open(fp)
+        src_files_to_mosaic.append(src)
+    
+    mosaic, out_trans = merge(src_files_to_mosaic)
+
+    out_meta = src.meta.copy()
+    out_meta.update({"driver": "GTiff",
+                 "height": mosaic.shape[1],
+                 "width": mosaic.shape[2],
+                 "transform": out_trans,
+                 "crs": dst_crs
+                 }
+                )
+    
+    with rasterio.open(outpul_file, "w", **out_meta) as dest:
+        dest.write(mosaic)
     
