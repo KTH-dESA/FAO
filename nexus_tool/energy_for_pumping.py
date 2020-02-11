@@ -61,9 +61,10 @@ def get_sw_tdh(df, tdh_sw, elevation, f, L, avg_Q, D, g, pump_hours, axis=1):
         for i in range (1,13):
             _avg_Q = '{}{}'.format(avg_Q, i)
             _f = '{}{}'.format(f, i)
+            _tdh_sw = '{}{}'.format(_tdh_sw, i)
         
-            df[tdh_sw] = (df[elevation] + ((df[_f]*L*16*((df[_avg_Q])**2))/((D**5)*2*g*(pi**2))))  #the elevation should be delta elevation between the two points
-            df[tdh_sw].replace(0, np.nan, inplace=True) #this line is unecesary and check the above one as it is being overwriten every time
+            df[_tdh_sw] = (df[elevation] + ((df[_f]*L*16*((df[_avg_Q]/(30*pump_hours*60*60))**2))/((D**5)*2*g*(pi**2))))
+            df[_tdh_sw].replace(0, np.nan, inplace=True) #this line is unecesary and check the above one as it is being overwriten every time
     else:
         df[tdh_sw] = (df[elevation] + ((df[f]*L*16*((df[avg_Q]/(30*pump_hours*60*60))**2))/((D**5)*2*g*(pi**2))))
 
@@ -74,13 +75,13 @@ def get_GWpumping_energy(df, trans_eff, pump_eff, pd_e, pwd, sswd, ed_e, tdh_gw,
     GWpump_plant_eff = trans_eff * pump_eff
     
     for i in range (1,13):
-        _pd_e = '{}{}'.format(pd_e, i)
-        _pwd = '{}{}'.format(pwd, i)
-        _sswd = '{}{}'.format(sswd, i)
-        _ed_e = '{}{}'.format(ed_e, i)
+        _pd_e = '{}{}'.format(pd_e, i) #in kW
+        _pwd = '{}{}'.format(pwd, i) #in l/s
+        _sswd = '{}{}'.format(sswd, i) #in m3
+        _ed_e = '{}{}'.format(ed_e, i) #in kWh
         
-        df[_pd_e]=(9.81*(df[_pwd]/1000)*df[tdh_gw])/GWpump_plant_eff
-        df[_ed_e]=(df[_sswd]*df[tdh_gw]*0.00272)/GWpump_plant_eff
+        df[_pd_e]=(9.81*(df[_pwd]/1000)*df[tdh_gw])/GWpump_plant_eff 
+        df[_ed_e]=(df[_sswd]*df[tdh_gw]*0.00272)/GWpump_plant_eff 
         
         if desalination:
             df[_pd_e] += (df[_pwd]*df[des_int]*3600/1000)

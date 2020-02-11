@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 20 January 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 10 February 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -29,8 +29,8 @@
 		<Icon>
 			<href>http://www.weap21.org/img/Other-Supply.png</href>
 		</Icon>
-		<Placemark id="Object-575-Introduction">
-			<name>Prélevement 3</name>
+		<Placemark id="Object-760-Introduction">
+			<name>Desalination</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -49,13 +49,13 @@
 					<value>Other Supply</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Prélevement 3</value>
+					<value>Desalination</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.613910000000001,30.12975,0</coordinates>
+				<coordinates>-9.765980000000001,30.29627,0</coordinates>
 			</Point>
 		</Placemark>
 	</Folder>

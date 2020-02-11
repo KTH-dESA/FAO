@@ -301,7 +301,7 @@ def get_water_demand(df, crop_calendar, ky_dict, crop_column, aeff, deff,
             ky=ky_dict[crop] #Yield response factor coeff = 0.8 for date palms, source TABLE 53-FAO: http://www.fao.org/3/y4360e/y4360e0b.htm 
             df[acwr] = (df[eto]*30*df[kc+'_'+crop]*ky - df[eff]*30 - (0.12*df[eff])*30) #Assumption: awc=12% effective rainfall
             df.loc[df[acwr]<0,acwr] = 0
-            df[pcwr] += ((df[acwr]*10)/30)*2*0.012
+            df[pcwr] += ((df[acwr]*10)/30)*2*0.012 #make the factor of 2 an input for the model so we can choose between agri and residencial demand
             
             df[f'harvest_{i}_'+crop] = df[crop_area] * \
                     np.array([x[crop] for x in df[crop_share]]) * \

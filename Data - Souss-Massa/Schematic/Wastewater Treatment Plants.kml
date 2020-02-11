@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 20 January 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 10 February 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -142,7 +142,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.963060000000001,29.6246,0</coordinates>
+				<coordinates>-9.765050000000001,29.72875,0</coordinates>
 			</Point>
 		</Placemark>
 	</Folder>
