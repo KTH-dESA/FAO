@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 20 January 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 10 February 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -55,7 +55,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.16446,30.6357,0</coordinates>
+				<coordinates>-8.076029999999999,30.60326,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-619-Introduction">
@@ -142,7 +142,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.32663,30.46188,0</coordinates>
+				<coordinates>-9.342499999999999,30.61711,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-370-Introduction">
@@ -200,7 +200,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.58451,30.3331,0</coordinates>
+				<coordinates>-9.535629999999999,30.31635,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-493-Introduction">
@@ -229,7 +229,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.57255,30.59818,0</coordinates>
+				<coordinates>-8.597860000000001,30.64637,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-406-Introduction">
@@ -461,7 +461,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.63945,29.73226,0</coordinates>
+				<coordinates>-9.408580000000001,29.98976,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-75-Introduction">
@@ -519,7 +519,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-7.715579999999999,30.83717,0</coordinates>
+				<coordinates>-7.732330000000001,30.70354,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-176-Introduction">
@@ -548,7 +548,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.475720000000001,29.99731,0</coordinates>
+				<coordinates>-8.51909,30.0744,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-138-Introduction">
@@ -606,7 +606,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.33121,30.35728,0</coordinates>
+				<coordinates>-8.227259999999999,30.42453,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-51-Introduction">
@@ -867,7 +867,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.128959999999999,29.55845,0</coordinates>
+				<coordinates>-8.995089999999999,29.67337,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-412-Introduction">
@@ -1070,7 +1070,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.19657,30.36665,0</coordinates>
+				<coordinates>-9.186870000000001,30.54272,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-381-Introduction">
@@ -1099,7 +1099,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.486420000000001,30.16739000000001,0</coordinates>
+				<coordinates>-9.513640000000001,30.23167000000001,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-471-Introduction">
@@ -1157,7 +1157,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.18981,30.50293,0</coordinates>
+				<coordinates>-9.21454,30.38804,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-363-Introduction">
@@ -1186,7 +1186,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.448790000000001,30.08432,0</coordinates>
+				<coordinates>-9.51151,30.06546,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-477-Introduction">
@@ -1244,7 +1244,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.50708,30.30994,0</coordinates>
+				<coordinates>-9.42971,30.29396,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-302-Introduction">
@@ -1273,7 +1273,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.57185,30.04115,0</coordinates>
+				<coordinates>-9.5787,30.0987,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-324-Introduction">
@@ -1334,35 +1334,6 @@
 				<coordinates>-8.328770000000001,30.23916,0</coordinates>
 			</Point>
 		</Placemark>
-		<Placemark id="Object-574-Introduction">
-			<name>I_PMH Montagne Massa</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Catchment.png</href>
-					</Icon>
-				</IconStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Catchment-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Catchment</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>I_PMH Montagne Massa</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<Point>
-				<coordinates>-9.512280000000001,30.12975,0</coordinates>
-			</Point>
-		</Placemark>
 		<Placemark id="Object-516-Introduction">
 			<name>I_PMH Taliouine Tifnoute</name>
 			<Snippet maxLines="0"></Snippet>
@@ -1389,7 +1360,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-7.72991,30.7501,0</coordinates>
+				<coordinates>-7.83665,30.85396,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-392-Introduction">
@@ -1418,7 +1389,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.571389999999999,30.76442,0</coordinates>
+				<coordinates>-9.528560000000001,30.75083,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-519-Introduction">
@@ -1447,7 +1418,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-7.746740000000001,30.9867,0</coordinates>
+				<coordinates>-7.75479,30.91938,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-320-Introduction">
@@ -1505,7 +1476,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.53415,29.96883,0</coordinates>
+				<coordinates>-9.61619,29.98837,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-511-Introduction">
@@ -1534,7 +1505,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.50858,30.6031,0</coordinates>
+				<coordinates>-8.501760000000001,30.61331,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-424-Introduction">
@@ -1563,7 +1534,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.22372,30.53157,0</coordinates>
+				<coordinates>-9.29753,30.44463,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-534-Introduction">

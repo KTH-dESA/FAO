@@ -16,26 +16,42 @@ def wind_cf(df, wind, mu, t, p_rated, z, zr, es, u_arr, p_curve):
     
     return energy_produced/(p_rated * t)
     
-def get_wind_cf(df, wind, mu, t, p_rated, z, zr, es, u_arr, p_curve):
+def get_wind_cf(df, wind, mu, t, p_rated, z, zr, es, u_arr, p_curve, axis=1):
     cf_df = pd.DataFrame()
-    for i in range (1,13):
-        _wind = f'{wind}{i}'
-        cf_df['cf_{}'.format(i)] = wind_cf(df, _wind, mu, t, p_rated, z, 
-                                             zr, es, u_arr, p_curve)
+    if axis:
+        for i in range (1,13):
+            _wind = f'{wind}{i}'
+            cf_df['cf_{}'.format(i)] = wind_cf(df, _wind, mu, t, p_rated, z, 
+                                                 zr, es, u_arr, p_curve)
+    else:
+        cf_df['Year'] = df.Year
+        cf_df['Month'] = df.Month
+        cf_df['cf'] = wind_cf(df, wind, mu, t, p_rated, z, 
+                                                 zr, es, u_arr, p_curve)
     return cf_df
     
-def get_pv_cf(df, srad):
+def get_pv_cf(df, srad, axis=1):
     cf_df = pd.DataFrame()
-    for i in range (1,13):
-        cf_df['cf_{}'.format(i)] = df[f'{srad}{i}'] / (60*60*24) # solar rad: (kJ/(m2.day))*30.day/month*1h/(60*60s) = kWh/(m2.month)*30/(60*60)
-                                                                        # pv_cf: energy produced / (p_rated * t)
+    if axis:
+        for i in range (1,13):
+            cf_df['cf_{}'.format(i)] = df[f'{srad}{i}'] / (60*60*24) # solar rad: (kJ/(m2.day))*30.day/month*1h/(60*60s) = kWh/(m2.month)*30/(60*60)
+                                                                            # pv_cf: energy produced / (p_rated * t)
+    else:
+        cf_df['Year'] = df.Year
+        cf_df['Month'] = df.Month
+        cf_df['cf'] = df[srad] / (60*60*24)
     return cf_df
     
-def get_installed_capacity(df, cf, pd_e):
+def get_installed_capacity(df, cf, pd_e, axis=1):
     ic_df = pd.DataFrame()
-    for i in range(1,13):
-        _cf = cf if type(cf) == float else cf[f'cf_{i}']
-        ic_df[f'ic_{i}'] = df[f'{pd_e}{i}'] / _cf
+    if axis:
+        for i in range(1,13):
+            _cf = cf if type(cf) == float else cf[f'cf_{i}']
+            ic_df[f'ic_{i}'] = df[f'{pd_e}{i}'] / _cf
+    else:
+        ic_df['Year'] = df.Year
+        ic_df['Month'] = df.Month
+        ic_df['ic'] = df[pd_e] / cf
     return ic_df
     
 def get_max_capacity(df):

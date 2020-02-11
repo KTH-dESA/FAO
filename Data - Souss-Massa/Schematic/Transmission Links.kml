@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 20 January 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 10 February 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -30,7 +30,7 @@
 			<href>http://www.weap21.org/img/Transmission-Link.png</href>
 		</Icon>
 		<Placemark id="Object-335-Introduction">
-			<name>Transmission Link from AAM to AEPR</name>
+			<name>Transmission Link from AAM GW to AEPR</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -53,7 +53,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from AAM to AEPR</value>
+					<value>Transmission Link from AAM GW to AEPR</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -61,7 +61,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.20064,29.51839,0 -9.348140000000001,29.52576,0 -9.33708,29.70645,0 
+					-9.25258,29.60961,0 -9.33708,29.70645,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -138,7 +138,7 @@
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-563-Introduction">
-			<name>Transmission Link from Anti Atlas Groundwater to AEP Rural</name>
+			<name>Transmission Link from Anti Atlas GW to AEP Rural</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -161,7 +161,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Anti Atlas Groundwater to AEP Rural</value>
+					<value>Transmission Link from Anti Atlas GW to AEP Rural</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -169,12 +169,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.81551,30.19516,0 -8.9657,30.19602,0 -8.963699999999999,30.09209,0 
+					-8.712999999999999,30.19612,0 -8.9657,30.19602,0 -8.963699999999999,30.09209,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-562-Introduction">
-			<name>Transmission Link from Anti Atlas Groundwater to AEP_Ighrem</name>
+			<name>Transmission Link from Anti Atlas GW to AEP_Ighrem</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -197,7 +197,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Anti Atlas Groundwater to AEP_Ighrem</value>
+					<value>Transmission Link from Anti Atlas GW to AEP_Ighrem</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -205,12 +205,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.81551,30.19516,0 -8.454050000000001,30.19602,0 -8.45626,30.23337,0 
+					-8.712999999999999,30.19612,0 -8.454050000000001,30.19602,0 -8.45837,30.25891,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-387-Introduction">
-			<name>Transmission Link from Chtouka Groundwater to Biougra</name>
+			<name>Transmission Link from Chtouka GW to Biougra</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -233,7 +233,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Chtouka Groundwater to Biougra</value>
+					<value>Transmission Link from Chtouka GW to Biougra</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -241,12 +241,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.363160000000001,30.04192,0 -9.253080000000001,30.04345,0 -9.246969999999999,30.14053,0 
+					-9.35136,30.22505,0 -9.24272,30.21131,0 -9.246969999999999,30.14053,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-382-Introduction">
-			<name>Transmission Link from Chtouka Groundwater to I_Modern Privé Massa</name>
+			<name>Transmission Link from Chtouka GW to I_Modern Privé Massa</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -269,7 +269,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Chtouka Groundwater to I_Modern Privé Massa</value>
+					<value>Transmission Link from Chtouka GW to I_Modern Privé Massa</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -277,12 +277,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.363160000000001,30.04192,0 -9.318820000000001,30.04268,0 -9.316050000000001,30.25283,0 -9.486420000000001,30.16739000000001,0 
+					-9.35136,30.22505,0 -9.513640000000001,30.23167000000001,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-380-Introduction">
-			<name>Transmission Link from Chtouka Groundwater to I_Moderne Privé Chtouka</name>
+			<name>Transmission Link from Chtouka GW to I_Moderne Privé Chtouka</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -305,7 +305,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Chtouka Groundwater to I_Moderne Privé Chtouka</value>
+					<value>Transmission Link from Chtouka GW to I_Moderne Privé Chtouka</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -313,12 +313,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.363160000000001,30.04192,0 -9.36134,30.31388,0 -9.50708,30.30994,0 
+					-9.35136,30.22505,0 -9.361000000000001,30.29654,0 -9.42971,30.29396,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-307-Introduction">
-			<name>Transmission Link from Chtouka Groundwater to I_Oughzifen</name>
+			<name>Transmission Link from Chtouka GW to I_Oughzifen</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -341,7 +341,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Chtouka Groundwater to I_Oughzifen</value>
+					<value>Transmission Link from Chtouka GW to I_Oughzifen</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -349,7 +349,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.363160000000001,30.04192,0 -9.57185,30.04115,0 
+					-9.35136,30.22505,0 -9.5787,30.0987,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -421,7 +421,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.29576,30.56446,0 -9.38744,30.55766,0 -9.385920000000001,30.34938,0 -9.250220000000001,30.35014,0 -9.259740000000001,30.38587,0 -9.19657,30.36665,0 
+					-9.29576,30.56446,0 -9.186870000000001,30.54272,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -457,7 +457,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.29576,30.56446,0 -9.104670000000001,30.56526,0 -9.104670000000001,30.51357,0 -9.18981,30.50293,0 
+					-9.29576,30.56446,0 -9.21454,30.38804,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -493,79 +493,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.29576,30.56446,0 -9.287039999999999,30.64205000000001,0 -9.219300000000001,30.64205000000001,0 -9.22372,30.53157,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-591-Introduction">
-			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to AEP_SEl Guerdane</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Transmission-Link.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff66cc00</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Transmission-Link-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Transmission Link</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to AEP_SEl Guerdane</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-8.124890000000001,30.69973,0 -8.131270000000001,30.37757,0 -8.946210000000001,30.35913,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-590-Introduction">
-			<name>Transmission Link from Complexe Aoulouz Mokhtar Soussi to El Guerdane</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Transmission-Link.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff66cc00</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Transmission-Link-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Transmission Link</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Transmission Link from Complexe Aoulouz Mokhtar Soussi to El Guerdane</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-8.124890000000001,30.69973,0 -8.131270000000001,30.30751,0 -8.131270000000001,30.28907,0 -8.972020000000001,30.29276,0 -8.974119999999999,30.3981,0 
+					-9.29576,30.56446,0 -9.29753,30.44463,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -637,7 +565,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.124890000000001,30.69973,0 -8.1241,30.63779,0 -7.731760000000001,30.63929,0 -7.72991,30.7501,0 
+					-8.124890000000001,30.69973,0 -8.1241,30.63779,0 -7.86658,30.64208,0 -7.83665,30.85396,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -709,12 +637,84 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.124890000000001,30.69973,0 -8.21833,31.01411,0 
+					-8.124890000000001,30.69973,0 -8.3698,30.51796,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-761-Introduction">
+			<name>Transmission Link from Desalination to Agadir</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Desalination to Agadir</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.765980000000001,30.29627,0 -9.59572,30.38739,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-762-Introduction">
+			<name>Transmission Link from Desalination to I_Moderne Privé Chtouka</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Desalination to I_Moderne Privé Chtouka</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.765980000000001,30.29627,0 -9.42971,30.29396,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-549-Introduction">
-			<name>Transmission Link from Groundwater of Haut Montagne Souss to AEPR 2</name>
+			<name>Transmission Link from Haut Montagne Souss GW to AEPR 2</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -737,7 +737,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Groundwater of Haut Montagne Souss to AEPR 2</value>
+					<value>Transmission Link from Haut Montagne Souss GW to AEPR 2</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -745,48 +745,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-7.90037,30.97153,0 -7.991580000000001,30.86536,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-569-Introduction">
-			<name>Transmission Link from Groundwater of Haut Montagne Souss to C_Sdass</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Transmission-Link.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff66cc00</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Transmission-Link-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Transmission Link</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Transmission Link from Groundwater of Haut Montagne Souss to C_Sdass</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-7.90037,30.97153,0 -7.49913,30.96472,0 -7.49607,30.01262,0 -8.475720000000001,29.99731,0 
+					-7.83061,30.53151,0 -7.991580000000001,30.86536,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-579-Introduction">
-			<name>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Anti Atlas Ig</name>
+			<name>Transmission Link from Haut Montagne Souss GW to I_PMH Anti Atlas Ighrem</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -809,7 +773,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Anti Atlas Ig</value>
+					<value>Transmission Link from Haut Montagne Souss GW to I_PMH Anti Atlas Ighrem</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -817,12 +781,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-7.90037,30.97153,0 -8.009589999999999,31.01182,0 -8.02065,31.21094,0 -7.452780000000001,31.20725,0 -7.46015,30.24114,0 -8.328770000000001,30.23916,0 
+					-7.83061,30.53151,0 -8.328770000000001,30.23916,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-518-Introduction">
-			<name>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Taliouine Tif</name>
+			<name>Transmission Link from Haut Montagne Souss GW to I_PMH Taliouine Tifnoute</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -845,7 +809,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH Taliouine Tif</value>
+					<value>Transmission Link from Haut Montagne Souss GW to I_PMH Taliouine Tifnoute</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -853,12 +817,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-7.90037,30.97153,0 -7.72991,30.7501,0 
+					-7.83061,30.53151,0 -7.83665,30.85396,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-520-Introduction">
-			<name>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH de Montagne S</name>
+			<name>Transmission Link from Haut Montagne Souss GW to I_PMH de Montagne Souss</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -881,7 +845,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Groundwater of Haut Montagne Souss to I_PMH de Montagne S</value>
+					<value>Transmission Link from Haut Montagne Souss GW to I_PMH de Montagne Souss</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -889,7 +853,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-7.90037,30.97153,0 -7.900969999999999,31.01216,0 -7.75123,31.01216,0 -7.74726,30.98873,0 -7.746740000000001,30.9867,0 
+					-7.83061,30.53151,0 -7.75479,30.91938,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -961,7 +925,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.596970000000001,30.82216,0 -9.91954,30.82371,0 -9.922610000000001,30.38843,0 -9.59572,30.38739,0 
+					-9.596970000000001,30.82216,0 -9.59572,30.38739,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -997,12 +961,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.596970000000001,30.82216,0 -9.571389999999999,30.76442,0 
+					-9.596970000000001,30.82216,0 -9.528560000000001,30.75083,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-533-Introduction">
-			<name>Transmission Link from Nappe Aluviale de Souss to AEP_Aoulouz</name>
+			<name>Transmission Link from Nappe Aluviale de Souss GW to AEP_Aoulouz</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1025,7 +989,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Nappe Aluviale de Souss to AEP_Aoulouz</value>
+					<value>Transmission Link from Nappe Aluviale de Souss GW to AEP_Aoulouz</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1033,12 +997,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-7.97735,30.69469,0 -7.97569,30.77148,0 -8.16503,30.77148,0 -8.163029999999999,30.71566,0 
+					-7.97735,30.69469,0 -7.97569,30.77148,0 -8.142200000000001,30.77449,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-532-Introduction">
-			<name>Transmission Link from Nappe Aluviale de Souss to AEP_Taliouine</name>
+			<name>Transmission Link from Nappe Aluviale de Souss GW to AEP_Taliouine</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1061,7 +1025,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Nappe Aluviale de Souss to AEP_Taliouine</value>
+					<value>Transmission Link from Nappe Aluviale de Souss GW to AEP_Taliouine</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1069,48 +1033,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-7.97735,30.69469,0 -7.78417,30.55393,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-576-Introduction">
-			<name>Transmission Link from Prélevement 3 to I_PMH Montagne Massa</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Transmission-Link.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff66cc00</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Transmission-Link-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Transmission Link</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Transmission Link from Prélevement 3 to I_PMH Montagne Massa</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-9.613910000000001,30.12975,0 -9.512280000000001,30.12975,0 
+					-7.97735,30.69469,0 -7.936579999999999,30.59884,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-481-Introduction">
-			<name>Transmission Link from Souss Grounwater to AEP Taroudant</name>
+			<name>Transmission Link from Souss GW to AEP Taroudant</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1133,7 +1061,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to AEP Taroudant</value>
+					<value>Transmission Link from Souss GW to AEP Taroudant</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1141,12 +1069,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -8.902760000000001,30.46283,0 
+					-9.08357,30.26714,0 -8.902760000000001,30.46283,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-514-Introduction">
-			<name>Transmission Link from Souss Grounwater to AEP_ouled berhil</name>
+			<name>Transmission Link from Souss GW to AEP_ouled berhil</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1169,7 +1097,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to AEP_ouled berhil</value>
+					<value>Transmission Link from Souss GW to AEP_ouled berhil</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1177,12 +1105,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -8.577579999999999,30.55853,0 -8.53445,30.55566,0 
+					-9.08357,30.26714,0 -8.577579999999999,30.55853,0 -8.53445,30.55566,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-484-Introduction">
-			<name>Transmission Link from Souss Grounwater to Agadir</name>
+			<name>Transmission Link from Souss GW to Agadir</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1205,7 +1133,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to Agadir</value>
+					<value>Transmission Link from Souss GW to Agadir</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1213,12 +1141,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -10.00643,30.91259000000001,0 -10.00873,30.28450000000001,0 -9.649609999999999,30.28524,0 -9.6157,30.30483,0 -9.59572,30.38739,0 
+					-9.08357,30.26714,0 -9.59572,30.38739,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-476-Introduction">
-			<name>Transmission Link from Souss Grounwater to El Guerdane</name>
+			<name>Transmission Link from Souss GW to El Guerdane</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1241,7 +1169,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to El Guerdane</value>
+					<value>Transmission Link from Souss GW to El Guerdane</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1249,12 +1177,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -8.974119999999999,30.3981,0 
+					-9.08357,30.26714,0 -8.974119999999999,30.3981,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-472-Introduction">
-			<name>Transmission Link from Souss Grounwater to I_Modern Privé de Souss</name>
+			<name>Transmission Link from Souss GW to I_Modern Privé de Souss</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1277,7 +1205,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to I_Modern Privé de Souss</value>
+					<value>Transmission Link from Souss GW to I_Modern Privé de Souss</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1285,12 +1213,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -9.028890000000001,30.51428,0 
+					-9.08357,30.26714,0 -9.028890000000001,30.51428,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-470-Introduction">
-			<name>Transmission Link from Souss Grounwater to I_Modern Public Issen</name>
+			<name>Transmission Link from Souss GW to I_Modern Public Issen</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1313,7 +1241,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to I_Modern Public Issen</value>
+					<value>Transmission Link from Souss GW to I_Modern Public Issen</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1321,12 +1249,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -9.18981,30.50293,0 
+					-9.08357,30.26714,0 -9.21454,30.38804,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-478-Introduction">
-			<name>Transmission Link from Souss Grounwater to I_Modern Public du Souss Amont</name>
+			<name>Transmission Link from Souss GW to I_Modern Public du Souss Amont</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1349,7 +1277,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to I_Modern Public du Souss Amont</value>
+					<value>Transmission Link from Souss GW to I_Modern Public du Souss Amont</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1357,12 +1285,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -8.75671,30.44955,0 
+					-9.08357,30.26714,0 -8.75671,30.44955,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-512-Introduction">
-			<name>Transmission Link from Souss Grounwater to I_Traditionnel Rehabilite du Souss Am</name>
+			<name>Transmission Link from Souss GW to I_Traditionnel Rehabilite du Souss Amont</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1385,7 +1313,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to I_Traditionnel Rehabilite du Souss Am</value>
+					<value>Transmission Link from Souss GW to I_Traditionnel Rehabilite du Souss Amont</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1393,12 +1321,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -8.51576,30.91649,0 -8.510009999999999,30.60885,0 -8.50858,30.6031,0 
+					-9.08357,30.26714,0 -8.548920000000001,30.49982,0 -8.510009999999999,30.60885,0 -8.501760000000001,30.61331,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-474-Introduction">
-			<name>Transmission Link from Souss Grounwater to I_Traditionnel Réhabilité du Souss Pe</name>
+			<name>Transmission Link from Souss GW to I_Traditionnel Réhabilité du Souss Perimetres</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1421,7 +1349,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to I_Traditionnel Réhabilité du Souss Pe</value>
+					<value>Transmission Link from Souss GW to I_Traditionnel Réhabilité du Souss Perimetres</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1429,12 +1357,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -8.987399999999999,30.4844,0 
+					-9.08357,30.26714,0 -8.987399999999999,30.4844,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-483-Introduction">
-			<name>Transmission Link from Souss Grounwater to I_Traditionnel nn Réahbilité 2 Tranch</name>
+			<name>Transmission Link from Souss GW to I_Traditionnel nn Réahbilité 2 Tranche</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1457,7 +1385,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss Grounwater to I_Traditionnel nn Réahbilité 2 Tranch</value>
+					<value>Transmission Link from Souss GW to I_Traditionnel nn Réahbilité 2 Tranche</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1465,12 +1393,48 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.929309999999999,30.91259000000001,0 -8.81978,30.69186,0 
+					-9.08357,30.26714,0 -8.85995,30.62951,0 -8.81978,30.69186,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-782-Introduction">
+			<name>Transmission Link from Souss GW to Ouled Teima</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Souss GW to Ouled Teima</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.08357,30.26714,0 -9.20825,30.47732,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-321-Introduction">
-			<name>Transmission Link from Tiznit Groundwater to I_PMH de Tiznit</name>
+			<name>Transmission Link from Tiznit GW to I_PMH de Tiznit</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1493,7 +1457,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Tiznit Groundwater to I_PMH de Tiznit</value>
+					<value>Transmission Link from Tiznit GW to I_PMH de Tiznit</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1501,12 +1465,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.769780000000001,29.46813,0 -9.856299999999999,29.46629,0 -9.848929999999999,29.34479,0 
+					-9.769780000000001,29.46813,0 -9.848929999999999,29.34479,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
-		<Placemark id="Object-364-Introduction">
-			<name>Transmission Link from Youssef Ben Tachefine to I_Modern Public Massa</name>
+		<Placemark id="Object-794-Introduction">
+			<name>Transmission Link from Tiznit GW to Sidi Ifni</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1529,7 +1493,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Youssef Ben Tachefine to I_Modern Public Massa</value>
+					<value>Transmission Link from Tiznit GW to Sidi Ifni</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1537,12 +1501,12 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.475429999999999,29.81078,0 -9.42136,29.80795000000001,0 -9.42136,30.09064,0 -9.448790000000001,30.08432,0 
+					-9.769780000000001,29.46813,0 -10.09376,29.44972,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
-		<Placemark id="Object-306-Introduction">
-			<name>Transmission Link from Youssef Ben Tachefine to I_Tassila</name>
+		<Placemark id="Object-758-Introduction">
+			<name>Transmission Link from Withdrawal Node 1 to AEP_SEl Guerdane</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1565,7 +1529,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Youssef Ben Tachefine to I_Tassila</value>
+					<value>Transmission Link from Withdrawal Node 1 to AEP_SEl Guerdane</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1573,7 +1537,115 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.475429999999999,29.81078,0 -9.46604,29.97251,0 -9.53415,29.96883,0 
+					-8.85033,30.38495,0 -8.946210000000001,30.35913,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-757-Introduction">
+			<name>Transmission Link from Withdrawal Node 1 to El Guerdane</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Withdrawal Node 1 to El Guerdane</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.85033,30.38495,0 -8.974119999999999,30.3981,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-799-Introduction">
+			<name>Transmission Link from Withdrawal Node 2 to I_Modern Public Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Withdrawal Node 2 to I_Modern Public Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.464829999999999,29.99332,0 -9.51151,30.06546,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-802-Introduction">
+			<name>Transmission Link from Withdrawal Node 3 to I_Tassila</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Withdrawal Node 3 to I_Tassila</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.47261,29.87945,0 -9.61619,29.98837,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -1609,7 +1681,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.475429999999999,29.81078,0 -9.46604,29.39818,0 -9.65381,29.40002,0 
+					-9.475429999999999,29.81078,0 -9.538399999999999,29.45795,0 -9.65381,29.40002,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -1645,7 +1717,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.475429999999999,29.81078,0 -10.08195,29.80233,0 -10.09376,29.44972,0 
+					-9.475429999999999,29.81078,0 -9.511850000000001,29.60743,0 -10.09376,29.44972,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -1681,7 +1753,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.475429999999999,29.81078,0 -10.40645,29.80601,0 -10.40645,29.53314,0 -9.93445,29.53314,0 
+					-9.475429999999999,29.81078,0 -9.508990000000001,29.62325,0 -9.93867,29.55467,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -1717,7 +1789,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.475429999999999,29.81078,0 -9.47157,29.63564,0 -9.71087,29.63196,0 
+					-9.475429999999999,29.81078,0 -9.50662,29.63684,0 -9.71087,29.63196,0 
 				</coordinates>
 			</LineString>
 		</Placemark>

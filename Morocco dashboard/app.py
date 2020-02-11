@@ -15,7 +15,7 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 # my_path = ''
 spatial_data = os.path.join(my_path, 'spatial_data')
 
-provinces = gpd.read_file(os.path.join(spatial_data,'Admin','Provinces.gpkg'))
+provinces = gpd.read_file(os.path.join(spatial_data, 'Admin', 'Provinces.gpkg'))
 demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.geojson'))
 supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.geojson'))
 pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.geojson'))
@@ -60,18 +60,7 @@ def title_info(title, info_id, info_title, modal_content):
                         id=f"{info_id}-modal",
                     )])
 
-
-# water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data('New Resources', ['Eto trend'],
-#                                                                                       'level_1')
-
 token = "pk.eyJ1IjoiY2FtaWxvcmciLCJhIjoiY2p1bTl0MGpkMjgyYjQ0b2E0anRibWJ1MSJ9.GhUUGD6gok1d36lvP17CQQ"
-
-# with open('governorates.json') as response:
-#     counties = json.load(response)
-#     for feature in counties['features']:
-#         feature['id'] = feature['properties']['id']
-#
-# df = governorates
 
 layout = dict(
     autosize=True,
@@ -298,11 +287,11 @@ map_options = html.Div(
             [
                 dcc.Dropdown(id='cho-map-drop',
                                     options=[
-                                        {"label": "Cropland density", "value": 'crop'},
-                                        {"label": "Water delivered", "value": 'water'},
-                                        {"label": "Energy demand", "value": 'energy'},
+                                        {"label": "Cropland density", "value": 'Cropland density'},
+                                        {"label": "Water delivered", "value": 'Water delivered'},
+                                        {"label": "Energy demand", "value": 'Energy demand'},
                                     ],
-                                    value='crop',
+                                    value='Cropland density',
                                     placeholder='Select variable...',
                                     clearable=False,
                                     style={'marginBottom': '1em'}
@@ -336,6 +325,8 @@ compare_scenarios = html.Div(
                     {"label": "Scenario 2", "value": 's2'},
                 ],
                 value='current',
+                clearable=False,
+                searchable=False,
                 multi=True,
                 # className='checklist-selected-style',
             ),
@@ -429,33 +420,37 @@ app.layout = html.Div([dcc.Store(id='current'), sidebar, content])
 
 
 # Helper funtions
-# def choroplethmap():
-#     data = [dict(
-#         type="choroplethmapbox",
-#         geojson=counties,
-#         locations=df.NAME_1,
-#         name=df.NAME_1,
-#         z=df.GLCV2sum,
-#         customdata=[{'Water demand': np.random.randint(1, 101, 12),
-#                      'Energy demand': np.random.randint(1, 101, 12),
-#                      'Agricultural yield': np.random.randint(1, 101, 12)} for i in range(0, df.shape[0])],
-#         colorbar={'len': 0.3, 'thicknessmode': 'fraction',
-#                   'thickness': 0.01, 'x': 0.01, 'y': 0.85,
-#                   'title': {'text': 'Cropland density'}},
-#         showscale=True
-#     )]
-#     return data
+with open(os.path.join(spatial_data, 'Admin', 'Provinces.geojson')) as response:
+    provinces_chmap = json.load(response)
+    for feature in provinces_chmap['features']:
+        # print(feature)
+        feature['id'] = feature['properties']['Province']
 
-def get_lines(pols):
-    lines = []
-    for pol in pols:
-        boundary = pol.boundary
-        if boundary.type == 'MultiLineString':
-            for line in boundary:
-                lines.append(line)
-        else:
-            lines.append(boundary)
-    return lines
+def choroplethmap(geojson, locations, title):
+    layout_map = layout.copy()
+    data = [dict(
+        type="choroplethmapbox",
+        geojson=geojson,
+        locations=locations,
+        name=locations,
+        z= np.random.randint(1, 101, locations.shape[0]),
+        # customdata=[{'Water demand': np.random.randint(1, 101, 12),
+        #              'Energy demand': np.random.randint(1, 101, 12),
+        #              'Agricultural yield': np.random.randint(1, 101, 12)} for i in range(0, locations.shape[0])],
+        colorbar={'len': 0.3, 'thicknessmode': 'fraction',
+                  'thickness': 0.01, 'x': 0.01, 'y': 0.85,
+                  'title': {'text': title}},
+        showscale=True,
+    )]
+
+    layout_map["mapbox"] = {"center": {"lon": -8.9, 'lat': 30.2}, 'zoom': 7,
+                            'style': "outdoors", 'accesstoken': token}
+    layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
+    layout_map['clickmode'] = 'event+select'
+    layout_map['legend'] = dict(font=dict(size=12), orientation="h", x=0, y=0)
+    map = dict(data=data, layout=layout_map)
+
+    return map
 
 
 def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data):
@@ -643,14 +638,19 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
         Input("button-apply", "n_clicks"),
     ],
     [State('pump-eff-init', 'value'), State('pump-eff-end', 'value'), State('rb-scenario', 'value'),
-     State('eto-input', 'value'), State('drop-level', 'value')]
+     State('eto-input', 'value'), State('drop-level', 'value'), State("map-options", 'value'),
+     State('cho-map-drop', 'value')]
 )
-def update_current_data(n_1, eff_init, eff_end, scenario, eto, level):
+def update_current_data(n_1, eff_init, eff_end, scenario, eto, level, map_op, label):
     water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
                                                                                            eto,
                                                                                            level)
-
-    map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
+    if map_op == 'cho-map':
+        map = choroplethmap(provinces_chmap, provinces['Province'], label)
+    elif map_op == 'sch-map':
+        map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
+    else:
+        map = {}
     graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end,
                         eff_init)
     data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
@@ -775,7 +775,7 @@ def update_level_dropdown(scenario):
     [
         Input("button-apply", "n_clicks"),
         Input("sidebar-toggle", "n_clicks"),
-        Input("current", "data")
+        Input("current", "data"),
     ],
 )
 def update_level_dropdown(n_1, n_2, data):
@@ -789,6 +789,7 @@ def update_level_dropdown(n_1, n_2, data):
                                  'level_2': 'to 20 percent'}}
     scenario = data['scenario']
     level = data['level']
+
     name = f' - {scenario} {level_dict[scenario][level]} scenario'
 
     return name

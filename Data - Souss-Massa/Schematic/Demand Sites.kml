@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 20 January 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 10 February 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -171,7 +171,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.163029999999999,30.71566,0</coordinates>
+				<coordinates>-8.142200000000001,30.77449,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-556-Introduction">
@@ -200,7 +200,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.45626,30.23337,0</coordinates>
+				<coordinates>-8.45837,30.25891,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-588-Introduction">
@@ -258,7 +258,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-7.78417,30.55393,0</coordinates>
+				<coordinates>-7.936579999999999,30.59884,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-513-Introduction">
@@ -432,7 +432,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.19342,30.41347,0</coordinates>
+				<coordinates>-9.20825,30.47732,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-536-Introduction">
@@ -461,7 +461,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.21833,31.01411,0</coordinates>
+				<coordinates>-8.3698,30.51796,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-308-Introduction">
@@ -519,7 +519,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.93445,29.53314,0</coordinates>
+				<coordinates>-9.93867,29.55467,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-310-Introduction">

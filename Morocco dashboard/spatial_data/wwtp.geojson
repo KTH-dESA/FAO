@@ -5,6 +5,6 @@
 { "type": "Feature", "properties": { "point": "Waste Water Treatment Plant of Agadir", "type": "WWTP", "elevation_m": 44.0 }, "geometry": { "type": "Point", "coordinates": [ -9.58446, 30.26983 ] } },
 { "type": "Feature", "properties": { "point": "Waste Water Treatment Plant of Biougra", "type": "WWTP", "elevation_m": 155.0 }, "geometry": { "type": "Point", "coordinates": [ -9.33411, 30.13976 ] } },
 { "type": "Feature", "properties": { "point": "Waste Water Treatment Plant of Ouled Teima", "type": "WWTP", "elevation_m": 175.0 }, "geometry": { "type": "Point", "coordinates": [ -9.25989, 30.5224 ] } },
-{ "type": "Feature", "properties": { "point": "Waste Water Treatment Plant of Tiznit", "type": "WWTP", "elevation_m": 142.0 }, "geometry": { "type": "Point", "coordinates": [ -9.96306, 29.6246 ] } }
+{ "type": "Feature", "properties": { "point": "Waste Water Treatment Plant of Tiznit", "type": "WWTP", "elevation_m": 192.0 }, "geometry": { "type": "Point", "coordinates": [ -9.76505, 29.72875 ] } }
 ]
 }

@@ -386,24 +386,24 @@ class Model():
                                                 fuel_cost, fuel_req, 
                                                 emission_factor, env_cost)
         
-    def get_cf(self, technologies = 'all'):
+    def get_cf(self, technologies = 'all', axis=1):
         technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             if type(self.technologies[technology]) == self.WindTurbine:
-                self.get_wind_cf(technology)
+                self.get_wind_cf(technology, axis)
             elif type(self.technologies[technology]) == self.PVSystem:
-                self.get_pv_cf(technology)
+                self.get_pv_cf(technology, axis)
     
-    def get_wind_cf(self, wind_turbine):
+    def get_wind_cf(self, wind_turbine, axis):
         tech = self.technologies[wind_turbine]
         self.technologies[wind_turbine].cf = get_wind_cf(self.df, wind = self.wind, 
                     mu = tech.mu, t = tech.t, p_rated = tech.p_rated, 
                     z = tech.z, zr = tech.zr, es = tech.es, u_arr = tech.u_arr,
-                    p_curve = tech.p_curve)
+                    p_curve = tech.p_curve, axis = axis)
                     
-    def get_pv_cf(self, pv_system):
+    def get_pv_cf(self, pv_system, axis):
         tech = self.technologies[pv_system]
-        self.technologies[pv_system].cf = get_pv_cf(self.df, self.srad)
+        self.technologies[pv_system].cf = get_pv_cf(self.df, self.srad, axis)
                     
     def get_installed_capacity(self, technologies = 'all'):
         technologies = self.__check_tech_input(technologies)
