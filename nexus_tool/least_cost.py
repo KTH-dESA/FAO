@@ -51,11 +51,16 @@ def get_installed_capacity(df, cf, pd_e, axis=1):
     else:
         ic_df['Year'] = df.Year
         ic_df['Month'] = df.Month
+        ic_df['Demand point'] = df['Demand point']
+        cf = cf if type(cf) == float else cf.cf
         ic_df['ic'] = df[pd_e] / cf
     return ic_df
     
-def get_max_capacity(df):
-    return pd.DataFrame({'max_cap': df.filter(like='ic_').max(axis=1)})
+def get_max_capacity(df, axis=1):
+    if axis:
+        return pd.DataFrame({'max_cap': df.filter(like='ic_').max(axis=1)})
+    else:
+        return df[['Demand point', 'Year', 'ic']].groupby(['Demand point', 'Year']).max()
 
 
 def get_fuel_cost(fuel_cost, el_gen, efficiency, fuel_req):
@@ -72,45 +77,93 @@ def get_emissions(el_gen, efficiency, fuel_req, emission_factor):
 
 def get_lcoe(max_capacity, total_demand, tech_life, om_cost, capital_cost,
              discount_rate, project_life, fuel_cost, fuel_req, 
-             efficiency, emission_factor, env_cost):
-    # Perform the time-value LCOE calculation
-    reinvest_year = 0
-    capital_cost = capital_cost * max_capacity
-    om_cost = om_cost * capital_cost
+             efficiency, emission_factor, env_cost, start_year, end_year, axis=1):
+    if axis:
+        # Perform the time-value LCOE calculation
+        reinvest_year = 0
+        capital_cost = capital_cost * max_capacity
+        om_cost = om_cost * capital_cost
 
-    # If the technology life is less than the project life, we will have to invest twice to buy it again
-    if tech_life < project_life:
-        reinvest_year = tech_life
+        # If the technology life is less than the project life, we will have to invest twice to buy it again
+        if tech_life < project_life:
+            reinvest_year = tech_life
 
-    year = np.arange(project_life)
-    el_gen = np.array([demand * np.ones(project_life -1) for demand in total_demand])
-    el_gen = np.insert(el_gen,0,0,axis=1)
-    discount_factor = np.array([(1 + discount_rate) ** year for i in total_demand])
-    investments = np.array([np.zeros(project_life-1) for i in capital_cost])
-    investments = np.insert(investments,0,capital_cost,axis=1)
-    
-    if reinvest_year:
-        investments = np.delete(investments,reinvest_year,axis=1)
-        investments = np.insert(investments,reinvest_year,capital_cost,axis=1)
+        year = np.arange(project_life)
+        el_gen = np.array([demand * np.ones(project_life -1) for demand in total_demand])
+        el_gen = np.insert(el_gen,0,0,axis=1)
+        discount_factor = np.array([(1 + discount_rate) ** year for i in total_demand])
+        investments = np.array([np.zeros(project_life-1) for i in capital_cost])
+        investments = np.insert(investments,0,capital_cost,axis=1)
+        
+        if reinvest_year:
+            investments = np.delete(investments,reinvest_year,axis=1)
+            investments = np.insert(investments,reinvest_year,capital_cost,axis=1)
 
-    salvage = np.array([np.zeros(project_life-1) for i in capital_cost])
-    used_life = project_life
-    if reinvest_year:
-        # salvage will come from the remaining life after the re-investment
-        used_life = project_life - tech_life
-    salvage = np.insert(salvage,-1,capital_cost * (1 - used_life / tech_life),axis=1)
+        salvage = np.array([np.zeros(project_life-1) for i in capital_cost])
+        used_life = project_life
+        if reinvest_year:
+            # salvage will come from the remaining life after the re-investment
+            used_life = project_life - tech_life
+        salvage = np.insert(salvage,-1,capital_cost * (1 - used_life / tech_life),axis=1)
 
-    operation_and_maintenance = np.array([i * np.ones(project_life-1) for i in om_cost])
-    operation_and_maintenance = np.insert(operation_and_maintenance,0,0,axis=1)
-    
-    fuel = get_fuel_cost(fuel_cost,el_gen,efficiency,fuel_req)
-    emissions = get_emissions(el_gen,efficiency,fuel_req,emission_factor)
-    
-    discounted_costs = (investments + operation_and_maintenance + fuel + 
-                        emissions * env_cost - salvage) / discount_factor
-    discounted_generation = el_gen / discount_factor
-    
-    return discounted_costs.sum(axis=1) / discounted_generation.sum(axis=1)
+        operation_and_maintenance = np.array([i * np.ones(project_life-1) for i in om_cost])
+        operation_and_maintenance = np.insert(operation_and_maintenance,0,0,axis=1)
+        
+        fuel = get_fuel_cost(fuel_cost,el_gen,efficiency,fuel_req)
+        emissions = get_emissions(el_gen,efficiency,fuel_req,emission_factor)
+        
+        discounted_costs = (investments + operation_and_maintenance + fuel + 
+                            emissions * env_cost - salvage) / discount_factor
+        discounted_generation = el_gen / discount_factor
+        
+        return discounted_costs.sum(axis=1) / discounted_generation.sum(axis=1)
+    else:
+        reinvest_year = 0
+        df = get_capital_cost(max_capacity, start_year, end_year, 
+                              tech_life, capital_cost)
+        df = df.loc[(df.Year>=(start_year))&(df.Year<=(end_year))]
+        data = total_demand.copy()
+        total_demand = data.groupby(['Demand point', 'Year']).swpa_e.sum()
+        df['total_demand'] = total_demand.reset_index().swpa_e
+        df['om_cost'] = om_cost * capital_cost
+        df['discount_factor'] = (1 + discount_rate) ** (df.Year - start_year)
+        df = get_salvage(df, start_year, end_year, tech_life)
+        df['emissions'] = get_emissions(df['total_demand'], efficiency, 
+                                        fuel_req, emission_factor)
+        df['fuel_cost'] = df['total_demand'] * fuel_req * fuel_cost / efficiency
+        df['discounted_costs'] = (df['capital_cost'] + df['om_cost'] + 
+                                  df['fuel_cost'] + df['emissions'] * env_cost - 
+                                  df['salvage']) / df['discount_factor']
+        df['discounted_generation'] = df['total_demand'] / df['discount_factor']
+        dff = df.groupby('Demand point')[['discounted_costs', 
+                                          'discounted_generation']].sum()
+        dff.reset_index(inplace=True)
+        dff['lcoe'] = dff['discounted_costs'] / dff['discounted_generation']
+        dff.loc[dff.lcoe==np.inf, 'lcoe'] = np.nan
+        dff['year'] = start_year
+        
+        return dff
+        
+def get_salvage(df, start_year, end_year, tech_life):
+    year_used = ((end_year-start_year) % tech_life)
+    years_left = tech_life - year_used - 1
+    df['salvage'] = 0
+    df.loc[df.Year==end_year, 'salvage'] = np.array(df.loc[(df.inv_period==df.inv_period.max())&(df.Year==(end_year-year_used)), 'capital_cost']  * (years_left/tech_life))
+    return df
+        
+def get_capital_cost(max_capacity, start_year, end_year, tech_life, capital_cost):
+    df = max_capacity.copy()
+    df.loc[(df.Year<=start_year)&(df.Year<=start_year)]
+    df['inv_period'] = (df.Year - start_year + tech_life)//tech_life
+    df['invest_year'] = (df.Year - start_year + tech_life)%tech_life == 0
+    dff = df.groupby(['Demand point', 'inv_period']).ic.max()
+    dff = dff.reset_index()
+    dff['invest_year'] = True
+    dff.set_index(['Demand point', 'inv_period', 'invest_year'], inplace=True)
+    df['new_capacity'] = df.set_index(['Demand point', 'inv_period', 'invest_year']).index.map(dff.ic)
+    df['new_capacity'] = df['new_capacity'].fillna(0)
+    df['capital_cost'] = capital_cost * df.new_capacity
+    return df
    
 def get_least_cost(df, geo_boundary_col = None, geo_boundary_name = None):
     if geo_boundary_col == None:
@@ -122,7 +175,7 @@ def get_least_cost(df, geo_boundary_col = None, geo_boundary_name = None):
     df.loc[filter_vec, 'least_cost_technology'] = \
                                 df.loc[filter_vec, list(df)[i:]].idxmin(axis=1)
     df.loc[filter_vec, 'lcoe'] = df.loc[filter_vec, list(df)[i:]].min(axis=1)
-    return df.loc[filter_vec, 'least_cost_technology'], df.loc[filter_vec, 'lcoe']
+    return df.loc[filter_vec, ['least_cost_technology', 'lcoe']]
 
 def get_tech_generation(df, technologies):
     for key in technologies:

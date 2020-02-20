@@ -80,7 +80,7 @@ def get_GWpumping_energy(df, trans_eff, pump_eff, pd_e, pwd, sswd, ed_e, tdh_gw,
         _sswd = '{}{}'.format(sswd, i) #in m3
         _ed_e = '{}{}'.format(ed_e, i) #in kWh
         
-        df[_pd_e]=(9.81*(df[_pwd]/1000)*df[tdh_gw])/GWpump_plant_eff 
+        df[_pd_e]=(9.81*(df[_pwd]/1000)*df[tdh_gw])/GWpump_plant_eff # this should be changed to use m3/s instead of l/s
         df[_ed_e]=(df[_sswd]*df[tdh_gw]*0.00272)/GWpump_plant_eff 
         
         if desalination:
@@ -102,7 +102,7 @@ def get_SWpumping_energy(df, tdh_sw, SWpump_eff, swpp_e, swpa_e, g, peak_Q,
             _avg_Q = '{}{}'.format(avg_Q, i) #average water flow in the pipeline. To be updated with WEAP output 
             
             
-            df[_swpp_e]=((df[_peak_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000)) #to convert E from W to KWh
+            df[_swpp_e]=((df[_peak_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000)) #to convert E from W to KW
             df[_swpa_e]=((df[_avg_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000*3600)) #to convert E from J to KWh
             
     else:
