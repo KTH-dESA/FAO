@@ -394,68 +394,123 @@ class Model():
             elif type(self.technologies[technology]) == self.PVSystem:
                 self.get_pv_cf(technology, axis)
     
-    def get_wind_cf(self, wind_turbine, axis):
+    def get_wind_cf(self, wind_turbine, axis=1):
         tech = self.technologies[wind_turbine]
         self.technologies[wind_turbine].cf = get_wind_cf(self.df, wind = self.wind, 
                     mu = tech.mu, t = tech.t, p_rated = tech.p_rated, 
                     z = tech.z, zr = tech.zr, es = tech.es, u_arr = tech.u_arr,
                     p_curve = tech.p_curve, axis = axis)
                     
-    def get_pv_cf(self, pv_system, axis):
+    def get_pv_cf(self, pv_system, axis=1):
         tech = self.technologies[pv_system]
         self.technologies[pv_system].cf = get_pv_cf(self.df, self.srad, axis)
                     
-    def get_installed_capacity(self, technologies = 'all'):
+    def get_installed_capacity(self, technologies = 'all', axis=1):
         technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             tech = self.technologies[technology]
             self.technologies[technology].df = get_installed_capacity(self.df, 
                                                                       tech.cf, 
-                                                                      self.pd_e)
+                                                                      self.pd_e,
+                                                                      axis)
                                                 
-    def get_max_capacity(self, technologies = 'all'):
+    def get_max_capacity(self, technologies = 'all', axis=1):
         technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             tech = self.technologies[technology]
-            self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df))
+            if axis:
+                self.technologies[technology].df = tech.df.join(get_max_capacity(tech.df, axis))
+            else:
+                self.technologies[technology].max_cap = get_max_capacity(tech.df, axis)
         
-    def get_lcoe(self, technologies = 'all'):
+    def get_lcoe(self, technologies = 'all', years = 'all', axis=1):
         technologies = self.__check_tech_input(technologies)
         for technology in technologies:
             tech = self.technologies[technology]
-            self.technologies[technology].df['lcoe'] = get_lcoe(
-                                        max_capacity = tech.df['max_cap'],
-                                        total_demand = self.df['annual_el_demand'],
-                                        tech_life=tech.life, om_cost = tech.om_cost,
-                                        capital_cost = tech.capital_cost,
-                                        discount_rate = self.discount_rate,
-                                        project_life = self.end_year - self.start_year,
-                                        fuel_cost = tech.fuel_cost, 
-                                        fuel_req = tech.fuel_req, 
-                                        efficiency = tech.efficiency, 
-                                        emission_factor = tech.emission_factor,
-                                        env_cost = tech.env_cost)
-                                        
-    def get_least_cost(self,  technologies = 'all', geo_boundary = None):
-        self.df['least_cost_tech'] = np.nan
-        self.df['lcoe'] = np.nan
-        if (geo_boundary != None) and (type(technologies) == dict):
-            for key, value in technologies.items():
-                _technologies = self.__check_tech_input(value)
+            if axis:
+                self.technologies[technology].df['lcoe'] = get_lcoe(
+                                            max_capacity = tech.df['max_cap'],
+                                            total_demand = self.df['annual_el_demand'],
+                                            tech_life=tech.life, om_cost = tech.om_cost,
+                                            capital_cost = tech.capital_cost,
+                                            discount_rate = self.discount_rate,
+                                            project_life = self.end_year - self.start_year,
+                                            fuel_cost = tech.fuel_cost, 
+                                            fuel_req = tech.fuel_req, 
+                                            efficiency = tech.efficiency, 
+                                            emission_factor = tech.emission_factor,
+                                            env_cost = tech.env_cost,
+                                            start_year = self.start_year,
+                                            end_year = self.end_year,
+                                            axis = axis)
+            else:
+                years = self.__get_years(years)
+                self.technologies[technology].lcoe = pd.DataFrame()
+                for year in years:
+                    self.technologies[technology].lcoe = \
+                            self.technologies[technology].lcoe.append(get_lcoe(
+                                max_capacity = tech.max_cap.reset_index(),
+                                total_demand = self.df,
+                                tech_life=tech.life, om_cost = tech.om_cost,
+                                capital_cost = tech.capital_cost,
+                                discount_rate = self.discount_rate,
+                                project_life = self.end_year - self.start_year,
+                                fuel_cost = tech.fuel_cost, 
+                                fuel_req = tech.fuel_req, 
+                                efficiency = tech.efficiency, 
+                                emission_factor = tech.emission_factor,
+                                env_cost = tech.env_cost,
+                                start_year = year,
+                                end_year = self.end_year,
+                                axis = axis), ignore_index=True)
+                                
+                # self.technologies[technology].lcoe.reset_index(inplace=True)
+                                                            
+    def get_least_cost(self,  technologies = 'all', years = 'all',
+                       geo_boundary = None, axis=1):
+        if axis:
+            self.df['least_cost_tech'] = np.nan
+            self.df['lcoe'] = np.nan
+            if (geo_boundary != None) and (type(technologies) == dict):
+                for key, value in technologies.items():
+                    _technologies = self.__check_tech_input(value)
+                    lcoe_df = pd.DataFrame()
+                    lcoe_df[geo_boundary] = self.df[geo_boundary]
+                    for _technology in _technologies:
+                        lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
+                    self.df.loc[self.df[geo_boundary]==key, 'least_cost_tech'], \
+                    self.df.loc[self.df[geo_boundary]==key, 'lcoe'] = \
+                                        get_least_cost(lcoe_df, geo_boundary, key)
+            else:
+                _technologies = self.__check_tech_input(technologies)
                 lcoe_df = pd.DataFrame()
-                lcoe_df[geo_boundary] = self.df[geo_boundary]
                 for _technology in _technologies:
                     lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
-                self.df.loc[self.df[geo_boundary]==key, 'least_cost_tech'], \
-                self.df.loc[self.df[geo_boundary]==key, 'lcoe'] = \
-                                    get_least_cost(lcoe_df, geo_boundary, key)
+                self.df['least_cost_tech'], self.df['lcoe'] = get_least_cost(lcoe_df)
         else:
             _technologies = self.__check_tech_input(technologies)
             lcoe_df = pd.DataFrame()
             for _technology in _technologies:
-                lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
-            self.df['least_cost_tech'], self.df['lcoe'] = \
-                                    get_least_cost(lcoe_df)
+                dff = self.technologies[_technology].lcoe.set_index(['Demand point', 'year'])
+                lcoe_df[_technology] = dff['lcoe']
+            
+            years = self.__get_years(years)
+            self.lcoe = self.df.loc[self.df.Year.isin(years)]
+            self.lcoe = self.lcoe.groupby(['Demand point', 'Year']).agg(
+                                                      {'Supply point': 'first',
+                                                       'links': 'first',
+                                                       'sswd': 'sum',
+                                                       'type': 'first',
+                                                       'swpp_e': 'max',
+                                                       'swpa_e': 'sum'})
+            self.lcoe.rename(columns={'links': 'link', 'sswd': 'water demand',
+                                      'swpp_e': 'required capacity',
+                                      'swpa_e': 'energy demand'},
+                            inplace=True)
+            lcoe = get_least_cost(lcoe_df)
+            
+            self.lcoe['least_cost_technology'] = lcoe['least_cost_technology']
+            self.lcoe['lcoe'] = lcoe['lcoe']
     
     def get_tech_generation(self):
         get_tech_generation(self.df, self.technologies.keys())
@@ -482,6 +537,14 @@ class Model():
             else:
                 technologies = [technologies]
         return technologies
+    
+    def __get_years(self, years):
+        if type(years) == str:
+            if years.lower() in ['all', 'a', 'everything']:
+                years = range(self.start_year, self.end_year + 1)
+        elif type(years) == int:
+            years = [years]
+        return years
     
     def print_summary(self, geo_boundary = 'global'):
         if 'month' in geo_boundary:
@@ -553,6 +616,8 @@ class Model():
             
     class Technology():
         df = pd.DataFrame()
+        max_cap = pd.DataFrame()
+        lcoe = pd.DataFrame()
         fuel_cost = 0
         fuel_req = 0
         efficiency = 1
