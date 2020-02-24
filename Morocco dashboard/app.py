@@ -16,9 +16,9 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 spatial_data = os.path.join(my_path, 'spatial_data')
 
 provinces = gpd.read_file(os.path.join(spatial_data, 'Admin', 'Provinces.gpkg'))
-demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.geojson'))
-supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.geojson'))
-pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.geojson'))
+demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg'))
+supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.gpkg'))
+pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
 WebMercator = 4326
 
 for gdf in [demand_points, supply_points, pipelines, provinces]:
