@@ -4,13 +4,15 @@ channels:
   - defaults
   - jmcmurray
 dependencies:
+  - contextily
   - descartes
   - geopandas
   - json
   - matplotlib
   - notebook
   - plotly
-  - python=3.7.3
+  - python
   - rasterio
+  - scipy
   - xlrd
   

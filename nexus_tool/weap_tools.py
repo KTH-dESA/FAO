@@ -2,6 +2,7 @@
 import os
 import glob
 import geopandas as gpd
+import pandas as pd
 import numpy as np
 import fiona
 import shapely
@@ -10,6 +11,7 @@ import rasterio.mask
 from rasterio.merge import merge
 from rasterio.warp import calculate_default_transform, reproject, Resampling
 from rasterio.fill import fillnodata
+import scipy
 fiona.drvsupport.supported_drivers['kml'] = 'rw' # enable KML support
 fiona.drvsupport.supported_drivers['KML'] = 'rw' # enable KML support
 
@@ -89,4 +91,16 @@ def merge_rasters(files_path, dst_crs, outpul_file):
     
     with rasterio.open(outpul_file, "w", **out_meta) as dest:
         dest.write(mosaic)
-    
+
+def create_learning_curve(iyear, eyear, cp, rates, method, order=2):
+    learning_curve = pd.DataFrame({'Year': range(iyear, eyear+1)})
+    if method!='step':
+        for year, rate in rates.items():
+            learning_curve.loc[learning_curve.Year==year, 'rate'] = rate
+        learning_curve['capital_cost'] = (1-learning_curve['rate']) * cp
+        learning_curve['capital_cost'] = learning_curve.capital_cost.interpolate(method=method, order=order)
+    else:
+        for year, rate in rates.items():
+            learning_curve.loc[learning_curve.Year>=year, 'rate'] = rate
+        learning_curve['capital_cost'] = (1-learning_curve['rate']) * cp
+    return learning_curve.set_index('Year').capital_cost

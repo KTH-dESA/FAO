@@ -497,10 +497,12 @@ class Model():
             years = self.__get_years(years)
             self.lcoe = self.df.loc[self.df.Year.isin(years)]
             self.lcoe = self.lcoe.groupby(['Demand point', 'Year']).agg(
-                                                      {'Supply point': 'first',
-                                                       'links': 'first',
+                                                      {
+                                                       # 'Supply point': 'first',
+                                                       # 'links': 'first',
+                                                       'province': 'first',
                                                        'sswd': 'sum',
-                                                       'type': 'first',
+                                                       # 'type': 'first',
                                                        'swpp_e': 'max',
                                                        'swpa_e': 'sum'})
             self.lcoe.rename(columns={'links': 'link', 'sswd': 'water demand',
