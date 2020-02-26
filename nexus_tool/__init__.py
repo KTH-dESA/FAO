@@ -500,6 +500,7 @@ class Model():
                                                       {
                                                        # 'Supply point': 'first',
                                                        # 'links': 'first',
+                                                       'province': 'first',
                                                        'sswd': 'sum',
                                                        # 'type': 'first',
                                                        'swpp_e': 'max',
