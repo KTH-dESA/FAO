@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 10 February 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -677,6 +677,42 @@
 				</coordinates>
 			</LineString>
 		</Placemark>
+		<Placemark id="Object-816-Introduction">
+			<name>Transmission Link from Desalination to I_Modern Privé Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Transmission-Link.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff66cc00</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Transmission-Link-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Transmission Link</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Transmission Link from Desalination to I_Modern Privé Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.765980000000001,30.29627,0 -9.513640000000001,30.23167000000001,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
 		<Placemark id="Object-762-Introduction">
 			<name>Transmission Link from Desalination to I_Moderne Privé Chtouka</name>
 			<Snippet maxLines="0"></Snippet>
@@ -1146,7 +1182,7 @@
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-476-Introduction">
-			<name>Transmission Link from Souss GW to El Guerdane</name>
+			<name>Transmission Link from Souss GW to I_El Guerdane</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1169,7 +1205,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Souss GW to El Guerdane</value>
+					<value>Transmission Link from Souss GW to I_El Guerdane</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -1542,7 +1578,7 @@
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-757-Introduction">
-			<name>Transmission Link from Withdrawal Node 1 to El Guerdane</name>
+			<name>Transmission Link from Withdrawal Node 1 to I_El Guerdane</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -1565,7 +1601,7 @@
 					<value>Transmission Link</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Transmission Link from Withdrawal Node 1 to El Guerdane</value>
+					<value>Transmission Link from Withdrawal Node 1 to I_El Guerdane</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
