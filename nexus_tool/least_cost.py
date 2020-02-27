@@ -125,11 +125,15 @@ def get_lcoe(max_capacity, total_demand, tech_life, om_cost, capital_cost,
         data = total_demand.copy()
         total_demand = data.groupby(['Demand point', 'Year']).swpa_e.sum()
         df['total_demand'] = total_demand.reset_index().swpa_e
+        if type(capital_cost)==pd.core.series.Series:
+            capital_cost = capital_cost[start_year]
         df['om_cost'] = om_cost * capital_cost
         df['discount_factor'] = (1 + discount_rate) ** (df.Year - start_year)
         df = get_salvage(df, start_year, end_year, tech_life)
         df['emissions'] = get_emissions(df['total_demand'], efficiency, 
                                         fuel_req, emission_factor)
+        if type(fuel_cost)==pd.core.series.Series:
+            fuel_cost = df.Year.map(fuel_cost)
         df['fuel_cost'] = df['total_demand'] * fuel_req * fuel_cost / efficiency
         df['discounted_costs'] = (df['capital_cost'] + df['om_cost'] + 
                                   df['fuel_cost'] + df['emissions'] * env_cost - 
@@ -162,6 +166,8 @@ def get_capital_cost(max_capacity, start_year, end_year, tech_life, capital_cost
     dff.set_index(['Demand point', 'inv_period', 'invest_year'], inplace=True)
     df['new_capacity'] = df.set_index(['Demand point', 'inv_period', 'invest_year']).index.map(dff.ic)
     df['new_capacity'] = df['new_capacity'].fillna(0)
+    if type(capital_cost)==pd.core.series.Series:
+        capital_cost = df.Year.map(capital_cost)
     df['capital_cost'] = capital_cost * df.new_capacity
     return df
    
