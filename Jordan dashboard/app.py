@@ -40,6 +40,8 @@ def load_data(scenario, eto, level):
 
     return water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data
 
+water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data('Reference', ['Eto trend'], 'level_1')
+
 button_color = 'primary'
 info_ids = []
 
@@ -552,6 +554,33 @@ def unmet_demand_plot(data, dff_unmet):
                        } for category in sorted(df['type'].unique())]
     return data
 
+def wtd_plot(data, gw_pumped):
+    name = 'Depth to groundwater (mbgl)'
+    dff_wtd = gw_pumped.copy()
+    wtd = dff_wtd.groupby(['Year', 'point'])['wtd'].mean().reset_index()
+    for df, name in zip([wtd], [name]):
+        data[name] = [{'x': df.loc[df['point'] == point].Year,
+                       'y': df.loc[df['point'] == point].wtd,
+                       'name': point,
+                       'mode': 'lines',
+                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
+                       } for point in sorted(df['point'].unique())]
+    return data
+
+def groundwater_plot(data, gw_pumped):
+    name = 'Groundwater extraction (Mm3)'
+    dff = gw_pumped.groupby(['Year', 'point'])['value'].sum() / 1000000
+    dff = dff.reset_index()
+    for df, name in zip([dff], [name]):
+        data[name] = [{'x': df.loc[df['point'] == point].Year,
+                       'y': df.loc[df['point'] == point].value,
+                       'name': point,
+                       'mode': 'lines',
+                       'stackgroup': 'one',
+                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
+                       } for point in sorted(df['point'].unique())]
+    return data
+
 def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end, eff_init):
     emission_factor = 0.643924449
     names = ['Water delivered (Mm3)', 'Water required (Mm3)']
@@ -591,6 +620,8 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
                        } for type in sorted(df['type'].unique())]
 
     data = unmet_demand_plot(data, dff_unmet)
+    data = wtd_plot(data, gw_pumped)
+    data = groundwater_plot(data, gw_pumped)
 
     for df, name in zip([dff_energy], ['Energy demand (GWh)']):
         data[name] = [{'x': df.loc[df['type'] == type].Year,
@@ -733,24 +764,29 @@ def update_results(selection, n_1, title, data_current):
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
-            if ('delivered' in key) or ('supplied' in key):
+            elif ('delivered' in key) or ('supplied' in key):
                 # layout_plot['yaxis'] = {'range': [0, 1100]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
-            if 'Energy demand' in key:
+            elif 'Energy demand' in key:
                 # layout_plot['yaxis'] = {'range': [0, 1600]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
-            # if 'Depth' in key:
-            #     layout_plot['yaxis'] = {'range': [0, 200]}
-            #     plots.append(
-            #         dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
-            #             format='png', filename=key, height=400,
-            #             width=400, scale=2))))
+            elif 'Depth' in key:
+                # layout_plot['yaxis'] = {'range': [0, 200]}
+                plots.append(
+                    dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
+                        format='png', filename=key, height=400,
+                        width=400, scale=2))))
+            else:
+                plots.append(
+                    dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
+                        format='png', filename=key, height=400,
+                        width=400, scale=2))))
         else:
             plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                 format='png', filename=key, height=400,
