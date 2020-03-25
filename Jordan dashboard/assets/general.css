@@ -209,7 +209,13 @@ button {
   color: var(--secondary);
 }
 
-@media (min-width: 48em) {    
+@media (min-width: 85em) { 
+  #button-save, #button-compare, #button-download {
+	width: 130px;
+  }
+}
+
+@media (min-width: 75em) {    
   #graphs-container {
     position: relative;
 	overflow: auto;

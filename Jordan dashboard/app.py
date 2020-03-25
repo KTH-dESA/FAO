@@ -212,7 +212,6 @@ energy_options = html.Div(
                     size="sm"
                 ),
                 width={"size": 5, "offset": 1}
-
             )
         ],
             no_gutters=True,
@@ -387,7 +386,7 @@ sidebar = html.Div(
         sidebar_header,
         dbc.Nav(
             [
-                dbc.NavItem(dbc.NavLink("Scenario", active=True, href="#", id='page-1', className='tabs')),
+                dbc.NavItem(dbc.NavLink("Scenario options", active=True, href="#", id='page-1', className='tabs')),
                 # dbc.NavItem(dbc.NavLink("Visualisation", href="#", id='page-2', className='tabs')),
             ],
             id="tabs",
@@ -419,16 +418,22 @@ results_header = dbc.Row(
 
 footer_results = dbc.Row(
     [
+        dbc.ButtonGroup([
+        dbc.Button([html.I(className='fa fa-save'), " Save"], color=button_color, className="mr-1",
+                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-save'),
+        dbc.Button([html.I(className='fa fa-chart-pie'), " Compare"], color=button_color, outline=True, className="mr-1",
+                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-compare'),
         dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color, className="mr-1",
                    style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
+        ])
     ],
     align='center',
-    justify="center",
+    justify="around",
     className='footer',
 )
 
 map = dcc.Graph(id="map",
-                className='col-lg-7 col-md-7 col-sm-12 col-xs-12',
+                className='col-xl-7 col-lg-12',
                 config=dict(showSendToCloud=True, toImageButtonOptions=dict(format='png', filename='map', height=700,
                                                                             width=700, scale=2)))
 
@@ -437,7 +442,7 @@ graphs = html.Div([results_header,
                    footer_results
                    ],
                   id='results-container',
-                  className='col-lg-5 col-md-5 col-sm-12 col-xs-12')
+                  className='col-xl-5 col-lg-12')
 
 content = html.Div([map, graphs], id="page-content")
 
@@ -647,7 +652,8 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
 
     return data
 
-
+##### need to change the compare scenarios logic to the calback of the compare modal
+#### also add logic to the save button and modal
 @app.callback(
     [Output("current", "data"), Output("compare", "data"), Output('map', 'selectedData'),
      Output('pump-eff-init', 'value'), Output('pump-eff-end', 'value'), Output('rb-scenario', 'value'),
