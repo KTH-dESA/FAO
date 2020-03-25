@@ -29,3 +29,9 @@ running `conda acivate <name-of-environment>` and then `jupyter notebook`.
 Alternatively, you can start the Anaconda navigator, select the previously 
 created environment and start a Jupyter notebook session. Open any of the 
 runner files and follow the steps.
+
+## Visualazing results
+Results for te case studies of Jordan and the Souss-Massa river basin, can be 
+explored through interactive dashboards found in:
+* Jordan: [https://jordan-nexus-model.herokuapp.com/](https://jordan-nexus-model.herokuapp.com/)
+* Moroco: [https://souss-massa-nexus-model.herokuapp.com/](https://souss-massa-nexus-model.herokuapp.com/)
