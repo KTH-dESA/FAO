@@ -40,7 +40,8 @@ def load_data(scenario, eto, level):
 
     return water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data
 
-water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data('Reference', ['Eto trend'], 'level_1')
+
+# water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data('Reference', ['Eto trend'], 'level_1')
 
 button_color = 'primary'
 info_ids = []
@@ -62,8 +63,8 @@ def title_info(title, info_id, info_title, modal_content):
                         id=f"{info_id}-modal",
                     )])
 
-token = "pk.eyJ1IjoiY2FtaWxvcmciLCJhIjoiY2p1bTl0MGpkMjgyYjQ0b2E0anRibWJ1MSJ9.GhUUGD6gok1d36lvP17CQQ"
 
+token = "pk.eyJ1IjoiY2FtaWxvcmciLCJhIjoiY2p1bTl0MGpkMjgyYjQ0b2E0anRibWJ1MSJ9.GhUUGD6gok1d36lvP17CQQ"
 
 layout = dict(
     autosize=True,
@@ -220,109 +221,127 @@ energy_options = html.Div(
     className='options'
 )
 
-
 # unit_options = html.Div(
-    # [
-        # title_info(title='Select display units', info_id='units-info',
-                   # info_title='Units info', modal_content='This is the content of the modal'),
-        # dbc.InputGroup(
-            # [
-                # dbc.InputGroupAddon("Water demand", addon_type="prepend"),
-                # dbc.Select(id='water-units',
-                           # options=[
-                               # {"label": "Mm3", "value": "Mm3"},
-                               # {"label": "m3", "value": "m3"},
-                           # ],
-                           # value='Mm3',
-                           # className='form-control'
-                           # ),
-            # ],
-            # size="sm",
-            # style={'marginBottom': '1em'}
-        # ),
-        # dbc.InputGroup(
-            # [
-                # dbc.InputGroupAddon("Energy demand", addon_type="prepend"),
-                # dbc.Select(id='energy-units',
-                           # options=[
-                               # {"label": "GWh", "value": "GWh"},
-                               # {"label": "MWh", "value": "MWh"},
-                               # {"label": "Wh", "value": "Wh"},
-                               # {"label": "PJ", "value": "PJ"},
-                           # ],
-                           # value='GWh'
-                           # ),
-            # ],
-            # size="sm"
-        # ),
-    # ],
-    # className='options'
+# [
+# title_info(title='Select display units', info_id='units-info',
+# info_title='Units info', modal_content='This is the content of the modal'),
+# dbc.InputGroup(
+# [
+# dbc.InputGroupAddon("Water demand", addon_type="prepend"),
+# dbc.Select(id='water-units',
+# options=[
+# {"label": "Mm3", "value": "Mm3"},
+# {"label": "m3", "value": "m3"},
+# ],
+# value='Mm3',
+# className='form-control'
+# ),
+# ],
+# size="sm",
+# style={'marginBottom': '1em'}
+# ),
+# dbc.InputGroup(
+# [
+# dbc.InputGroupAddon("Energy demand", addon_type="prepend"),
+# dbc.Select(id='energy-units',
+# options=[
+# {"label": "GWh", "value": "GWh"},
+# {"label": "MWh", "value": "MWh"},
+# {"label": "Wh", "value": "Wh"},
+# {"label": "PJ", "value": "PJ"},
+# ],
+# value='GWh'
+# ),
+# ],
+# size="sm"
+# ),
+# ],
+# className='options'
 # )
 
 # map_options = html.Div(
-    # [
-        # title_info(title='Map visualization options', info_id='map-info',
-                   # info_title='Map visualization info', modal_content='This is the content of the modal'),
-        # html.Div(
-            # dbc.RadioItems(
-                # id="map-options",
-                # options=[
-                    # {"label": "System schematic", "value": 'sch-map'},
-                    # {"label": "Choropleth map", "value": 'cho-map'},
-                # ],
-                # value='sch-map',
-                # className='checklist-selected-style',
-            # ),
-        # ),
-        # dbc.Collapse(dbc.Card(dbc.CardBody(
-            # [
-                # dcc.Dropdown(id='cho-map-drop',
-                                    # options=[
-                                        # {"label": "Cropland density", "value": 'crop'},
-                                        # {"label": "Water delivered", "value": 'water'},
-                                        # {"label": "Energy demand", "value": 'energy'},
-                                    # ],
-                                    # value='crop',
-                                    # placeholder='Select variable...',
-                                    # clearable=False,
-                                    # style={'marginBottom': '1em'}
-                                    # ),
-                # dcc.Dropdown(id='cho-map-filter',
-                             # options=[
-                                 # {"label": "Governorate", "value": 'gov'},
-                                 # {"label": "Water basin", "value": 'basin'},
-                             # ],
-                             # value='crop',
-                             # placeholder='Filter by...',
-                             # clearable=False
-                             # ),
-            # ])),
-            # id="cho-map-collapse",
-        # ),
-    # ],
-    # className='options'
+# [
+# title_info(title='Map visualization options', info_id='map-info',
+# info_title='Map visualization info', modal_content='This is the content of the modal'),
+# html.Div(
+# dbc.RadioItems(
+# id="map-options",
+# options=[
+# {"label": "System schematic", "value": 'sch-map'},
+# {"label": "Choropleth map", "value": 'cho-map'},
+# ],
+# value='sch-map',
+# className='checklist-selected-style',
+# ),
+# ),
+# dbc.Collapse(dbc.Card(dbc.CardBody(
+# [
+# dcc.Dropdown(id='cho-map-drop',
+# options=[
+# {"label": "Cropland density", "value": 'crop'},
+# {"label": "Water delivered", "value": 'water'},
+# {"label": "Energy demand", "value": 'energy'},
+# ],
+# value='crop',
+# placeholder='Select variable...',
+# clearable=False,
+# style={'marginBottom': '1em'}
+# ),
+# dcc.Dropdown(id='cho-map-filter',
+# options=[
+# {"label": "Governorate", "value": 'gov'},
+# {"label": "Water basin", "value": 'basin'},
+# ],
+# value='crop',
+# placeholder='Filter by...',
+# clearable=False
+# ),
+# ])),
+# id="cho-map-collapse",
+# ),
+# ],
+# className='options'
 # )
 
-# compare_scenarios = html.Div(
-    # [
-        # title_info(title='Select scenarios to display', info_id='compare-info',
-                   # info_title='Compare scenarios info', modal_content='This is the content of the modal'),
-        # html.Div(
-            # dcc.Dropdown(
-                # id="compare-options",
-                # options=[
-                    # {"label": "Current", "value": 'current'},
-                    # {"label": "Scenario 1", "value": 's1'},
-                    # {"label": "Scenario 2", "value": 's2'},
-                # ],
-                # value='current',
-                # multi=True,
-                # className='checklist-selected-style',
-            # ),
-        # ),
-    # ],
-    # className='options'
-# )
+save_scenario = html.Div(
+    [
+        title_info(title='Save scenario', info_id='save-info',
+                   info_title='Save scenario info', modal_content='This is the content of the modal'),
+        dbc.InputGroup(
+            [
+                dbc.InputGroupAddon("Save scenario", addon_type="prepend"),
+                dbc.Input(id='save-scenario',
+                          placeholder="Name the scenario",
+                          className='form-control'
+                          ),
+            ],
+            size="sm",
+            style={'marginBottom': '1em'}
+        ),
+    ],
+    className='options'
+)
+
+compare_scenarios = html.Div(
+    [
+        title_info(title='Select scenarios to display', info_id='compare-info',
+                   info_title='Compare scenarios info', modal_content='This is the content of the modal'),
+        html.Div(
+            dcc.Dropdown(
+                id="compare-options",
+                options=[
+                    {"label": "Current", "value": 'current'},
+                    {"label": "Scenario 1", "value": 's1'},
+                    {"label": "Scenario 2", "value": 's2'},
+                ],
+                value=['current'],
+                multi=True,
+                className='checklist-selected-style',
+            ),
+        ),
+    ],
+    className='options'
+)
 
 scenario_tools = html.Div(
     [
@@ -338,32 +357,16 @@ scenario_tools = html.Div(
 )
 
 visual_tools = html.Div(
-    # [
+    [
         # unit_options,
         # html.Hr(),
         # map_options,
         # html.Hr(),
-                           
-                  
-                     
-                    
-                       
-                    
-                      
-                    
-        # compare_scenarios
-    # ],
-               
- 
+        save_scenario,
+        html.Hr(),
+        compare_scenarios,
+    ],
 
-                        
-       
-                       
-                    
-                      
-                    
-                           
-        
     id='visual-tools',
 )
 
@@ -391,6 +394,7 @@ sidebar = html.Div(
         ),
         dbc.Collapse([
             scenario_tools,
+            html.Hr(),
             visual_tools,
             # dbc.Input(type='range', className='custom-range')
             # use the Collapse component to animate hiding / revealing links
@@ -437,7 +441,7 @@ graphs = html.Div([results_header,
 
 content = html.Div([map, graphs], id="page-content")
 
-app.layout = html.Div([dcc.Store(id='current'), sidebar, content])
+app.layout = html.Div([dcc.Store(id='current'), dcc.Store(id='compare', data={}), sidebar, content])
 
 
 # Helper funtions
@@ -542,6 +546,7 @@ def plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, des
     map = dict(data=data, layout=layout_map)
     return map
 
+
 def unmet_demand_plot(data, dff_unmet):
     name = 'Unmet water demand (%)'
 
@@ -554,9 +559,11 @@ def unmet_demand_plot(data, dff_unmet):
                        } for category in sorted(df['type'].unique())]
     return data
 
+
 def wtd_plot(data, gw_pumped):
-    name = 'Depth to groundwater (mbgl)'
+    name = 'Average depth to groundwater (mbgl)'
     dff_wtd = gw_pumped.copy()
+    dff_wtd['point'] = [x[1] for x in dff_wtd['point'].str.split('_')]
     wtd = dff_wtd.groupby(['Year', 'point'])['wtd'].mean().reset_index()
     for df, name in zip([wtd], [name]):
         data[name] = [{'x': df.loc[df['point'] == point].Year,
@@ -567,9 +574,12 @@ def wtd_plot(data, gw_pumped):
                        } for point in sorted(df['point'].unique())]
     return data
 
+
 def groundwater_plot(data, gw_pumped):
     name = 'Groundwater extraction (Mm3)'
-    dff = gw_pumped.groupby(['Year', 'point'])['value'].sum() / 1000000
+    dff = gw_pumped.copy()
+    dff['point'] = [x[1] for x in dff['point'].str.split('_')]
+    dff = dff.groupby(['Year', 'point'])['value'].sum() / 1000000
     dff = dff.reset_index()
     for df, name in zip([dff], [name]):
         data[name] = [{'x': df.loc[df['point'] == point].Year,
@@ -580,6 +590,7 @@ def groundwater_plot(data, gw_pumped):
                        'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
                        } for point in sorted(df['point'].unique())]
     return data
+
 
 def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end, eff_init):
     emission_factor = 0.643924449
@@ -638,23 +649,41 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
 
 
 @app.callback(
-    [Output("current", "data"), Output('map', 'selectedData')],
+    [Output("current", "data"), Output("compare", "data"), Output('map', 'selectedData'),
+     Output('pump-eff-init', 'value'), Output('pump-eff-end', 'value'), Output('rb-scenario', 'value'),
+     Output('eto-input', 'value'), Output('drop-level', 'value')],
     [
         Input("button-apply", "n_clicks"),
     ],
     [State('pump-eff-init', 'value'), State('pump-eff-end', 'value'), State('rb-scenario', 'value'),
-     State('eto-input', 'value'), State('drop-level', 'value')]
+     State('eto-input', 'value'), State('drop-level', 'value'), State('compare-options', 'value'),
+     State('save-scenario', 'value'), State("compare", "data")]
 )
-def update_current_data(n_1, eff_init, eff_end, scenario, eto, level):
-    water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
-                                                                                           eto,
-                                                                                           level)
+def update_current_data(n_1, eff_init, eff_end, scenario, eto, level, compare, scenario_name, compare_data):
+    print(compare_data)
+    if compare == ['current']:
+        water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
+                                                                                               eto,
+                                                                                               level)
 
-    map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
-    graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end,
-                        eff_init)
-    data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
-    return data_dict, None
+        map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
+        graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end,
+                            eff_init)
+        data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
+        if scenario_name in [None, '']:
+            compare_data['current'] = dict(scenario=scenario, eto=eto, level=level, eff_end=eff_end, eff_init=eff_init)
+        else:
+            compare_data[scenario_name] = dict(scenario=scenario, eto=eto, level=level, eff_end=eff_end,
+                                               eff_init=eff_init)
+    else:
+        water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(compare_data[compare[0]]['scenario'],
+                                                                                               compare_data[compare[0]]['eto'],
+                                                                                               compare_data[compare[0]]['level'])
+        map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
+        graphs = {}
+        data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
+    return data_dict, compare_data, None, compare_data[compare[0]]['eff_init'], compare_data[compare[0]]['eff_end'], \
+           compare_data[compare[0]]['scenario'], compare_data[compare[0]]['eto'], compare_data[compare[0]]['level']
 
 
 @app.callback(
@@ -765,19 +794,25 @@ def update_results(selection, n_1, title, data_current):
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
             elif ('delivered' in key) or ('supplied' in key):
-                # layout_plot['yaxis'] = {'range': [0, 1100]}
+                layout_plot['yaxis'] = {'range': [0, 1650]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
             elif 'Energy demand' in key:
-                # layout_plot['yaxis'] = {'range': [0, 1600]}
+                layout_plot['yaxis'] = {'range': [0, 12200]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
-            elif 'Depth' in key:
-                # layout_plot['yaxis'] = {'range': [0, 200]}
+            elif 'depth' in key:
+                layout_plot['yaxis'] = {'range': [520, 0], }
+                plots.append(
+                    dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
+                        format='png', filename=key, height=360,
+                        width=400, scale=2))))
+            elif 'extraction' in key:
+                layout_plot['yaxis'] = {'range': [0, 420]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=400,
@@ -795,7 +830,7 @@ def update_results(selection, n_1, title, data_current):
 
 
 @app.callback(
-    [Output('drop-level', 'options'), Output('drop-level', 'value'), Output('drop-level', 'disabled')],
+    [Output('drop-level', 'options'), Output('drop-level', 'disabled')],
     [Input('rb-scenario', 'value')]
 )
 def update_level_dropdown(scenario):
@@ -809,7 +844,7 @@ def update_level_dropdown(scenario):
     disable = False
     if len(level_dict[scenario].keys()) == 1:
         disable = True
-    return options, 'level_1', disable
+    return options, disable
 
 
 @app.callback(
@@ -849,32 +884,32 @@ def update_level_dropdown(data, n):
 
 
 # @app.callback(
-    # [Output('page-1', 'active'), Output('page-2', 'active'),
-     # Output('tools', 'hidden'), Output('visual-tools', 'hidden')],
-    # [Input('page-1', 'n_clicks_timestamp'), Input('page-2', 'n_clicks_timestamp')],
+# [Output('page-1', 'active'), Output('page-2', 'active'),
+# Output('tools', 'hidden'), Output('visual-tools', 'hidden')],
+# [Input('page-1', 'n_clicks_timestamp'), Input('page-2', 'n_clicks_timestamp')],
 # )
 # def selected_tab(n_1, n_2):
-    # if n_2 is None:
-        # n_1 = 1
-        # n_2 = 0
-        # tools = False
-        # visual = True
-    # elif n_1 is None:
-        # n_1 = 0
-        # n_2 = 1
-        # tools = True
-        # visual = False
-    # if n_1 > n_2:
-        # state_1 = True
-        # state_2 = False
-        # tools = False
-        # visual = True
-    # else:
-        # state_1 = False
-        # state_2 = True
-        # tools = True
-        # visual = False
-    # return state_1, state_2, tools, visual
+# if n_2 is None:
+# n_1 = 1
+# n_2 = 0
+# tools = False
+# visual = True
+# elif n_1 is None:
+# n_1 = 0
+# n_2 = 1
+# tools = True
+# visual = False
+# if n_1 > n_2:
+# state_1 = True
+# state_2 = False
+# tools = False
+# visual = True
+# else:
+# state_1 = False
+# state_2 = True
+# tools = True
+# visual = False
+# return state_1, state_2, tools, visual
 
 
 for info_id in info_ids:
@@ -887,7 +922,6 @@ for info_id in info_ids:
         if n_1 or n_2:
             return not is_open
         return is_open
-
 
 # @app.callback(
 #     [Output('cho-map-drop', 'disabled'),
