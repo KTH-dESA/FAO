@@ -31,40 +31,40 @@ for gdf in [demand_points, supply_points, pipelines, provinces]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
 
-# def load_data(scenario, climate, level):
-#     init_year = 2020
-#     data_folder = os.path.join(my_path, 'data')
-#     if not climate:
-#         climate = ['Trend']
-#     data = os.path.join(data_folder, scenario, climate[0])
-#     lcoe = os.path.join(data_folder, scenario, climate[0], level)
-#
-#     water_delivered = pd.read_csv(os.path.join(data, 'results.csv'))
-#     # water_required = pd.read_csv(os.path.join(data, 'Water_requirements.csv'))
-#     ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.csv'))
-#     wwtp_data = pd.read_csv(os.path.join(data, 'wwtp_data.csv'))
-#     desal_data = pd.read_csv(os.path.join(data, 'desal_data.csv'))
-#     desal_data['swpa_e'] = desal_data['sswd'] * 3.31
-#
-#     return water_delivered.loc[water_delivered.Year>=init_year], ag_lcoe.loc[ag_lcoe.Year>=init_year], \
-#            wwtp_data.loc[wwtp_data.Year>=init_year], desal_data.loc[desal_data.Year>=init_year]
-
 def load_data(scenario, climate, level):
     init_year = 2020
-    data_folder = 's3://souss-massa-project/data'
+    data_folder = os.path.join(my_path, 'data')
     if not climate:
         climate = ['Trend']
-    data = f'{data_folder}/{scenario}/{climate[0]}'
-    lcoe = f'{data_folder}/{scenario}/{climate[0]}/{level}'
+    data = os.path.join(data_folder, scenario, climate[0])
+    lcoe = os.path.join(data_folder, scenario, climate[0], level)
 
-    water_delivered = pd.read_csv(f'{data}/results.csv')
-    ag_lcoe = pd.read_csv(f'{lcoe}/lcoe.csv', compression='zip')
-    wwtp_data = pd.read_csv(f'{data}/wwtp_data.csv')
-    desal_data = pd.read_csv(f'{data}/desal_data.csv')
+    water_delivered = pd.read_csv(os.path.join(data, 'results.gz'))
+    # water_required = pd.read_csv(os.path.join(data, 'Water_requirements.csv'))
+    ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.gz'))
+    wwtp_data = pd.read_csv(os.path.join(data, 'wwtp_data.gz'))
+    desal_data = pd.read_csv(os.path.join(data, 'desal_data.gz'))
     desal_data['swpa_e'] = desal_data['sswd'] * 3.31
 
     return water_delivered.loc[water_delivered.Year>=init_year], ag_lcoe.loc[ag_lcoe.Year>=init_year], \
            wwtp_data.loc[wwtp_data.Year>=init_year], desal_data.loc[desal_data.Year>=init_year]
+
+# def load_data(scenario, climate, level):
+#     init_year = 2020
+#     data_folder = 's3://souss-massa-project/data'
+#     if not climate:
+#         climate = ['Trend']
+#     data = f'{data_folder}/{scenario}/{climate[0]}'
+#     lcoe = f'{data_folder}/{scenario}/{climate[0]}/{level}'
+#
+#     water_delivered = pd.read_csv(f'{data}/results.csv')
+#     ag_lcoe = pd.read_csv(f'{lcoe}/lcoe.csv', compression='zip')
+#     wwtp_data = pd.read_csv(f'{data}/wwtp_data.csv')
+#     desal_data = pd.read_csv(f'{data}/desal_data.csv')
+#     desal_data['swpa_e'] = desal_data['sswd'] * 3.31
+#
+#     return water_delivered.loc[water_delivered.Year>=init_year], ag_lcoe.loc[ag_lcoe.Year>=init_year], \
+#            wwtp_data.loc[wwtp_data.Year>=init_year], desal_data.loc[desal_data.Year>=init_year]
 
 
 button_color = 'primary'
@@ -883,7 +883,7 @@ def update_results(selection, title, data_current):
                     format='png', filename=key, height=400,
                     width=400, scale=2))))
             if 'Depth' in key:
-                layout_plot['yaxis'] = {'range': [0, 200]}
+                layout_plot['yaxis'] = {'range': [200, 0]}
                 plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                     format='png', filename=key, height=400,
                     width=400, scale=2))))

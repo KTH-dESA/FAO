@@ -28,7 +28,9 @@ border-color:var(--btn-bc-hover)
 }
 
 .btn-primary.focus,.btn-primary:focus{
-box-shadow:0 0 0 .2rem var(--btn-bs-focus)
+box-shadow:0 0 0 .2rem var(--btn-bs-focus);
+background-color:var(--btn-bc-hover);
+border-color:var(--btn-bc-active)
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{

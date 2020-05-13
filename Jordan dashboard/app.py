@@ -666,7 +666,6 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
      State('save-scenario', 'value'), State("compare", "data")]
 )
 def update_current_data(n_1, eff_init, eff_end, scenario, eto, level, compare, scenario_name, compare_data):
-    print(compare_data)
     if compare == ['current']:
         water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = load_data(scenario,
                                                                                                eto,
