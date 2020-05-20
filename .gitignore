@@ -2,14 +2,12 @@
 .Rhistory
 __pycache__
 .ipynb_checkpoints
-nwsas_results/*
-data/*
-Plots/*
-WEAP data/*
+NWSAS model/*results/*
+*/Plots/*
 *dashboard/data/*
 *dashboard/.idea/*
-Data - Souss-Massa/WEAP Results/*
-Data - Souss-Massa/GIS/*
-Data - Souss-Massa/Processed Results/*
-Data - Souss-Massa/Merged data/*
-Data - Souss-Massa/Cropland and Builtarea/*
+*/Data/WEAP Results/*
+*/Data/GIS/*
+*/Data/Processed Results/*
+*/Data/Merged data/*
+*/Data/Cropland and Builtarea/*

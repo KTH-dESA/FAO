@@ -1,0 +1,1745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Catchments 20200227.kml</name>
+	<Style id="Introduction">
+		<BalloonStyle>
+			<text><![CDATA[<style><--{}
+		table.data { border-color: #EEEEEE; }
+		table.inner td { padding: 0 4px; }
+		table.data td { padding: 0 4px; font-size: 8pt; }
+	--></style>
+	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
+    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
+    <tr><td align="center">
+	     <table border="0" width="630" cellspacing="0" cellpadding="2">
+		     <tr><td align="left">$[MainText]</td></tr>
+      </table>
+    </td></tr>
+	   <tr><td align="center">
+    </td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
+ </table>]]></text>
+			<bgColor>ff80a5b3</bgColor>
+		</BalloonStyle>
+	</Style>
+	<Folder>
+		<name>Catchments</name>
+		<Icon>
+			<href>http://www.weap21.org/img/Catchment.png</href>
+		</Icon>
+		<Placemark id="Object-650-Introduction">
+			<name>B immerguen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B immerguen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.076029999999999,30.60326,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-619-Introduction">
+			<name>B.Adoudou</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Adoudou</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.90864,29.68064,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-350-Introduction">
+			<name>B.Amaghouz</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Amaghouz</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.31101,29.73843,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-420-Introduction">
+			<name>B.Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.342499999999999,30.61711,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-370-Introduction">
+			<name>B.Izik</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Izik</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.32221,29.90922,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-438-Introduction">
+			<name>B.Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.535629999999999,30.31635,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-493-Introduction">
+			<name>B.Talekjount</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Talekjount</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.597860000000001,30.64637,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-406-Introduction">
+			<name>B.Tamri</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Tamri</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.80856,30.76746,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-337-Introduction">
+			<name>B.Tazaroualt</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>B.Tazaroualt</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.37764,29.28977,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-632-Introduction">
+			<name>C_Aouergua</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Aouergua</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.958080000000001,29.90025,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-599-Introduction">
+			<name>C_Argune</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Argune</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.11093,30.27072,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-235-Introduction">
+			<name>C_Ifni</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Ifni</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.946059999999999,29.18219,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-227-Introduction">
+			<name>C_Ifni2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Ifni2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-10.09548,29.13097,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-27-Introduction">
+			<name>C_Lamdad</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Lamdad</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.105130000000001,31.01774,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-193-Introduction">
+			<name>C_Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.408580000000001,29.98976,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-75-Introduction">
+			<name>C_Nokheil</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Nokheil</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.73349,30.94555,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-19-Introduction">
+			<name>C_Oumnerigh</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Oumnerigh</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.732330000000001,30.70354,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-176-Introduction">
+			<name>C_Sdass</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Sdass</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.51909,30.0744,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-138-Introduction">
+			<name>C_Tamraght</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Tamraght</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.367649999999999,30.79249,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-168-Introduction">
+			<name>C_Tanguerafa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Tanguerafa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.227259999999999,30.42453,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-51-Introduction">
+			<name>C_Targua</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Targua</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.4545,30.97885,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-748-Introduction">
+			<name>C_Tifnoute</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Tifnoute</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.79604,31.09806,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-67-Introduction">
+			<name>C_Waar</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_Waar</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.827080000000001,30.82765,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-43-Introduction">
+			<name>C_boussriwil</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>C_boussriwil</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.325810000000001,30.94555,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-366-Introduction">
+			<name>H Izik</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H Izik</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.026859999999999,29.8396,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-644-Introduction">
+			<name>H immerguen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H immerguen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.95059,30.33332,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-623-Introduction">
+			<name>H.Adoudou</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H.Adoudou</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.6837,29.23445,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-346-Introduction">
+			<name>H.Amaghouz</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H.Amaghouz</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.995089999999999,29.67337,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-412-Introduction">
+			<name>H.Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H.Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.069699999999999,30.99398,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-544-Introduction">
+			<name>H.Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H.Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.011939999999999,30.79645,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-489-Introduction">
+			<name>H.Talekjount</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H.Talekjount</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.59338,30.86378,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-398-Introduction">
+			<name>H.Tamri</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H.Tamri</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.40568,31.02743,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-341-Introduction">
+			<name>H.Tazaroualt</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>H.Tazaroualt</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.58822,29.70119,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-475-Introduction">
+			<name>I_El Guerdane</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_El Guerdane</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.974119999999999,30.3981,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-522-Introduction">
+			<name>I_G1 Aoulouz</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_G1 Aoulouz</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.25737,30.73213,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-428-Introduction">
+			<name>I_Modern Privé Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Modern Privé Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.186870000000001,30.54272,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-381-Introduction">
+			<name>I_Modern Privé Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Modern Privé Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.513640000000001,30.23167000000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-471-Introduction">
+			<name>I_Modern Privé de Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Modern Privé de Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.028890000000001,30.51428,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-426-Introduction">
+			<name>I_Modern Public Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Modern Public Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.21454,30.38804,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-363-Introduction">
+			<name>I_Modern Public Massa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Modern Public Massa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.51151,30.06546,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-477-Introduction">
+			<name>I_Modern Public du Souss Amont</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Modern Public du Souss Amont</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.75671,30.44955,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-379-Introduction">
+			<name>I_Moderne Privé Chtouka</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Moderne Privé Chtouka</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.42971,30.29396,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-302-Introduction">
+			<name>I_Oughzifen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Oughzifen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.5787,30.0987,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-324-Introduction">
+			<name>I_PMH Anti Atlas Ait Baha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_PMH Anti Atlas Ait Baha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.127330000000001,29.94674,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-568-Introduction">
+			<name>I_PMH Anti Atlas Ighrem</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_PMH Anti Atlas Ighrem</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.328770000000001,30.23916,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-516-Introduction">
+			<name>I_PMH Taliouine Tifnoute</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_PMH Taliouine Tifnoute</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.83665,30.85396,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-392-Introduction">
+			<name>I_PMH Tamri_Tamraght</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_PMH Tamri_Tamraght</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.528560000000001,30.75083,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-519-Introduction">
+			<name>I_PMH de Montagne Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_PMH de Montagne Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.75479,30.91938,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-320-Introduction">
+			<name>I_PMH de Tiznit</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_PMH de Tiznit</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.848929999999999,29.34479,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-304-Introduction">
+			<name>I_Tassila</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Tassila</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.61619,29.98837,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-511-Introduction">
+			<name>I_Traditionnel Rehabilite du Souss Amont</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Traditionnel Rehabilite du Souss Amont</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.501760000000001,30.61331,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-424-Introduction">
+			<name>I_Traditionnel Rehabilité Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Traditionnel Rehabilité Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.29753,30.44463,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-534-Introduction">
+			<name>I_Traditionnel Rehabilité Souss Amont 1 Tranche</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Traditionnel Rehabilité Souss Amont 1 Tranche</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.324920000000001,30.69714,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-473-Introduction">
+			<name>I_Traditionnel Réhabilité du Souss Perimetres Diff</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Traditionnel Réhabilité du Souss Perimetres Diff</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.987399999999999,30.4844,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-482-Introduction">
+			<name>I_Traditionnel nn Réahbilité 2 Tranche</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>I_Traditionnel nn Réahbilité 2 Tranche</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.81978,30.69186,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-416-Introduction">
+			<name>M.Issen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>M.Issen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.149660000000001,30.8599,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-402-Introduction">
+			<name>M.Tamri</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>M.Tamri</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.621560000000001,30.93317,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-485-Introduction">
+			<name>Middle Souss1</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Middle Souss1</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.61838,30.54611,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-442-Introduction">
+			<name>Middle.Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Catchment.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Catchment-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Catchment</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Middle.Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.10455,30.47481,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

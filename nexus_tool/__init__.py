@@ -478,15 +478,19 @@ class Model():
                     lcoe_df[geo_boundary] = self.df[geo_boundary]
                     for _technology in _technologies:
                         lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
-                    self.df.loc[self.df[geo_boundary]==key, 'least_cost_tech'], \
+                    lcoe = get_least_cost(lcoe_df, geo_boundary, key)
+                    self.df.loc[self.df[geo_boundary]==key, 'least_cost_tech'] = \
+                        lcoe.loc[self.df[geo_boundary]==key,'least_cost_technology']
                     self.df.loc[self.df[geo_boundary]==key, 'lcoe'] = \
-                                        get_least_cost(lcoe_df, geo_boundary, key)
+                        lcoe.loc[self.df[geo_boundary]==key, 'lcoe']
             else:
                 _technologies = self.__check_tech_input(technologies)
                 lcoe_df = pd.DataFrame()
                 for _technology in _technologies:
                     lcoe_df[_technology] = self.technologies[_technology].df['lcoe']
-                self.df['least_cost_tech'], self.df['lcoe'] = get_least_cost(lcoe_df)
+                lcoe = get_least_cost(lcoe_df)
+                self.df['least_cost_tech'] = lcoe['least_cost_technology']
+                self.df['lcoe'] = lcoe['lcoe']
         else:
             _technologies = self.__check_tech_input(technologies)
             lcoe_df = pd.DataFrame()

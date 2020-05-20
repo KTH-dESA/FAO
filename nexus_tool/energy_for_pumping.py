@@ -61,7 +61,7 @@ def get_sw_tdh(df, tdh_sw, elevation, f, L, avg_Q, D, g, pump_hours, axis=1):
         for i in range (1,13):
             _avg_Q = '{}{}'.format(avg_Q, i)
             _f = '{}{}'.format(f, i)
-            _tdh_sw = '{}{}'.format(_tdh_sw, i)
+            _tdh_sw = '{}{}'.format(tdh_sw, i)
         
             df[_tdh_sw] = (df[elevation] + ((df[_f]*L*16*((df[_avg_Q]/(30*pump_hours*60*60))**2))/((D**5)*2*g*(pi**2))))
             df[_tdh_sw].replace(0, np.nan, inplace=True) #this line is unecesary and check the above one as it is being overwriten every time
@@ -100,10 +100,10 @@ def get_SWpumping_energy(df, tdh_sw, SWpump_eff, swpp_e, swpa_e, g, peak_Q,
             _swpa_e = '{}{}'.format(swpa_e, i) #surface water pumping average electric demand
             _peak_Q = '{}{}'.format(peak_Q, i) #peak water flow in the pipeline. To be updated WEAP output. 
             _avg_Q = '{}{}'.format(avg_Q, i) #average water flow in the pipeline. To be updated with WEAP output 
+            _tdh_sw = '{}{}'.format(tdh_sw, i)
             
-            
-            df[_swpp_e]=((df[_peak_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000)) #to convert E from W to KW
-            df[_swpa_e]=((df[_avg_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000*3600)) #to convert E from J to KWh
+            df[_swpp_e]=((df[_peak_Q]*df[_tdh_sw]*g*dens)/(SWpump_eff*1000)) #to convert E from W to KW
+            df[_swpa_e]=((df[_avg_Q]*df[_tdh_sw]*g*dens)/(SWpump_eff*1000*3600)) #to convert E from J to KWh
             
     else:
         df[swpp_e] = ((df[peak_Q]*df[tdh_sw]*g*dens)/(SWpump_eff*1000))

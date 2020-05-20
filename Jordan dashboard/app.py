@@ -16,9 +16,9 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 spatial_data = os.path.join(my_path, 'spatial_data')
 
 # governorates = gpd.read_file(os.path.join(spatial_data,'Admin','JOR_adm1.shp'))
-demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.geojson'))
-supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.geojson'))
-pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.geojson'))
+demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg')) #TEST: changed from geojson
+supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.gpkg'))
+pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
 WebMercator = 4326
 # governorates.to_crs(epsg=WebMercator, inplace=True)
 for gdf in [demand_points, supply_points, pipelines]:

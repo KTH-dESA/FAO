@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Demand Sites 20200227.kml</name>
+	<Style id="Introduction">
+		<BalloonStyle>
+			<text><![CDATA[<style><--{}
+		table.data { border-color: #EEEEEE; }
+		table.inner td { padding: 0 4px; }
+		table.data td { padding: 0 4px; font-size: 8pt; }
+	--></style>
+	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
+    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
+    <tr><td align="center">
+	     <table border="0" width="630" cellspacing="0" cellpadding="2">
+		     <tr><td align="left">$[MainText]</td></tr>
+      </table>
+    </td></tr>
+	   <tr><td align="center">
+    </td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
+ </table>]]></text>
+			<bgColor>ff80a5b3</bgColor>
+		</BalloonStyle>
+	</Style>
+	<Folder>
+		<name>Demand Sites</name>
+		<Icon>
+			<href>http://www.weap21.org/img/Demand-Site.png</href>
+		</Icon>
+		<Placemark id="Object-561-Introduction">
+			<name>AEP Rural</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEP Rural</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.963699999999999,30.09209,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-480-Introduction">
+			<name>AEP Taroudant</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEP Taroudant</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.902760000000001,30.46283,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-333-Introduction">
+			<name>AEPR</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEPR</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.33708,29.70645,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-548-Introduction">
+			<name>AEPR 2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEPR 2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.991580000000001,30.86536,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-524-Introduction">
+			<name>AEP_Aoulouz</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEP_Aoulouz</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.142200000000001,30.77449,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-556-Introduction">
+			<name>AEP_Ighrem</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEP_Ighrem</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.45837,30.25891,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-588-Introduction">
+			<name>AEP_SEl Guerdane</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEP_SEl Guerdane</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.946210000000001,30.35913,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-525-Introduction">
+			<name>AEP_Taliouine</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEP_Taliouine</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-7.936579999999999,30.59884,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-513-Introduction">
+			<name>AEP_ouled berhil</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>AEP_ouled berhil</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.53445,30.55566,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-394-Introduction">
+			<name>Agadir</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Agadir</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.59572,30.38739,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-584-Introduction">
+			<name>Ait Baha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Ait Baha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.18324,29.99476,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-383-Introduction">
+			<name>Biougra</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Biougra</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.246969999999999,30.14053,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-315-Introduction">
+			<name>Lakhssass</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Lakhssass</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.65381,29.40002,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-431-Introduction">
+			<name>Ouled Teima</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Ouled Teima</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.20825,30.47732,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-536-Introduction">
+			<name>Recharge Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Recharge Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.3698,30.51796,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-308-Introduction">
+			<name>Sidi Ifni</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Sidi Ifni</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-10.09376,29.44972,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-586-Introduction">
+			<name>Tafraout</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Tafraout</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.93867,29.55467,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-310-Introduction">
+			<name>Tiznit</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Demand-Site.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Demand-Site-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Demand Site</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Tiznit</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.71087,29.63196,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
