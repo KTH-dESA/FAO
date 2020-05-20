@@ -1,9 +1,0 @@
-{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "diversion": "ConduiteEl Guerdane", "type": "Transmission Pipeline", "Supply point": "Complexe Aoulouz Mokhtar Soussi", "type_supply": "Reservoir supply", "Demand point": "Withdrawal Node 1", "type_demand": "Surfacewater withdrawal", "distance": 77847.692844384132, "elevation_diff": -466.0 }, "geometry": { "type": "LineString", "coordinates": [ [ -8.12489, 30.69973 ], [ -8.24548, 30.65062 ], [ -8.3968, 30.55802 ], [ -8.59255, 30.44799 ], [ -8.85033, 30.38495 ], [ -8.94976, 30.27628 ] ] } },
-{ "type": "Feature", "properties": { "diversion": "Youssef ben Tachfine Canal", "type": "Transmission Pipeline", "Supply point": "Youssef Ben Tachefine", "type_supply": "Reservoir supply", "Demand point": "Withdrawal Node 3", "type_demand": "Surfacewater withdrawal", "distance": 7614.0981230172729, "elevation_diff": 69.0 }, "geometry": { "type": "LineString", "coordinates": [ [ -9.47543, 29.81078 ], [ -9.47261, 29.87945 ], [ -9.46483, 29.99332 ], [ -9.46271, 30.03363 ] ] } },
-{ "type": "Feature", "properties": { "diversion": "Youssef ben Tachfine Canal", "type": "Transmission Pipeline", "Supply point": "Youssef Ben Tachefine", "type_supply": "Reservoir supply", "Demand point": "Withdrawal Node 2", "type_demand": "Surfacewater withdrawal", "distance": 20253.108322140477, "elevation_diff": 60.0 }, "geometry": { "type": "LineString", "coordinates": [ [ -9.47543, 29.81078 ], [ -9.47261, 29.87945 ], [ -9.46483, 29.99332 ], [ -9.46271, 30.03363 ] ] } }
-]
-}
