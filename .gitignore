@@ -2,12 +2,13 @@
 .Rhistory
 __pycache__
 .ipynb_checkpoints
+envs/*
 NWSAS model/*results/*
 */Plots/*
 *dashboard/data/*
 *dashboard/.idea/*
 */Data/WEAP Results/*
 */Data/GIS/*
-*/Data/Processed Results/*
-*/Data/Merged data/*
+*/Data/Processed results/*
+*/Data/Ordered results/*
 */Data/Cropland and Builtarea/*
