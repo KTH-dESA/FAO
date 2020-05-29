@@ -62,7 +62,7 @@ if not os.path.exists(os.path.join('Data', 'Processed results', scenario)):
 if not os.path.exists(output_folder):
     os.mkdir(output_folder)
     
-file = os.path.join('Data', 'Ordered results', scenario, climate, 'data.xlsx')
+file = os.path.join('Data', 'WEAP Results', f'SoussMassa Results - {scenario} - {climate}.xlsx')
 data = pd.ExcelFile(file)
 
 sheet_names = {'Desalination': 'DS Agriculture', 

@@ -1,42 +1,29 @@
 workdir: "Morocco model"
 
-SCENARIOS = ['Reference', 'Desalination','Irrigation Intensification']
+# SCENARIOS = ['Reference', 'Desalination','Irrigation Intensification']
 # W_RATE = [0, 0.3, 0.5, 0.7]
 # PV_RATE = [0, 0.3, 0.5, 0.7]
 # GRID_RATE = [0, -0.3, -0.5, -0.7]
-# SCENARIOS = ["Reference"]
+SCENARIOS = ["Reference"]
+# CLIMATE = ['Trend']
 CLIMATE = ['Trend', 'Climate Change']
 W_RATE = [0]
 PV_RATE = [0]
 GRID_RATE = [0]
 
-rule input_data:
+rule all:
     input: expand("../Morocco dashboard/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/lcoe.gz", \
                   scenario=SCENARIOS, climate=CLIMATE, w_rate=W_RATE, \
                   pv_rate=PV_RATE, grid_rate=GRID_RATE)
 
-rule copy_data:
-    input: "Data/WEAP Results/SoussMassa Results - {scenario} - {climate}.xlsx"
-    params: scenario="{scenario}", climate="{climate}"
-    output: "Data/Ordered results/{scenario}/{climate}/data.xlsx"
-    # shell: "python script.py {params.x} {output}"
-    run:
-        import os
-        from shutil import copyfile
-        scenario = str(params.scenario)
-        climate = str(params.climate)
-        
-        if not os.path.exists(os.path.join("Data","Ordered results")):
-            os.mkdir(os.path.join("Data","Ordered results"))
-        if not os.path.exists(os.path.join("Data", "Ordered results", scenario)):
-            os.mkdir(os.path.join("Data", "Ordered results", scenario))   
-        if not os.path.exists(os.path.join("Data", "Ordered results", scenario, climate)):
-            os.mkdir(os.path.join("Data", "Ordered results", scenario, climate))
-    
-        copyfile(str(input), str(output))
+rule schematic_processing:
+    input: "Data/Schematic/Demand Sites.kml" 
+    output: "../Morocco dashboard/spatial_data/Demand_points.gpkg"
+    shell: 'python schematic_processing.py'
 
 rule softlinking:
-    input: "Data/Ordered results/{scenario}/{climate}/data.xlsx" 
+    input: "Data/WEAP Results/SoussMassa Results - {scenario} - {climate}.xlsx", \
+           "../Morocco dashboard/spatial_data/Demand_points.gpkg"
     params: scenario="{scenario}", climate="{climate}"
     output: "Data/Processed results/{scenario}/{climate}/demand_data.gz"
     shell: 'python softlinking.py "{params.scenario}" "{params.climate}"'
