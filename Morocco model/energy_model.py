@@ -1,30 +1,26 @@
 import sys, os
 sys.path.append("..") #this is to add the avobe folder to the package directory
 import nexus_tool
-from nexus_tool.weap_tools import create_folder
 from nexus_tool.weap_tools import create_learning_curve
 import pandas as pd
 import numpy as np
 
-scenario = str(sys.argv[1])
-climate = str(sys.argv[2])
+scenario = str(snakemake.params.scenario)
+climate = str(snakemake.params.climate)
+demand_data = str(snakemake.input.demand_data)
+wwtp_inflow = str(snakemake.input.wwtp_inflow)
+output = str(snakemake.output)
 
-load_folder = os.path.join('Data', 'Processed results')
-results_folder = os.path.join('..', 'Morocco dashboard', 'data')
-# results_folder = os.path.join('Results')
-create_folder(results_folder)
+# load_folder = os.path.join('Data', 'Processed results', scenario, climate)
+# results_folder = os.path.join('..', 'Morocco dashboard', 'data', scenario, climate)
+# results_folder = output.split('results.gz')[0]
+results_folder = output.split(os.path.basename(output))[0]
 
-scenario_folder = os.path.join(load_folder, scenario)
-create_folder(os.path.join(results_folder, scenario))
+os.makedirs(results_folder, exist_ok = True)
 
-sub_scenario_folder = os.path.join(scenario_folder, climate)
-create_folder(os.path.join(results_folder, scenario, climate))
-output_main_folder = os.path.join(results_folder, scenario, climate)
-
-load_data = sub_scenario_folder
 #Define the path to read the scenario input data and reads it in
-file_path = os.path.join(load_data, 'demand_data.gz')
-df = nexus_tool.read_csv(file_path)
+# file_path = os.path.join(load_folder, 'demand_data.gz')
+df = nexus_tool.read_csv(demand_data)
 
 #Creates the nexus model with the input dataframe
 souss_massa = nexus_tool.Model(df)
@@ -78,13 +74,13 @@ sm_desal.df[souss_massa.swpa_e] = sm_desal.df[souss_massa.sswd] * desalination_e
 sm_desal.df[souss_massa.swpp_e] = desalination_energy_int
 
 #Here we load the WWTP inflow data
-file_path = os.path.join(load_data, 'wwtp_inflow.gz')
-df_wwtp = pd.read_csv(file_path)
+# file_path = os.path.join(load_folder, 'wwtp_inflow.gz')
+df_wwtp = pd.read_csv(wwtp_inflow)
 
 #We define an energy intensity for wastewater treatment and compute the energy demand
 wwtp_energy_int = 0.6 # kWh/m3
 df_wwtp['swpa_e'] = df_wwtp.value * wwtp_energy_int
 
-souss_massa.df.to_csv(os.path.join(output_main_folder, 'results.gz'), index=False)
-sm_desal.df.to_csv(os.path.join(output_main_folder, 'desal_data.gz'), index=False)
-df_wwtp.to_csv(os.path.join(output_main_folder, 'wwtp_data.gz'), index=False)
+souss_massa.df.to_csv(output, index=False)
+sm_desal.df.to_csv(os.path.join(results_folder, 'desal_data.gz'), index=False)
+df_wwtp.to_csv(os.path.join(results_folder, 'wwtp_data.gz'), index=False)
