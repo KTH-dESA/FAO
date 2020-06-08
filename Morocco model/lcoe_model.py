@@ -1,27 +1,30 @@
 import sys, os
 sys.path.append("..") #this is to add the avobe folder to the package directory
 import nexus_tool
-from nexus_tool.weap_tools import create_folder
 from nexus_tool.weap_tools import create_learning_curve
 import pandas as pd
 import numpy as np
 
-scenario = str(sys.argv[1])
-climate = str(sys.argv[2])
-w_rate = str(sys.argv[3])
-pv_rate = str(sys.argv[4])
-grid_rate = str(sys.argv[5])
+scenario = str(snakemake.params.scenario)
+climate = str(snakemake.params.climate)
+w_rate = str(snakemake.params.w_rate)
+pv_rate = str(snakemake.params.pv_rate)
+grid_rate = str(snakemake.params.grid_rate)
+input_path = str(snakemake.input.results)
+cropland_path = str(snakemake.input.cropland)
+output_path = str(snakemake.output)
 
-output_main_folder = os.path.join('..', 'Morocco dashboard', 'data', scenario, climate)
-output_folder = os.path.join(output_main_folder, f'W{w_rate}_PV{pv_rate}_Grid{grid_rate}')
-create_folder(output_folder)
+# output_main_folder = os.path.join('..', 'Morocco dashboard', 'data', scenario, climate)
+# output_lcoe_folder = os.path.join(output_main_folder, f'W{w_rate}_PV{pv_rate}_Grid{grid_rate}')
+output_lcoe_folder = output_path.split(os.path.basename(output_path))[0]
+os.makedirs(output_lcoe_folder, exist_ok = True)
 
-file_path = os.path.join(output_main_folder, 'results.gz')
-df = nexus_tool.read_csv(file_path)
+# file_path = os.path.join(output_main_folder, 'results.gz')
+df = nexus_tool.read_csv(input_path)
 
 #Define the path to read the cropland and builtup are data and reads it in
-folder_path = os.path.join('Data', 'Cropland and Builtarea')
-cropland_path = os.path.join(folder_path, 'cropland.gz')
+# folder_path = os.path.join('Data', 'Cropland and Builtarea')
+# cropland_path = os.path.join(folder_path, 'cropland.gz')
 cropland = nexus_tool.read_csv(cropland_path)
 cropland = cropland.loc[cropland.Date.isin(df.Date.unique())]
 
@@ -79,4 +82,4 @@ sm_cropland.get_lcoe(years='all', axis=0)
 sm_cropland.get_least_cost(technologies='a', years='all', axis=0)
 
 sm_cropland.lcoe.drop(columns=['water demand', 'required capacity', 'energy demand'], inplace=True)
-sm_cropland.lcoe.reset_index().to_csv(os.path.join(output_folder, 'lcoe.gz'), index=False)
+sm_cropland.lcoe.reset_index().to_csv(output_path, index=False)

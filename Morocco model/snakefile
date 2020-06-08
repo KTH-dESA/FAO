@@ -1,41 +1,64 @@
-workdir: "Morocco model"
+workdir: sys.path[0] #this line it to set the working directory to the location of the snakefile
 
-# SCENARIOS = ['Reference', 'Desalination','Irrigation Intensification']
-# W_RATE = [0, 0.3, 0.5, 0.7]
-# PV_RATE = [0, 0.3, 0.5, 0.7]
-# GRID_RATE = [0, -0.3, -0.5, -0.7]
+######################### User defined parameters #############################
+dash_folder = "../Morocco dashboard" #set the dashboard folder
+
+# SCENARIOS = ['Reference', 'Desalination','Irrigation Intensification'] #define the list of scenarios to run
+# W_RATE = [0, 0.3, 0.5, 0.7] #define the list of wind technology cost reduction rate
+# PV_RATE = [0, 0.3, 0.5, 0.7] #define the list of solar PV technology cost reduction rate
+# GRID_RATE = [0, -0.3, -0.5, -0.7] #define the list of grid price increment rate
+# CLIMATE = ['Trend', 'Climate Change'] #define the list of climates to run
+CLIMATE = ['Trend']
 SCENARIOS = ["Reference"]
-# CLIMATE = ['Trend']
-CLIMATE = ['Trend', 'Climate Change']
 W_RATE = [0]
 PV_RATE = [0]
 GRID_RATE = [0]
+###############################################################################
 
 rule all:
-    input: expand("../Morocco dashboard/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/lcoe.gz", \
+    input: expand("{dash_folder}/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/lcoe.gz", \
                   scenario=SCENARIOS, climate=CLIMATE, w_rate=W_RATE, \
-                  pv_rate=PV_RATE, grid_rate=GRID_RATE)
+                  pv_rate=PV_RATE, grid_rate=GRID_RATE, dash_folder=dash_folder), \
 
 rule schematic_processing:
-    input: "Data/Schematic/Demand Sites.kml" 
-    output: "../Morocco dashboard/spatial_data/Demand_points.gpkg"
-    shell: 'python schematic_processing.py'
+    input: provinces="Data/GIS/Admin/Provinces.gpkg", \
+           groundwater="Data/Schematic/Groundwater.kml", \
+           wwtp="Data/Schematic/Wastewater Treatment Plants.kml", \
+           other_supply="Data/Schematic/Other Supplies.kml", \
+           river_with="Data/Schematic/River Withdrawals.kml", \
+           demand_sites="Data/Schematic/Demand Sites.kml", \
+           catchments="Data/Schematic/Catchments.kml", \
+           diversions="Data/Schematic/Diversions.kml", \
+           reservoirs="Data/Schematic/Reservoirs.kml", \
+           links="Data/Schematic/Transmission Links.kml"
+    output: demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg"
+    script: 'schematic_processing.py'
+    
+rule cropland_processing:
+    input: demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg", \
+           cropland="Data/GIS/Processed layers/cropland_2013_processed_20200227.csv"
+    output: "Data/Cropland and Builtarea/cropland.gz"
+    script: 'cropland_processing.py'
 
 rule softlinking:
-    input: "Data/WEAP Results/SoussMassa Results - {scenario} - {climate}.xlsx", \
-           "../Morocco dashboard/spatial_data/Demand_points.gpkg"
+    input: data="Data/WEAP Results/SoussMassa Results - {scenario} - {climate}.xlsx", \
+           demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg"
     params: scenario="{scenario}", climate="{climate}"
-    output: "Data/Processed results/{scenario}/{climate}/demand_data.gz"
-    shell: 'python softlinking.py "{params.scenario}" "{params.climate}"'
+    output: demand_data="Data/Processed results/{scenario}/{climate}/demand_data.gz", \
+            wwtp_inflow="Data/Processed results/{scenario}/{climate}/wwtp_inflow.gz"
+    script: 'softlinking.py'
     
 rule energy_model:
-    input: "Data/Processed results/{scenario}/{climate}/demand_data.gz" 
+    input: demand_data="Data/Processed results/{scenario}/{climate}/demand_data.gz", \
+           wwtp_inflow="Data/Processed results/{scenario}/{climate}/wwtp_inflow.gz"
     params: scenario="{scenario}", climate="{climate}"
-    output: "../Morocco dashboard/data/{scenario}/{climate}/results.gz"
-    shell: 'python energy_model.py "{params.scenario}" "{params.climate}"'
+    output: f"{dash_folder}/data/{{scenario}}/{{climate}}/results.gz"
+    script: 'energy_model.py'
     
 rule lcoe_model:
-    input: "../Morocco dashboard/data/{scenario}/{climate}/results.gz" 
-    params: scenario="{scenario}", climate="{climate}", w_rate="{w_rate}", pv_rate="{pv_rate}", grid_rate="{grid_rate}"
-    output: "../Morocco dashboard/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/lcoe.gz"
-    shell: 'python lcoe_model.py "{params.scenario}" "{params.climate}" "{params.w_rate}" "{params.pv_rate}" "{params.grid_rate}"'    
+    input: results="../Morocco dashboard/data/{scenario}/{climate}/results.gz", \
+           cropland="Data/Cropland and Builtarea/cropland.gz"
+    params: scenario="{scenario}", climate="{climate}", w_rate="{w_rate}", \
+            pv_rate="{pv_rate}", grid_rate="{grid_rate}"
+    output: f"{dash_folder}/data/{{scenario}}/{{climate}}/W{{w_rate}}_PV{{pv_rate}}_Grid{{grid_rate}}/lcoe.gz"
+    script: 'lcoe_model.py'    

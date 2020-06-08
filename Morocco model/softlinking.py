@@ -1,7 +1,21 @@
-import sys, os
+import os
 import pandas as pd
 import geopandas as gpd
 import numpy as np
+
+scenario = str(snakemake.params.scenario)
+climate = str(snakemake.params.climate)
+data_file = str(snakemake.input.data)
+demand_points = str(snakemake.input.demand_points)
+demand_data_output = str(snakemake.output.demand_data)
+wwtp_inflow_output = str(snakemake.output.wwtp_inflow)
+
+# spatial_folder = f"{snakemake.params.dash_folder}/spatial_data"
+spatial_folder = demand_points.split(os.path.basename(demand_points))[0]
+output_folder = demand_data_output.split(os.path.basename(demand_data_output))[0]
+
+# output_folder = output.split('demand_data.gz')[0]
+# output_folder = os.path.join('Data', 'Processed results', scenario, climate)
 
 def integrate_data(data, sheet_name, category, dff_dict, var_name='links', target='point'):
     df = data.parse(sheet_name, skiprows=3)
@@ -41,29 +55,19 @@ def integrate_data(data, sheet_name, category, dff_dict, var_name='links', targe
         print(df.loc[~df[var_name].isin(df.dropna()[var_name].unique()),var_name].unique())
     return df
 
-
-demand_links = gpd.read_file(os.path.join('..','Morocco dashboard', 'spatial_data', 'Demand_points.gpkg'))
-supply_links = gpd.read_file(os.path.join('..','Morocco dashboard', 'spatial_data', 'Supply_points.gpkg'))
-wwtp = gpd.read_file(os.path.join('..','Morocco dashboard', 'spatial_data', 'wwtp.gpkg'))
-diversions = gpd.read_file(os.path.join('..','Morocco dashboard', 'spatial_data', 'Pipelines.gpkg'))
-groundwater = gpd.read_file(os.path.join('..','Morocco dashboard', 'spatial_data', 'Groundwater.gpkg'))
-all_points = gpd.read_file(os.path.join('..','Morocco dashboard', 'spatial_data', 'all_points.gpkg'))
+demand_links = gpd.read_file(demand_points)
+supply_links = gpd.read_file(os.path.join(spatial_folder, 'Supply_points.gpkg'))
+wwtp = gpd.read_file(os.path.join(spatial_folder, 'wwtp.gpkg'))
+diversions = gpd.read_file(os.path.join(spatial_folder, 'Pipelines.gpkg'))
+groundwater = gpd.read_file(os.path.join(spatial_folder, 'Groundwater.gpkg'))
+all_points = gpd.read_file(os.path.join(spatial_folder, 'all_points.gpkg'))
 
 MerchidSudMoroc = 26192
 
-scenario = str(sys.argv[1])
-climate = str(sys.argv[2])
-
-output_folder = os.path.join('Data', 'Processed results', scenario, climate)
-if not os.path.exists(os.path.join('Data', "Processed results")):
-    os.mkdir(os.path.join('Data', "Processed results"))
-if not os.path.exists(os.path.join('Data', 'Processed results', scenario)):
-    os.mkdir(os.path.join('Data', 'Processed results', scenario))
-if not os.path.exists(output_folder):
-    os.mkdir(output_folder)
+os.makedirs(output_folder, exist_ok = True)
     
-file = os.path.join('Data', 'WEAP Results', f'SoussMassa Results - {scenario} - {climate}.xlsx')
-data = pd.ExcelFile(file)
+# data_file = os.path.join('Data', 'WEAP Results', f'SoussMassa Results - {scenario} - {climate}.xlsx')
+data = pd.ExcelFile(data_file)
 
 sheet_names = {'Desalination': 'DS Agriculture', 
                'GP Irrigation': 'GW Agriculture', 
@@ -144,5 +148,5 @@ df.loc[df.unmet_demand_month<0, 'unmet_demand_month'] = 0
 
 df.fillna({'unmet_demand_year': 0, 'unmet_demand_month': 0}, inplace=True)
 
-df.to_csv(os.path.join(output_folder, 'demand_data.gz'), index=False)
-df_wwtp.to_csv(os.path.join(output_folder, 'wwtp_inflow.gz'), index=False)
+df.to_csv(demand_data_output, index=False)
+df_wwtp.to_csv(wwtp_inflow_output, index=False)

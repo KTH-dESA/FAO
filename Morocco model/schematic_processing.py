@@ -4,16 +4,20 @@ import os
 import geopandas as gpd
 import nexus_tool.weap_tools as wp
 
-provinces = gpd.read_file('Data/GIS/Admin/Provinces.gpkg', encoding='utf-8')
-groundwater = gpd.read_file('Data/Schematic/Groundwater.kml', encoding='utf-8')
-wwtp = gpd.read_file('Data/Schematic/Wastewater Treatment Plants.kml', encoding='utf-8')
-other_supply = gpd.read_file('Data/Schematic/Other Supplies.kml', encoding='utf-8')
-river_withdrawals = gpd.read_file('Data/Schematic/River Withdrawals.kml', encoding='utf-8')
-demand_sites = gpd.read_file('Data/Schematic/Demand Sites.kml', encoding='utf-8')
-catchments = gpd.read_file('Data/Schematic/Catchments.kml', encoding='utf-8')
-diversion = gpd.read_file('Data/Schematic/Diversions.kml', encoding='utf-8')
-reservoirs = gpd.read_file('Data/Schematic/Reservoirs.kml', encoding='utf-8')
-links = gpd.read_file('Data/Schematic/Transmission Links.kml', encoding='utf-8')
+provinces = gpd.read_file(str(snakemake.input.provinces), encoding='utf-8')
+groundwater = gpd.read_file(str(snakemake.input.groundwater), encoding='utf-8')
+wwtp = gpd.read_file(str(snakemake.input.wwtp), encoding='utf-8')
+other_supply = gpd.read_file(str(snakemake.input.other_supply), encoding='utf-8')
+river_withdrawals = gpd.read_file(str(snakemake.input.river_with), encoding='utf-8')
+demand_sites = gpd.read_file(str(snakemake.input.demand_sites), encoding='utf-8')
+catchments = gpd.read_file(str(snakemake.input.catchments), encoding='utf-8')
+diversion = gpd.read_file(str(snakemake.input.diversions), encoding='utf-8')
+reservoirs = gpd.read_file(str(snakemake.input.reservoirs), encoding='utf-8')
+links = gpd.read_file(str(snakemake.input.links), encoding='utf-8')
+
+
+output_demand_points = str(snakemake.output.demand_points)
+output_folder = output_demand_points.split(os.path.basename(output_demand_points))[0]
 
 #Converting geometries and droping unecesary columns
 
@@ -76,15 +80,14 @@ groundwater['wtd_m'] = wp.sample_raster("Data/GIS/wtd/Africa_model_wtd_v2.nc",
 groundwater.loc[groundwater.point=='Souss GW','wtd_m'] = 170
 groundwater.loc[groundwater.point=='Chtouka GW','wtd_m'] = 85
 
-if not os.path.exists("Data/GIS/DEM/Souss-Massa DEM.tif"):
+dem_path = "Data/GIS/DEM/Souss-Massa DEM.tif"
+if not os.path.exists(dem_path):
     wp.merge_rasters('Data/GIS/DEM/*', 'EPSG:4326', 
-                     "Data/GIS/DEM/Souss-Massa DEM.tif")
+                     dem_path)
     
-supply_links['elevation'] = wp.sample_raster("Data/GIS/DEM/Souss-Massa DEM.tif", 
-                                               supply_links)
-demand_links['elevation'] = wp.sample_raster("Data/GIS/DEM/Souss-Massa DEM.tif", 
-                                               demand_links)
-wwtp['elevation'] = wp.sample_raster("Data/GIS/DEM/Souss-Massa DEM.tif", wwtp)
+supply_links['elevation'] = wp.sample_raster(dem_path, supply_links)
+demand_links['elevation'] = wp.sample_raster(dem_path, demand_links)
+wwtp['elevation'] = wp.sample_raster(dem_path, wwtp)
                                        
 diversions = gpd.sjoin(diversion, reservoirs, how='inner', op='intersects')
 diversions.drop(columns=['index_right'], inplace=True)
@@ -96,12 +99,11 @@ diversions.rename(columns={'point_left': 'Supply point', 'point_right': 'Demand 
 
 dff1 = river_withdrawals.loc[river_withdrawals.point.isin(diversions['Demand point'])].copy()
 dff1['diversion'] = dff1.point.map(diversions.set_index('Demand point').diversion)
-dff1['elevation'] = wp.sample_raster("Data/GIS/DEM//Souss-Massa DEM.tif", dff1)
+dff1['elevation'] = wp.sample_raster(dem_path, dff1)
 
 dff2 = reservoirs.loc[reservoirs.point.isin(diversions['Supply point'])].copy()
 dff2['diversion'] = dff2.point.map(diversions.groupby('Supply point').agg({'diversion': 'first'})['diversion'])
-dff2['elevation'] = wp.sample_raster("Data/GIS/DEM//Souss-Massa DEM.tif", 
-                                       dff2)
+dff2['elevation'] = wp.sample_raster(dem_path, dff2)
 MerchidSudMoroc = 26192
 dff2.to_crs(f'epsg:{MerchidSudMoroc}', inplace=True)
 
@@ -116,11 +118,11 @@ diversions['elevation_diff'] = diversions['Demand point'].map(dff1.set_index('po
 all_points = supply_links.append(demand_links, sort=False, ignore_index=True)
 all_points.drop_duplicates(subset="point", inplace=True)
 
-folder = r'../Morocco dashboard/spatial_data'
-wp.create_folder(folder)
-demand_links.to_file(os.path.join(folder, 'Demand_points.gpkg'), driver="GPKG")
-supply_links.to_file(os.path.join(folder, 'Supply_points.gpkg'), driver="GPKG")
-wwtp.to_file(os.path.join(folder, 'wwtp.gpkg'), driver="GPKG")
-diversions.to_file(os.path.join(folder, 'Pipelines.gpkg'), driver="GPKG")
-groundwater.to_file(os.path.join(folder, 'Groundwater.gpkg'), driver="GPKG")
-all_points.to_file(os.path.join(folder, 'all_points.gpkg'), driver="GPKG")
+os.makedirs(output_folder, exist_ok = True)
+
+demand_links.to_file(output_demand_points, driver="GPKG")
+supply_links.to_file(os.path.join(output_folder, 'Supply_points.gpkg'), driver="GPKG")
+wwtp.to_file(os.path.join(output_folder, 'wwtp.gpkg'), driver="GPKG")
+diversions.to_file(os.path.join(output_folder, 'Pipelines.gpkg'), driver="GPKG")
+groundwater.to_file(os.path.join(output_folder, 'Groundwater.gpkg'), driver="GPKG")
+all_points.to_file(os.path.join(output_folder, 'all_points.gpkg'), driver="GPKG")
