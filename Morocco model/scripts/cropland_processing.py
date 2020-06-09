@@ -68,8 +68,8 @@ cropland_temp.loc[cropland_temp['province']=='Inezgane-Aït Melloul', 'province'
 df_cropland['area_share'] = df_cropland['Demand point'].map(get_area_share(cropland_temp, 'province', 'area_m2'))
 
 os.makedirs(output_folder, exist_ok = True)
-cropland.to_crs('epsg:4326').to_file(os.path.join('Data', 'GIS', 
-                                                  'Processed layers', 
-                                                  'cropland.geojson'), 
-                                     driver='GeoJSON')
+# cropland.to_crs('epsg:4326').to_file(os.path.join('Data', 'GIS', 
+                                                  # 'Processed layers', 
+                                                  # 'cropland.geojson'), 
+                                     # driver='GeoJSON')
 df_cropland.to_csv(output_file, index=False)
