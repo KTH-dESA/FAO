@@ -12,7 +12,7 @@ dependencies:
   - notebook
   - pip
   - pip:
-    - git+https://github.com/woodcrafty/PyETo.git@8ca15bd6f70eda39f42b40581e7d5cab4bf76fbc#egg=PyETo
+    - git+https://github.com/woodcrafty/PyETo.git
   - plotly
   - python
   - rasterio

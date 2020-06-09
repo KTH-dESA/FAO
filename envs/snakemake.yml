@@ -1,0 +1,21 @@
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - jmcmurray
+dependencies:
+  - contextily
+  - descartes
+  - geopandas
+  - json
+  - matplotlib
+  - pip
+  - pip:
+    - git+https://github.com/woodcrafty/PyETo.git
+  - python
+  - rasterio
+  - rasterstats
+  - scipy
+  - snakemake-minimal
+  - xlrd
+  
