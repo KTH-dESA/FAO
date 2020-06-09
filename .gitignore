@@ -2,7 +2,6 @@
 .Rhistory
 __pycache__
 .ipynb_checkpoints
-envs/*
 NWSAS model/*results/*
 */Plots/*
 *dashboard/data/*
