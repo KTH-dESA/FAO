@@ -87,4 +87,7 @@ explored through interactive dashboards found in:
 
 For exploration of results locally, you can run the visualization from your 
 machine in a local host by running `python Morocco\ dashboard/app.py` 
-(for the Moroccan case) and going to http://localhost:8080/ in your browser.
+(for the Moroccan case) and going to http://localhost:8080/ in your browser. 
+Notice that you would need to create and environment using one of the `environment.yml` 
+files found inside each case dashboard folder, and activate it before running the 
+dashboard locally.
