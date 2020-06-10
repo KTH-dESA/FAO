@@ -53,14 +53,14 @@ for running the entire automated workflow of the project.
 ## Running the model
 ### Jupyter notebooks
 To run the model, first activate the previously created conda environment for 
-notebooks by running `conda acivate <name-of-environment>` and then run 
+notebooks by running `conda activate <name-of-environment>` and then run 
 `jupyter notebook`. Alternatively, you can start the Anaconda navigator, 
 select the previously created environment and start a Jupyter notebook session. 
 Open any of the runner files of either model and follow the steps.
 
 ### Snakemake
 Activate the previously created conda environment for snakemake by running 
-`conda acivate <name-of-environment>`. Then open the snakemake file of the 
+`conda activate <name-of-environment>`. Then open the snakemake file of the 
 model you wish to run and set the user inputs to the ones desired:
 ```python
 ######################### User defined parameters #############################
