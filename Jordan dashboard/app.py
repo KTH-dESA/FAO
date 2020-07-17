@@ -15,13 +15,13 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 # my_path = ''
 spatial_data = os.path.join(my_path, 'spatial_data')
 
-# governorates = gpd.read_file(os.path.join(spatial_data,'Admin','JOR_adm1.shp'))
+governorates = gpd.read_file(os.path.join(spatial_data,'Admin','JOR_adm0.shp'))
 demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg')) #TEST: changed from geojson
 supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.gpkg'))
 pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
 WebMercator = 4326
 # governorates.to_crs(epsg=WebMercator, inplace=True)
-for gdf in [demand_points, supply_points, pipelines]:
+for gdf in [demand_points, supply_points, pipelines, governorates]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
 
@@ -61,6 +61,7 @@ def title_info(title, info_id, info_title, modal_content):
                             ),
                         ],
                         id=f"{info_id}-modal",
+                        size="lg"
                     )])
 
 
@@ -123,8 +124,32 @@ sidebar_header = dbc.Row(
 
 scenario_options = html.Div(
     [
-        title_info(title='Select scenario', info_id='scenario-info', info_title='Scenario info',
-                   modal_content='This is the content of the modal'),
+        title_info(title='Select scenario', info_id='scenario-info', info_title='Scenario information',
+                   modal_content=[html.P('Four scenarios have been analysed to date in order to explore nexus interactions and '
+                                 'the impact any given nexus solution or policy measure targeted to one of the systems '
+                                 '(i.e. water, energy or agriculture), may have upon the other systems. '
+                                 'The scenarios evaluated so far are a reference (Business as Usual), an improved '
+                                 'agricultural efficiency and a new water resources scenario '
+                                 '(i.e. New desalinated water), and are run for 30 years from 2020 to 2050.'),
+                                  html.H6('Reference scenario'),
+                                  html.P('This scenario takes a Business as Usual approach where the main trends '
+                                         '(in terms of demand, supply and growth) are kept unchanged. It assumes that '
+                                         'domestic demands will increase over time, with refugees staying (but no new '
+                                         'refugees coming), and agriculture and industry not growing over time.'),
+                                  html.H6('Improve agricultural efficiency scenario'),
+                                  html.P('This scenario considers 10 and 20 percent increase in irrigation efficiency '
+                                         'above current levels by year 2050.'),
+                                  html.H6('Reduce non-revenue water scenario'),
+                                  html.P('The WEAP model was set up by MWI to include a representation of non-revenue '
+                                         'water losses in each governorate. Non-revenue water losses (i.e. water lost '
+                                         'to leakage, under-billing, and theft) accounts for about half of all water in '
+                                         'Jordan, which makes it a critical factor in improving water services in Jordan.'
+                                         ' This scenario assumes a reduction of total non-revenue water by 20% and 40% '
+                                         'levels, to year 2050. The reduction is set as a goal for each municipality to '
+                                         'achieve by year 2050.'),
+                                  html.H6('New water resources scenario'),
+                                  html.P('This scenario assumes the realization of the Red Sea-Dead Sea project and new '
+                                         'desalination plant Red-Dead (110 MCM/yr).')]),
         html.Div(
             dbc.RadioItems(
                 id="rb-scenario",
@@ -158,8 +183,13 @@ eto_options = html.Div(
                     width=2,
                 ),
                 dbc.Col(title_info(title='Increase Evapotranspiration (climate change)', info_id='Eto-info',
-                                   info_title='Evapotranspiration info',
-                                   modal_content='This is the content of the modal')),
+                                   info_title='Evapotranspiration information',
+                                   modal_content='Historical reference evapotranspiration (ETo) data indicates an '
+                                                 'increasing trend in the country, which will potentially impact '
+                                                 'hydrology and crop water requirements. To assess the impact of '
+                                                 'climate change, all scenarios were evaluated under two conditions: '
+                                                 'without increasing trend in ETo and an increasing trend applied to '
+                                                 'hydrology and irrigation requirements.')),
             ],
             no_gutters=True,
         )
@@ -169,8 +199,10 @@ eto_options = html.Div(
 
 level_options = html.Div(
     [
-        title_info(title='Select level of variable', info_id='level-info', info_title='Variable level info',
-                   modal_content='This is the content of the modal'),
+        title_info(title='Select level of variable', info_id='level-info', info_title='Variable level information',
+                   modal_content=[dcc.Markdown('This parameter allows to select the level of improvement wanted in the scenario. '
+                                 'It only applies for the **Improved agricultural efficiency** and the '
+                                 '**Reduce non-revenue water** scenarios.')]),
         html.Div(
             dcc.Dropdown(
                 id="drop-level",
@@ -189,7 +221,14 @@ level_options = html.Div(
 energy_options = html.Div(
     [
         title_info(title='Select energy pumping efficiency', info_id='pump-eff-info',
-                   info_title='Energy pumping efficiency info', modal_content='This is the content of the modal'),
+                   info_title='Energy pumping efficiency information', modal_content='This parameter allows to select '
+                                                                                     'the current level of energy '
+                                                                                     'efficiency and set an improvement '
+                                                                                     'goal for year 2050. Those values '
+                                                                                     'will affect pumping energy requirements '
+                                                                                     'for groundwater extraction and '
+                                                                                     'surface water conveyance '
+                                                                                     'through the pipeline system.'),
         dbc.Row([
             dbc.Col(
                 dbc.InputGroup(
@@ -365,8 +404,8 @@ visual_tools = html.Div(
         html.Hr(),
         compare_scenarios,
     ],
-
     id='visual-tools',
+    style=dict(display='none')
 )
 
 footer = dbc.Row(
@@ -419,10 +458,10 @@ results_header = dbc.Row(
 footer_results = dbc.Row(
     [
         dbc.ButtonGroup([
-        dbc.Button([html.I(className='fa fa-save'), " Save"], color=button_color, className="mr-1",
-                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-save'),
-        dbc.Button([html.I(className='fa fa-chart-pie'), " Compare"], color=button_color, outline=True, className="mr-1",
-                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-compare'),
+        # dbc.Button([html.I(className='fa fa-save'), " Save"], color=button_color, className="mr-1",
+        #            style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-save'),
+        # dbc.Button([html.I(className='fa fa-chart-pie'), " Compare"], color=button_color, outline=True, className="mr-1",
+        #            style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-compare'),
         dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color, className="mr-1",
                    style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
         ])
@@ -452,6 +491,7 @@ app.layout = html.Div([dcc.Store(id='current'), dcc.Store(id='compare', data={})
 # Helper funtions
 
 def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data):
+
     df_pipelines = pipelines.groupby('index').agg({'pipeline': 'first',
                                                    'segment_length_m': 'first',
                                                    'geometry': 'first'}).reset_index()
@@ -534,6 +574,21 @@ def scatterpointmap(water_delivered, water_required, gw_pumped, pl_flow, wwtp_da
                      'type': type,
                      } for point in df_supply.loc[df_supply.type == type].point],
     ) for type in sorted(df_supply['type'].unique())]
+
+    data += [dict(
+        type="scattermapbox",
+        mode='lines',
+        line=dict(color='rgb(80,100,80)', width=1),
+        fill='toself',
+        fillcolor='rgba(80,100,80,0.1)',
+        layer="below",
+        lon=list(list(itertools.chain.from_iterable(
+            [list(line.boundary.coords.xy[0]) + [None] for line in governorates.geometry]))),
+        lat=list(list(itertools.chain.from_iterable(
+            [list(line.boundary.coords.xy[1]) + [None] for line in governorates.geometry]))),
+        hoverinfo='skip',
+        showlegend=False,
+    )]
 
     return data
 
@@ -655,9 +710,7 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
 ##### need to change the compare scenarios logic to the calback of the compare modal
 #### also add logic to the save button and modal
 @app.callback(
-    [Output("current", "data"), Output("compare", "data"), Output('map', 'selectedData'),
-     Output('pump-eff-init', 'value'), Output('pump-eff-end', 'value'), Output('rb-scenario', 'value'),
-     Output('eto-input', 'value'), Output('drop-level', 'value')],
+    [Output("current", "data"), Output("compare", "data"), Output('map', 'selectedData')],
     [
         Input("button-apply", "n_clicks"),
     ],
@@ -674,7 +727,7 @@ def update_current_data(n_1, eff_init, eff_end, scenario, eto, level, compare, s
         map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
         graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, eff_end,
                             eff_init)
-        data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
+        data_dict = dict(gw_df=gw_pumped.to_dict(),map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
         if scenario_name in [None, '']:
             compare_data['current'] = dict(scenario=scenario, eto=eto, level=level, eff_end=eff_end, eff_init=eff_init)
         else:
@@ -687,8 +740,7 @@ def update_current_data(n_1, eff_init, eff_end, scenario, eto, level, compare, s
         map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
         graphs = {}
         data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
-    return data_dict, compare_data, None, compare_data[compare[0]]['eff_init'], compare_data[compare[0]]['eff_end'], \
-           compare_data[compare[0]]['scenario'], compare_data[compare[0]]['eto'], compare_data[compare[0]]['level']
+    return data_dict, compare_data, None
 
 
 @app.callback(
@@ -716,11 +768,11 @@ def toggle_collapse(n, is_open):
 @app.callback(
     [Output("graphs", "children"), Output('resultsTitle', 'children')],
     [Input('map', 'selectedData'),
-     Input("sidebar-toggle", "n_clicks"),
-     Input('scenarioTitle', 'children'),
-     Input('current', 'data')]
+     # Input("sidebar-toggle", "n_clicks"),
+     Input('scenarioTitle', 'children')],
+    [State('current', 'data')]
 )
-def update_results(selection, n_1, title, data_current):
+def update_results(selection, title, data_current):
     if data_current is None:
         raise PreventUpdate
     names = ['Water delivered (Mm3)', 'Water required (Mm3)']
@@ -760,10 +812,15 @@ def update_results(selection, n_1, title, data_current):
                                                'y': selection['points'][0]['customdata']['water'][0],
                                                'fill': 'tozeroy', 'mode': 'lines', 'showlegend': False,
                                                'line': {'color': colors['water']}}]
+        if name_key in ['Groundwater supply']:
+            gw_df = pd.DataFrame(data_current['gw_df'])
+            gw_df = gw_df.loc[gw_df['point'] == name]
+            data = wtd_plot(data, gw_df)
         data[name_dict[name_key]['energy']] = [{'x': selection['points'][0]['customdata']['energy'][1],
                                                 'y': np.array(selection['points'][0]['customdata']['energy'][0]) / eff,
                                                 'fill': 'tozeroy', 'mode': 'lines', 'showlegend': False,
                                                 'line': {'color': colors['energy']}}]
+
 
     elif selection['points'][0]['customdata']['type'] in ['River/pipeline supply']:
         name = selection['points'][0]['text']
@@ -811,7 +868,7 @@ def update_results(selection, n_1, title, data_current):
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
             elif 'depth' in key:
-                layout_plot['yaxis'] = {'range': [520, 0], }
+                layout_plot['yaxis'] = {'range': [520, 0]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=360,
@@ -828,9 +885,16 @@ def update_results(selection, n_1, title, data_current):
                         format='png', filename=key, height=400,
                         width=400, scale=2))))
         else:
-            plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
-                format='png', filename=key, height=400,
-                width=400, scale=2))))
+            if 'depth' in key:
+                layout_plot['yaxis'] = {'range': [gw_df.wtd.max()*1.1, 0]}
+                plots.append(
+                    dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
+                        format='png', filename=key, height=360,
+                        width=400, scale=2))))
+            else:
+                plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
+                    format='png', filename=key, height=400,
+                    width=400, scale=2))))
     return plots, name
 
 
@@ -855,13 +919,16 @@ def update_level_dropdown(scenario):
 @app.callback(
     Output('scenarioTitle', 'children'),
     [
-        Input("button-apply", "n_clicks"),
-        Input("sidebar-toggle", "n_clicks"),
-        Input("current", "data")
+        # Input("button-apply", "n_clicks"),
+        # Input("sidebar-toggle", "n_clicks"),
+        Input("current", "modified_timestamp")
     ],
+    [State('current', 'data')]
 )
-def update_level_dropdown(n_1, n_2, data):
+def update_level_dropdown(ts, data):
     if data is None:
+        raise PreventUpdate
+    if ts is None:
         raise PreventUpdate
     level_dict = {'Reference': {'level_1': ''},
                   'Improve AG eff': {'level_1': 'by 10 percent',
@@ -942,6 +1009,20 @@ for info_id in info_ids:
 #         return False, None, False, None, True
 #     return True, None, True, None, False
 
+@app.callback(
+    [
+     Output('rb-scenario', 'value'),
+     Output('eto-input', 'value'),
+     Output('drop-level', 'value'),
+     Output('pump-eff-init', 'value'),
+     Output('pump-eff-end', 'value'),
+     # Output('map-options', 'value')
+     # Output('compare-options', 'value'),
+     ],
+    [Input('button-reset', 'n_clicks')],
+)
+def reset_output(n):
+    return 'Reference', ['Eto trend'], 'level_1', 0.45, 0.45
 
 if __name__ == "__main__":
     app.run_server(debug=True)
