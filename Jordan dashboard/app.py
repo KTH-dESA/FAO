@@ -4,6 +4,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
+from dash_extensions import Download
+from dash_extensions.snippets import send_data_frame
+from dash_extensions.snippets import send_file
 import json
 import pandas as pd
 import numpy as np
@@ -462,7 +465,7 @@ footer_results = dbc.Row(
         #            style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-save'),
         # dbc.Button([html.I(className='fa fa-chart-pie'), " Compare"], color=button_color, outline=True, className="mr-1",
         #            style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-compare'),
-        dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color, className="mr-1",
+        dbc.Button([html.I(className='fa fa-download'),Download(id="download"), " Download"], color=button_color, className="mr-1",
                    style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
         ])
     ],
@@ -1023,6 +1026,13 @@ for info_id in info_ids:
 )
 def reset_output(n):
     return 'Reference', ['Eto trend'], 'level_1', 0.45, 0.45
+
+@app.callback(Output("download", "data"), [Input("button-download", "n_clicks")],[State('current', 'data')])
+def func(n_nlicks, data):
+    if data is None:
+        raise PreventUpdate
+    df = pd.DataFrame(data['gw_df'])
+    return send_data_frame(df.to_csv, "gw.csv")
 
 if __name__ == "__main__":
     app.run_server(debug=True)
