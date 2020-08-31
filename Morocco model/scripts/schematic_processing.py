@@ -45,7 +45,7 @@ demand_sites['type'] = 'Demand site'
 diversion['type'] = 'Transmission Pipeline'
 links['type'] = 'Transmission links'
 
-supply_points = groundwater.append([other_supply, reservoirs, river_withdrawals], ignore_index=True, sort=False)
+supply_points = groundwater.append([other_supply, reservoirs, river_withdrawals, wwtp], ignore_index=True, sort=False)
 demand_points = demand_sites.append(catchments, ignore_index=True, sort=False)
 links['links'] = links.links.str.replace('Groundwater','GW')
 links['links'] = links.links.str.replace('Grounwater','GW')

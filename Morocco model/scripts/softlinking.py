@@ -74,7 +74,9 @@ sheet_names = {'Desalination': 'DS Agriculture',
                'GP Domestic': 'GW Domestic',
                'MAR': 'Aquifer recharge',
                'SW Irrigation': 'SW Agriculture',
-               'SW Domestic': 'SW Domestic'}
+               'SW Domestic': 'SW Domestic',
+               'Wastewater Reuse AG': 'WWR Agriculture',
+               'Wastewater Reuse Agadir': 'WWR Domestic'}
 
 df = pd.DataFrame()
 for sheet_name, category in sheet_names.items():

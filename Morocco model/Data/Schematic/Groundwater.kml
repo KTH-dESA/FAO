@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 14 August 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -84,7 +84,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.712999999999999,30.19612,0</coordinates>
+				<coordinates>-8.45698,30.14931,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-301-Introduction">
@@ -142,7 +142,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-7.83061,30.53151,0</coordinates>
+				<coordinates>-7.83607,30.62167,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-526-Introduction">

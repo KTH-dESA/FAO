@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 14 August 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -30,7 +30,7 @@
 			<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
 		</Icon>
 		<Placemark id="Object-565-Introduction">
-			<name>Waste Water Treatment Plant of Agadir</name>
+			<name>Agadir WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -49,17 +49,104 @@
 					<value>Wastewater Treatment Plant</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Waste Water Treatment Plant of Agadir</value>
+					<value>Agadir WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.58446,30.26983,0</coordinates>
+				<coordinates>-9.598979999999999,30.3277,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-832-Introduction">
+			<name>Ait Baha WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Ait Baha WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.182840000000001,29.94803,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-850-Introduction">
+			<name>Ait Iaaza WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Ait Iaaza WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.81202,30.51264,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-866-Introduction">
+			<name>Aoulouz WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Aoulouz WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.2425,30.57115,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-384-Introduction">
-			<name>Waste Water Treatment Plant of Biougra</name>
+			<name>Biougra WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -78,17 +165,133 @@
 					<value>Wastewater Treatment Plant</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Waste Water Treatment Plant of Biougra</value>
+					<value>Biougra WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.334110000000001,30.13976,0</coordinates>
+				<coordinates>-9.39861,30.17729,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-827-Introduction">
+			<name>Drargua WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Drargua WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.36613,30.42949,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-851-Introduction">
+			<name>ElGuerdane WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>ElGuerdane WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.9819,30.35045,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-836-Introduction">
+			<name>Lqliaa WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Lqliaa WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.48171,30.2817,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-869-Introduction">
+			<name>Oulad Berhil WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Oulad Berhil WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-8.5288,30.51542,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-430-Introduction">
-			<name>Waste Water Treatment Plant of Ouled Teima</name>
+			<name>Ouled Teima WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -107,17 +310,46 @@
 					<value>Wastewater Treatment Plant</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Waste Water Treatment Plant of Ouled Teima</value>
+					<value>Ouled Teima WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.25989,30.52240000000001,0</coordinates>
+				<coordinates>-9.21468,30.46279,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-840-Introduction">
+			<name>Tafraout WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Wastewater-Treatment-Plant.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Wastewater-Treatment-Plant-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Wastewater Treatment Plant</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Tafraout WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>-9.47287,29.48576,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-312-Introduction">
-			<name>Waste Water Treatment Plant of Tiznit</name>
+			<name>Tiznit WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -136,13 +368,13 @@
 					<value>Wastewater Treatment Plant</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Waste Water Treatment Plant of Tiznit</value>
+					<value>Tiznit WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.765050000000001,29.72875,0</coordinates>
+				<coordinates>-9.76458,29.63136,0</coordinates>
 			</Point>
 		</Placemark>
 	</Folder>

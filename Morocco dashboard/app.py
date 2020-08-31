@@ -10,11 +10,11 @@ import numpy as np
 import geopandas as gpd
 import os.path
 import itertools
-import boto3
+# import boto3
 
-client = boto3.client('s3')           
-my_path = os.path.abspath(os.path.dirname(__file__))
-# my_path = ''
+# client = boto3.client('s3')
+# my_path = os.path.abspath(os.path.dirname(__file__))
+my_path = os.path.join('..', 'Morocco model', 'test dash results')
 spatial_data = os.path.join(my_path, 'spatial_data')
 
 provinces = gpd.read_file(os.path.join(spatial_data, 'Admin', 'Provinces.gpkg'))
@@ -27,7 +27,9 @@ supply_points.loc[supply_points['type']=='Other supply', 'type'] = 'Desalination
 pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
 WebMercator = 4326
 
-for gdf in [demand_points, supply_points, pipelines, provinces]:
+centroids = provinces.centroid
+
+for gdf in [demand_points, supply_points, pipelines]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
 
@@ -166,6 +168,8 @@ scenario_options = html.Div(
                     {"label": "Reference", "value": 'Reference'},
                     {"label": "Desalinated water", "value": 'Desalination'},
                     {"label": "Irrigation Intensification", "value": 'Irrigation intensification'},
+                    {"label": "Desalination & wastewater reuse", "value": "Desalination wastewater reuse"},
+                    {"label": "Reference & wastewater reuse", "value": "Reference wastewater reuse"}
                 ],
                 value='Reference',
                 className='checklist-selected-style',
@@ -443,6 +447,7 @@ results_header = dbc.Row(
                                                           className='flex')]),
     ],
     id='results-header',
+    style={'margin-top': '-1em'}
 )
 
 footer_results = dbc.Row(
@@ -455,28 +460,52 @@ footer_results = dbc.Row(
     className='footer',
 )
 
-map = dcc.Graph(id="map",
-                className='col-lg-7 col-md-7 col-sm-12 col-xs-12',
-                config=dict(showSendToCloud=True, toImageButtonOptions=dict(format='png', filename='map', height=700,
-                                                                            width=700, scale=2)))
+map = html.Div(dcc.Loading(
+                    id="loading-1",
+                    type="default",
+                    children=dcc.Graph(id="map",
+                               # className='col-lg-7 col-md-7 col-sm-12 col-xs-12',
+                               config=dict(showSendToCloud=True,
+                                           toImageButtonOptions=dict(format='png', filename='map', height=700,
+                                                                     width=700, scale=2)
+                                           )
+                               ),
+            ),
+            id='map-div',
+            className='col-xl-7 col-lg-12',
+)
+# map = dcc.Graph(id="map",
+#                className='col-xl-7 col-lg-12',
+#                config=dict(showSendToCloud=True,
+#                            toImageButtonOptions=dict(format='png', filename='map', height=700,
+#                                                      width=700, scale=2)
+#                            )
+#                )
 
-graphs = html.Div([results_header,
-                   html.Div(dbc.Col(id='graphs'), id='graphs-container'),
+
+graphs = html.Div([dbc.Nav([dbc.DropdownMenu([dbc.DropdownMenuItem(["English ", html.I(className='fa fa-language')], className="drop-items"),
+                                              dbc.DropdownMenuItem(["French ", html.I(className='fa fa-language')], className="drop-items")],
+                                              label="Language", nav=True),
+                            dbc.NavLink("About", href="#")],
+                           horizontal='end', style={'margin-bottom': '0em'}, id='about-nav'),
+                   results_header,
+                   html.Div(dbc.Col(dcc.Loading(id='graphs', type="default")),
+                            id='graphs-container'),
                    footer_results
                    ],
                   id='results-container',
-                  className='col-lg-5 col-md-5 col-sm-12 col-xs-12')
+                  className='col-xl-5 col-lg-12')
 
 content = html.Div([map, graphs], id="page-content")
 
 app.layout = html.Div([dcc.Store(id='current'), sidebar, content])
 
 # Helper funtions
-with open(os.path.join(spatial_data, 'Admin', 'Provinces.geojson')) as response:
-    provinces_chmap = json.load(response)
-    for feature in provinces_chmap['features']:
-        # print(feature)
-        feature['id'] = feature['properties']['Province']
+# with open(os.path.join(spatial_data, 'Admin', 'Provinces.geojson')) as response:
+#     provinces_chmap = json.load(response)
+#     for feature in provinces_chmap['features']:
+#         # print(feature)
+#         feature['id'] = feature['properties']['Province']
 
 
 def choroplethmap(geojson, locations, title):
@@ -527,8 +556,10 @@ def scatterpointmap(water_delivered):
         mode='text',
         name='Province',
         textfont=dict(color='rgba(80,80,80,0.8)'),
-        lon=[point.coords[0][0] for point in provinces.boundary.centroid],
-        lat=[point.coords[0][1] for point in provinces.boundary.centroid],
+        # lon=[point.coords[0][0] for point in provinces.centroid],
+        # lat=[point.coords[0][1] for point in provinces.centroid],
+        lon=[point.coords[0][0] for point in centroids],
+        lat=[point.coords[0][1] for point in centroids],
         text=provinces.Province,
         hoverinfo='skip',
     )]
@@ -617,6 +648,7 @@ def water_delivered_plot(data, water_delivered):
     dff_delivered.loc[dff_delivered['type'].str.contains('SW|Aquifer'), 'type'] = 'Surface water'
     dff_delivered.loc[dff_delivered['type'].str.contains('GW'), 'type'] = 'Groundwater'
     dff_delivered.loc[dff_delivered['type'].str.contains('DS'), 'type'] = 'Desalinated water'
+    dff_delivered.loc[dff_delivered['type'].str.contains('WWR'), 'type'] = 'Wastewater reuse'
     dff_delivered = dff_delivered.loc[dff_delivered['type'] != 'Transmission Pipeline']
     dff_delivered = dff_delivered.groupby(['Year', 'category', 'type'])['sswd'].sum() / 1000000
     dff_delivered = dff_delivered.reset_index()
@@ -624,17 +656,17 @@ def water_delivered_plot(data, water_delivered):
     dff_delivered_cat = dff_delivered.groupby(['Year', 'category']).sswd.sum()
     dff_delivered['share'] = dff_delivered.sswd / dff_delivered.set_index(['Year', 'category']).index.map(dff_delivered_cat)
 
-    for df, name in zip([dff_delivered_cat.reset_index()], [name]):
-        data[name] = [{'x': df.loc[df['category'] == category].Year,
-                       'y': df.loc[df['category'] == category].sswd,
-                       'name': category,
-                       'stackgroup': 'one',
-                       'mode': 'lines',
-                       'text': ["<br>".join([f'{row[1]["type"]}: {round(row[1]["share"]*100,2)}%' for row in group.iterrows()]) \
-                                for year, group in dff_delivered.loc[dff_delivered['category'] == category].groupby('Year')],
-                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}' +
-                                        '<br><b>Supply</b>: %{text}'
-                       } for category in sorted(df['category'].unique())]
+    df = dff_delivered_cat.reset_index()
+    data[name] = [{'x': df.loc[df['category'] == category].Year,
+                   'y': df.loc[df['category'] == category].sswd,
+                   'name': category,
+                   'stackgroup': 'one',
+                   'mode': 'lines',
+                   'text': ["<br>".join([f'{row[1]["type"]}: {round(row[1]["share"]*100,2)}%' for row in group.iterrows()]) \
+                            for year, group in dff_delivered.loc[dff_delivered['category'] == category].groupby('Year')],
+                   'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}' +
+                                    '<br><b>Supply</b>: %{text}'
+                   } for category in sorted(df['category'].unique())]
     return data
 
 def energy_demand_plot(data, water_delivered, wwtp_data, desal_data):
@@ -643,6 +675,7 @@ def energy_demand_plot(data, water_delivered, wwtp_data, desal_data):
     dff_energy.loc[dff_energy['type'].str.contains('GW'), 'type'] = 'Groundwater pumping'
     dff_energy.loc[dff_energy['type'].str.contains('SW|Pipeline'), 'type'] = 'Surface water conveyance'
     dff_energy.loc[dff_energy['type'].str.contains('DS'), 'type'] = 'Desalinated water conveyance'
+    dff_energy.loc[dff_energy['type'].str.contains('WWR'), 'type'] = 'Wastewater reuse conveyance'
     dff_energy = dff_energy.groupby(['Year', 'type'])['swpa_e'].sum() / 1000000
     dff_energy = dff_energy.reset_index()
     wwtp_data['type'] = 'Wastewater treatment'
@@ -652,16 +685,17 @@ def energy_demand_plot(data, water_delivered, wwtp_data, desal_data):
         dff = dff.reset_index()
         dff_energy = dff_energy.append(dff, sort=False)
 
-    for df, name in zip([dff_energy], ['Energy demand (GWh)']):
-        data[name] = [{'x': df.loc[df['type'] == type].Year,
-                       'y': df.loc[df['type'] == type].swpa_e,
-                       'name': type,
-                       'stackgroup': 'one',
-                       'mode': 'lines',
-                       'text': df.loc[df['type'] == type].swpa_e * emission_factor / 1000,
-                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
-                                        # '<br><b>Emissions</b>: %{text: 0.2f} MtCO2'
-                       } for type in sorted(df['type'].unique())]
+    name = 'Energy demand (GWh)'
+    df = dff_energy
+    data[name] = [{'x': df.loc[df['type'] == type].Year,
+                   'y': df.loc[df['type'] == type].swpa_e,
+                   'name': type,
+                   'stackgroup': 'one',
+                   'mode': 'lines',
+                   'text': df.loc[df['type'] == type].swpa_e * emission_factor / 1000,
+                   'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
+                                    # '<br><b>Emissions</b>: %{text: 0.2f} MtCO2'
+                   } for type in sorted(df['type'].unique())]
     return data
 
 def lcoe_plot(data, ag_lcoe):
@@ -671,13 +705,13 @@ def lcoe_plot(data, ag_lcoe):
     dff_lcoe.loc[dff_lcoe['least_cost_technology'].str.contains('Grid'), 'least_cost_technology'] = 'Grid electricity'
     count = len(dff_lcoe['Demand point'].unique())
     # total = dff_lcoe.loc[dff_lcoe['Year']==2020, 'area_m2'].sum()
-    for df, name in zip([dff_lcoe], ['Least-cost power technology for Agriculture']):
-        data[name] = [{'x': dff_lcoe.loc[dff_lcoe['least_cost_technology']==tech].groupby('Year')['least_cost_technology'].count().index,
-                       'y': dff_lcoe.loc[dff_lcoe['least_cost_technology']==tech].groupby('Year')['least_cost_technology'].count() / count,
-                       'name': tech,
-                       'type': 'bar',
-                       'hovertemplate': '<b>Value</b>: %{y:,.2%}' + '<br><b>Year</b>: %{x}'
-                       } for tech in sorted(dff_lcoe['least_cost_technology'].unique())]
+    name = 'Least-cost power technology for Agriculture'
+    data[name] = [{'x': dff_lcoe.loc[dff_lcoe['least_cost_technology']==tech].groupby('Year')['least_cost_technology'].count().index,
+                   'y': dff_lcoe.loc[dff_lcoe['least_cost_technology']==tech].groupby('Year')['least_cost_technology'].count() / count,
+                   'name': tech,
+                   'type': 'bar',
+                   'hovertemplate': '<b>Value</b>: %{y:,.2%}' + '<br><b>Year</b>: %{x}'
+                   } for tech in sorted(dff_lcoe['least_cost_technology'].unique())]
     return data
 
 def unmet_demand_plot(data, water_delivered):
@@ -692,13 +726,13 @@ def unmet_demand_plot(data, water_delivered):
     unment_demand = 1 - (dff_unmet.groupby(['Year', 'category'])['sswd'].sum() /
                          water_req_year)
 
-    for df, name in zip([unment_demand.reset_index()], [name]):
-        data[name] = [{'x': df.loc[df['category'] == category].Year,
-                       'y': df.loc[df['category'] == category].iloc[:,2],
-                       'name': category,
-                       'mode': 'lines',
-                       'hovertemplate': '<b>Value</b>: %{y:,.2%}' + '<br><b>Year</b>: %{x}'
-                       } for category in sorted(df['category'].unique())]
+    df = unment_demand.reset_index()
+    data[name] = [{'x': df.loc[df['category'] == category].Year,
+                   'y': df.loc[df['category'] == category].iloc[:,2],
+                   'name': category,
+                   'mode': 'lines',
+                   'hovertemplate': '<b>Value</b>: %{y:,.2%}' + '<br><b>Year</b>: %{x}'
+                   } for category in sorted(df['category'].unique())]
     return data
 
 def wtd_plot(data, water_delivered):
@@ -706,13 +740,13 @@ def wtd_plot(data, water_delivered):
     dff_wtd = water_delivered.copy()
     dff_wtd = dff_wtd.loc[dff_wtd['type'].str.contains('GW')]
     wtd = dff_wtd.groupby(['Year', 'Supply point'])['wtd'].mean().reset_index()
-    for df, name in zip([wtd], [name]):
-        data[name] = [{'x': df.loc[df['Supply point'] == point].Year,
-                       'y': df.loc[df['Supply point'] == point].wtd,
-                       'name': point,
-                       'mode': 'lines',
-                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
-                       } for point in sorted(df['Supply point'].unique())]
+    df = wtd
+    data[name] = [{'x': df.loc[df['Supply point'] == point].Year,
+                   'y': df.loc[df['Supply point'] == point].wtd,
+                   'name': point,
+                   'mode': 'lines',
+                   'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
+                   } for point in sorted(df['Supply point'].unique())]
     return data
 
 def water_supply_plot(data, water_delivered):
@@ -721,18 +755,19 @@ def water_supply_plot(data, water_delivered):
     dff_delivered.loc[dff_delivered['type'].str.contains('SW|Aquifer'), 'type'] = 'Surface water'
     dff_delivered.loc[dff_delivered['type'].str.contains('GW'), 'type'] = 'Groundwater'
     dff_delivered.loc[dff_delivered['type'].str.contains('DS'), 'type'] = 'Desalinated water'
+    dff_delivered.loc[dff_delivered['type'].str.contains('WWR'), 'type'] = 'Reused Wastewater'
     dff_delivered = dff_delivered.loc[dff_delivered['type'] != 'Transmission Pipeline']
     dff_delivered = dff_delivered.groupby(['Year', 'type'])['sswd'].sum() / 1000000
     dff_delivered = dff_delivered.reset_index()
 
-    for df, name in zip([dff_delivered.reset_index()], [name]):
-        data[name] = [{'x': df.loc[df['type'] == type].Year,
-                       'y': df.loc[df['type'] == type].sswd,
-                       'name': type,
-                       'stackgroup': 'one',
-                       'mode': 'lines',
-                       'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
-                       } for type in sorted(df['type'].unique())]
+    df = dff_delivered.reset_index()
+    data[name] = [{'x': df.loc[df['type'] == type].Year,
+                   'y': df.loc[df['type'] == type].sswd,
+                   'name': type,
+                   'stackgroup': 'one',
+                   'mode': 'lines',
+                   'hovertemplate': '<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}'
+                   } for type in sorted(df['type'].unique())]
     return data
 
 def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe):
@@ -796,10 +831,10 @@ def toggle_collapse(n, is_open):
     [Output("graphs", "children"), Output('resultsTitle', 'children')],
     [Input('map', 'selectedData'),
      # Input("sidebar-toggle", "n_clicks"),
-     Input('scenarioTitle', 'children')],
+     Input('current', 'modified_timestamp')],
     [State('current', 'data')]
 )
-def update_results(selection, title, data_current):
+def update_results(selection, ts, data_current):
     if data_current is None:
         raise PreventUpdate
     names = ['Water delivered (Mm3)']
@@ -941,11 +976,11 @@ def update_level_dropdown(ts, data):
     Output("map", "figure"),
     [
         # Input("sidebar-toggle", "n_clicks"),
-        Input('scenarioTitle', 'children'),
+        Input('current', 'modified_timestamp'),
     ],
     [State("current", "data")]
 )
-def update_level_dropdown(n, data):
+def update_level_dropdown(ts, data):
     if data is None:
         raise PreventUpdate
     map = data['map']
