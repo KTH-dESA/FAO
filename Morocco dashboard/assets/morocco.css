@@ -97,3 +97,22 @@ box-shadow:0 0 0 .1rem var(--cfs-bs-focus)
 .VirtualizedSelectSelectedOption {
   font-weight: bold;
 }
+
+.drop-items {
+  text-transform: capitalize;
+  color: var(--secondary);
+}
+
+.drop-items:active {
+  background-color: var(--primary);
+  outline: 0;
+}
+
+a {
+  color: var(--secondary);
+  font-size: 0.8em
+}
+
+a:hover {
+  color: var(--primary)
+}

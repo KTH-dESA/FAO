@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 14 August 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -29,8 +29,8 @@
 		<Icon>
 			<href>http://www.weap21.org/img/Return-Flow.png</href>
 		</Icon>
-		<Placemark id="Object-566-Introduction">
-			<name>Return Flow from Agadir to Waste Water Treatment Plant of Agadir</name>
+		<Placemark id="Object-867-Introduction">
+			<name>Return Flow from AEP_Aoulouz to Aoulouz WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -53,7 +53,7 @@
 					<value>Return Flow</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Return Flow from Agadir to Waste Water Treatment Plant of Agadir</value>
+					<value>Return Flow from AEP_Aoulouz to Aoulouz WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -61,12 +61,408 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.59572,30.38739,0 -9.58446,30.26983,0 
+					-8.18848,30.60157,0 -8.2425,30.57115,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-853-Introduction">
+			<name>Return Flow from AEP_SEl Guerdane to ElGuerdane WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from AEP_SEl Guerdane to ElGuerdane WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.946210000000001,30.35913,0 -8.9819,30.35045,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-870-Introduction">
+			<name>Return Flow from AEP_ouled berhil to Oulad Berhil WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from AEP_ouled berhil to Oulad Berhil WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.53445,30.55566,0 -8.5288,30.51542,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-777-Introduction">
+			<name>Return Flow from Agadir WWTP to Oued Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Agadir WWTP to Oued Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.598979999999999,30.3277,0 -9.57708,30.35821,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-566-Introduction">
+			<name>Return Flow from Agadir to Agadir WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Agadir to Agadir WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.59572,30.38739,0 -9.598979999999999,30.3277,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-900-Introduction">
+			<name>Return Flow from Agadir to Oued Souss</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Agadir to Oued Souss</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.59572,30.38739,0 -9.599449999999999,30.36607,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-879-Introduction">
+			<name>Return Flow from Ait Baha WWTP to Oued Izik</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Ait Baha WWTP to Oued Izik</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.182840000000001,29.94803,0 -9.235099999999999,29.95086,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-833-Introduction">
+			<name>Return Flow from Ait Baha to Ait Baha WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Ait Baha to Ait Baha WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.18324,29.99476,0 -9.182840000000001,29.94803,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-858-Introduction">
+			<name>Return Flow from Ait Iaaza WWTP to Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Ait Iaaza WWTP to Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.81202,30.51264,0 -9.08357,30.26714,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-857-Introduction">
+			<name>Return Flow from Ait Iaaza to Ait Iaaza WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Ait Iaaza to Ait Iaaza WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.77688,30.52966,0 -8.81202,30.51264,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-868-Introduction">
+			<name>Return Flow from Aoulouz WWTP to Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Aoulouz WWTP to Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.2425,30.57115,0 -8.367039999999999,30.49384999999999,0 -8.798170000000001,30.31185,0 -9.08357,30.26714,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-385-Introduction">
+			<name>Return Flow from Biougra WWTP to Chtouka GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Biougra WWTP to Chtouka GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.39861,30.17729,0 -9.35136,30.22505,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-386-Introduction">
-			<name>Return Flow from Biougra to Waste Water Treatment Plant of Biougra</name>
+			<name>Return Flow from Biougra to Biougra WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -89,7 +485,7 @@
 					<value>Return Flow</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Return Flow from Biougra to Waste Water Treatment Plant of Biougra</value>
+					<value>Return Flow from Biougra to Biougra WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -97,12 +493,264 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.246969999999999,30.14053,0 -9.334110000000001,30.13976,0 
+					-9.33273,30.18095,0 -9.39861,30.17729,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-829-Introduction">
+			<name>Return Flow from Drargua WWTP to Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Drargua WWTP to Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.36613,30.42949,0 -9.08357,30.26714,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-828-Introduction">
+			<name>Return Flow from Drargua to Drargua WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Drargua to Drargua WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.42291,30.43001,0 -9.36613,30.42949,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-854-Introduction">
+			<name>Return Flow from ElGuerdane WWTP to Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from ElGuerdane WWTP to Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.9819,30.35045,0 -9.08357,30.26714,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-838-Introduction">
+			<name>Return Flow from Lqliaa WWTP to Chtouka GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Lqliaa WWTP to Chtouka GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.48171,30.2817,0 -9.35136,30.22505,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-837-Introduction">
+			<name>Return Flow from Lqliaa to Lqliaa WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Lqliaa to Lqliaa WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.47067,30.25032,0 -9.48171,30.2817,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-871-Introduction">
+			<name>Return Flow from Oulad Berhil WWTP to Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Oulad Berhil WWTP to Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-8.5288,30.51542,0 -9.08357,30.26714,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-835-Introduction">
+			<name>Return Flow from Ouled Teima WWTP to Souss GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Ouled Teima WWTP to Souss GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.21468,30.46279,0 -9.08357,30.26714,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
 		<Placemark id="Object-432-Introduction">
-			<name>Return Flow from Ouled Teima to Waste Water Treatment Plant of Ouled Teima</name>
+			<name>Return Flow from Ouled Teima to Ouled Teima WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -125,7 +773,7 @@
 					<value>Return Flow</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Return Flow from Ouled Teima to Waste Water Treatment Plant of Ouled Teima</value>
+					<value>Return Flow from Ouled Teima to Ouled Teima WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -133,7 +781,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.20825,30.47732,0 -9.25989,30.52240000000001,0 
+					-9.210900000000001,30.50264,0 -9.21468,30.46279,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
@@ -173,8 +821,116 @@
 				</coordinates>
 			</LineString>
 		</Placemark>
+		<Placemark id="Object-842-Introduction">
+			<name>Return Flow from Tafraout WWTP to Tiznit GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Tafraout WWTP to Tiznit GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.47287,29.48576,0 -9.769780000000001,29.46813,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-841-Introduction">
+			<name>Return Flow from Tafraout to Tafraout WWTP</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Tafraout to Tafraout WWTP</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.417450000000001,29.49637,0 -9.47287,29.48576,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-839-Introduction">
+			<name>Return Flow from Tiznit WWTP to Tiznit GW</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Return-Flow.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0000ff</color>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Return-Flow-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Return Flow</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Return Flow from Tiznit WWTP to Tiznit GW</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					-9.76458,29.63136,0 -9.769780000000001,29.46813,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
 		<Placemark id="Object-318-Introduction">
-			<name>Return Flow from Tiznit to Waste Water Treatment Plant of Tiznit</name>
+			<name>Return Flow from Tiznit to Tiznit WWTP</name>
 			<Snippet maxLines="0"></Snippet>
 			<styleUrl>#Introduction</styleUrl>
 			<Style>
@@ -197,7 +953,7 @@
 					<value>Return Flow</value>
 				</Data>
 				<Data name="ObjectName">
-					<value>Return Flow from Tiznit to Waste Water Treatment Plant of Tiznit</value>
+					<value>Return Flow from Tiznit to Tiznit WWTP</value>
 				</Data>
 				<Data name="MainText">
 				</Data>
@@ -205,151 +961,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-9.71087,29.63196,0 -9.765050000000001,29.72875,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-777-Introduction">
-			<name>Return Flow from Waste Water Treatment Plant of Agadir to Oued Souss</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff0000ff</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Return-Flow-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Return Flow</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Return Flow from Waste Water Treatment Plant of Agadir to Oued Souss</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-9.58446,30.26983,0 -9.577080000000001,30.35821,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-385-Introduction">
-			<name>Return Flow from Waste Water Treatment Plant of Biougra to Chtouka GW</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff0000ff</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Return-Flow-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Return Flow</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Return Flow from Waste Water Treatment Plant of Biougra to Chtouka GW</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-9.334110000000001,30.13976,0 -9.36927,30.139,0 -9.35136,30.22505,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-435-Introduction">
-			<name>Return Flow from Waste Water Treatment Plant of Ouled Teima to Oued Issen</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff0000ff</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Return-Flow-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Return Flow</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Return Flow from Waste Water Treatment Plant of Ouled Teima to Oued Issen</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-9.25989,30.52240000000001,0 -9.28262,30.52412,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark id="Object-774-Introduction">
-			<name>Return Flow from Waste Water Treatment Plant of Tiznit to Oued Adoudou</name>
-			<Snippet maxLines="0"></Snippet>
-			<styleUrl>#Introduction</styleUrl>
-			<Style>
-				<IconStyle>
-					<scale>1</scale>
-					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
-					</Icon>
-				</IconStyle>
-				<LineStyle>
-					<color>ff0000ff</color>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<ExtendedData>
-				<Data name="BalloonGroupBanner">
-					<value>Return-Flow-header.gif</value>
-				</Data>
-				<Data name="ObjectType">
-					<value>Return Flow</value>
-				</Data>
-				<Data name="ObjectName">
-					<value>Return Flow from Waste Water Treatment Plant of Tiznit to Oued Adoudou</value>
-				</Data>
-				<Data name="MainText">
-				</Data>
-			</ExtendedData>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-9.765050000000001,29.72875,0 -9.81852,29.76669,0 
+					-9.71087,29.63196,0 -9.76458,29.63136,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
