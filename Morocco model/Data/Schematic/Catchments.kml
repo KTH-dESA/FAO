@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Catchments 20200227.kml</name>
+	<name>Catchments.kml</name>
 	<Style id="Introduction">
 		<BalloonStyle>
 			<text><![CDATA[<style><--{}
@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 14 August 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -635,7 +635,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.4545,30.97885,0</coordinates>
+				<coordinates>-8.454499999999999,30.97885,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-748-Introduction">
@@ -693,7 +693,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.827080000000001,30.82765,0</coordinates>
+				<coordinates>-8.82708,30.82765,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-43-Introduction">
@@ -1041,7 +1041,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.25737,30.73213,0</coordinates>
+				<coordinates>-8.1381,30.64735,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-428-Introduction">
@@ -1099,7 +1099,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.513640000000001,30.23167000000001,0</coordinates>
+				<coordinates>-9.513640000000001,30.23167,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-471-Introduction">
@@ -1186,7 +1186,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.51151,30.06546,0</coordinates>
+				<coordinates>-9.511509999999999,30.06546,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-477-Introduction">
@@ -1302,7 +1302,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-9.127330000000001,29.94674,0</coordinates>
+				<coordinates>-9.127330000000001,29.94673999999999,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-568-Introduction">
@@ -1331,7 +1331,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-8.328770000000001,30.23916,0</coordinates>
+				<coordinates>-8.32877,30.23916,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-516-Introduction">
@@ -1360,7 +1360,7 @@
 				</Data>
 			</ExtendedData>
 			<Point>
-				<coordinates>-7.83665,30.85396,0</coordinates>
+				<coordinates>-7.962150000000001,30.5142,0</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="Object-392-Introduction">

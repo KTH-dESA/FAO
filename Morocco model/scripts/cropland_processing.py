@@ -11,9 +11,9 @@ output_file = str(snakemake.output)
 output_folder = output_file.split(os.path.basename(output_file))[0]
 
 cropland = gpd.read_file(cropland_path, encoding='utf-8')
-cropland.drop(columns=['WKT', 'gen2013', 'area'], inplace=True)
+cropland.drop(columns=['WKT', 'gen2013', 'area_ha'], inplace=True)
 cropland.reset_index(inplace=True)
-cropland.rename(columns={'area_ha': 'area_m2', 'index': 'Demand point', 
+cropland.rename(columns={'index': 'Demand point', 
                          'prov': 'province', 'wtd_mean': 'wtd'}, inplace=True)
 cropland.columns = cropland.columns.str.replace('mean','')
 cropland.columns = cropland.columns.str.replace('mea','')

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Diversions 20200227.kml</name>
+	<name>Diversions.kml</name>
 	<Style id="Introduction">
 		<BalloonStyle>
 			<text><![CDATA[<style><--{}
@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 26 February 2020</td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 14 August 2020</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -61,7 +61,7 @@
 			<LineString>
 				<tessellate>1</tessellate>
 				<coordinates>
-					-8.124890000000001,30.69973,0 -8.245480000000001,30.65062,0 -8.396800000000001,30.55802,0 -8.592549999999999,30.44799,0 -8.85033,30.38495,0 -8.94976,30.27628,0 
+					-8.124890000000001,30.69973,0 -8.245480000000001,30.65062,0 -8.396800000000001,30.55802,0 -8.592549999999999,30.44799,0 -8.85033,30.38495,0 -8.949759999999999,30.27628,0 
 				</coordinates>
 			</LineString>
 		</Placemark>
