@@ -663,7 +663,7 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
     dff_unmet = dff_required.copy()
     dff_unmet['value'] = (dff_unmet.value - dff_unmet.set_index(['Year', 'type']).index.map(
         dff_delivered.set_index(['Year', 'type']).value)) / dff_unmet.value * 100
-    dff_unmet.loc[dff_unmet['value'] < 0.001, 'value'] = 0
+    # dff_unmet.loc[dff_unmet['value'] < 0.001, 'value'] = 0
 
     dff_energy = pd.DataFrame()
     pl_flow['type'] = 'Water conveyance'
@@ -850,7 +850,7 @@ def update_results(selection, title, data_current):
             #             format='png', filename=key, height=300,
             #             width=400, scale=2))))
             if 'Unmet' in key:
-                layout_plot['yaxis'] = {'tickformat': ',.0%', 'range': [0, 1]}
+                layout_plot['yaxis'] = {'tickformat': '%', 'range': [0, 1]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
@@ -891,6 +891,7 @@ def update_results(selection, title, data_current):
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=360,
                         width=400, scale=2))))
+            
             else:
                 plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                     format='png', filename=key, height=400,
