@@ -948,7 +948,7 @@ def update_results(selection, ts, n1, n2, data_current):
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
             if 'unmet' in key:
-                layout_plot['yaxis'] = {'tickformat': ',.0%', 'range': [0, 1]}
+                layout_plot['yaxis'] = {'tickformat': '%', 'range': [0, 1]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
@@ -972,6 +972,8 @@ def update_results(selection, ts, n1, n2, data_current):
                         format='png', filename=key, height=400,
                         width=400, scale=2))))
         else:
+            if 'unmet' in key:
+                layout_plot['yaxis'] = {'tickformat': '%', 'range': [0, 1]}
             plots.append(dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                 format='png', filename=key, height=400,
                 width=400, scale=2))))
