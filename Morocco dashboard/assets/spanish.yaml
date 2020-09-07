@@ -18,6 +18,12 @@ sidebar:
   price increase:
     title: Seleccione el incremento de precio para el año 2040
     grid: Electricidad
+  butane:
+    title: Eliminación del uso de Butano
+    year: Año
+  pv adoption:
+    title: Adopción de paneles solares para el año 2040
+    share: Contribución
   reset: Resetear
   apply: Aplicar
 
@@ -64,6 +70,12 @@ information:
   price:
     title: Información sobre incremento del precio de la electrícidad de la red
     body: Este parámetro representa un aumento en el precio de la electricidad de la red debido a factores como nuevas políticas, reducción de subsidios o aumento en los costos de generación de energía.
+  butane:
+    title: text
+    body: text
+  pv adoption:
+    title: text
+    body: text
   close: cerrar
 
 language: Idioma
