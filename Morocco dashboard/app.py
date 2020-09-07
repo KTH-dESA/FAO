@@ -50,7 +50,8 @@ def load_data(scenario, climate, level):
 
     water_delivered = pd.read_csv(os.path.join(data, 'results.gz'))
     # water_required = pd.read_csv(os.path.join(data, 'Water_requirements.csv'))
-    ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.gz'))
+    # ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.gz'))
+    ag_lcoe = pd.DataFrame({'Year': []})
     wwtp_data = pd.read_csv(os.path.join(data, 'wwtp_data.gz'))
     desal_data = pd.read_csv(os.path.join(data, 'desal_data.gz'))
     desal_data['swpa_e'] = desal_data['sswd'] * 3.31
@@ -236,7 +237,8 @@ technology_options = html.Div(
             no_gutters=True,
         ),
     ],
-    className='options'
+    className='options',
+    hidden=True,
 )
 
 grid_options = html.Div(
@@ -257,7 +259,48 @@ grid_options = html.Div(
             no_gutters=True, style={'margin-top': '1em'}
         ),
     ],
-    className='options'
+    className='options',
+    hidden=True,
+)
+
+butane_options = html.Div(
+    [
+        title_info(title_id='butane-title', info_id='butane-info', modal_size='lg'),
+        dbc.Row(
+            [
+                dbc.Col([html.I(className="fa fa-burn"), html.Label(id='butane-phaseout', style={'padding': '0 0 0 10px'})],
+                        style={'font-size': '14px', 'color': 'gray'}, width=5),
+                dbc.Col(dcc.Slider(min=2020, max=2040, value=2020, step=10,
+                                   marks={2020: {'label': 'none'}, 2030: {'label': '2030'}, 2040: {'label': '2040'}},
+                                   included=False, id='butane-year'),
+                        style={'margin-top': '5px', 'margin-left': '0.5em'}
+                        ),
+            ],
+            no_gutters=True, style={'margin-top': '1em'}
+        ),
+    ],
+    className='options',
+    # hidden=True,
+)
+
+pv_options = html.Div(
+    [
+        title_info(title_id='pv-adoption-title', info_id='pv-info', modal_size='lg'),
+        dbc.Row(
+            [
+                dbc.Col([html.I(className="fa fa-solar-panel"), html.Label(id='pv-adoption', style={'padding': '0 0 0 10px'})],
+                        style={'font-size': '14px', 'color': 'gray'}, width=5),
+                dbc.Col(dcc.Slider(min=0.1, max=0.2, value=0.1, step=0.1,
+                                   marks={0.1: {'label': 'current (10%)'}, 0.2: {'label': '20%'}},
+                                   included=False, id='pv-share'),
+                        style={'margin-top': '5px', 'margin-left': '0.5em'}
+                        ),
+            ],
+            no_gutters=True, style={'margin-top': '1em'}
+        ),
+    ],
+    className='options',
+    # hidden=True,
 )
 
 # unit_options = html.Div(
@@ -372,9 +415,12 @@ scenario_tools = html.Div(
         climate_options,
         html.Hr(),
         technology_options,
-        html.Hr(),
+        # html.Hr(),
         grid_options,
         # html.Hr(),
+        butane_options,
+        html.Hr(),
+        pv_options
         # unit_options,
         # html.Hr(),
         # map_options,
@@ -815,7 +861,7 @@ def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe):
     data = water_supply_plot(data, water_delivered, 'Year')
     data = energy_demand_plot(data, water_delivered, wwtp_data, desal_data, 'Year')
     data = wtd_plot(data, water_delivered, 'Date')
-    data = lcoe_plot(data, ag_lcoe)
+    # data = lcoe_plot(data, ag_lcoe)
     return data
 
 
@@ -1118,20 +1164,24 @@ def toggle_popover(n_1, n_2, is_open):
         Output('rate-wind', 'value'),
         Output('rate-pv', 'value'),
         Output('rate-grid', 'value'),
+        Output('butane-year', 'value'),
+        Output('pv-share', 'value'),
         # Output('map-options', 'value')
         # Output('compare-options', 'value'),
     ],
     [Input('button-reset', 'n_clicks')],
 )
 def reset_output(n):
-    return 'Reference', [], 0, 0, 0
+    return 'Reference', [], 0, 0, 0, 2020, 0.1
 
 
 @app.callback(
     [Output('title', "children"), Output('page-1', 'children'), Output('scenarios-title', "children"),
      Output('rb-scenario', "options"), Output('climate', "children"), Output('cost-reduction', "children"),
      Output('wind-title', 'children'), Output('pv-title', 'children'), Output('price-increase', 'children'),
-     Output('grid-title', 'children'), Output('button-reset', 'children'), Output('button-apply', 'children'),
+     Output('grid-title', 'children'),  Output('butane-title', 'children'), Output('butane-phaseout', 'children'),
+     Output('pv-adoption-title', 'children'), Output('pv-adoption', 'children'),
+     Output('button-reset', 'children'), Output('button-apply', 'children'),
      Output('language', 'label'), Output('about', 'children'),
      Output('resultsTitle', 'children'), Output('button-download', 'children'), Output('scenarioTitle', 'children')] +
     [Output(f'{i}-title', 'children') for i in info_ids] + [Output(f'{i}-body', 'children') for i in info_ids] +
@@ -1172,6 +1222,19 @@ def update_language(n1, n2, ts, data_current):
                     * {language_dic['information']['climate']['body'][2]}
                     '''))]
 
+    info_butane = [html.H6(language_dic['information']['butane']['body'][0]),
+                   html.P(dcc.Markdown(f'''
+                        * {language_dic['information']['butane']['body'][1]} 
+                        * {language_dic['information']['butane']['body'][2]}
+                        * {language_dic['information']['butane']['body'][3]}
+                        '''))]
+
+    info_pv_share = [html.H6(language_dic['information']['pv adoption']['body'][0]),
+                   html.P(dcc.Markdown(f'''
+                            * {language_dic['information']['pv adoption']['body'][1]} 
+                            * {language_dic['information']['pv adoption']['body'][2]}
+                            '''))]
+
     about_content = [html.P(language_dic['about']['body'][0]), html.P(language_dic['about']['body'][1]),
                      html.P(language_dic['about']['body'][2]), html.P(language_dic['about']['body'][3]),
                      dbc.Row([dbc.Col(html.A(html.Img(src='assets/kth.png', style={'height': '130px'}),
@@ -1188,6 +1251,8 @@ def update_language(n1, n2, ts, data_current):
         options, language_dic['sidebar']['climate']['title'], language_dic['sidebar']['cost reduction']['title'], \
         language_dic['sidebar']['cost reduction']['wind'], language_dic['sidebar']['cost reduction']['pv'], \
         language_dic['sidebar']['price increase']['title'], language_dic['sidebar']['price increase']['grid'], \
+        language_dic['sidebar']['butane']['title'], language_dic['sidebar']['butane']['year'], \
+        language_dic['sidebar']['pv adoption']['title'], language_dic['sidebar']['pv adoption']['share'], \
         [html.I(className='fa fa-redo-alt'), f" {language_dic['sidebar']['reset']}"], \
         [html.I(className='fa fa-check-double'), f" {language_dic['sidebar']['apply']}"], \
         language_dic['language'], language_dic['about']['header'], \
@@ -1195,11 +1260,13 @@ def update_language(n1, n2, ts, data_current):
         [html.I(className='fa fa-download'), f" {language_dic['results']['download']}"], \
         results_string[language_index], language_dic['information']['scenarios']['title'], \
         language_dic['information']['climate']['title'], language_dic['information']['cost']['title'], \
-        language_dic['information']['price']['title'], info_scenarios, \
+        language_dic['information']['price']['title'], language_dic['information']['butane']['title'], \
+        language_dic['information']['pv adoption']['title'], info_scenarios, \
         info_climate, language_dic['information']['cost']['body'], \
-        language_dic['information']['price']['body'], language_dic['information']['close'], \
-        language_dic['information']['close'], language_dic['information']['close'], language_dic['information'][
-           'close'], \
+        language_dic['information']['price']['body'], info_butane, info_pv_share, \
+        language_dic['information']['close'], language_dic['information']['close'], \
+        language_dic['information']['close'], language_dic['information']['close'], \
+        language_dic['information']['close'], language_dic['information']['close'], \
         language_dic['about']['title'], about_content, language_dic['about']['close']
 
 
