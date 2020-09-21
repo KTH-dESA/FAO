@@ -44,9 +44,13 @@ graphs:
   water delivered: Water delivered (Mm3)
   unmet water: Unmet water demand (%)
   water supplied: Water supplied (Mm3)
+  water treated: Water treated (Mm3)
   depth to groundwater: Depth to groundwater (mbgl)
   energy demand: Energy demand (GWh)
   least-cost: Least-cost power technology for Agriculture
+  energy ag: Energy for agriculture water pumping (GWh)
+  pv capacity: PV installed capacity (MW)
+  emissions ag: Yearly emissions in agriculture (MtCO2)
 
 information:
   scenarios:

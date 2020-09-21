@@ -44,9 +44,13 @@ graphs:
   water delivered: Agua entregada (Mm3)
   unmet water: Demanda de agua no cumplida (%)
   water supplied: Suministro de agua (Mm3)
+  water treated: Agua tratada (Mm3)
   depth to groundwater: Profundidad del aquifero (mbgl)
   energy demand: Demanda de energía (GWh)
   least-cost: Technología de menor costo<br>de generación de energía en Agricultura
+  energy ag: Energy for agriculture water pumping (GWh)
+  pv capacity: PV installed capacity (MW)
+  emissions ag: Yearly emissions in agriculture (MtCO2)
 
 information:
   scenarios:
