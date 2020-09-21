@@ -970,8 +970,8 @@ def update_results(selection, ts, n1, n2, n3, data_current):
     elif 'WWTP' in selection['points'][0]['text']:
         name = selection['points'][0]['text']
         water_delivered, ag_lcoe, wwtp_data, desal_data, butane_data = load_data(data_current['scenario'], data_current['level'],
-                                                                    'W{0}_PV{0}_Grid{-0}', data_current['pv_share'],
-                                                                    data_current['butane_year'])
+                                                                    'W{0}_PV{0}_Grid{-0}', data_current['butane_year'],
+                                                                    data_current['pv_share'])
         df = wwtp_data.loc[wwtp_data.point == name].groupby('Year')['value', 'swpa_e'].sum()
         data['water treated'] = [{'x': df.index,
                                   'y': df.value,
