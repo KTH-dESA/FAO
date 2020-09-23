@@ -30,6 +30,7 @@ sidebar:
 results:
   title: Résumé des résultats
   download: Télécharger
+  compare: Comparer
   scenarios:
     Reference: Référence
     Desalination: Eau dessalée
@@ -48,9 +49,17 @@ graphs:
   depth to groundwater: Profondeur jusqu'aux eaux souterraines (mbgl)
   energy demand: La demande d'énergie (GWh)
   least-cost: Technologie énergétique la moins coûteuse pour l'agriculture
-  energy ag: Energy for agriculture water pumping (GWh)
-  pv capacity: PV installed capacity (MW)
-  emissions ag: Yearly emissions in agriculture (MtCO2)
+  energy ag: Énergie pour le pompage de l'eau agricole (GWh)
+  pv capacity: Capacité installée des panneaux solaires (MW)
+  emissions ag: Émissions annuelles dans l'agriculture (MtCO2)
+  water supply compare: Eau fournie à Souss-Massa
+  energy demand compare: La demande d'énergie à Souss-Massa
+  unmet demand compare: Demande d'eau non satisfaite dans l'agriculture à Souss-Massa
+  total costs compare: Coût total selon différents scénarios d'élimination du butane et adoption du PV
+  energy share compare: Part des sources d'énergie selon différents scénarios d'élimination du butane et adoption du PV
+  emissions compare: Émissions annuelles selon différents scénarios d'élimination du butane et adoption du PV
+  total emissions compare: Émissions totales selon différents scénarios d'élimination du butane et adoption du PV
+  emissions vs costs compare: Émissions totales vs coûts selon différents scénarios d'élimination du butane et adoption du PV
 
 information:
   scenarios:
@@ -78,7 +87,7 @@ information:
     title: Informations sur l'élimination du butane
     body:
       - Trois scénarios d'élimination progressive du butane peuvent être explorés comme suit
-      - Scénario du statu quo, qui suppose que la part actuelle de l'utilisation du butane se poursuivra dans le futur
+      - Scénario du statu quo, qui suppose que la part actuelle de l'utilisation du butane se poursuivra dans le futur.
       - Élimination tardive, qui suppose l'élimination complète du butane d'ici 2040.
       - Élimination précoce, qui suppose l'élimination complète du butane d'ici 2030.
   pv adoption:
@@ -86,8 +95,9 @@ information:
     body:
       - Deux niveaux de part du PV dans la région peuvent être explorés.
       - Part PV faible, qui suppose que le niveau actuel de part PV de 10% se maintiendra à l'avenir.
-      - Part PV élevée, qui suppose une augmentation de la part PV de 10% à 20% d'ici 2040.
-  close: fermée
+      - Part PV modérée , qui suppose une augmentation de la part PV de 10% à 20% d'ici 2040.
+      - Part PV élevée, qui suppose une augmentation de la part PV de 10% à 50% d'ici 2040.
+  close: fermer
 
 language: Langue
 
@@ -99,4 +109,12 @@ about:
     - L'analyse Nexus développée pour le bassin marocain de Souss-Massa, soft links un modèle de bilan hydrique développé par SEI en utilisant le système d'Evaluation et de Planification de l'Eau (WEAP), et un modèle énergétique basé sur le SIG développé par KTH.
     - Le modèle utilisé WEAP pour estimer l'approvisionnement en eau sur la base de routines hydrologiques liées au climat qui calculent le ruissellement des précipitations et la recharge des eaux souterraines. Il estime les modes d'utilisation des principaux secteurs de l'eau, évalue la productivité des systèmes de culture dans différents futurs climatiques et évalue leur impact sur les systèmes d'énergie et d'eau.
     - En outre, la composante énergie met en œuvre des méthodologies basées sur le SIG pour estimer les besoins énergétiques pour le pompage des eaux souterraines et des eaux de surface, les nouveaux projets de dessalement des eaux et les grandes usines de traitement des eaux usées. Enfin, les technologies de production les moins coûteuses pour fournir de l'électricité aux secteurs de l'eau et de l'agriculture sont identifiées.
+  close: fermer
+
+compare:
+  tabs:
+    - Demande d'eau
+    - Demande d'énergie
+    - Demande d'eau non satisfaite
+    - Élimination du butane
   close: fermer

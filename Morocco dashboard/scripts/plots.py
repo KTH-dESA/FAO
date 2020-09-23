@@ -26,7 +26,7 @@ def load_results_data(working_directory, scenarios, climates):
             df_wwtp = df_wwtp.append(dff, ignore_index=True)
     return df_results, df_desal, df_wwtp
 
-def water_supply_compare_plot(water_delivered, time_frame):
+def water_supply_compare_plot(water_delivered, time_frame, title):
     dff_delivered = water_delivered.copy()
     dff_delivered.loc[dff_delivered['type'].str.contains('SW|Aquifer'), 'type'] = 'Surface water'
     dff_delivered.loc[dff_delivered['type'].str.contains('GW'), 'type'] = 'Groundwater'
@@ -42,11 +42,11 @@ def water_supply_compare_plot(water_delivered, time_frame):
         if df.loc[df['type']==t, 'sswd'].sum() == 0:
             df = df.loc[df['type']!=t]
     fig = px.area(df, x='Year', y='sswd', color='type', facet_col='Scenario', facet_row='Reuse',
-                  labels={"sswd": "Water (Mm<sup>3</sup>)"}, title='Water supply in Souss-Massa',
+                  labels={"sswd": "Water (Mm<sup>3</sup>)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.Dark2)
     return fig
     
-def energy_demand_compare_plot(water_delivered, wwtp_data, desal_data, time_frame):
+def energy_demand_compare_plot(water_delivered, wwtp_data, desal_data, time_frame, title):
     dff_energy = water_delivered.copy()
     dff_energy.loc[dff_energy['type'].str.contains('GW'), 'type'] = 'Groundwater pumping'
     dff_energy.loc[dff_energy['type'].str.contains('SW|Pipeline'), 'type'] = 'Surface water conveyance'
@@ -65,11 +65,11 @@ def energy_demand_compare_plot(water_delivered, wwtp_data, desal_data, time_fram
             dff_energy = dff_energy.loc[dff_energy['type']!=t]
             
     fig = px.area(dff_energy, x='Year', y='swpa_e', color='type', facet_col='Scenario', facet_row='Reuse',
-                  labels={"swpa_e": "Energy (GWh)"}, title='Energy demand in Souss-Massa',
+                  labels={"swpa_e": "Energy (GWh)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.T10)
     return fig
     
-def unmet_demand_compare_plot(water_delivered, time_frame):
+def unmet_demand_compare_plot(water_delivered, time_frame, title):
     dff_unmet = water_delivered.copy()
     dff_unmet.loc[dff_unmet['type'].str.contains('Agriculture'), 'category'] = 'Agriculture'
     dff_unmet.loc[dff_unmet['type'].str.contains('Domestic'), 'category'] = 'Domestic'
@@ -89,7 +89,7 @@ def unmet_demand_compare_plot(water_delivered, time_frame):
 
     fig = px.line(df, x='Year', y='value', color='FullScenario',  # facet_col='Reuse', #facet_row='Reuse',
                         labels={"value": "Unmet demand (%)", 'FullScenario': 'Scenario'},
-                        title='Unmet demand in agriculture Souss-Massa',
+                        title=title,
                         facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_layout(yaxis={'tickformat': "%"})
     return fig
@@ -99,7 +99,7 @@ def load_butane_results(working_directory, scenarios, pv_levels):
     for scenario in scenarios:
         phaseout = f'by {scenario}' if scenario else 'None'
         for pv_level in pv_levels:
-            file = os.path.join(working_directory, 'Butane_calculations', scenario, f'{pv_level}_PV', 'summary_results.gz')
+            file = os.path.join(working_directory, 'Butane_calculations', f'phaseout_{scenario}', f'{pv_level}_PV', 'summary_results.gz')
             dff = pd.read_csv(file)
             dff['butane_phaseout'] = phaseout
             dff['pv_adoption'] = f'{pv_level}%'
@@ -109,7 +109,7 @@ def load_butane_results(working_directory, scenarios, pv_levels):
     return all_dfs
     
 
-def total_costs_plot(df):    
+def total_costs_plot(df, title):    
     dff = df.melt(value_vars=['butane_SUBSIDY(mMAD)', 'grid_cost(mMAD)', 'PV_Capex(mMAD)'], 
              id_vars=['butane_phaseout', 'pv_adoption'])
 
@@ -118,7 +118,7 @@ def total_costs_plot(df):
     dff.loc[dff['variable']=="PV_Capex(mMAD)", 'variable'] = "PV"
 
     fig = px.bar(dff, x='butane_phaseout', y='value', color='variable',
-                 facet_col='pv_adoption', title='Total cost under different butane phaseout scenarios and PV adoption',
+                 facet_col='pv_adoption', title=title,
                  color_discrete_sequence=px.colors.qualitative.Set2,
                  labels={
                          "butane_phaseout": "Butane phase-out",
@@ -130,7 +130,7 @@ def total_costs_plot(df):
     fig.update_layout(xaxis={'categoryorder':'total descending'})
     return fig
     
-def emissions_compare_plot(df):
+def emissions_compare_plot(df, title):
     df['Total_emissions(MtCO2)'] = df[['butane_emissions(MtCO2)', 'grid_emissions(MtCO2)']].sum(axis=1)
     dff = df.groupby(['Year','butane_phaseout', 'pv_adoption'])['Total_emissions(MtCO2)'].sum().reset_index()
 
@@ -138,7 +138,7 @@ def emissions_compare_plot(df):
              id_vars=['Year','butane_phaseout', 'pv_adoption'])
 
     fig = px.line(dff, x='Year', y='value', color='butane_phaseout',
-                 facet_col='pv_adoption', title='Annual emissions under different butane phaseout scenarios and PV adoption',
+                 facet_col='pv_adoption', title=title,
                  color_discrete_sequence=px.colors.qualitative.T10,
                  labels={
                          "butane_phaseout": "Butane phase-out",
@@ -149,7 +149,7 @@ def emissions_compare_plot(df):
                  )
     return fig
     
-def total_emissions_compare_plot(df):
+def total_emissions_compare_plot(df, title):
     dff = df.melt(value_vars=['butane_emissions(MtCO2)', 'grid_emissions(MtCO2)'], 
                   id_vars=['butane_phaseout', 'pv_adoption'])
 
@@ -157,7 +157,7 @@ def total_emissions_compare_plot(df):
     dff.loc[dff['variable']=="grid_emissions(MtCO2)", 'variable'] = "Grid"
 
     fig = px.bar(dff, x='butane_phaseout', y='value', color='variable',
-                 facet_col='pv_adoption', title='Total emissions under different butane phaseout scenarios and PV adoption',
+                 facet_col='pv_adoption', title=title,
                  color_discrete_sequence=px.colors.qualitative.Vivid,
                  labels={
                          "butane_phaseout": "Butane phase-out",
@@ -170,7 +170,7 @@ def total_emissions_compare_plot(df):
     fig.update_layout(xaxis={'categoryorder':'array', 'categoryarray':['None','by 2040','by 2030']})
     return fig
     
-def emisions_vs_costs(df):
+def emisions_vs_costs(df, title):
     df = df.loc[(df.Year >= 2021) & (df.Year < 2050)].copy()
 
     df['Total_emissions(MtCO2)'] = df[['butane_emissions(MtCO2)', 'grid_emissions(MtCO2)']].sum(axis=1)
@@ -191,7 +191,7 @@ def emisions_vs_costs(df):
     dff['pv_adoption_number'] = [pv_adop_dic[i] for i in dff['pv_adoption']]
 
     fig = px.scatter(dff, x='Total_costs(mMAD)', y='Total_emissions(MtCO2)',
-                     title='Total emissions and costs under different butane phaseout scenarios and PV adoption', 
+                     title=title, 
                      color='butane_phaseout', size='pv_adoption_number',
                      color_discrete_sequence=px.colors.qualitative.Vivid,
                      labels={
@@ -204,7 +204,7 @@ def emisions_vs_costs(df):
                     )
     return fig
     
-def energy_resources_share_plot(df): 
+def energy_resources_share_plot(df, title): 
     dff = df.groupby(['Year','butane_phaseout', 'pv_adoption'])[['pv_demand(KWh)', 'butane_demand(KWh)', 'grid_demand(KWh)']].sum().reset_index()
 
     dff['pv_demand(%)'] = dff['pv_demand(KWh)'] / dff[['pv_demand(KWh)', 'butane_demand(KWh)', 'grid_demand(KWh)']].sum(axis=1)
@@ -219,7 +219,7 @@ def energy_resources_share_plot(df):
     dff.loc[dff['variable']=="pv_demand(%)", 'variable'] = "PV"
 
     fig = px.bar(dff, x='Year', y='value', color='variable',
-                 facet_col='pv_adoption', facet_row='butane_phaseout', title='Share of energy sources under different butane phaseout scenarios and PV adoption',
+                 facet_col='pv_adoption', facet_row='butane_phaseout', title=title,
                  color_discrete_sequence=px.colors.qualitative.Set2,
                  labels={
                          "butane_phaseout": "phaseout",
