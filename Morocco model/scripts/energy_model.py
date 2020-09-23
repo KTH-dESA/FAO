@@ -78,11 +78,17 @@ sm_desal.df[souss_massa.swpp_e] = desalination_energy_int
 df_wwtp = pd.read_csv(wwtp_inflow)
 
 #We define an energy intensity for wastewater treatment and compute the energy demand
-if scenario.contains('Reuse'):
+if 'Reuse' in scenario:
     wwtp_energy_int = 0.8 # kWh/m3
+    df_wwtp['swpa_e'] = df_wwtp.value * wwtp_energy_int
+    df_wwtp.loc[df_wwtp['point']=='Agadir WWTP', 'swpa_e'] = df_wwtp.loc[df_wwtp['point']=='Agadir WWTP'].value * 0.6
 else:
     wwtp_energy_int = 0.1 # kWh/m3
-df_wwtp['swpa_e'] = df_wwtp.value * wwtp_energy_int
+    df_wwtp['swpa_e'] = df_wwtp.value * wwtp_energy_int
+    
+souss_massa.df.loc[souss_massa.df['type'].str.contains('WWR'), 'swpa_e'] = None
+souss_massa.df.loc[souss_massa.df['type'].str.contains('SW'), 'swpa_e'] = None
+souss_massa.df.loc[souss_massa.df['Supply point'].str.contains('Complexe Aoulouz Mokhtar Soussi'), 'swpa_e'] = None
 
 souss_massa.df.to_csv(output, index=False)
 sm_desal.df.to_csv(os.path.join(results_folder, 'desal_data.gz'), index=False)

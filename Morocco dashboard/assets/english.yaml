@@ -18,12 +18,19 @@ sidebar:
   price increase:
     title: Select the price increase for year 2040
     grid: Grid electricity
+  butane:
+    title: Butane phase-out
+    year: Phase-out year
+  pv adoption:
+    title: Solar PV adoption by year 2040
+    share: PV share
   reset: Reset
   apply: Apply
 
 results:
   title: Summary of results
   download: Download
+  compare: Compare
   scenarios:
     Reference: Reference
     Desalination: Desalinated water
@@ -38,9 +45,21 @@ graphs:
   water delivered: Water delivered (Mm3)
   unmet water: Unmet water demand (%)
   water supplied: Water supplied (Mm3)
+  water treated: Water treated (Mm3)
   depth to groundwater: Depth to groundwater (mbgl)
   energy demand: Energy demand (GWh)
   least-cost: Least-cost power technology for Agriculture
+  energy ag: Energy for agriculture water pumping (GWh)
+  pv capacity: PV installed capacity (MW)
+  emissions ag: Yearly emissions in agriculture (MtCO2)
+  water supply compare: Water supply in Souss-Massa
+  energy demand compare: Energy demand in Souss-Massa
+  unmet demand compare: Unmet demand in agriculture Souss-Massa
+  total costs compare: Total cost under different butane phaseout scenarios and PV adoption
+  energy share compare: Share of energy sources under different butane phaseout scenarios and PV adoption
+  emissions compare: Annual emissions under different butane phaseout scenarios and PV adoption
+  total emissions compare: Total emissions under different butane phaseout scenarios and PV adoption
+  emissions vs costs compare: Total emissions vs costs under different butane phaseout scenarios and PV adoption
 
 information:
   scenarios:
@@ -64,6 +83,20 @@ information:
   price:
     title: Electricity price reduction information
     body: This parameter represents an increase in electricity price from the grid, due to factors as new policies, reduction of subsidies or increase in power generation costs.
+  butane:
+    title: Butane phase-out information
+    body:
+      - Three phase-out scenarios for Butane can be explored as follows
+      - Business as usual scenario, which assumes the current share of butane use to continue into the future
+      - Late Phase out, which assumes complete phase-out of butane by year 2040.
+      - Early Phase out, which assumes complete phase-out of butane by  year 2030.
+  pv adoption:
+    title: Solar PV adoption information
+    body:
+      - Two levels of PV share in the region can be explored.
+      - Low PV Share, which assumes the current level of PV share of 10% to continue in the future.
+      - Moderate PV Share, which assumes an increase of PV share from 10% to 20% by year 2040.
+      - High PV Share, which assumes an increase of PV share from 10% to 50% by year 2040.
   close: close
 
 language: Language
@@ -72,8 +105,16 @@ about:
   header: About
   title: About the Souss-Massa Nexus model
   body:
-    - This platform provides the means to explore the modelling results of the project “Implementing the 2030 Agenda for water efficiency/productivity and water sustainability in NENA countries” in the Souss-Massa basin in Morocco. The project is funded by the UN Food and Agricultural Organization (FAO). The Royal Institute of Technology (KTH) and the Stockholm Environmental Institute (SEI) are providing analyses and support on decision making across the climate, land, energy and water spheres.
+    - This platform provides the means to explore the modelling results of the project titled “Implementing the 2030 Agenda for water efficiency/productivity and water sustainability in the Souss-Massa basin in Morocco”. The project is funded by the UN Food and Agricultural Organization (FAO). The Royal Institute of Technology (KTH) and the Stockholm Environmental Institute (SEI) are providing analyses and support on decision making across the climate, land, energy and water spheres.
     - The Nexus analysis developed for the Moroccan Souss-Massa basin, softlinks a water balance model developed by SEI using the Water Evaluation and Planning system (WEAP), and a GIS-based energy model developed by KTH.
     - The model uses WEAP for estimating water supplies based on climate-driven hydrological routines that calculate rainfall runoff and groundwater recharge. It estimates usage patterns for the main water sectors, evaluates the productivity of cropping systems under different climate futures and assess their impact on energy and water systems.
     - Furthermore, the energy component implements GIS-based methodologies to estimate energy requirements for groundwater and surface water pumping, new water desalination projects and major wastewater treatment plants. Finally, least-cost generation technologies to supply electricity for water and agricultural sectors are identified.
+  close: close
+
+compare:
+  tabs:
+    - Water demand
+    - Energy demand
+    - Unmet demand
+    - Butane phase-out
   close: close

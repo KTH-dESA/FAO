@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 
+import itertools
+import os.path
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
+import geopandas as gpd
+import numpy as np
+import pandas as pd
+import yaml
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-import json
-import pandas as pd
-import numpy as np
-import geopandas as gpd
-import os.path
-import itertools
-import yaml
+
+from scripts import plots
 
 # import boto3
 
@@ -40,8 +42,9 @@ for gdf in [demand_points, supply_points, pipelines]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
 
-def load_data(scenario, climate, level):
+def load_data(scenario, climate, level, phaseout_year, pv_level):
     init_year = 2020
+    butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year!=2050 else 'phaseout_None'
     data_folder = os.path.join(my_path, 'data')
     if not climate:
         climate = ['Trend']
@@ -50,13 +53,17 @@ def load_data(scenario, climate, level):
 
     water_delivered = pd.read_csv(os.path.join(data, 'results.gz'))
     # water_required = pd.read_csv(os.path.join(data, 'Water_requirements.csv'))
-    ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.gz'))
+    # ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.gz'))
+    ag_lcoe = pd.DataFrame({'Year': []})
     wwtp_data = pd.read_csv(os.path.join(data, 'wwtp_data.gz'))
     desal_data = pd.read_csv(os.path.join(data, 'desal_data.gz'))
     desal_data['swpa_e'] = desal_data['sswd'] * 3.31
+    butane_data = pd.read_csv(os.path.join(my_path, 'Butane_calculations', butane_scenario,
+                                           f'{pv_level}_PV', 'summary_results.gz'))
 
     return water_delivered.loc[water_delivered.Year >= init_year], ag_lcoe.loc[ag_lcoe.Year >= init_year], \
-        wwtp_data.loc[wwtp_data.Year >= init_year], desal_data.loc[desal_data.Year >= init_year]
+           wwtp_data.loc[wwtp_data.Year >= init_year], desal_data.loc[desal_data.Year >= init_year], \
+           butane_data.loc[butane_data.Year >= init_year]
 
 
 # def load_data(scenario, climate, level):
@@ -111,7 +118,6 @@ layout = dict(
     plot_bgcolor="#fff",
     paper_bgcolor="#fff",
     legend=dict(font=dict(size=10), orientation="h"),
-    # xaxis={'tickformat': 'd'},
     showlegend=True,
     hoverlabel={'align': 'left'},
 )
@@ -165,13 +171,6 @@ scenario_options = html.Div(
         html.Div(
             dbc.RadioItems(
                 id="rb-scenario",
-                # options=[
-                #     {"label": "Reference", "value": 'Reference'},
-                #     {"label": "Desalinated water", "value": 'Desalination'},
-                #     {"label": "Irrigation Intensification", "value": 'Irrigation intensification'},
-                #     {"label": "Desalination & wastewater reuse", "value": "Desalination wastewater reuse"},
-                #     {"label": "Reference & wastewater reuse", "value": "Reference wastewater reuse"}
-                # ],
                 value='Reference',
                 className='checklist-selected-style',
             ),
@@ -226,7 +225,7 @@ technology_options = html.Div(
                 dbc.Col([html.I(className="fa fa-solar-panel"), html.Label('Solar panels', id='pv-title',
                                                                            style={'padding': '0 0 0 8px'})],
                         style={'font-size': '14px', 'color': 'gray', 'margin-right': '0em'}, width=5),
-                dbc.Col(dcc.Slider(min=0, max=0.7, value=0, step=0.7,
+                dbc.Col(dcc.Slider(min=0, max=0.7, value=0, step=None,
                                    marks={0: {'label': '0%'}, 0.3: {'label': '30%'}, 0.5: {'label': '50%'},
                                           0.7: {'label': '70%'}},
                                    included=False, id='rate-pv'),
@@ -236,7 +235,8 @@ technology_options = html.Div(
             no_gutters=True,
         ),
     ],
-    className='options'
+    className='options',
+    hidden=True,
 )
 
 grid_options = html.Div(
@@ -247,7 +247,7 @@ grid_options = html.Div(
                 dbc.Col([html.I(className="fa fa-plug"), html.Label('Grid electricity', id='grid-title',
                                                                     style={'padding': '0 0 0 10px'})],
                         style={'font-size': '14px', 'color': 'gray'}, width=5),
-                dbc.Col(dcc.Slider(min=0, max=0.7, value=0, step=0.7,
+                dbc.Col(dcc.Slider(min=0, max=0.7, value=0, step=None,
                                    marks={0: {'label': '0%'}, 0.3: {'label': '30%'}, 0.5: {'label': '50%'},
                                           0.7: {'label': '70%'}},
                                    included=False, id='rate-grid'),
@@ -257,7 +257,50 @@ grid_options = html.Div(
             no_gutters=True, style={'margin-top': '1em'}
         ),
     ],
-    className='options'
+    className='options',
+    hidden=True,
+)
+
+butane_options = html.Div(
+    [
+        title_info(title_id='butane-title', info_id='butane-info', modal_size='lg'),
+        dbc.Row(
+            [
+                dbc.Col(
+                    [html.I(className="fa fa-burn"), html.Label(id='butane-phaseout', style={'padding': '0 0 0 10px'})],
+                    style={'font-size': '14px', 'color': 'gray'}, width=5),
+                dbc.Col(dcc.Slider(min=2030, max=2050, value=2050, step=None,
+                                   marks={2030: {'label': '2030'}, 2040: {'label': '2040'}, 2050: {'label': 'none'}},
+                                   included=False, id='butane-year'),
+                        style={'margin-top': '5px', 'margin-left': '0.5em'}
+                        ),
+            ],
+            no_gutters=True, style={'margin-top': '1em'}
+        ),
+    ],
+    className='options',
+    # hidden=True,
+)
+
+pv_options = html.Div(
+    [
+        title_info(title_id='pv-adoption-title', info_id='pv-info', modal_size='lg'),
+        dbc.Row(
+            [
+                dbc.Col([html.I(className="fa fa-solar-panel"),
+                         html.Label(id='pv-adoption', style={'padding': '0 0 0 10px'})],
+                        style={'font-size': '14px', 'color': 'gray'}, width=5),
+                dbc.Col(dcc.Slider(min=10, max=50, value=10, step=None,
+                                   marks={10: {'label': '10%'}, 20: {'label': '20%'}, 50: {'label': '50%'}},
+                                   included=False, id='pv-share'),
+                        style={'margin-top': '5px', 'margin-left': '0.5em'}
+                        ),
+            ],
+            no_gutters=True, style={'margin-top': '1em'}
+        ),
+    ],
+    className='options',
+    # hidden=True,
 )
 
 # unit_options = html.Div(
@@ -372,9 +415,12 @@ scenario_tools = html.Div(
         climate_options,
         html.Hr(),
         technology_options,
-        html.Hr(),
+        # html.Hr(),
         grid_options,
         # html.Hr(),
+        butane_options,
+        html.Hr(),
+        pv_options
         # unit_options,
         # html.Hr(),
         # map_options,
@@ -445,11 +491,31 @@ results_header = dbc.Row(
 
 footer_results = dbc.Row(
     [
+        dbc.Button([html.I(className='fa fa-chart-pie'), " Compare"], color=button_color, outline=True,
+                   className="mr-1", style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='compare'),
+        dbc.Modal(
+            [
+                dbc.ModalBody([dbc.Tabs([dbc.Tab(tab_id="tab-1", id="tab-1"),
+                                         dbc.Tab(tab_id="tab-2", id="tab-2"),
+                                         dbc.Tab(tab_id="tab-3", id="tab-3"),
+                                         dbc.Tab(tab_id="tab-4", id="tab-4")],
+                                        id="compare-tabs",
+                                        active_tab="tab-1",
+                                        style={'fontSize': '1.5rem', 'fontWeight': '600'}
+                                        ),
+                               dcc.Store(id='compare-data'),
+                               dcc.Loading(dbc.ModalBody(id="compare-content"))]),
+                dbc.ModalFooter(
+                    dbc.Button("Close", id="compare-close", className="ml-auto")
+                ), ],
+            size="xl",
+            id="compare-modal",
+        ),
         dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color, className="mr-1",
                    style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
     ],
     align='center',
-    justify="center",
+    justify="around",
     className='footer',
 )
 
@@ -476,9 +542,10 @@ map = html.Div(dcc.Loading(
 #                )
 
 
-graphs = html.Div([dbc.Nav([dbc.DropdownMenu(
+graphs = html.Div([dcc.Store(id='current-language'), dbc.Nav([dbc.DropdownMenu(
     [dbc.DropdownMenuItem(["English ", html.I(className='fa fa-language')], className="drop-items", id="english"),
-     dbc.DropdownMenuItem(["Spanish ", html.I(className='fa fa-language')], className="drop-items", id="spanish")],
+     dbc.DropdownMenuItem(["Spanish ", html.I(className='fa fa-language')], className="drop-items", id="spanish"),
+     dbc.DropdownMenuItem(["French ", html.I(className='fa fa-language')], className="drop-items", id="french")],
     label="Language", id='language', nav=True),
     dbc.NavLink("About", id='about', href="#"),
     dbc.Modal(
@@ -514,24 +581,11 @@ app.layout = html.Div([dcc.Store(id='current'), sidebar, content])
 #         # print(feature)
 #         feature['id'] = feature['properties']['Province']
 
-def get_language(data, n1, n2):
-    if data is None:
-        raise PreventUpdate
-
-    language_list = ['english', 'spanish']
-    n_list = []
-    for n in [n1, n2]:
-        if n is None:
-            n_list.append(0)
-        else:
-            n_list.append(n)
-
-    language_index = np.array(n_list).argmax()
-    language = language_list[language_index]
+def get_language(language):
     file = f"assets/{language}.yaml"
     with open(file, 'rt', encoding='utf8') as yml:
         language_dic = yaml.load(yml, Loader=yaml.FullLoader)
-    return language_dic, language_index
+    return language_dic
 
 
 def choroplethmap(geojson, locations, title):
@@ -704,9 +758,12 @@ def energy_demand_plot(data, water_delivered, wwtp_data, desal_data, time_frame)
     emission_factor = 1.76
     dff_energy = water_delivered.copy()
     dff_energy.loc[dff_energy['type'].str.contains('GW'), 'type'] = 'Groundwater pumping'
-    dff_energy.loc[dff_energy['type'].str.contains('SW|Pipeline'), 'type'] = 'Surface water conveyance'
+    dff_energy.loc[dff_energy['type'].str.contains('Pipeline'), 'type'] = 'Surface water conveyance'
     dff_energy.loc[dff_energy['type'].str.contains('DS'), 'type'] = 'Desalinated water conveyance'
-    dff_energy.loc[dff_energy['type'].str.contains('WWR'), 'type'] = 'Wastewater reuse conveyance'
+    # dff_energy.loc[dff_energy['type'].str.contains('WWR'), 'type'] = 'Wastewater reuse conveyance'
+    # dff_energy = dff_energy.loc[~dff_energy['type'].str.contains('WWR')]
+    # dff_energy = dff_energy.loc[~dff_energy['type'].str.contains('SW')]
+    dff_energy = dff_energy.loc[~dff_energy['Supply point'].str.contains('Complexe Aoulouz Mokhtar Soussi')]
     dff_energy = dff_energy.groupby([time_frame, 'type'])['swpa_e'].sum() / 1000000
     dff_energy = dff_energy.reset_index()
     wwtp_data['type'] = 'Wastewater treatment'
@@ -715,6 +772,10 @@ def energy_demand_plot(data, water_delivered, wwtp_data, desal_data, time_frame)
         dff = df.groupby([time_frame, 'type'])['swpa_e'].sum() / 1000000
         dff = dff.reset_index()
         dff_energy = dff_energy.append(dff, sort=False)
+
+    for t in dff_energy['type'].unique():
+        if dff_energy.loc[dff_energy['type'] == t, 'swpa_e'].sum() == 0:
+            dff_energy = dff_energy.loc[dff_energy['type'] != t]
 
     name = 'energy demand'
     df = dff_energy
@@ -809,13 +870,16 @@ def water_supply_plot(data, water_delivered, time_frame):
     return data
 
 
-def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe):
+def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe, butane_data):
     data = water_delivered_plot(data, water_delivered, 'Year')
     data = unmet_demand_plot(data, water_delivered, 'Year')
     data = water_supply_plot(data, water_delivered, 'Year')
     data = energy_demand_plot(data, water_delivered, wwtp_data, desal_data, 'Year')
     data = wtd_plot(data, water_delivered, 'Date')
-    data = lcoe_plot(data, ag_lcoe)
+    data['energy ag'] = plots.energy_demand_ag(butane_data)
+    data['pv capacity'] = plots.pv_installed_capacity(butane_data)
+    data['emissions ag'] = plots.emissions_ag(butane_data)
+    # data = lcoe_plot(data, ag_lcoe)
     return data
 
 
@@ -825,12 +889,13 @@ def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe):
         Input("button-apply", "n_clicks"),
     ],
     [State('rate-wind', 'value'), State('rate-pv', 'value'), State('rate-grid', 'value'), State('rb-scenario', 'value'),
-     State('climate-input', 'value')]
+     State('climate-input', 'value'), State('butane-year', 'value'), State('pv-share', 'value')]
     # State("map-options", 'value'), State('cho-map-drop', 'value')]
 )
-def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate):
-    water_delivered, ag_lcoe, wwtp_data, desal_data = load_data(scenario, climate,
-                                                                f'W{rate_wind}_PV{rate_pv}_Grid{-rate_grid}')
+def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate, butane_year, pv_share):
+    water_delivered, ag_lcoe, wwtp_data, desal_data, butane_data = load_data(scenario, climate,
+                                                                             f'W{rate_wind}_PV{rate_pv}_Grid{-rate_grid}',
+                                                                             butane_year, pv_share)
     # if map_op == 'cho-map':
     #     #     map = choroplethmap(provinces_chmap, provinces['Province'], label)
     #     # elif map_op == 'sch-map':
@@ -840,9 +905,10 @@ def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate):
 
     map = plot_map(water_delivered)
     data = {}
-    graphs = get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe)
+    graphs = get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe, butane_data)
 
-    data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=climate)
+    data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=climate, pv_share=pv_share,
+                     butane_year=butane_year)
     return data_dict, None
 
 
@@ -872,21 +938,52 @@ def toggle_collapse(n, is_open):
     [Output("graphs", "children"), Output('resultsSubTitle', 'children')],
     [Input('map', 'selectedData'),
      # Input("sidebar-toggle", "n_clicks"),
-     Input('current', 'modified_timestamp')] +
-    [Input(language, "n_clicks_timestamp") for language in ['english', 'spanish']],
-    [State('current', 'data')]
+     Input('current', 'modified_timestamp'), Input('current-language', "modified_timestamp")],
+    [State('current-language', 'data'), State('current', 'data')]
 )
-def update_results(selection, ts, n1, n2, data_current):
+def update_results(selection, ts, ts2, language, data_current):
     if data_current is None:
         raise PreventUpdate
 
-    language_dic, language_index = get_language(data_current, n1, n2)
+    language_dic = get_language(language)
 
     colors = {'water': "#59C3C3", 'energy': "#F9ADA0", 'food': "#849E68"}
     data = {}
     if selection is None:
         name = 'Souss-Massa'
         data = data_current['graphs']
+
+    elif 'WWTP' in selection['points'][0]['text']:
+        name = selection['points'][0]['text']
+        water_delivered, ag_lcoe, wwtp_data, desal_data, butane_data = load_data(data_current['scenario'], data_current['level'],
+                                                                    'W{0}_PV{0}_Grid{-0}', data_current['butane_year'],
+                                                                    data_current['pv_share'])
+        df = wwtp_data.loc[wwtp_data.point == name].groupby('Year')['value', 'swpa_e'].sum()
+        data['water treated'] = [{'x': df.index,
+                                  'y': df.value,
+                                  'stackgroup': 'one',
+                                  'mode': 'lines',
+                                  'name': selection['points'][0]['text'],
+                                  'line': {'color': colors['water']}
+                                  }]
+
+        dff = water_delivered.loc[water_delivered['Supply point'] == name].groupby(['Year', 'Demand point'])[
+            'sswd'].sum().reset_index()
+        data['water supplied'] = [{'x': dff.loc[dff['Demand point'] == point].Year,
+                                   'y': dff.loc[dff['Demand point'] == point].sswd,
+                                   'stackgroup': 'one',
+                                   'mode': 'lines',
+                                   'name': point,
+                                   } for point in dff['Demand point'].unique()]
+
+        data['energy demand'] = [{'x': df.index,
+                                  'y': df.swpa_e,
+                                  'stackgroup': 'one',
+                                  'mode': 'lines',
+                                  'name': name,
+                                  'line': {'color': colors['energy']}
+                                  }]
+
 
     elif selection['points'][0]['customdata']['type'] in ['demand', 'supply']:
         name = selection['points'][0]['text']
@@ -935,42 +1032,47 @@ def update_results(selection, ts, n1, n2, data_current):
         layout_plot['font'] = dict(size=10, color="#7f7f7f")
 
         if selection is None:
-
             if 'least-cost' in key:
                 layout_plot['yaxis'] = {'tickformat': ',.0%', 'range': [0, 1]}
-                layout_plot['annotations'] = [dict(xref='paper',
+                layout_plot['annotations'] = dict(xref='paper',
                                                    yref='paper',
                                                    x=0, y=1.12,
                                                    showarrow=False,
-                                                   text='Percentage of Agricultural sites per technology')]
+                                                   text='Percentage of Agricultural sites per technology')
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
-            if 'unmet' in key:
-                layout_plot['yaxis'] = {'tickformat': '%', 'range': [0, 1]}
+            elif 'unmet' in key:
+                layout_plot['yaxis'] = {'tickformat': '%'}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
-            if ('delivered' in key) or ('supplied' in key):
-                layout_plot['yaxis'] = {'range': [0, 1100]}
+            elif ('delivered' in key) or ('supplied' in key):
+                # layout_plot['yaxis'] = {'range': [0, 1100]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=300,
                         width=400, scale=2))))
-            if 'energy demand' in key:
-                layout_plot['yaxis'] = {'range': [0, 1600]}
+            elif 'energy demand' in key:
+                # layout_plot['yaxis'] = {'range': [0, 1600]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=400,
                         width=400, scale=2))))
-            if 'depth' in key:
+            elif 'depth' in key:
                 layout_plot['yaxis'] = {'range': [200, 0]}
                 plots.append(
                     dcc.Graph(figure=dict(data=value, layout=layout_plot), config=dict(toImageButtonOptions=dict(
                         format='png', filename=key, height=400,
                         width=400, scale=2))))
+            else:
+                plots.append(
+                    dcc.Graph(figure=dict(data=value['data'], layout=layout_plot),
+                              config=dict(toImageButtonOptions=dict(
+                                  format='png', filename=key, height=300,
+                                  width=400, scale=2))))
         else:
             if 'unmet' in key:
                 layout_plot['yaxis'] = {'tickformat': '%', 'range': [0, 1]}
@@ -1085,16 +1187,16 @@ for info_id in info_ids:
             return not is_open
         return is_open
 
-
-@app.callback(
-    Output("about-modal", "is_open"),
-    [Input('about', "n_clicks"), Input("about-close", "n_clicks")],
-    [State("about-modal", "is_open")]
-)
-def toggle_popover(n_1, n_2, is_open):
-    if n_1 or n_2:
-        return not is_open
-    return is_open
+for modal_id in ['about', 'compare']:
+    @app.callback(
+        Output(f"{modal_id}-modal", "is_open"),
+        [Input(modal_id, "n_clicks"), Input(f"{modal_id}-close", "n_clicks")],
+        [State(f"{modal_id}-modal", "is_open")],
+    )
+    def toggle_popover(n_1, n_2, is_open):
+        if n_1 or n_2:
+            return not is_open
+        return is_open
 
 
 # @app.callback(
@@ -1118,31 +1220,135 @@ def toggle_popover(n_1, n_2, is_open):
         Output('rate-wind', 'value'),
         Output('rate-pv', 'value'),
         Output('rate-grid', 'value'),
+        Output('butane-year', 'value'),
+        Output('pv-share', 'value'),
         # Output('map-options', 'value')
         # Output('compare-options', 'value'),
     ],
     [Input('button-reset', 'n_clicks')],
 )
 def reset_output(n):
-    return 'Reference', [], 0, 0, 0
+    return 'Reference', [], 0, 0, 0, 2050, 10
 
+
+@app.callback(Output("compare-data", "data"),
+              [Input("compare", "n_clicks"), Input("current-language", "modified_timestamp")],
+              [State('current-language', 'data')])
+def read_compare_data(n, ts, language):
+    language_dic = get_language(language)
+    # General results
+    scenarios = ['Reference', 'Desalination', 'Reference Wastewater Reuse', 'Desalination Wastewater Reuse']
+    climates = ['Climate Change']
+    df_results, df_desal, df_wwtp = plots.load_results_data(my_path, scenarios, climates)
+
+    df_results = df_results.loc[df_results.Year >= 2020]
+    df_desal = df_desal.loc[df_desal.Year >= 2020]
+    df_wwtp = df_wwtp.loc[df_wwtp.Year >= 2020]
+
+    fig_supply = plots.water_supply_compare_plot(df_results, 'Year', language_dic['graphs']['water supply compare'])
+    fig_energy = plots.energy_demand_compare_plot(df_results, df_wwtp, df_desal, 'Year',
+                                                  language_dic['graphs']['energy demand compare'])
+    fig_unmet = plots.unmet_demand_compare_plot(df_results, 'Year', language_dic['graphs']['unmet demand compare'])
+
+    # Butane results
+    scenarios = [None, 2040, 2030]
+    pv_levels = [10, 20, 50]
+    df_butane = plots.load_butane_results(my_path, scenarios, pv_levels)
+
+    df = df_butane.loc[df_butane.Year >= 2021].groupby(['butane_phaseout', 'pv_adoption'])[
+        ['water_demand(m3)', 'energy_demand(KWh)', 'pv_elec(KWh)', 'grid_elec(KWh)', 'butane_cons(tonnes)',
+         'butane_FARcost(mMAD)', 'PV_new_cap(MW)', 'reinv_cap(MW)', 'butane_emissions(MtCO2)', 'grid_emissions(MtCO2)',
+         'Total_emissions(MtCO2)', 'butane_SUBSIDY(mMAD)', 'grid_cost(mMAD)', 'PV_Capex(mMAD)', 'pv_demand(KWh)',
+         'butane_demand(KWh)', 'grid_demand(KWh)']].sum().reset_index()
+
+    fig_butane_costs = plots.total_costs_plot(df, language_dic['graphs']['total costs compare'])
+    fig_butane_emissions = plots.emissions_compare_plot(df_butane, language_dic['graphs']['emissions compare'])
+    fig_butane_emissions_total = plots.total_emissions_compare_plot(df, language_dic['graphs']['total emissions compare'])
+    fig_emissions_costs = plots.emisions_vs_costs(df_butane, language_dic['graphs']['emissions vs costs compare'])
+    fig_energy_share = plots.energy_resources_share_plot(df_butane, language_dic['graphs']['energy share compare'])
+
+    return {'water supply': fig_supply, 'energy demand': fig_energy, 'unmet demand': fig_unmet,
+            'butane costs': fig_butane_costs, 'butane emissions': fig_butane_emissions,
+            'butane total emissions': fig_butane_emissions_total, 'emissions vs costs': fig_emissions_costs,
+            'resources share': fig_energy_share}
+
+
+@app.callback(Output("compare-content", "children"),
+              [Input("compare-tabs", "active_tab"), Input('compare-data', 'modified_timestamp')],
+              [State("compare-data", "data")])
+def switch_tab(at, ts, data):
+    if data is None:
+        raise PreventUpdate
+    if at == "tab-1":
+        return dcc.Graph(figure=data['water supply'],
+                         config=dict(toImageButtonOptions=dict(format='png', filename='water_supply_all',
+                                                               height=500, width=900, scale=2)))
+    elif at == "tab-2":
+        return dcc.Graph(figure=data['energy demand'],
+                         config=dict(toImageButtonOptions=dict(format='png', filename='energy_demand_all',
+                                                               height=500, width=900, scale=2)))
+    elif at == "tab-3":
+        return dcc.Graph(figure=data['unmet demand'],
+                         config=dict(toImageButtonOptions=dict(format='png', filename='unmet_demand_ag_all',
+                                                               height=500, width=900, scale=2)))
+    elif at == "tab-4":
+        return [dcc.Graph(figure=data['resources share'],
+                         config=dict(toImageButtonOptions=dict(format='png', filename='energy_resources_share_ag',
+                                                               height=600, width=900, scale=2))),
+                dcc.Graph(figure=data['butane costs'],
+                         config=dict(toImageButtonOptions=dict(format='png', filename='total_butane_system_cost',
+                                                               height=500, width=900, scale=2))),
+                dcc.Graph(figure=data['butane emissions'],
+                          config=dict(toImageButtonOptions=dict(format='png', filename='annual_emissions_butane',
+                                                                height=500, width=900, scale=2))),
+                dcc.Graph(figure=data['butane total emissions'],
+                          config=dict(toImageButtonOptions=dict(format='png', filename='total_emissions_butane',
+                                                                height=500, width=900, scale=2))),
+
+                dcc.Graph(figure=data['emissions vs costs'],
+                          config=dict(toImageButtonOptions=dict(format='png', filename='emissions_vs_costs',
+                                                                height=500, width=900, scale=2)))
+                ]
+
+@app.callback(
+    Output('current-language', 'data'),
+    [Input(language, 'n_clicks_timestamp') for language in ['english', 'spanish', 'french']]
+)
+def current_language(n1, n2, n3):
+    language_list = ['english', 'spanish', 'french']
+    n_list = []
+    for n in [n1, n2, n3]:
+        if n is None:
+            n_list.append(0)
+        else:
+            n_list.append(n)
+
+    language_index = np.array(n_list).argmax()
+    language = language_list[language_index]
+    return language
 
 @app.callback(
     [Output('title', "children"), Output('page-1', 'children'), Output('scenarios-title', "children"),
      Output('rb-scenario', "options"), Output('climate', "children"), Output('cost-reduction', "children"),
      Output('wind-title', 'children'), Output('pv-title', 'children'), Output('price-increase', 'children'),
-     Output('grid-title', 'children'), Output('button-reset', 'children'), Output('button-apply', 'children'),
+     Output('grid-title', 'children'), Output('butane-title', 'children'), Output('butane-phaseout', 'children'),
+     Output('pv-adoption-title', 'children'), Output('pv-adoption', 'children'),
+     Output('button-reset', 'children'), Output('button-apply', 'children'),
      Output('language', 'label'), Output('about', 'children'),
      Output('resultsTitle', 'children'), Output('button-download', 'children'), Output('scenarioTitle', 'children')] +
     [Output(f'{i}-title', 'children') for i in info_ids] + [Output(f'{i}-body', 'children') for i in info_ids] +
     [Output(f'{i}-close', 'children') for i in info_ids] + [Output(f'about-{i}', 'children') for i in
-                                                            ['title', 'body', 'close']],
-    [Input(language, "n_clicks_timestamp") for language in ['english', 'spanish']] + [
-        Input('current', 'modified_timestamp')],
-    [State('current', 'data')]
+                                                            ['title', 'body', 'close']] +
+    [Output('compare', 'children'), Output('compare-close', 'children')] +
+    [Output(f'tab-{i + 1}', 'label') for i in range(4)],
+    # [Input(language, "n_clicks_timestamp") for language in ['english', 'spanish', 'french']] + [
+    [Input('current-language', 'modified_timestamp'), Input('current', 'modified_timestamp')],
+    [State('current-language', 'data'), State('current', 'data')]
 )
-def update_language(n1, n2, ts, data_current):
-    language_dic, language_index = get_language(data_current, n1, n2)
+def update_language(ts, ts2, language, data_current):
+    if data_current is None:
+        raise PreventUpdate
+    language_dic = get_language(language)
 
     options = [
         {"label": language_dic["sidebar"]["scenarios"]["options"][0], "value": 'Reference'},
@@ -1155,9 +1361,11 @@ def update_language(n1, n2, ts, data_current):
     if not climate:
         climate = ['historical trend']
 
-    results_string = [
-        f" - {language_dic['results']['scenarios'][data_current['scenario']]} & {language_dic['results']['climate'][climate[0]]} scenario",
-        f" - Escenario de {language_dic['results']['scenarios'][data_current['scenario']]} & {language_dic['results']['climate'][climate[0]]}"]
+    results_string = {
+        'english': f" - {language_dic['results']['scenarios'][data_current['scenario']]} & {language_dic['results']['climate'][climate[0]]} scenario",
+        'spanish': f" - Escenario de {language_dic['results']['scenarios'][data_current['scenario']]} & {language_dic['results']['climate'][climate[0]]}",
+        'french': f" - {language_dic['results']['scenarios'][data_current['scenario']]} & {language_dic['results']['climate'][climate[0]]} scénario"
+    }
 
     info_scenarios = [html.H6(language_dic['information']['scenarios']['body'][0]),
                       html.P(language_dic['information']['scenarios']['body'][1]),
@@ -1172,35 +1380,55 @@ def update_language(n1, n2, ts, data_current):
                     * {language_dic['information']['climate']['body'][2]}
                     '''))]
 
+    info_butane = [html.H6(language_dic['information']['butane']['body'][0]),
+                   html.P(dcc.Markdown(f'''
+                        * {language_dic['information']['butane']['body'][1]} 
+                        * {language_dic['information']['butane']['body'][2]}
+                        * {language_dic['information']['butane']['body'][3]}
+                        '''))]
+
+    info_pv_share = [html.H6(language_dic['information']['pv adoption']['body'][0]),
+                     html.P(dcc.Markdown(f'''
+                            * {language_dic['information']['pv adoption']['body'][1]} 
+                            * {language_dic['information']['pv adoption']['body'][2]}
+                            * {language_dic['information']['pv adoption']['body'][3]}
+                            '''))]
+
     about_content = [html.P(language_dic['about']['body'][0]), html.P(language_dic['about']['body'][1]),
                      html.P(language_dic['about']['body'][2]), html.P(language_dic['about']['body'][3]),
                      dbc.Row([dbc.Col(html.A(html.Img(src='assets/kth.png', style={'height': '130px'}),
-                            href='https://www.energy.kth.se/energy-systems/about-the-division-of-energy-systems-1.937036'),
-                            width=3),
-                     dbc.Col(html.A(html.Img(src='assets/sei.png', style={'height': '130px'}),
-                            href='https://www.sei.org/'), width=4),
-                     dbc.Col(html.A(html.Img(src='assets/fao.png', style={'height': '130px'}),
-                            href='http://www.fao.org/home/en/'), width=2)], justify="center")
+                                             href='https://www.energy.kth.se/energy-systems/about-the-division-of-energy-systems-1.937036'),
+                                      width=3),
+                              dbc.Col(html.A(html.Img(src='assets/sei.png', style={'height': '130px'}),
+                                             href='https://www.sei.org/'), width=4),
+                              dbc.Col(html.A(html.Img(src='assets/fao.png', style={'height': '130px'}),
+                                             href='http://www.fao.org/home/en/'), width=2)], justify="center")
                      ]
 
     return language_dic['sidebar']['title'], language_dic['sidebar']['options'], \
-        language_dic['sidebar']['scenarios']['title'], \
-        options, language_dic['sidebar']['climate']['title'], language_dic['sidebar']['cost reduction']['title'], \
-        language_dic['sidebar']['cost reduction']['wind'], language_dic['sidebar']['cost reduction']['pv'], \
-        language_dic['sidebar']['price increase']['title'], language_dic['sidebar']['price increase']['grid'], \
-        [html.I(className='fa fa-redo-alt'), f" {language_dic['sidebar']['reset']}"], \
-        [html.I(className='fa fa-check-double'), f" {language_dic['sidebar']['apply']}"], \
-        language_dic['language'], language_dic['about']['header'], \
-        language_dic['results']['title'], \
-        [html.I(className='fa fa-download'), f" {language_dic['results']['download']}"], \
-        results_string[language_index], language_dic['information']['scenarios']['title'], \
-        language_dic['information']['climate']['title'], language_dic['information']['cost']['title'], \
-        language_dic['information']['price']['title'], info_scenarios, \
-        info_climate, language_dic['information']['cost']['body'], \
-        language_dic['information']['price']['body'], language_dic['information']['close'], \
-        language_dic['information']['close'], language_dic['information']['close'], language_dic['information'][
-           'close'], \
-        language_dic['about']['title'], about_content, language_dic['about']['close']
+           language_dic['sidebar']['scenarios']['title'], \
+           options, language_dic['sidebar']['climate']['title'], language_dic['sidebar']['cost reduction']['title'], \
+           language_dic['sidebar']['cost reduction']['wind'], language_dic['sidebar']['cost reduction']['pv'], \
+           language_dic['sidebar']['price increase']['title'], language_dic['sidebar']['price increase']['grid'], \
+           language_dic['sidebar']['butane']['title'], language_dic['sidebar']['butane']['year'], \
+           language_dic['sidebar']['pv adoption']['title'], language_dic['sidebar']['pv adoption']['share'], \
+           [html.I(className='fa fa-redo-alt'), f" {language_dic['sidebar']['reset']}"], \
+           [html.I(className='fa fa-check-double'), f" {language_dic['sidebar']['apply']}"], \
+           language_dic['language'], language_dic['about']['header'], \
+           language_dic['results']['title'], \
+           [html.I(className='fa fa-download'), f" {language_dic['results']['download']}"], \
+           results_string[language], language_dic['information']['scenarios']['title'], \
+           language_dic['information']['climate']['title'], language_dic['information']['cost']['title'], \
+           language_dic['information']['price']['title'], language_dic['information']['butane']['title'], \
+           language_dic['information']['pv adoption']['title'], info_scenarios, \
+           info_climate, language_dic['information']['cost']['body'], \
+           language_dic['information']['price']['body'], info_butane, info_pv_share, \
+           language_dic['information']['close'], language_dic['information']['close'], \
+           language_dic['information']['close'], language_dic['information']['close'], \
+           language_dic['information']['close'], language_dic['information']['close'], \
+           language_dic['about']['title'], about_content, language_dic['about']['close'], \
+           language_dic['results']['compare'], language_dic['compare']['close'], language_dic['compare']['tabs'][0], \
+           language_dic['compare']['tabs'][1], language_dic['compare']['tabs'][2], language_dic['compare']['tabs'][3]
 
 
 if __name__ == "__main__":

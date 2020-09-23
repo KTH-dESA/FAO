@@ -17,14 +17,14 @@ GRID_RATE = [0]
 
 rule all:
     input: 
-        expand("{dash_folder}/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/lcoe.gz", \
-                  scenario=SCENARIOS, climate=CLIMATE, w_rate=W_RATE, \
-                  pv_rate=PV_RATE, grid_rate=GRID_RATE, dash_folder=dash_folder), \
+        # expand("{dash_folder}/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/lcoe.gz", \
+                  # scenario=SCENARIOS, climate=CLIMATE, w_rate=W_RATE, \
+                  # pv_rate=PV_RATE, grid_rate=GRID_RATE, dash_folder=dash_folder), \
         # expand("{dash_folder}/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/least-cost-2050.png", \
                   # scenario=SCENARIOS, climate=CLIMATE, w_rate=W_RATE, \
                   # pv_rate=PV_RATE, grid_rate=GRID_RATE, dash_folder=dash_folder), \
-        # expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
-               # scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
+        expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
+               scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
 
 rule schematic_processing:
     input: provinces="Data/GIS/Admin/Provinces.gpkg", \

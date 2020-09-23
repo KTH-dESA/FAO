@@ -125,7 +125,7 @@ df.loc[(df['type']=='DS Agriculture')&(df['Demand point']=='Agadir'), 'type'] = 
 df_wwtp = integrate_data(data, 'WWTP Inflow', 'wwtp', {'WWTP': wwtp}, 'point', 'point')
 
 sheet_names = {'AgWaterDemand': 'Agriculture', 
-               'DomWaterDemand': 'Domestic'}
+               'DomSupplyReq': 'Domestic'}
 
 df_required = pd.DataFrame()
 for sheet_name, category in sheet_names.items():
