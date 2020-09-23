@@ -13,6 +13,9 @@ import pandas as pd
 import yaml
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
+from dash_extensions import Download
+from dash_extensions.snippets import send_data_frame
+from dash_extensions.snippets import send_file
 
 from scripts import plots
 
@@ -511,8 +514,9 @@ footer_results = dbc.Row(
             size="xl",
             id="compare-modal",
         ),
-        dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color, className="mr-1",
-                   style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
+        Download(id="download"),
+        dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color,
+                   className="mr-1", style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
     ],
     align='center',
     justify="around",
@@ -1307,8 +1311,20 @@ def switch_tab(at, ts, data):
 
                 dcc.Graph(figure=data['emissions vs costs'],
                           config=dict(toImageButtonOptions=dict(format='png', filename='emissions_vs_costs',
-                                                                height=500, width=900, scale=2)))
-                ]
+                                                                height=500, width=900, scale=2)))]
+
+
+@app.callback(Output("download", "data"), [Input("button-download", "n_clicks_timestamp")])
+def func(ts):
+    if ts is None:
+        raise PreventUpdate
+    # scenarios = ['Reference', 'Desalination', 'Reference Wastewater Reuse', 'Desalination Wastewater Reuse']
+    # climates = ['Climate Change']
+    # df_results, df_desal, df_wwtp = plots.load_results_data(my_path, scenarios, climates)
+    scenarios = [None, 2040, 2030]
+    pv_levels = [10, 20, 50]
+    df_butane = plots.load_butane_results(my_path, scenarios, pv_levels)
+    return send_data_frame(df_butane.to_csv, "butan_phaseout.csv")
 
 @app.callback(
     Output('current-language', 'data'),
