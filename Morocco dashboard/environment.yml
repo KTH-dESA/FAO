@@ -4,10 +4,12 @@ channels:
   - defaults
   - jmcmurray
 dependencies:
+  - boto3
   - dash
   - dash-bootstrap-components
   - dash-renderer
   - geopandas
   - json
+  - s3fs
   - xlrd
   

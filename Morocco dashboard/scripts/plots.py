@@ -8,19 +8,19 @@ def load_results_data(working_directory, scenarios, climates):
     df_wwtp = pd.DataFrame()
     for scenario in scenarios:
         for climate in climates:
-            folder = os.path.join(working_directory, 'data', scenario, climate)
+            folder = f'{working_directory}/{scenario}/{climate}'
             # read general results
-            dff = pd.read_csv(os.path.join(folder, 'results.gz'))
+            dff = pd.read_csv(f'{folder}/results.gz')
             dff['Scenario'] = scenario.split('Wastewater Reuse')[0].strip()
             dff['Reuse'] = 'Yes' if 'Reuse' in scenario else 'No'
             df_results = df_results.append(dff, ignore_index=True)
             # read desal results
-            dff = pd.read_csv(os.path.join(folder, 'desal_data.gz'))
+            dff = pd.read_csv(f'{folder}/desal_data.gz')
             dff['Scenario'] = scenario.split('Wastewater Reuse')[0].strip()
             dff['Reuse'] = 'Yes' if 'Reuse' in scenario else 'No'
             df_desal = df_desal.append(dff, ignore_index=True)
             # read wastewater treatment results
-            dff = pd.read_csv(os.path.join(folder, 'wwtp_data.gz'))
+            dff = pd.read_csv(f'{folder}/wwtp_data.gz')
             dff['Scenario'] = scenario.split('Wastewater Reuse')[0].strip()
             dff['Reuse'] = 'Yes' if 'Reuse' in scenario else 'No'
             df_wwtp = df_wwtp.append(dff, ignore_index=True)
@@ -44,6 +44,7 @@ def water_supply_compare_plot(water_delivered, time_frame, title):
     fig = px.area(df, x='Year', y='sswd', color='type', facet_col='Scenario', facet_row='Reuse',
                   labels={"sswd": "Water (Mm<sup>3</sup>)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.Dark2)
+    fig.update_layout(height=600)
     return fig
     
 def energy_demand_compare_plot(water_delivered, wwtp_data, desal_data, time_frame, title):
@@ -67,6 +68,7 @@ def energy_demand_compare_plot(water_delivered, wwtp_data, desal_data, time_fram
     fig = px.area(dff_energy, x='Year', y='swpa_e', color='type', facet_col='Scenario', facet_row='Reuse',
                   labels={"swpa_e": "Energy (GWh)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.T10)
+    fig.update_layout(height=600)
     return fig
     
 def unmet_demand_compare_plot(water_delivered, time_frame, title):
@@ -92,6 +94,7 @@ def unmet_demand_compare_plot(water_delivered, time_frame, title):
                         title=title,
                         facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_layout(yaxis={'tickformat': "%"})
+    fig.update_layout(height=600)
     return fig
     
 def load_butane_results(working_directory, scenarios, pv_levels):
@@ -128,6 +131,7 @@ def total_costs_plot(df, title):
                          }
                 )
     fig.update_layout(xaxis={'categoryorder':'total descending'})
+    # fig.update_layout(height=600)
     return fig
     
 def emissions_compare_plot(df, title):
@@ -147,6 +151,7 @@ def emissions_compare_plot(df, title):
                          },
                  facet_col_spacing=0.06,
                  )
+    # fig.update_layout(height=600)
     return fig
     
 def total_emissions_compare_plot(df, title):
@@ -168,6 +173,7 @@ def total_emissions_compare_plot(df, title):
                 )
 
     fig.update_layout(xaxis={'categoryorder':'array', 'categoryarray':['None','by 2040','by 2030']})
+    # fig.update_layout(height=600)
     return fig
     
 def emisions_vs_costs(df, title):
@@ -202,6 +208,7 @@ def emisions_vs_costs(df, title):
                              "pv_adoption_number": 'PV share by 2040'
                              }
                     )
+    # fig.update_layout(height=600)
     return fig
     
 def energy_resources_share_plot(df, title): 

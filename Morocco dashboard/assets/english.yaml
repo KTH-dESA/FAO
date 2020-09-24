@@ -35,8 +35,8 @@ results:
     Reference: Reference
     Desalination: Desalinated water
     Irrigation intensification: Irrigation Intensification
-    Desalination wastewater reuse: Desalination, wastewater reuse
-    Reference wastewater reuse: Reference, wastewater reuse
+    Desalination Wastewater Reuse: Desalination, wastewater reuse
+    Reference Wastewater Reuse: Reference, wastewater reuse
   climate:
     historical trend: historical trend
     Climate Change: climate change
