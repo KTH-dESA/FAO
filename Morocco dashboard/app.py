@@ -19,11 +19,11 @@ from dash_extensions.snippets import send_file
 
 from scripts import plots
 
-# import boto3
+import boto3
 
-# client = boto3.client('s3')
-# my_path = os.path.abspath(os.path.dirname(__file__))
-my_path = os.path.join('..', 'Morocco model', 'test dash results')
+client = boto3.client('s3')
+my_path = os.path.abspath(os.path.dirname(__file__))
+# my_path = os.path.join('..', 'Morocco model', 'test dash results')
 spatial_data = os.path.join(my_path, 'spatial_data')
 
 # language = open("assets/english.yaml")
@@ -45,46 +45,51 @@ for gdf in [demand_points, supply_points, pipelines]:
     gdf.to_crs(epsg=WebMercator, inplace=True)
 
 
-def load_data(scenario, climate, level, phaseout_year, pv_level):
-    init_year = 2020
-    butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year!=2050 else 'phaseout_None'
-    data_folder = os.path.join(my_path, 'data')
-    if not climate:
-        climate = ['Trend']
-    data = os.path.join(data_folder, scenario, climate[0])
-    lcoe = os.path.join(data_folder, scenario, climate[0], level)
-
-    water_delivered = pd.read_csv(os.path.join(data, 'results.gz'))
-    # water_required = pd.read_csv(os.path.join(data, 'Water_requirements.csv'))
-    # ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.gz'))
-    ag_lcoe = pd.DataFrame({'Year': []})
-    wwtp_data = pd.read_csv(os.path.join(data, 'wwtp_data.gz'))
-    desal_data = pd.read_csv(os.path.join(data, 'desal_data.gz'))
-    desal_data['swpa_e'] = desal_data['sswd'] * 3.31
-    butane_data = pd.read_csv(os.path.join(my_path, 'Butane_calculations', butane_scenario,
-                                           f'{pv_level}_PV', 'summary_results.gz'))
-
-    return water_delivered.loc[water_delivered.Year >= init_year], ag_lcoe.loc[ag_lcoe.Year >= init_year], \
-           wwtp_data.loc[wwtp_data.Year >= init_year], desal_data.loc[desal_data.Year >= init_year], \
-           butane_data.loc[butane_data.Year >= init_year]
-
-
-# def load_data(scenario, climate, level):
+# def load_data(scenario, climate, level, phaseout_year, pv_level):
 #     init_year = 2020
-#     data_folder = 's3://souss-massa-project/data'
+#     butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year!=2050 else 'phaseout_None'
+#     data_folder = os.path.join(my_path, 'data')
 #     if not climate:
 #         climate = ['Trend']
-#     data = f'{data_folder}/{scenario}/{climate[0]}'
-#     lcoe = f'{data_folder}/{scenario}/{climate[0]}/{level}'
+#     data = os.path.join(data_folder, scenario, climate[0])
+#     # lcoe = os.path.join(data_folder, scenario, climate[0], level)
 #
-#     water_delivered = pd.read_csv(f'{data}/results.csv')
-#     ag_lcoe = pd.read_csv(f'{lcoe}/lcoe.csv', compression='zip')
-#     wwtp_data = pd.read_csv(f'{data}/wwtp_data.csv')
-#     desal_data = pd.read_csv(f'{data}/desal_data.csv')
+#     water_delivered = pd.read_csv(os.path.join(data, 'results.gz'))
+#     # water_required = pd.read_csv(os.path.join(data, 'Water_requirements.csv'))
+#     # ag_lcoe = pd.read_csv(os.path.join(lcoe, 'lcoe.gz'))
+#     ag_lcoe = pd.DataFrame({'Year': []})
+#     wwtp_data = pd.read_csv(os.path.join(data, 'wwtp_data.gz'))
+#     desal_data = pd.read_csv(os.path.join(data, 'desal_data.gz'))
 #     desal_data['swpa_e'] = desal_data['sswd'] * 3.31
+#     butane_data = pd.read_csv(os.path.join(my_path, 'Butane_calculations', butane_scenario,
+#                                            f'{pv_level}_PV', 'summary_results.gz'))
 #
-#     return water_delivered.loc[water_delivered.Year>=init_year], ag_lcoe.loc[ag_lcoe.Year>=init_year], \
-#            wwtp_data.loc[wwtp_data.Year>=init_year], desal_data.loc[desal_data.Year>=init_year]
+#     return water_delivered.loc[water_delivered.Year >= init_year], ag_lcoe.loc[ag_lcoe.Year >= init_year], \
+#            wwtp_data.loc[wwtp_data.Year >= init_year], desal_data.loc[desal_data.Year >= init_year], \
+#            butane_data.loc[butane_data.Year >= init_year]
+
+
+def load_data(scenario, climate, level, phaseout_year, pv_level):
+    init_year = 2020
+    butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year != 2050 else 'phaseout_None'
+    data_folder = 's3://souss-massa-project/data'
+    butane_folder = 's3://souss-massa-project/Butane_calculations'
+    if not climate:
+        climate = ['Trend']
+    data = f'{data_folder}/{scenario}/{climate[0]}'
+    # lcoe = f'{data_folder}/{scenario}/{climate[0]}/{level}'
+
+    water_delivered = pd.read_csv(f'{data}/results.gz')
+    # ag_lcoe = pd.read_csv(f'{lcoe}/lcoe.gz')
+    ag_lcoe = pd.DataFrame({'Year': []})
+    wwtp_data = pd.read_csv(f'{data}/wwtp_data.gz')
+    desal_data = pd.read_csv(f'{data}/desal_data.gz')
+    desal_data['swpa_e'] = desal_data['sswd'] * 3.31
+    butane_data = pd.read_csv(f'{butane_folder}/{butane_scenario}/{pv_level}_PV/summary_results.gz')
+
+    return water_delivered.loc[water_delivered.Year>=init_year], ag_lcoe.loc[ag_lcoe.Year>=init_year], \
+           wwtp_data.loc[wwtp_data.Year>=init_year], desal_data.loc[desal_data.Year>=init_year], \
+           butane_data.loc[butane_data.Year >= init_year]
 
 
 button_color = 'primary'
@@ -506,8 +511,7 @@ footer_results = dbc.Row(
                                         active_tab="tab-1",
                                         style={'fontSize': '1.5rem', 'fontWeight': '600'}
                                         ),
-                               dcc.Store(id='compare-data'),
-                               dcc.Loading(dbc.ModalBody(id="compare-content"))]),
+                               dcc.Loading(dbc.ModalBody([dcc.Store(id='compare-data'), html.Div(html.Div(style={'height': '300px'}), id="compare-content")]))]),
                 dbc.ModalFooter(
                     dbc.Button("Close", id="compare-close", className="ml-auto")
                 ), ],
@@ -1236,15 +1240,19 @@ def reset_output(n):
 
 
 @app.callback(Output("compare-data", "data"),
-              [Input("compare", "n_clicks"), Input("current-language", "modified_timestamp")],
+              [Input("current-language", "modified_timestamp")],
               [State('current-language', 'data')])
-def read_compare_data(n, ts, language):
+def read_compare_data(ts, language):
     language_dic = get_language(language)
     # General results
-    scenarios = ['Reference', 'Desalination', 'Reference Wastewater Reuse', 'Desalination Wastewater Reuse']
-    climates = ['Climate Change']
-    df_results, df_desal, df_wwtp = plots.load_results_data(my_path, scenarios, climates)
+    # scenarios = ['Reference', 'Desalination', 'Reference Wastewater Reuse', 'Desalination Wastewater Reuse']
+    # climates = ['Climate Change']
+    # df_results, df_desal, df_wwtp = plots.load_results_data('s3://souss-massa-project/data', scenarios, climates)
 
+    df_results = pd.read_csv('s3://souss-massa-project/compare_results.gz')
+    df_desal = pd.read_csv('s3://souss-massa-project/compare_desal.gz')
+    df_wwtp = pd.read_csv('s3://souss-massa-project/compare_wwtp.gz')
+    
     df_results = df_results.loc[df_results.Year >= 2020]
     df_desal = df_desal.loc[df_desal.Year >= 2020]
     df_wwtp = df_wwtp.loc[df_wwtp.Year >= 2020]
@@ -1255,9 +1263,11 @@ def read_compare_data(n, ts, language):
     fig_unmet = plots.unmet_demand_compare_plot(df_results, 'Year', language_dic['graphs']['unmet demand compare'])
 
     # Butane results
-    scenarios = [None, 2040, 2030]
-    pv_levels = [10, 20, 50]
-    df_butane = plots.load_butane_results(my_path, scenarios, pv_levels)
+    # scenarios = [None, 2040, 2030]
+    # pv_levels = [10, 20, 50]
+    # df_butane = plots.load_butane_results(my_path, scenarios, pv_levels)
+
+    df_butane = pd.read_csv('s3://souss-massa-project/compare_butane.gz')
 
     df = df_butane.loc[df_butane.Year >= 2021].groupby(['butane_phaseout', 'pv_adoption'])[
         ['water_demand(m3)', 'energy_demand(KWh)', 'pv_elec(KWh)', 'grid_elec(KWh)', 'butane_cons(tonnes)',
@@ -1278,7 +1288,8 @@ def read_compare_data(n, ts, language):
 
 
 @app.callback(Output("compare-content", "children"),
-              [Input("compare-tabs", "active_tab"), Input('compare-data', 'modified_timestamp')],
+              [Input("compare-tabs", "active_tab"),
+               Input("compare-data", "modified_timestamp")],
               [State("compare-data", "data")])
 def switch_tab(at, ts, data):
     if data is None:
@@ -1318,12 +1329,7 @@ def switch_tab(at, ts, data):
 def func(ts):
     if ts is None:
         raise PreventUpdate
-    # scenarios = ['Reference', 'Desalination', 'Reference Wastewater Reuse', 'Desalination Wastewater Reuse']
-    # climates = ['Climate Change']
-    # df_results, df_desal, df_wwtp = plots.load_results_data(my_path, scenarios, climates)
-    scenarios = [None, 2040, 2030]
-    pv_levels = [10, 20, 50]
-    df_butane = plots.load_butane_results(my_path, scenarios, pv_levels)
+    df_butane = pd.read_csv('s3://souss-massa-project/compare_butane.gz')
     return send_data_frame(df_butane.to_csv, "butan_phaseout.csv")
 
 @app.callback(
@@ -1370,8 +1376,8 @@ def update_language(ts, ts2, language, data_current):
         {"label": language_dic["sidebar"]["scenarios"]["options"][0], "value": 'Reference'},
         {"label": language_dic['sidebar']['scenarios']['options'][1], "value": 'Desalination'},
         {"label": language_dic['sidebar']['scenarios']['options'][2], "value": 'Irrigation intensification'},
-        {"label": language_dic['sidebar']['scenarios']['options'][3], "value": "Desalination wastewater reuse"},
-        {"label": language_dic['sidebar']['scenarios']['options'][4], "value": "Reference wastewater reuse"}
+        {"label": language_dic['sidebar']['scenarios']['options'][3], "value": "Desalination Wastewater Reuse"},
+        {"label": language_dic['sidebar']['scenarios']['options'][4], "value": "Reference Wastewater Reuse"}
     ]
     climate = data_current['level']
     if not climate:
