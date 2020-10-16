@@ -55,15 +55,34 @@ def data_merging(demand_points, supply_points, pipelines):
     return df, pipe_coords
 
 
-def plot_borders(geojson, df=None):
+def choroplet_map(geojson, df):
+    fig = px.choropleth_mapbox(df, geojson=geojson, locations='id',
+                               color='color',
+                               color_continuous_scale=px.colors.sequential.Viridis)
+
+    fig.update_layout(coloraxis_colorbar=dict(
+        len=0.5,
+        xanchor="right", x=1,
+        yanchor='bottom', y=0.1,
+        thickness=10,
+    ))
+
+    # fig = go.Figure(go.Choroplethmapbox(geojson=geojson, locations=df['id'],
+    #                            z=df['color'],
+    #                            colorscale='Viridis'))
+    return fig
+
+def plot_borders(geojson):
+    opacity = 0.1
+    line = dict(width=1, color='gray')
     colorscale = ((0, 'gray'), (1, 'gray'))
-    if df is None:
-        df = pd.DataFrame(geojson['features'])
-        df['color'] = 0
+    df = pd.DataFrame(geojson['features'])
+    df['color'] = 0
 
     trace = go.Choroplethmapbox(geojson=geojson, locations=df.id, z=df['color'],
                                 colorscale=colorscale,
-                                marker=dict(opacity=0.1, line=dict(width=0.5, color='gray')),
+                                marker=dict(opacity=opacity,
+                                            line=line),
                                 hoverinfo='skip', showscale=False,
                                 showlegend=False)
     return trace
