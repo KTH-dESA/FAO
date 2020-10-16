@@ -62,9 +62,7 @@ button {
   /* background-color: rgba(23,162,184,0.2); */
 }
 
-#sidebar
-  .custom-control-input:checked
-  ~ .custom-control-label::before {
+.custom-control-input:checked~ .custom-control-label::before {
   background-color: var(--primary);
   border-color: var(--primary);
 }
@@ -77,13 +75,11 @@ button {
 
 #map {
   padding: 0rem 0rem;
-  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
   height: 100vh
 }
 
 #map-div {
   padding: 0rem 0rem;
-  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
 }
 
 #sidebar h2 {
@@ -130,7 +126,8 @@ button {
   flex: 0 1 auto;
   margin: 0;
   padding: 0rem 0rem;
-  box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
+  z-index: 2;
+  box-shadow: 0px 2px 2px 0px rgba(20,33,61,.08);
   /* transition: margin 0.5s ease-in-out; */
 }
 
@@ -140,7 +137,8 @@ button {
   flex: 0 1 auto;
   padding: 1rem 1rem;
   margin: 0;
-  box-shadow: 0 -1px 0 0 rgba(20,33,61,.2);
+  z-index: 2;
+  box-shadow: 0 -2px 2px 0 rgba(20,33,61,.08);
 }
 
 #sidebar-header {
@@ -169,7 +167,19 @@ button {
   flex: 0 1 auto;
   margin: 0;
   padding: 1rem 1rem;
-  box-shadow: inset 0 -1px 0 0 rgba(20,33,61,.2);
+  z-index: 2;
+  box-shadow: 0 2px 2px 0 rgba(20,33,61,.08);
+}
+
+#popover-map {
+  position: absolute;
+  z-index: 2;
+  bottom: 8.2rem;
+  left: 2rem;
+  background: #fff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 1px 0 rgba(20,33,61,.08), 0 2px 6px 0 rgba(20,33,61,.24);
 }
 
 #graphs-container {
@@ -221,7 +231,7 @@ button {
 	flex-flow: column;
 	z-index: 100;
     width: 20rem;
-	box-shadow: 0 16px 4px rgba(20,33,61,.08);
+	box-shadow: 0 0 16px 4px rgba(20,33,61,.08);
     text-align: left;
     transition: margin 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
