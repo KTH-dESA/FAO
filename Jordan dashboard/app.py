@@ -470,19 +470,9 @@ footer_results = dbc.Row(
 )
 
 map = html.Div(
-    [
-        dcc.Loading(
-            id="loading-1",
-            type="default",
-            children=dcc.Graph(id="map",
-                               config=dict(showSendToCloud=True,
-                                           toImageButtonOptions=dict(format='png',
-                                                                     filename='map',
-                                                                     height=700,
-                                                                     width=700, scale=2)))
-        ),
+    [html.Div([
         dbc.Button(html.I(className='fa fa-layer-group'), color=button_color,
-                   outline=True, className='map-ctrl-bottom-left mr-1',
+                   outline=True, className='map-ctrl-bottom mr-1',
                    id="popover-map-target"),
         html.Div(
             [
@@ -515,11 +505,19 @@ map = html.Div(
                     ),
                 ]),
             ],
+            className="popover-map",
+            tabIndex='-1',
             id="popover-map",
-            style=dict(display='none'),
+            # style=dict(display='none'),
             # target="popover-map-target",
             # placement='top-start',
             # hide_arrow=True,
+        )],
+        className='map-controls',
+    ),
+        dcc.Loading(
+            id="loading-1",
+            type="default",
         )
     ],
     id='map-div',
@@ -552,6 +550,7 @@ def plot_map(background, map_type):
         fig.add_traces(plotting.plot_borders(admin))
         fig.add_traces(plotting.plot_pipelines(pipe_coords))
         fig.add_traces(plotting.plot_points(points_coords))
+
     elif map_type == 'governorates':
         df = pd.DataFrame(governorates['features'])
         df['color'] = range(len(df['id']))
@@ -559,8 +558,9 @@ def plot_map(background, map_type):
 
     layout_map["mapbox"] = {"center": {"lon": 36.8, 'lat': 31.2}, 'zoom': 6,
                             'style': background, 'accesstoken': token}
+
     layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
-    layout_map['clickmode'] = 'event+select'
+    layout_map['clickmode'] = 'select+event'
     layout_map['legend'] = dict(font=dict(size=12), orientation="h", x=0, y=0)
 
     fig.update_layout(layout_map)
@@ -612,17 +612,17 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
     [Output("current", "data"), Output('map', 'selectedData')],
     [
         Input("button-apply", "n_clicks"),
-        Input('map-background', 'value'),
-        Input('map-selection', 'value')
+        # Input("popover-map-target", "n_clicks"),
     ],
     [State('pump-eff-init', 'value'), State('pump-eff-end', 'value'), State('rb-scenario', 'value'),
      State('eto-input', 'value'), State('drop-level', 'value')]
 )
-def update_current_data(n_1, background, map_type, eff_init, eff_end, scenario, eto, level):
+def update_current_data(n_1, eff_init, eff_end, scenario, eto, level):
     water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = plotting.load_data(my_path, scenario,
                                                                                                     eto, level, 'all')
 
-    map = plot_map(background, map_type)
+    # map = plot_map(background, map_type)
+    map = {}
     graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
     data_dict = dict(gw_df=gw_pumped.to_dict(), map=map, graphs=graphs, scenario=scenario,
                      level=level, eto=eto, eff_end=eff_end, eff_init=eff_init)
@@ -752,6 +752,11 @@ def update_results(selection, data_current):
         data[f'{name}WaterSupplied'] = plotting.plot_water_supply(dff, [colors['water']], layout,
                                                                   'Water supplied (Mm3)')
 
+    else:
+        print(selection['points'][0]['customdata'][0])
+        data = {}
+        name = selection['points'][0]['customdata'][0]
+
     plots = []
     for key, value in data.items():
         plots.append(dcc.Graph(figure=value, config=dict(toImageButtonOptions=dict(
@@ -806,15 +811,20 @@ def update_level_dropdown(ts, data):
 
 
 @app.callback(
-    Output("map", "figure"),
-    [Input("current", "modified_timestamp")],
-    [State("current", "data")],
+    [Output("map", "figure"), Output("loading-1", "children")],
+    [
+        Input('map-background', 'value'),
+        Input('map-selection', 'value'),
+    ],
 )
-def update_level_dropdown(ts, data):
-    if data is None:
-        raise PreventUpdate
-    map = data['map']
-    return map
+def update_level_dropdown(background, map_type):
+    map = plot_map(background, map_type)
+    return {}, dcc.Graph(figure=map, id="map",
+                   config=dict(showSendToCloud=True,
+                               toImageButtonOptions=dict(format='png',
+                                                         filename='map',
+                                                         height=700,
+                                                         width=700, scale=2)))
 
 
 # @app.callback(
@@ -893,18 +903,6 @@ def func(n_nlicks, data):
         raise PreventUpdate
     df = pd.DataFrame(data['gw_df'])
     return send_data_frame(df.to_csv, "gw.csv")
-
-
-@app.callback(
-    Output(f"popover-map", "style"),
-    [Input(f"popover-map-target", "n_clicks")],
-    [State(f"popover-map", "style")],
-)
-def toggle_popover(n, style):
-    if n:
-        if style['display'] == 'none':
-            return {'display': 'block'}
-    return {'display': 'none'}
 
 
 if __name__ == "__main__":
