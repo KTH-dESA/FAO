@@ -164,7 +164,7 @@ button {
 }
 
 .map-controls {
-  z-index: 9999;
+  z-index: 1;
   position: absolute;
   bottom: 5.5rem;
   left: 2rem;

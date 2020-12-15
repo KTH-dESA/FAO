@@ -68,7 +68,7 @@ layout = dict(
     plot_bgcolor="#fff",
     paper_bgcolor="#fff",
     legend=dict(font=dict(size=10), orientation="h", title=''),
-    xaxis={'tickformat': 'd', 'title': ''},
+    xaxis={'title': ''},
     showlegend=True,
     hoverlabel={'align': 'left'},
     font=dict(size=10, color="#7f7f7f"),
@@ -567,7 +567,8 @@ def plot_map(background, map_type):
     return fig
 
 
-def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data):
+def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow,
+               wwtp_data, desal_data, crop_production):
     emission_factor = 0.643924449
     dff_delivered = water_delivered.groupby(['Year', 'type'])['value'].sum() / 1000000
     dff_delivered = dff_delivered.reset_index()
@@ -577,6 +578,9 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
     dff_unmet = dff_required.copy()
     dff_unmet['value'] = (dff_unmet.value - dff_unmet.set_index(['Year', 'type']).index.map(
         dff_delivered.set_index(['Year', 'type']).value)) / dff_unmet.value
+
+    df_production = crop_production.groupby(['Year', 'variable']).sum() / 1000000
+    df_production.reset_index(inplace=True)
 
     dff_energy = pd.DataFrame()
     pl_flow['type'] = 'Water conveyance'
@@ -601,6 +605,10 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
     dff = dff.reset_index()
     data['WaterExtraction'] = plotting.groundwater_extraction(dff, layout, 'Groundwater extraction (Mm3)')
 
+    data['CropProduction'] = plotting.plot_production(df_production, layout,
+                                                      'Annual cropland production by type (kton)',
+                                                      'variable')
+
     data['EnergyDemand'] = plotting.energy_demand(dff_energy, layout, 'Energy demand (GWh)')
 
     return data
@@ -618,12 +626,13 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow, wwtp_d
      State('eto-input', 'value'), State('drop-level', 'value')]
 )
 def update_current_data(n_1, eff_init, eff_end, scenario, eto, level):
-    water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data = plotting.load_data(my_path, scenario,
-                                                                                                    eto, level, 'all')
+    water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, crop_production = plotting.load_data(
+        my_path, scenario,
+        eto, level, 'all')
 
     # map = plot_map(background, map_type)
     map = {}
-    graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
+    graphs = get_graphs({}, water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data, crop_production)
     data_dict = dict(gw_df=gw_pumped.to_dict(), map=map, graphs=graphs, scenario=scenario,
                      level=level, eto=eto, eff_end=eff_end, eff_init=eff_init)
 
@@ -662,18 +671,48 @@ def toggle_collapse(n, is_open):
 
 @app.callback(
     [Output("graphs", "children"), Output('resultsTitle', 'children')],
-    [Input('map', 'selectedData')],
+    [Input('map', 'selectedData'), Input('map-selection', 'value')],
     [State('current', 'data')]
 )
-def update_results(selection, data_current):
+def update_results(selection, map_type, data_current):
     if data_current is None:
         raise PreventUpdate
     colors = {'water': "#59C3C3", 'energy': "#F9ADA0", 'food': "#849E68"}
     data = {}
 
     if selection is None:
-        name = 'Jordan country'
-        data = data_current['graphs']
+        if map_type == 'schematic':
+            name = 'Jordan country'
+            data = data_current['graphs']
+        else:
+            name = 'Jordan country'
+            dff_delivered, crop_production = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
+                                                                data_current['level'],
+                                                                ['Water_delivered.csv', 'crop_production.csv'])
+
+            df = dff_delivered.groupby(['Year', 'Governorate'])[['value']].sum() / 1000000
+            df.reset_index(inplace=True)
+
+
+            data['WaterDeliveredGov'] = plotting.plot_water_delivered_by_gov(df, layout,
+                                                                             'Annual water delivered by Governorate (Mm3)',)
+
+            df = crop_production.groupby(['Year', 'Governorate'])[['production']].sum() / 1000000
+            df.reset_index(inplace=True)
+
+            data['CropProduction'] = plotting.plot_production(df, layout,
+                                                              'Annual cropland production by type (kton)',
+                                                              'Governorate')
+
+            df = crop_production.groupby(['Governorate', 'variable'])[['production']].sum() / 1000000000
+            df.reset_index(inplace=True)
+            data['CropProductionByType'] = plotting.plot_production_by_gov(df, layout,
+                                                                                  'Total cropland production (Mton)',
+                                                                                  'variable', 'Governorate')
+
+            # data['CropProductionByGovernorate'] = plotting.plot_production_by_gov(df, layout,
+            #                                                                       'Total cropland production (Mton)',
+            #                                                                       'Governorate', 'variable')
 
     elif selection['points'][0]['customdata'][0] in ['Municipality', 'Industry', 'Agriculture']:
         name = selection['points'][0]['customdata'][1]
@@ -698,7 +737,12 @@ def update_results(selection, data_current):
         dff = dff.reset_index()
         data['water'] = plotting.plot_water_supply(dff, [colors['water']], layout, 'Water supplied (Mm3)')
 
-        data[f'{name}GWdepth'] = plotting.plot_depth_groundwater(dff, layout, 'Average depth to groundwater (mbgl)')
+        dff_wtd = gw_pumped.loc[gw_pumped['point'] == name].copy()
+        date = gw_pumped[['Year', 'Month']].copy()
+        date['Day'] = 1
+        dff_wtd['Date'] = pd.to_datetime(date)
+
+        data[f'{name}GWdepth'] = plotting.plot_depth_groundwater(dff_wtd, layout, 'Average depth to groundwater (mbgl)')
         data[f'{name}EnergyDemand'] = plotting.plot_energy_for_pumping(dff, [colors['energy']], layout,
                                                                        'Energy for pumping (GWh)')
 
@@ -753,9 +797,24 @@ def update_results(selection, data_current):
                                                                   'Water supplied (Mm3)')
 
     else:
-        print(selection['points'][0]['customdata'][0])
-        data = {}
         name = selection['points'][0]['customdata'][0]
+
+        dff_delivered, crop_production = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
+                                             data_current['level'], ['Water_delivered.csv', 'crop_production.csv'])
+
+        df = dff_delivered.loc[dff_delivered['Governorate']==name]
+        df = df.groupby(['Year', 'type'])['value'].sum() / 1000000
+        df = df.reset_index()
+
+        data[f'{name}WaterDelivered'] = plotting.water_delivered(df, layout,
+                                                                 'Annual water delivered (Mm3)')
+
+        df = crop_production.loc[crop_production['Governorate']==name]
+        df = df.groupby(['Year', 'variable'])[['production']].sum() / 1000000
+        df.reset_index(inplace=True)
+        data[f'{name}CropProduction'] = plotting.plot_production(df, layout,
+                                                                 'Annual cropland production by type (kton)',
+                                                                 'variable')
 
     plots = []
     for key, value in data.items():
@@ -820,11 +879,11 @@ def update_level_dropdown(ts, data):
 def update_level_dropdown(background, map_type):
     map = plot_map(background, map_type)
     return {}, dcc.Graph(figure=map, id="map",
-                   config=dict(showSendToCloud=True,
-                               toImageButtonOptions=dict(format='png',
-                                                         filename='map',
-                                                         height=700,
-                                                         width=700, scale=2)))
+                         config=dict(showSendToCloud=True,
+                                     toImageButtonOptions=dict(format='png',
+                                                               filename='map',
+                                                               height=700,
+                                                               width=700, scale=2)))
 
 
 # @app.callback(
