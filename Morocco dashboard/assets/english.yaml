@@ -42,10 +42,10 @@ results:
     Climate Change: climate change
 
 graphs:
-  water delivered: Water delivered (Mm3)
+  water delivered: Water delivered (Mm<sup>3</sup>)
   unmet water: Unmet water demand (%)
-  water supplied: Water supplied (Mm3)
-  water treated: Water treated (Mm3)
+  water supplied: Water supplied (Mm<sup>3</sup>)
+  water treated: Water treated (Mm<sup>3</sup>)
   depth to groundwater: Depth to groundwater (mbgl)
   energy demand: Energy demand (GWh)
   least-cost: Least-cost power technology for Agriculture
