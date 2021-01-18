@@ -42,10 +42,10 @@ results:
     Climate Change: cambio climatico
 
 graphs:
-  water delivered: Agua entregada (Mm3)
+  water delivered: Agua entregada (Mm<sup>3</sup>)
   unmet water: Demanda de agua no cumplida (%)
-  water supplied: Suministro de agua (Mm3)
-  water treated: Agua tratada (Mm3)
+  water supplied: Suministro de agua (Mm<sup>3</sup>)
+  water treated: Agua tratada (Mm<sup>3</sup>)
   depth to groundwater: Profundidad del aquifero (mbgl)
   energy demand: Demanda de energía (GWh)
   least-cost: Technología de menor costo<br>de generación de energía en Agricultura
