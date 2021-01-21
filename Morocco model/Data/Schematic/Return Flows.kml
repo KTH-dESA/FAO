@@ -10,7 +10,7 @@
 		table.data td { padding: 0 4px; font-size: 8pt; }
 	--></style>
 	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
-    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><a href="https://www.weap21.org"><img src="https://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
     <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
     <tr><td align="center">
 	     <table border="0" width="630" cellspacing="0" cellpadding="2">
@@ -19,7 +19,7 @@
     </td></tr>
 	   <tr><td align="center">
     </td></tr>
-   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 14 August 2020</td></tr>
+   <tr><td align="center">Exported from <a href="https://www.weap21.org">WEAP</a> on 20 January 2021</td></tr>
  </table>]]></text>
 			<bgColor>ff80a5b3</bgColor>
 		</BalloonStyle>
@@ -27,7 +27,7 @@
 	<Folder>
 		<name>Return Flows</name>
 		<Icon>
-			<href>http://www.weap21.org/img/Return-Flow.png</href>
+			<href>https://www.weap21.org/img/Return-Flow.png</href>
 		</Icon>
 		<Placemark id="Object-867-Introduction">
 			<name>Return Flow from AEP_Aoulouz to Aoulouz WWTP</name>
@@ -37,7 +37,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -73,7 +73,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -109,7 +109,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -145,7 +145,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -181,7 +181,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -217,7 +217,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -253,7 +253,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -289,7 +289,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -325,7 +325,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -361,7 +361,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -397,7 +397,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -433,7 +433,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -469,7 +469,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -505,7 +505,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -541,7 +541,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -577,7 +577,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -613,7 +613,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -649,7 +649,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -685,7 +685,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -721,7 +721,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -757,7 +757,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -793,7 +793,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -829,7 +829,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -865,7 +865,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -901,7 +901,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>
@@ -937,7 +937,7 @@
 				<IconStyle>
 					<scale>1</scale>
 					<Icon>
-						<href>http://www.weap21.org/img/Return-Flow.png</href>
+						<href>https://www.weap21.org/img/Return-Flow.png</href>
 					</Icon>
 				</IconStyle>
 				<LineStyle>

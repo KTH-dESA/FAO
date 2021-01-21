@@ -9,6 +9,7 @@ data_file = str(snakemake.input.data)
 demand_points = str(snakemake.input.demand_points)
 demand_data_output = str(snakemake.output.demand_data)
 wwtp_inflow_output = str(snakemake.output.wwtp_inflow)
+production_data_output = str(snakemake.output.production_data)
 
 # spatial_folder = f"{snakemake.params.dash_folder}/spatial_data"
 spatial_folder = demand_points.split(os.path.basename(demand_points))[0]
@@ -26,6 +27,7 @@ def integrate_data(data, sheet_name, category, dff_dict, var_name='links', targe
     df.columns = df.columns.str.replace('Grounwater','GW')
     df.columns = df.columns.str.replace('GW of ','')
     df.columns = df.columns.str.replace('GW ','')
+    df.columns = df.columns.str.replace('I_TRSPD','I_Traditional Rehabilite du Souss Perimetre Diffus')
 
     for link in demand_links.links:
         if np.array(df.columns[df.columns.str.contains(link)]).size > 0:
@@ -145,10 +147,54 @@ df_unmet_year = 1 - (df.groupby(['Year', 'Demand point'])['value'].sum() / \
 
 df['unmet_demand_year'] = df.set_index(['Year','Demand point']).index.map(df_unmet_year)
 
-df.loc[df.unmet_demand_year<0, 'unmet_demand_year'] = 0
-df.loc[df.unmet_demand_month<0, 'unmet_demand_month'] = 0
+# df.loc[df.unmet_demand_year<0, 'unmet_demand_year'] = 0
+# df.loc[df.unmet_demand_month<0, 'unmet_demand_month'] = 0
 
 df.fillna({'unmet_demand_year': 0, 'unmet_demand_month': 0}, inplace=True)
 
+# Process crop production data
+df_production = data.parse('Annual Crop Production', skiprows=3)
+df_production.rename(columns={'Unnamed: 0': 'Year'}, inplace=True)
+df_production.columns = df_production.columns.str.replace('"', '').str.strip()
+df_production = df_production.loc[df_production.Year!='Sum']
+df_production.drop(columns='Sum', inplace=True)
+df_production = df_production.melt(id_vars=['Year'])
+df_production['point'] = [row[0] for row in df_production['variable'].str.split('\\')]
+df_production['crop'] = [row[-1] for row in df_production['variable'].str.split('\\')]
+df_production['group'] = [row[1] for row in df_production['variable'].str.split('\\')]
+df_production.rename(columns={'value': 'production_kg'}, inplace=True)
+df_production.drop(columns='variable', inplace=True)
+df_production['crop'] = df_production['crop'].str.replace('_', ' ')
+
+df_production.to_csv(production_data_output, index=False)
 df.to_csv(demand_data_output, index=False)
 df_wwtp.to_csv(wwtp_inflow_output, index=False)
+
+def data_merging(demand_points, supply_points, pipelines):
+    df1 = demand_points.groupby('point').agg({'type': 'first',
+                                              'geometry': 'first'}).reset_index()
+
+    df2 = supply_points.groupby('point').agg({'type': 'first',
+                                              'geometry': 'first'}).reset_index()
+
+    df_pipelines = pipelines.groupby('diversion').agg({'geometry': 'first'}).reset_index()
+
+    df = df1.append(df2, ignore_index=True)
+    df['lon'] = [point.xy[0][0] for point in df.geometry]
+    df['lat'] = [point.xy[1][0] for point in df.geometry]
+
+    pipe_coords = pd.DataFrame({'lon': [], 'lat': []})
+    for name, point in zip(df_pipelines.diversion, df_pipelines.geometry):
+        lon = list(point.xy[0]) + [None]
+        lat = list(point.xy[1]) + [None]
+        df_temp = pd.DataFrame({'lon': lon, 'lat': lat})
+        df_temp['name'] = name
+        pipe_coords = pipe_coords.append(df_temp, ignore_index=True)
+
+    pipe_coords['type'] = 'pipeline'
+    return df, pipe_coords
+    
+points_coords, pipe_coords = data_merging(demand_links, supply_links, diversions)
+
+points_coords.to_csv(os.path.join(spatial_folder, 'points_coords.csv'), index=False)
+pipe_coords.to_csv(os.path.join(spatial_folder, 'pipe_coords.csv'), index=False)

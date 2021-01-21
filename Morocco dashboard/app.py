@@ -7,7 +7,6 @@ import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
-import geopandas as gpd
 import numpy as np
 import pandas as pd
 import yaml
@@ -32,13 +31,20 @@ spatial_data = os.path.join(my_path, 'spatial_data')
 
 # provinces = gpd.read_file(os.path.join(spatial_data, 'Admin', 'provinces.geojson'))
 cropland = pd.read_csv(os.path.join(spatial_data, 'cropland.csv'))
-demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg'))
-demand_points.loc[demand_points['type'] == 'Catchment', 'type'] = 'Agriculture'
-demand_points.loc[demand_points['type'] == 'Demand site', 'type'] = 'Municipality' #TODO: move this to the schematic processing
-supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.gpkg'))
-supply_points.loc[supply_points['type'] == 'Other supply', 'type'] = 'Desalination plant'
-pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
-WebMercator = 4326
+# demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg'))
+# demand_points.loc[demand_points['type'] == 'Catchment', 'type'] = 'Agriculture'
+# demand_points.loc[demand_points['type'] == 'Demand site', 'type'] = 'Municipality' #TODO: move this to the schematic processing
+# supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.gpkg'))
+# supply_points.loc[supply_points['type'] == 'Other supply', 'type'] = 'Desalination plant'
+# pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
+# WebMercator = 4326
+
+points_coords = pd.read_csv(os.path.join(spatial_data, 'points_coords.csv'))
+points_coords.loc[points_coords['type'] == 'Catchment', 'type'] = 'Agriculture'
+points_coords.loc[points_coords['type'] == 'Demand site', 'type'] = 'Municipality'
+points_coords.loc[points_coords['type'] == 'Other supply', 'type'] = 'Desalination plant'
+pipe_coords = pd.read_csv(os.path.join(spatial_data, 'pipe_coords.csv'))
+
 
 # centroids = provinces.centroid
 
@@ -47,10 +53,10 @@ with open(os.path.join(spatial_data, 'Admin', 'provinces.geojson')) as response:
     for value in provinces['features']:
         value['id'] = value['properties']['id']
 
-for gdf in [demand_points, supply_points, pipelines]:
-    gdf.to_crs(epsg=WebMercator, inplace=True)
+# for gdf in [demand_points, supply_points, pipelines]:
+    # gdf.to_crs(epsg=WebMercator, inplace=True)
 
-points_coords, pipe_coords = plotting.data_merging(demand_points, supply_points, pipelines)
+# points_coords, pipe_coords = plotting.data_merging(demand_points, supply_points, pipelines) #TODO: move this to the softlinking
 
 
 def load_data(path, scenario, climate, phaseout_year, pv_level, files='all'):
@@ -63,7 +69,8 @@ def load_data(path, scenario, climate, phaseout_year, pv_level, files='all'):
     # lcoe = os.path.join(data_folder, scenario, climate[0], level)
 
     if files == 'all':
-        files = ['results.gz', 'wwtp_data.gz', 'desal_data.gz', 'summary_results.gz']
+        files = ['results.gz', 'wwtp_data.gz', 'desal_data.gz',
+                 'summary_results.gz', 'production.gz']
 
     if isinstance(files, str):
         files = [files]
@@ -139,11 +146,11 @@ token = open('.mapbox_token').read()
 layout = dict(
     autosize=True,
     height=350,
-    margin=dict(l=30, r=20, b=50, t=100),
+    margin=dict(l=0, r=20, b=50, t=100),
     hovermode="closest",
     plot_bgcolor="#fff",
     paper_bgcolor="#fff",
-    legend=dict(font=dict(size=10), orientation="h"),
+    legend=dict(font=dict(size=10), orientation="h", title=''),
     showlegend=True,
     hoverlabel={'align': 'left'},
     xaxis={'title': ''},
@@ -490,17 +497,67 @@ footer_results = dbc.Row(
     className='footer',
 )
 
-map = html.Div(dcc.Loading(
-    id="loading-1",
-    type="default",
-    children=dcc.Graph(id="map",
-                       # className='col-lg-7 col-md-7 col-sm-12 col-xs-12',
-                       config=dict(showSendToCloud=True,
-                                   toImageButtonOptions=dict(format='png', filename='map', height=700,
-                                                             width=700, scale=2)
-                                   )
-                       ),
-),
+map = html.Div(
+    [
+        html.Div(
+            [
+                dbc.Button(html.I(className='fa fa-layer-group'), color=button_color,
+                           outline=True, className='map-ctrl-bottom mr-1',
+                           id="popover-map-target"),
+                html.Div(
+                    [
+                        # dbc.PopoverHeader("Header"),
+                        dbc.PopoverBody([
+                            html.H6('Map visualization'),
+                            dbc.RadioItems(
+                                id="map-selection",
+                                options=[
+                                    {"label": "Schematic", "value": 'schematic'},
+                                    {"label": "Provinces", "value": 'governorates'},
+                                ],
+                                value='schematic',
+                                className='checklist-selected-style',
+                            ),
+                            html.Hr(),
+                            html.H6('Map background'),
+                            dbc.RadioItems(
+                                id="map-background",
+                                options=[
+                                    {"label": "White", "value": 'white-bg'},
+                                    {"label": "Light", "value": 'light'},
+                                    {"label": "Outdoors", "value": 'outdoors'},
+                                    {"label": "Basic", "value": 'basic'},
+                                    {"label": "Dark", "value": 'dark'},
+                                    {"label": "Satellite", "value": 'satellite'},
+                                ],
+                                value='light',
+                                className='checklist-selected-style',
+                            ),
+                        ]),
+                    ],
+                    className="popover-map",
+                    tabIndex='-1',
+                    id="popover-map",
+                    # style=dict(display='none'),
+                    # target="popover-map-target",
+                    # placement='top-start',
+                    # hide_arrow=True,
+                )
+            ],
+            className='map-controls',
+        ),
+        dcc.Store(id='map-state'),
+        dcc.Loading(
+            id="loading-1",
+            type="default",
+            children=dcc.Graph(id="map",
+                         config=dict(showSendToCloud=True,
+                                     toImageButtonOptions=dict(format='png',
+                                                               filename='map',
+                                                               height=700,
+                                                               width=700, scale=2)))
+        ),
+    ],
     id='map-div',
     className='col-xl-7 col-lg-12',
 )
@@ -586,13 +643,19 @@ def choroplethmap(geojson, locations, title):
     return map
 
 
-def plot_map(background):
+def plot_map(background, map_type):
     layout_map = {}
 
-    fig = go.Figure()
-    fig.add_traces(plotting.plot_borders(provinces))
-    fig.add_traces(plotting.plot_pipelines(pipe_coords))
-    fig.add_traces(plotting.plot_points(points_coords))
+    if map_type == 'schematic':
+        fig = go.Figure()
+        fig.add_traces(plotting.plot_borders(provinces))
+        fig.add_traces(plotting.plot_pipelines(pipe_coords))
+        fig.add_traces(plotting.plot_points(points_coords))
+
+    elif map_type == 'governorates':
+        df = pd.DataFrame(provinces['features'])
+        df['color'] = range(len(df['id']))
+        fig = plotting.choroplet_map(provinces, df)
 
     layout_map["mapbox"] = {"center": {"lon": -8.9, 'lat': 30.2}, 'zoom': 7,
                             'style': background, 'accesstoken': token}
@@ -605,12 +668,14 @@ def plot_map(background):
     return fig
 
 
-def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe, butane_data):
+def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe,
+               butane_data, crop_data):
     data['water delivered'] = plotting.water_delivered_plot(water_delivered, 'Year', layout)
     data['unmet water'] = plotting.unmet_demand_plot(water_delivered, 'Year', layout)
     data['water supplied'] = plotting.water_supply_plot(water_delivered, 'Year', layout)
     data['energy demand'] = plotting.energy_demand_plot(water_delivered, wwtp_data, desal_data, 'Year', layout)
     data['depth to groundwater'] = plotting.wtd_plot(water_delivered, 'Date', layout)
+    data['crop production'] = plotting.crop_production(crop_data, 'group', layout)
     data['energy ag'] = plotting.energy_demand_ag(butane_data, layout)
     data['pv capacity'] = plotting.pv_installed_capacity(butane_data, layout)
     data['emissions ag'] = plotting.emissions_ag(butane_data, layout)
@@ -628,8 +693,8 @@ def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe, butane_dat
     # State("map-options", 'value'), State('cho-map-drop', 'value')]
 )
 def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate, butane_year, pv_share):
-    water_delivered, wwtp_data, desal_data, butane_data = load_data(my_path, scenario, climate,
-                                                                    butane_year, pv_share, 'all')
+    water_delivered, wwtp_data, desal_data, butane_data, crop_data = load_data(my_path, scenario, climate,
+                                                                     butane_year, pv_share, 'all')
     # if map_op == 'cho-map':
     #     #     map = choroplethmap(provinces_chmap, provinces['Province'], label)
     #     # elif map_op == 'sch-map':
@@ -638,11 +703,11 @@ def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate, b
     #     #     map = {}
 
     # map = plot_map(water_delivered)
-    map = {}
     data = {}
-    graphs = get_graphs(data, water_delivered, wwtp_data, desal_data, None, butane_data)
+    graphs = get_graphs(data, water_delivered, wwtp_data, desal_data, None,
+                        butane_data, crop_data)
 
-    data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=climate, pv_share=pv_share,
+    data_dict = dict(graphs=graphs, scenario=scenario, level=climate, pv_share=pv_share,
                      butane_year=butane_year)
     return data_dict, None
 
@@ -672,10 +737,12 @@ def toggle_collapse(n, is_open):
 @app.callback(
     [Output("graphs", "children"), Output('resultsSubTitle', 'children')],
     [Input('map', 'selectedData'),
-     Input('current-language', "modified_timestamp")],
-    [State('current-language', 'data'), State('current', 'data')]
+     Input('current-language', "modified_timestamp"),
+     Input('map-selection', 'value')],
+    [State('current-language', 'data'), State('current', 'data')],
+    prevent_initial_call=True
 )
-def update_results(selection, ts2, language, data_current):
+def update_results(selection, map_type, ts2, language, data_current):
     if data_current is None:
         raise PreventUpdate
 
@@ -737,7 +804,6 @@ def update_results(selection, ts2, language, data_current):
                                     data_current['pv_share'],
                                     ['results.gz'])
         df = water_delivered.loc[water_delivered['Supply point'] == name]
-        print(list(df))
 
         data['water supplied'] = plotting.water_delivered_plot(df, 'Year', layout)
         if selection['points'][0]['customdata'][0] == 'Groundwater supply':
@@ -771,20 +837,24 @@ def update_results(selection, ts2, language, data_current):
     return plots, name
 
 
+#TODO: use calback context read dash documentation!
 @app.callback(
     [Output("map", "figure"), Output("loading-1", "children")],
     [
-        Input('current', 'modified_timestamp'),
+        Input('map-background', 'value'),
+        Input('map-selection', 'value'),
+        Input("button-apply", "n_clicks"),
     ]
 )
-def update_level_dropdown(ts):
-    map = plot_map("light")
+def update_level_dropdown(background, map_type, n):
+    map = plot_map(background, map_type)
     return {}, dcc.Graph(figure=map, id="map",
                          config=dict(showSendToCloud=True,
                                      toImageButtonOptions=dict(format='png',
                                                                filename='map',
                                                                height=700,
-                                                               width=700, scale=2)))
+                                                               width=700,
+                                                               scale=2)))
 
 
 for info_id in info_ids:
