@@ -305,7 +305,7 @@ def unmet_demand_plot(water_delivered, time_frame, layout):
                          water_req_year)
 
     df = unmet_demand.reset_index().rename(columns={0: 'unmet_demand'})
-    df.loc[df['unmet_demand']<0.001, 'unmet_demand'] = 0
+    # df.loc[df['unmet_demand']<0.001, 'unmet_demand'] = 0
 
     fig = px.line(df, x=time_frame, y='unmet_demand', color='category',
                   color_discrete_sequence=px.colors.qualitative.T10)
@@ -429,29 +429,19 @@ def plot_pipelines(df):
     return trace.data
 
 
-def data_merging(demand_points, supply_points, pipelines):
-    df1 = demand_points.groupby('point').agg({'type': 'first',
-                                              'geometry': 'first'}).reset_index()
+def choroplet_map(geojson, df):
+    fig = px.choropleth_mapbox(df, geojson=geojson, locations='id',
+                               color='color',
+                               color_continuous_scale=px.colors.sequential.Viridis,
+                               custom_data=['id'])
 
-    df2 = supply_points.groupby('point').agg({'type': 'first',
-                                              'geometry': 'first'}).reset_index()
-
-    df_pipelines = pipelines.groupby('diversion').agg({'geometry': 'first'}).reset_index()
-
-    df = df1.append(df2, ignore_index=True)
-    df['lon'] = [point.xy[0][0] for point in df.geometry]
-    df['lat'] = [point.xy[1][0] for point in df.geometry]
-
-    pipe_coords = pd.DataFrame({'lon': [], 'lat': []})
-    for name, point in zip(df_pipelines.diversion, df_pipelines.geometry):
-        lon = list(point.xy[0]) + [None]
-        lat = list(point.xy[1]) + [None]
-        df_temp = pd.DataFrame({'lon': lon, 'lat': lat})
-        df_temp['name'] = name
-        pipe_coords = pipe_coords.append(df_temp, ignore_index=True)
-
-    pipe_coords['type'] = 'pipeline'
-    return df, pipe_coords
+    fig.update_layout(coloraxis_colorbar=dict(
+        len=0.5,
+        xanchor="right", x=1,
+        yanchor='bottom', y=0.1,
+        thickness=10,
+    ))
+    return fig
 
 
 def wastewater_treated(df, layout, colors):
@@ -523,4 +513,18 @@ def pumping_energy(df, layout):
                                     '<br><b>Year</b>: %{x}')
     fig.update_layout(layout)
 
+    return fig
+
+
+def crop_production(df, group_by, layout):
+    colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4',
+              '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
+              '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
+              '#000075', '#808080', '#ffffff', '#000000']
+    dff = df.groupby(['Year', group_by])[['production_kg']].sum() / 1000000
+    dff = dff.reset_index()
+    fig = px.area(dff, x='Year', y='production_kg', color=group_by,
+                  color_discrete_sequence=colors)
+
+    fig.update_layout(layout)
     return fig

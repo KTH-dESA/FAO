@@ -3,13 +3,17 @@ channels:
   - conda-forge
   - defaults
   - jmcmurray
+  - anaconda
 dependencies:
   - boto3
   - dash
   - dash-bootstrap-components
-  - dash-renderer
   - geopandas
   - json
+  - openpyxl
+  - pip
+  - pip:
+    - dash-extensions
   - s3fs
   - xlrd
   
