@@ -47,6 +47,8 @@ graphs:
   water supplied: Suministro de agua (Mm<sup>3</sup>)
   water treated: Agua tratada (Mm<sup>3</sup>)
   depth to groundwater: Profundidad del aquifero (mbgl)
+  crop production: Production de cultivos (ton)
+  crop production 2: Crop average production (ton)
   energy demand: Demanda de energía (GWh)
   least-cost: Technología de menor costo<br>de generación de energía en Agricultura
   energy ag: Energía para bombeo en agricultura (GWh)

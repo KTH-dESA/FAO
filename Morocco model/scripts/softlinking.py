@@ -125,6 +125,17 @@ df.loc[df['type'].str.contains('SW'), 'elevation_diff'] = np.nan
 df.loc[(df['type']=='DS Agriculture')&(df['Demand point']=='Agadir'), 'type'] = 'DS Domestic'
 
 df_wwtp = integrate_data(data, 'WWTP Inflow', 'wwtp', {'WWTP': wwtp}, 'point', 'point')
+df_wwtp['Province'] = None
+df_wwtp.loc[df_wwtp['point'].isin(['Agadir WWTP', 'Drargua WWTP']),
+            'Province'] = 'Agadir-Ida-Ou-Tanane'
+df_wwtp.loc[df_wwtp['point'].isin(['Lqliaa WWTP', 'Biougra WWTP', 'Ait Baha WWTP']),
+            'Province'] = 'Chtouka-Ait Baha'
+df_wwtp.loc[df_wwtp['point'].isin(['Ouled Teima WWTP', 'ELGuerdane WWTP',
+                                   'Ait Iaaza WWTP', 'Oulad Berhil WWTP',
+                                   'Aoulouz WWTP']),
+            'Province'] = 'Taroudannt'
+df_wwtp.loc[df_wwtp['point'].isin(['Drargua WWTP']),
+            'Province'] = 'Inezgane-Ait Melloul'
 
 sheet_names = {'AgWaterDemand': 'Agriculture', 
                'DomSupplyReq': 'Domestic'}
