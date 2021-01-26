@@ -663,9 +663,13 @@ def plot_map(background, map_type):
 
     layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
     layout_map['clickmode'] = 'select+event'
-    layout_map['legend'] = dict(font=dict(size=12), orientation="h", x=0, y=0)
+    layout_map['legend'] = dict(font=dict(size=12),
+                                title='',
+                                orientation="h", x=0, y=0)
 
     fig.update_layout(layout_map)
+    fig.update_traces(marker=dict(size=10),
+                      selector=dict(mode="markers"))
     return fig
 
 
