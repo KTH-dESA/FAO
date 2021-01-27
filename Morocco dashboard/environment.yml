@@ -8,9 +8,9 @@ dependencies:
   - boto3
   - dash
   - dash-bootstrap-components
-  - geopandas
   - json
   - openpyxl
+  - pandas
   - pip
   - pip:
     - dash-extensions
