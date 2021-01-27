@@ -335,6 +335,7 @@ def water_supply_plot(water_delivered, time_frame, layout, by='type'):
 
     return fig
 
+
 def energy_demand_plot(water_delivered, wwtp_data, desal_data,
                        time_frame, layout, group_by='type'):
     # emission_factor = 1.76
