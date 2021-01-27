@@ -397,7 +397,7 @@ def lcoe_plot(data, ag_lcoe, cropland):
     return data
 
 def plot_borders(geojson):
-    line = dict(width=1, color='rgb(80,100,80)')
+    line = dict(width=1, color='rgb(200,200,200)')
     colorscale = ((0, 'rgba(80,100,80,0.1)'), (1, 'rgba(80,100,80,0.1)'))
     df = pd.DataFrame(geojson['features'])
     df['color'] = 0
@@ -412,7 +412,7 @@ def plot_borders(geojson):
 
 def plot_points(df):
     trace = px.scatter_mapbox(df, lat="lat", lon="lon", color="type",
-                              color_discrete_sequence=px.colors.qualitative.Dark2,
+                              color_discrete_sequence=px.colors.qualitative.T10,
                               custom_data=['type', 'point'], hover_name='point').data
     return trace
 
@@ -429,9 +429,10 @@ def plot_pipelines(df):
 
 def choroplet_map(geojson, df):
     fig = px.choropleth_mapbox(df, geojson=geojson, locations='id',
-                               color='color',
+                               color='id',
                                color_continuous_scale=px.colors.sequential.Viridis,
-                               custom_data=['id'])
+                               custom_data=['id'],
+                               opacity=0.8)
 
     fig.update_layout(coloraxis_colorbar=dict(
         len=0.5,
@@ -458,6 +459,7 @@ def water_delivered(df, layout, group_by='type'):
     df.loc[df['type'].str.contains('WWR'), 'type'] = 'Reused Wastewater'
     fig = px.area(df, x='Year', y='water',
                   color=group_by,
+                  color_discrete_sequence=px.colors.qualitative.Dark2,
                   labels={'water': 'Water (Mm<sup>3</sup>)',
                           'energy': 'Energy (GWh)'})
     fig.update_layout(layout)

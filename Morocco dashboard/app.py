@@ -25,12 +25,12 @@ from scripts import plotting
 pio.templates.default = "plotly_white"
 
 client = boto3.client('s3')
-# my_path = os.path.abspath(os.path.dirname(__file__))
-my_path = os.path.join('..', 'Morocco model', 'test dash results')
+my_path = os.path.abspath(os.path.dirname(__file__))
+# my_path = os.path.join('..', 'Morocco model', 'test dash results')
 spatial_data = os.path.join(my_path, 'spatial_data')
 
 # provinces = gpd.read_file(os.path.join(spatial_data, 'Admin', 'provinces.geojson'))
-cropland = pd.read_csv(os.path.join(spatial_data, 'cropland.csv'))
+# cropland = pd.read_csv(os.path.join(spatial_data, 'cropland.csv'))
 # demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg'))
 # demand_points.loc[demand_points['type'] == 'Catchment', 'type'] = 'Agriculture'
 # demand_points.loc[demand_points['type'] == 'Demand site', 'type'] = 'Municipality' #TODO: move this to the schematic processing
@@ -58,14 +58,26 @@ with open(os.path.join(spatial_data, 'Admin', 'provinces.geojson')) as response:
 
 # points_coords, pipe_coords = plotting.data_merging(demand_points, supply_points, pipelines) #TODO: move this to the softlinking
 
+def get_path(path, from_server):
+    if from_server:
+        return ('/').join(path)
+    else:
+        return os.path.join(*path)
 
-def load_data(path, scenario, climate, phaseout_year, pv_level, files='all'):
+def load_summary_data(path, name, from_server=True):
+    if from_server:
+        path = 's3://souss-massa-dev'
+    return pd.read_csv(get_path([path, 'data', name], from_server))
+
+def load_data(path, scenario, climate, phaseout_year, pv_level,
+              files='all', from_server=True):
+    if from_server:
+        path = 's3://souss-massa-dev'
     init_year = 2020
     butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year != 2050 else 'phaseout_None'
-    data_folder = os.path.join(path, 'data')
     if not climate:
         climate = ['Trend']
-    data = os.path.join(data_folder, scenario, climate[0])
+    data = get_path([path, 'data', scenario, climate[0]], from_server)
     # lcoe = os.path.join(data_folder, scenario, climate[0], level)
 
     if files == 'all':
@@ -76,20 +88,21 @@ def load_data(path, scenario, climate, phaseout_year, pv_level, files='all'):
         files = [files]
 
     if len(files) == 1:
-        dff = pd.read_csv(os.path.join(data, files[0]))
+        dff = pd.read_csv(get_path([data, files[0]], from_server))
         dff = dff.loc[dff.Year >= init_year]
         output = dff
     else:
         output = []
         for file in files:
             if file == 'summary_results.gz':
-                dff = pd.read_csv(os.path.join(path,
-                                               'Butane_calculations',
-                                               butane_scenario,
-                                               f'{pv_level}_PV',
-                                               file))
+                dff = pd.read_csv(get_path([path,
+                                            'data',
+                                            'Butane_calculations',
+                                            butane_scenario,
+                                            f'{pv_level}_PV',
+                                            file], from_server))
             else:
-                dff = pd.read_csv(os.path.join(data, file))
+                dff = pd.read_csv(get_path([data, file], from_server))
             dff = dff.loc[dff.Year >= init_year]
             output.append(dff)
     return output
@@ -663,9 +676,13 @@ def plot_map(background, map_type):
 
     layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
     layout_map['clickmode'] = 'select+event'
-    layout_map['legend'] = dict(font=dict(size=12), orientation="h", x=0, y=0)
+    layout_map['legend'] = dict(font=dict(size=12),
+                                title='',
+                                orientation="h", x=0, y=0)
 
     fig.update_layout(layout_map)
+    fig.update_traces(marker=dict(size=10),
+                      selector=dict(mode="markers"))
     return fig
 
 
@@ -961,9 +978,9 @@ def read_compare_data(ts, language):
     # df_desal = pd.read_csv('s3://souss-massa-project/compare_desal.gz')
     # df_wwtp = pd.read_csv('s3://souss-massa-project/compare_wwtp.gz')
 
-    df_results = pd.read_csv(os.path.join(my_path, 'compare_results.gz'))
-    df_desal = pd.read_csv(os.path.join(my_path, 'compare_desal.gz'))
-    df_wwtp = pd.read_csv(os.path.join(my_path, 'compare_wwtp.gz'))
+    df_results = load_summary_data(my_path, 'compare_results.gz')
+    df_desal = load_summary_data(my_path, 'compare_desal.gz')
+    df_wwtp = load_summary_data(my_path, 'compare_wwtp.gz')
 
     df_results = df_results.loc[df_results.Year >= 2020]
     df_desal = df_desal.loc[df_desal.Year >= 2020]
@@ -974,7 +991,7 @@ def read_compare_data(ts, language):
                                                      language_dic['graphs']['energy demand compare'])
     fig_unmet = plotting.unmet_demand_compare_plot(df_results, 'Year', language_dic['graphs']['unmet demand compare'])
 
-    df_butane = pd.read_csv(os.path.join(my_path, 'compare_butane.gz'))
+    df_butane = load_summary_data(my_path, 'compare_butane.gz')
 
     df = df_butane.loc[df_butane.Year >= 2021].groupby(['butane_phaseout', 'pv_adoption'])[
         ['water_demand(m3)', 'energy_demand(KWh)', 'pv_elec(KWh)', 'grid_elec(KWh)', 'butane_cons(tonnes)',
