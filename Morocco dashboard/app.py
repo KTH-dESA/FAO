@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import itertools
 import os.path
 
 import dash
@@ -14,13 +13,13 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 from dash_extensions import Download
 from dash_extensions.snippets import send_data_frame
-from dash_extensions.snippets import send_file
 import plotly.graph_objects as go
 import plotly.io as pio
 import json
 import boto3
 
 from scripts import plotting
+from scripts.read_data import load_summary_data, load_data
 
 pio.templates.default = "plotly_white"
 
@@ -29,107 +28,16 @@ my_path = os.path.abspath(os.path.dirname(__file__))
 # my_path = os.path.join('..', 'Morocco model', 'test dash results')
 spatial_data = os.path.join(my_path, 'spatial_data')
 
-# provinces = gpd.read_file(os.path.join(spatial_data, 'Admin', 'provinces.geojson'))
-# cropland = pd.read_csv(os.path.join(spatial_data, 'cropland.csv'))
-# demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg'))
-# demand_points.loc[demand_points['type'] == 'Catchment', 'type'] = 'Agriculture'
-# demand_points.loc[demand_points['type'] == 'Demand site', 'type'] = 'Municipality' #TODO: move this to the schematic processing
-# supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.gpkg'))
-# supply_points.loc[supply_points['type'] == 'Other supply', 'type'] = 'Desalination plant'
-# pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
-# WebMercator = 4326
-
 points_coords = pd.read_csv(os.path.join(spatial_data, 'points_coords.csv'))
 points_coords.loc[points_coords['type'] == 'Catchment', 'type'] = 'Agriculture'
 points_coords.loc[points_coords['type'] == 'Demand site', 'type'] = 'Municipality'
 points_coords.loc[points_coords['type'] == 'Other supply', 'type'] = 'Desalination plant'
 pipe_coords = pd.read_csv(os.path.join(spatial_data, 'pipe_coords.csv'))
 
-
-# centroids = provinces.centroid
-
 with open(os.path.join(spatial_data, 'Admin', 'provinces.geojson')) as response:
     provinces = json.load(response)
     for value in provinces['features']:
         value['id'] = value['properties']['id']
-
-# for gdf in [demand_points, supply_points, pipelines]:
-    # gdf.to_crs(epsg=WebMercator, inplace=True)
-
-# points_coords, pipe_coords = plotting.data_merging(demand_points, supply_points, pipelines) #TODO: move this to the softlinking
-
-def get_path(path, from_server):
-    if from_server:
-        return ('/').join(path)
-    else:
-        return os.path.join(*path)
-
-def load_summary_data(path, name, from_server=True):
-    if from_server:
-        path = 's3://souss-massa-dev'
-    return pd.read_csv(get_path([path, 'data', name], from_server))
-
-def load_data(path, scenario, climate, phaseout_year, pv_level,
-              files='all', from_server=True):
-    if from_server:
-        path = 's3://souss-massa-dev'
-    init_year = 2020
-    butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year != 2050 else 'phaseout_None'
-    if not climate:
-        climate = ['Trend']
-    data = get_path([path, 'data', scenario, climate[0]], from_server)
-    # lcoe = os.path.join(data_folder, scenario, climate[0], level)
-
-    if files == 'all':
-        files = ['results.gz', 'wwtp_data.gz', 'desal_data.gz',
-                 'summary_results.gz', 'production.gz']
-
-    if isinstance(files, str):
-        files = [files]
-
-    if len(files) == 1:
-        dff = pd.read_csv(get_path([data, files[0]], from_server))
-        dff = dff.loc[dff.Year >= init_year]
-        output = dff
-    else:
-        output = []
-        for file in files:
-            if file == 'summary_results.gz':
-                dff = pd.read_csv(get_path([path,
-                                            'data',
-                                            'Butane_calculations',
-                                            butane_scenario,
-                                            f'{pv_level}_PV',
-                                            file], from_server))
-            else:
-                dff = pd.read_csv(get_path([data, file], from_server))
-            dff = dff.loc[dff.Year >= init_year]
-            output.append(dff)
-    return output
-
-
-# def load_data(scenario, climate, level, phaseout_year, pv_level):
-#     init_year = 2020
-#     butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year != 2050 else 'phaseout_None'
-#     data_folder = 's3://souss-massa-project/data'
-#     butane_folder = 's3://souss-massa-project/Butane_calculations'
-#     if not climate:
-#         climate = ['Trend']
-#     data = f'{data_folder}/{scenario}/{climate[0]}'
-#     # lcoe = f'{data_folder}/{scenario}/{climate[0]}/{level}'
-#
-#     water_delivered = pd.read_csv(f'{data}/results.gz')
-#     # ag_lcoe = pd.read_csv(f'{lcoe}/lcoe.gz')
-#     ag_lcoe = pd.DataFrame({'Year': []})
-#     wwtp_data = pd.read_csv(f'{data}/wwtp_data.gz')
-#     desal_data = pd.read_csv(f'{data}/desal_data.gz')
-#     desal_data['swpa_e'] = desal_data['sswd'] * 3.31
-#     butane_data = pd.read_csv(f'{butane_folder}/{butane_scenario}/{pv_level}_PV/summary_results.gz')
-#
-#     return water_delivered.loc[water_delivered.Year>=init_year], ag_lcoe.loc[ag_lcoe.Year>=init_year], \
-#            wwtp_data.loc[wwtp_data.Year>=init_year], desal_data.loc[desal_data.Year>=init_year], \
-#            butane_data.loc[butane_data.Year >= init_year]
-
 
 button_color = 'primary'
 info_ids = []
@@ -353,7 +261,6 @@ pv_options = html.Div(
     # hidden=True,
 )
 
-
 # map_options = html.Div(
 #     [
 #         title_info(title='Map visualization options', info_id='map-info',
@@ -565,11 +472,11 @@ map = html.Div(
             id="loading-1",
             type="default",
             children=dcc.Graph(id="map",
-                         config=dict(showSendToCloud=True,
-                                     toImageButtonOptions=dict(format='png',
-                                                               filename='map',
-                                                               height=700,
-                                                               width=700, scale=2)))
+                               config=dict(showSendToCloud=True,
+                                           toImageButtonOptions=dict(format='png',
+                                                                     filename='map',
+                                                                     height=700,
+                                                                     width=700, scale=2)))
         ),
     ],
     id='map-div',
@@ -617,12 +524,6 @@ app.layout = html.Div([dcc.Store(id='current'), sidebar, content])
 
 
 # Helper funtions
-# with open(os.path.join(spatial_data, 'Admin', 'Provinces.geojson')) as response:
-#     provinces_chmap = json.load(response)
-#     for feature in provinces_chmap['features']:
-#         # print(feature)
-#         feature['id'] = feature['properties']['Province']
-
 def get_language(language):
     file = f"assets/{language}.yaml"
     with open(file, 'rt', encoding='utf8') as yml:
@@ -666,7 +567,7 @@ def plot_map(background, map_type):
         fig.add_traces(plotting.plot_pipelines(pipe_coords))
         fig.add_traces(plotting.plot_points(points_coords))
 
-    elif map_type == 'governorates':
+    else:
         df = pd.DataFrame(provinces['features'])
         df['color'] = range(len(df['id']))
         fig = plotting.choroplet_map(provinces, df)
@@ -712,15 +613,7 @@ def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe,
 )
 def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate, butane_year, pv_share):
     water_delivered, wwtp_data, desal_data, butane_data, crop_data = load_data(my_path, scenario, climate,
-                                                                     butane_year, pv_share, 'all')
-    # if map_op == 'cho-map':
-    #     #     map = choroplethmap(provinces_chmap, provinces['Province'], label)
-    #     # elif map_op == 'sch-map':
-    #     #
-    #     # else:
-    #     #     map = {}
-
-    # map = plot_map(water_delivered)
+                                                                               butane_year, pv_share, 'all')
     data = {}
     graphs = get_graphs(data, water_delivered, wwtp_data, desal_data, None,
                         butane_data, crop_data)
@@ -776,11 +669,11 @@ def update_results(selection, ts2, map_type, language, data_current):
         else:
             name = 'Souss-Massa'
             water_delivered, crop_data, wwtp_data, desal_data = load_data(my_path, data_current['scenario'],
-                                                   data_current['level'],
-                                                   data_current['butane_year'],
-                                                   data_current['pv_share'],
-                                                   ['results.gz', 'production.gz',
-                                                    'wwtp_data.gz', 'desal_data.gz'])
+                                                                          data_current['level'],
+                                                                          data_current['butane_year'],
+                                                                          data_current['pv_share'],
+                                                                          ['results.gz', 'production.gz',
+                                                                           'wwtp_data.gz', 'desal_data.gz'])
 
             df = water_delivered.loc[water_delivered['type'] != 'Transmission Pipeline']
             df = df.groupby(['Year', 'Province'])['sswd'].sum().reset_index()
@@ -813,7 +706,8 @@ def update_results(selection, ts2, map_type, language, data_current):
         data['water treated'] = plotting.wastewater_treated(df_tww, layout, [colors['water']])
 
         df_sww = water_delivered.loc[water_delivered['Supply point'] == name].groupby(['Year',
-                                                                                     'Demand point'])['sswd'].sum().reset_index()
+                                                                                       'Demand point'])[
+            'sswd'].sum().reset_index()
         df_sww.rename(columns={'sswd': 'water'}, inplace=True)
         df_tww['water'] /= 1000000
         data['water supplied'] = plotting.wastewater_supply(df_sww, layout)
@@ -836,13 +730,14 @@ def update_results(selection, ts2, map_type, language, data_current):
         df['water'] /= 1000000
         data['water delivered'] = plotting.water_delivered(df, layout)
 
-        data['unmet water'] = plotting.unmet_demand_plot(water_delivered.loc[water_delivered['Demand point'] == name], 'Year', layout)
+        data['unmet water'] = plotting.unmet_demand_plot(water_delivered.loc[water_delivered['Demand point'] == name],
+                                                         'Year', layout)
         if selection['points'][0]['customdata'][0] == 'Agriculture':
             crop_data = load_data(my_path, data_current['scenario'],
-                                        data_current['level'],
-                                        data_current['butane_year'],
-                                        data_current['pv_share'],
-                                        ['production.gz'])
+                                  data_current['level'],
+                                  data_current['butane_year'],
+                                  data_current['pv_share'],
+                                  ['production.gz'])
             df = crop_data.loc[crop_data['point'] == name]
             data['crop production'] = plotting.crop_production(df, 'crop', layout)
 
@@ -866,18 +761,43 @@ def update_results(selection, ts2, map_type, language, data_current):
     elif selection['points'][0]['customdata'][0] in ['Desalination plant']:
         name = selection['points'][0]['customdata'][1]
         desal_data = load_data(my_path, data_current['scenario'],
-                                    data_current['level'],
-                                    data_current['butane_year'],
-                                    data_current['pv_share'],
-                                    ['desal_data.gz'])
+                               data_current['level'],
+                               data_current['butane_year'],
+                               data_current['pv_share'],
+                               ['desal_data.gz'])
         df = desal_data.loc[desal_data['Supply point'] == name]
 
         data['water supplied'] = plotting.water_supply_plot(df, 'Year', layout, 'Demand point')
         data['energy demand'] = plotting.desal_energy(df, layout)
 
     else:
-        raise PreventUpdate
+        name = selection['points'][0]['customdata'][0]
 
+        water_delivered, crop_data, wwtp_data, desal_data = load_data(my_path, data_current['scenario'],
+                                                                      data_current['level'],
+                                                                      data_current['butane_year'],
+                                                                      data_current['pv_share'],
+                                                                      ['results.gz', 'production.gz',
+                                                                       'wwtp_data.gz', 'desal_data.gz'])
+
+        df = water_delivered.loc[water_delivered['type'] != 'Transmission Pipeline']
+        df = df.loc[df['Province'] == name]
+        data['water delivered'] = plotting.water_delivered_plot(df, 'Year', layout)
+
+
+        df_crop = pd.merge(crop_data,
+                           water_delivered.groupby('Demand point').agg({'Province': 'first'}).reset_index(),
+                           left_on='point', right_on='Demand point')
+        df_crop = df_crop.loc[df_crop['Province'] == name]
+        if df_crop['production_kg'].sum() > 0:
+            # df_crop = df_crop.loc[df_crop['production_kg'] > 1]
+            data['crop production'] = plotting.crop_production(df_crop, 'group', layout)
+            data['crop production 2'] = plotting.crop_production_per_crop(df_crop, 'crop', layout)
+
+        data['energy demand'] = plotting.energy_demand_plot(water_delivered.loc[water_delivered['Province'] == name],
+                                                            wwtp_data.loc[wwtp_data['Province'] == name],
+                                                            desal_data.loc[desal_data['Province'] == name],
+                                                            'Year', layout, 'type')
 
     plots = []
     for key, value in data.items():
@@ -890,7 +810,7 @@ def update_results(selection, ts2, map_type, language, data_current):
     return plots, name
 
 
-#TODO: use calback context read dash documentation!
+# TODO: use calback context read dash documentation!
 @app.callback(
     [Output("map", "figure"), Output("loading-1", "children")],
     [
@@ -974,10 +894,6 @@ def read_compare_data(ts, language):
 
     language_dic = get_language(language)
 
-    # df_results = pd.read_csv('s3://souss-massa-project/compare_results.gz')
-    # df_desal = pd.read_csv('s3://souss-massa-project/compare_desal.gz')
-    # df_wwtp = pd.read_csv('s3://souss-massa-project/compare_wwtp.gz')
-
     df_results = load_summary_data(my_path, 'compare_results.gz')
     df_desal = load_summary_data(my_path, 'compare_desal.gz')
     df_wwtp = load_summary_data(my_path, 'compare_wwtp.gz')
@@ -1002,7 +918,8 @@ def read_compare_data(ts, language):
     fig_butane_costs = plotting.total_costs_plot(df, language_dic['graphs']['total costs compare'])
     fig_butane_emissions = plotting.emissions_compare_plot(df_butane, language_dic['graphs']['emissions compare'])
     fig_butane_emissions_total = plotting.total_emissions_compare_plot(df,
-                                                                       language_dic['graphs']['total emissions compare'])
+                                                                       language_dic['graphs'][
+                                                                           'total emissions compare'])
     fig_emissions_costs = plotting.emisions_vs_costs(df_butane, language_dic['graphs']['emissions vs costs compare'])
     fig_energy_share = plotting.energy_resources_share_plot(df_butane, language_dic['graphs']['energy share compare'])
 
