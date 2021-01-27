@@ -267,7 +267,6 @@ def emissions_ag(df, layout):
     return fig
 
 def water_delivered_plot(water_delivered, time_frame, layout):
-    name = 'water delivered'
     dff_delivered = water_delivered.copy()
     dff_delivered.loc[dff_delivered['type'].str.contains('Agriculture'), 'category'] = 'Agriculture'
     dff_delivered.loc[dff_delivered['type'].str.contains('Domestic'), 'category'] = 'Domestic'
@@ -336,27 +335,26 @@ def water_supply_plot(water_delivered, time_frame, layout, by='type'):
 
     return fig
 
-def energy_demand_plot(water_delivered, wwtp_data, desal_data, time_frame, layout):
+def energy_demand_plot(water_delivered, wwtp_data, desal_data,
+                       time_frame, layout, group_by='type'):
     # emission_factor = 1.76
     dff_energy = water_delivered.copy()
     dff_energy.loc[dff_energy['type'].str.contains('GW'), 'type'] = 'Groundwater pumping'
     dff_energy.loc[dff_energy['type'].str.contains('Pipeline'), 'type'] = 'Surface water conveyance'
     dff_energy.loc[dff_energy['type'].str.contains('DS'), 'type'] = 'Desalinated water conveyance'
     dff_energy = dff_energy.loc[~dff_energy['Supply point'].str.contains('Complexe Aoulouz Mokhtar Soussi')]
-    dff_energy = dff_energy.groupby([time_frame, 'type'])['swpa_e'].sum() / 1000000
-    dff_energy = dff_energy.reset_index()
+    dff_energy = dff_energy[[time_frame, group_by, 'swpa_e']]
     wwtp_data['type'] = 'Wastewater treatment'
     desal_data['type'] = 'Desalination energy'
     for df in [wwtp_data, desal_data]:
-        dff = df.groupby([time_frame, 'type'])['swpa_e'].sum() / 1000000
-        dff = dff.reset_index()
+        dff = df[[time_frame, group_by, 'swpa_e']]
         dff_energy = dff_energy.append(dff, sort=False)
 
-    dff_energy = dff_energy.loc[dff_energy['swpa_e'] != 0]
+    df = dff_energy.groupby([time_frame, group_by])[['swpa_e']].sum() / 1000000
+    df.reset_index(inplace=True)
+    df = df.loc[df['swpa_e'] != 0]
 
-    df = dff_energy
-
-    fig = px.area(df, x=time_frame, y='swpa_e', color='type',
+    fig = px.area(df.reset_index(), x=time_frame, y='swpa_e', color=group_by,
                   color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -453,13 +451,13 @@ def wastewater_treated(df, layout, colors):
     return fig
 
 
-def water_delivered(df, layout):
+def water_delivered(df, layout, group_by='type'):
     df.loc[df['type'].str.contains('SW|Aquifer'), 'type'] = 'Surface water'
     df.loc[df['type'].str.contains('GW'), 'type'] = 'Groundwater'
     df.loc[df['type'].str.contains('DS'), 'type'] = 'Desalinated water'
     df.loc[df['type'].str.contains('WWR'), 'type'] = 'Reused Wastewater'
     fig = px.area(df, x='Year', y='water',
-                  color='type',
+                  color=group_by,
                   labels={'water': 'Water (Mm<sup>3</sup>)',
                           'energy': 'Energy (GWh)'})
     fig.update_layout(layout)
@@ -521,10 +519,34 @@ def crop_production(df, group_by, layout):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    dff = df.groupby(['Year', group_by])[['production_kg']].sum() / 1000000
+    dff = df.groupby(['Year', group_by])[['production_kg']].sum() / 1000
     dff = dff.reset_index()
     fig = px.area(dff, x='Year', y='production_kg', color=group_by,
-                  color_discrete_sequence=colors)
+                  color_discrete_sequence=colors,
+                  labels={'production_kg': 'Production (ton)'})
 
     fig.update_layout(layout)
+    return fig
+
+
+def crop_production_per_crop(df, group_by, layout):
+    colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4',
+              '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
+              '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
+              '#000075', '#808080', '#ffffff', '#000000']
+    dff = df.groupby(['Province', group_by])[['production_kg']].mean() / 1000
+    dff.reset_index(inplace=True)
+    dff = dff.loc[dff['production_kg'] > 0.0001]
+    fig = px.bar(dff, x='production_kg', y=group_by, color='Province',
+                 orientation="h",
+                 color_discrete_sequence=colors)
+    fig.update_layout(layout, height=500,
+                      yaxis={'categoryorder': 'total ascending'},
+                      legend=dict(
+                          orientation="h",
+                          # yanchor="top",
+                          # y=0,
+                          # xanchor="left",
+                          x=-0.2
+                      ))
     return fig

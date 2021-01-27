@@ -77,6 +77,7 @@ def load_data(path, scenario, climate, phaseout_year, pv_level, files='all'):
 
     if len(files) == 1:
         dff = pd.read_csv(os.path.join(data, files[0]))
+        dff = dff.loc[dff.Year >= init_year]
         output = dff
     else:
         output = []
@@ -524,13 +525,13 @@ map = html.Div(
                                 id="map-background",
                                 options=[
                                     {"label": "White", "value": 'white-bg'},
-                                    {"label": "Light", "value": 'light'},
-                                    {"label": "Outdoors", "value": 'outdoors'},
-                                    {"label": "Basic", "value": 'basic'},
-                                    {"label": "Dark", "value": 'dark'},
+                                    # {"label": "Light", "value": 'light'},
+                                    # {"label": "Outdoors", "value": 'outdoors'},
+                                    # {"label": "Basic", "value": 'basic'},
+                                    # {"label": "Dark", "value": 'dark'},
                                     {"label": "Satellite", "value": 'satellite'},
                                 ],
-                                value='light',
+                                value='white-bg',
                                 className='checklist-selected-style',
                             ),
                         ]),
@@ -742,7 +743,7 @@ def toggle_collapse(n, is_open):
     [State('current-language', 'data'), State('current', 'data')],
     prevent_initial_call=True
 )
-def update_results(selection, map_type, ts2, language, data_current):
+def update_results(selection, ts2, map_type, language, data_current):
     if data_current is None:
         raise PreventUpdate
 
@@ -752,8 +753,34 @@ def update_results(selection, map_type, ts2, language, data_current):
     data = {}
 
     if selection is None:
-        name = 'Souss-Massa'
-        data = data_current['graphs']
+        if map_type == 'schematic':
+            name = 'Souss-Massa'
+            data = data_current['graphs']
+        else:
+            name = 'Souss-Massa'
+            water_delivered, crop_data, wwtp_data, desal_data = load_data(my_path, data_current['scenario'],
+                                                   data_current['level'],
+                                                   data_current['butane_year'],
+                                                   data_current['pv_share'],
+                                                   ['results.gz', 'production.gz',
+                                                    'wwtp_data.gz', 'desal_data.gz'])
+
+            df = water_delivered.loc[water_delivered['type'] != 'Transmission Pipeline']
+            df = df.groupby(['Year', 'Province'])['sswd'].sum().reset_index()
+            df.rename(columns={'sswd': 'water'}, inplace=True)
+            df['water'] /= 1000000
+            df['type'] = ''
+            data['water delivered'] = plotting.water_delivered(df, layout, 'Province')
+
+            df = pd.merge(crop_data,
+                          water_delivered.groupby('Demand point').agg({'Province': 'first'}).reset_index(),
+                          left_on='point', right_on='Demand point')
+
+            data['crop production'] = plotting.crop_production(df, 'Province', layout)
+            data['crop production 2'] = plotting.crop_production_per_crop(df, 'crop', layout)
+
+            data['energy demand'] = plotting.energy_demand_plot(water_delivered, wwtp_data, desal_data,
+                                                                'Year', layout, 'Province')
 
     elif selection['points'][0]['customdata'][0] in ['WWTP']:
         name = selection['points'][0]['customdata'][1]
@@ -793,6 +820,15 @@ def update_results(selection, map_type, ts2, language, data_current):
         data['water delivered'] = plotting.water_delivered(df, layout)
 
         data['unmet water'] = plotting.unmet_demand_plot(water_delivered.loc[water_delivered['Demand point'] == name], 'Year', layout)
+        if selection['points'][0]['customdata'][0] == 'Agriculture':
+            crop_data = load_data(my_path, data_current['scenario'],
+                                        data_current['level'],
+                                        data_current['butane_year'],
+                                        data_current['pv_share'],
+                                        ['production.gz'])
+            df = crop_data.loc[crop_data['point'] == name]
+            data['crop production'] = plotting.crop_production(df, 'crop', layout)
+
 
     elif selection['points'][0]['customdata'][0] in ['Groundwater supply',
                                                      'Surfacewater withdrawal',

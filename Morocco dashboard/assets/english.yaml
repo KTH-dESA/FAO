@@ -47,7 +47,8 @@ graphs:
   water supplied: Water supplied (Mm<sup>3</sup>)
   water treated: Water treated (Mm<sup>3</sup>)
   depth to groundwater: Depth to groundwater (mbgl)
-  crop production: Crop production (kton)
+  crop production: Crop production (ton)
+  crop production 2: Crop average production (ton)
   energy demand: Energy demand (GWh)
   least-cost: Least-cost power technology for Agriculture
   energy ag: Energy for agriculture water pumping (GWh)
