@@ -1,7 +1,7 @@
 workdir: sys.path[0] #this line it to set the working directory to the location of the snakefile
 
 ######################### User defined parameters #############################
-dash_folder = "test dash results" #set the dashboard folder
+dash_folder = "../Morocco dashboard" #set the dashboard folder
 
 # SCENARIOS = ['Reference', 'Desalination','Irrigation Intensification'] #define the list of scenarios to run
 # W_RATE = [0, 0.3, 0.5, 0.7] #define the list of wind technology cost reduction rate
@@ -38,19 +38,20 @@ rule schematic_processing:
            diversions="Data/Schematic/Diversions.kml", \
            reservoirs="Data/Schematic/Reservoirs.kml", \
            links="Data/Schematic/Transmission Links.kml"
-    output: demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg"
+    output: demand_points="Data/GIS/Processed layers/Demand_points.gpkg"
     script: 'scripts/schematic_processing.py'
     
 rule cropland_processing:
-    input: demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg", \
+    input: demand_points="Data/GIS/Processed layers/Demand_points.gpkg", \
            cropland="Data/GIS/Processed layers/cropland_2013_processed_20200227.csv"
     output: "Data/Cropland and Builtarea/cropland.gz"
     script: 'scripts/cropland_processing.py'
 
 rule softlinking:
     input: data="Data/WEAP Results/Results - {scenario} - {climate}.xlsx", \
-           demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg"
-    params: scenario="{scenario}", climate="{climate}"
+           demand_points="Data/GIS/Processed layers/Demand_points.gpkg"
+    params: scenario="{scenario}", climate="{climate}", \
+			spatial_output=f"{dash_folder}/spatial_data"
     output: demand_data="Data/Processed results/{scenario}/{climate}/demand_data.gz", \
             wwtp_inflow="Data/Processed results/{scenario}/{climate}/wwtp_inflow.gz", \
             production_data=f"{dash_folder}/data/{{scenario}}/{{climate}}/production.gz"

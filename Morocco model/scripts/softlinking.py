@@ -5,18 +5,15 @@ import numpy as np
 
 scenario = str(snakemake.params.scenario)
 climate = str(snakemake.params.climate)
+spatial_output = str(snakemake.params.spatial_output)
 data_file = str(snakemake.input.data)
 demand_points = str(snakemake.input.demand_points)
 demand_data_output = str(snakemake.output.demand_data)
 wwtp_inflow_output = str(snakemake.output.wwtp_inflow)
 production_data_output = str(snakemake.output.production_data)
 
-# spatial_folder = f"{snakemake.params.dash_folder}/spatial_data"
 spatial_folder = demand_points.split(os.path.basename(demand_points))[0]
 output_folder = demand_data_output.split(os.path.basename(demand_data_output))[0]
-
-# output_folder = output.split('demand_data.gz')[0]
-# output_folder = os.path.join('Data', 'Processed results', scenario, climate)
 
 def integrate_data(data, sheet_name, category, dff_dict, var_name='links', target='point'):
     df = data.parse(sheet_name, skiprows=3)
@@ -68,7 +65,6 @@ MerchidSudMoroc = 26192
 
 os.makedirs(output_folder, exist_ok = True)
     
-# data_file = os.path.join('Data', 'WEAP Results', f'SoussMassa Results - {scenario} - {climate}.xlsx')
 data = pd.ExcelFile(data_file)
 
 sheet_names = {'Desalination': 'DS Agriculture', 
@@ -107,10 +103,10 @@ df = df.append(dff, sort=False, ignore_index=True)
 df.loc[df.Province.isna(),'Province'] = df['Demand point'].map(demand_links.drop_duplicates('point').set_index('point')['Province'])
 
 supply = gpd.GeoDataFrame(geometry=df['Supply point'].map(all_points.set_index('point').geometry), crs='epsg:4326')
-#             supply.dropna(inplace=True)
+
 supply.to_crs(f'epsg:{MerchidSudMoroc}', inplace=True)
 demand = gpd.GeoDataFrame(geometry=df['Demand point'].map(all_points.set_index('point').geometry), crs='epsg:4326')
-#             demand.dropna(inplace=True)
+
 demand.to_crs(f'epsg:{MerchidSudMoroc}', inplace=True)
 df['distance'] = supply.distance(demand)
 
@@ -207,5 +203,5 @@ def data_merging(demand_points, supply_points, pipelines):
     
 points_coords, pipe_coords = data_merging(demand_links, supply_links, diversions)
 
-points_coords.to_csv(os.path.join(spatial_folder, 'points_coords.csv'), index=False)
-pipe_coords.to_csv(os.path.join(spatial_folder, 'pipe_coords.csv'), index=False)
+points_coords.to_csv(os.path.join(spatial_output, 'points_coords.csv'), index=False)
+pipe_coords.to_csv(os.path.join(spatial_output, 'pipe_coords.csv'), index=False)
