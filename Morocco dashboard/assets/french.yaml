@@ -7,6 +7,7 @@ sidebar:
       - Référence
       - Eau dessalée
       - Intensification de l'irrigation
+      - Yield Trends
       - Dessalement et réutilisation des eaux usées
       - Réutilisation de référence et des eaux usées
   climate:
@@ -34,7 +35,8 @@ results:
   scenarios:
     Reference: Référence
     Desalination: Eau dessalée
-    Irrigation intensification: Intensification de l'irrigation
+    Increased Water Productivity: Intensification de l'irrigation
+    Yield Trends: Yield trends
     Desalination Wastewater Reuse: Dessalement, réutilisation des eaux usées
     Reference Wastewater Reuse: Référence, réutilisation des eaux usées
   climate:

@@ -531,33 +531,6 @@ def get_language(language):
     return language_dic
 
 
-def choroplethmap(geojson, locations, title):
-    layout_map = layout.copy()
-    data = [dict(
-        type="choroplethmapbox",
-        geojson=geojson,
-        locations=locations,
-        name=locations,
-        z=np.random.randint(1, 101, locations.shape[0]),
-        # customdata=[{'Water demand': np.random.randint(1, 101, 12),
-        #              'Energy demand': np.random.randint(1, 101, 12),
-        #              'Agricultural yield': np.random.randint(1, 101, 12)} for i in range(0, locations.shape[0])],
-        colorbar={'len': 0.3, 'thicknessmode': 'fraction',
-                  'thickness': 0.01, 'x': 0.01, 'y': 0.85,
-                  'title': {'text': title}},
-        showscale=True,
-    )]
-
-    layout_map["mapbox"] = {"center": {"lon": -8.9, 'lat': 30.2}, 'zoom': 7,
-                            'style': "outdoors", 'accesstoken': token}
-    layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
-    layout_map['clickmode'] = 'event+select'
-    layout_map['legend'] = dict(font=dict(size=12), orientation="h", x=0, y=0)
-    map = dict(data=data, layout=layout_map)
-
-    return map
-
-
 def plot_map(background, map_type):
     layout_map = {}
 
@@ -594,7 +567,7 @@ def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe,
     data['water supplied'] = plotting.water_supply_plot(water_delivered, 'Year', layout)
     data['energy demand'] = plotting.energy_demand_plot(water_delivered, wwtp_data, desal_data, 'Year', layout)
     data['depth to groundwater'] = plotting.wtd_plot(water_delivered, 'Date', layout)
-    data['crop production'] = plotting.crop_production(crop_data, 'group', layout)
+    data['crop production'] = plotting.crop_production(crop_data, 'crop', layout)
     data['energy ag'] = plotting.energy_demand_ag(butane_data, layout)
     data['pv capacity'] = plotting.pv_installed_capacity(butane_data, layout)
     data['emissions ag'] = plotting.emissions_ag(butane_data, layout)
@@ -791,8 +764,8 @@ def update_results(selection, ts2, map_type, language, data_current):
         df_crop = df_crop.loc[df_crop['Province'] == name]
         if df_crop['production_kg'].sum() > 0:
             # df_crop = df_crop.loc[df_crop['production_kg'] > 1]
-            data['crop production'] = plotting.crop_production(df_crop, 'group', layout)
-            data['crop production 2'] = plotting.crop_production_per_crop(df_crop, 'crop', layout)
+            data['crop production'] = plotting.crop_production(df_crop, 'crop', layout)
+            # data['crop production 2'] = plotting.crop_production_per_crop(df_crop, 'crop', layout)
 
         data['energy demand'] = plotting.energy_demand_plot(water_delivered.loc[water_delivered['Province'] == name],
                                                             wwtp_data.loc[wwtp_data['Province'] == name],
@@ -1020,9 +993,10 @@ def update_language(ts, ts2, language, data_current):
     options = [
         {"label": language_dic["sidebar"]["scenarios"]["options"][0], "value": 'Reference'},
         {"label": language_dic['sidebar']['scenarios']['options'][1], "value": 'Desalination'},
-        {"label": language_dic['sidebar']['scenarios']['options'][2], "value": 'Irrigation intensification'},
-        {"label": language_dic['sidebar']['scenarios']['options'][3], "value": "Desalination Wastewater Reuse"},
-        {"label": language_dic['sidebar']['scenarios']['options'][4], "value": "Reference Wastewater Reuse"}
+        {"label": language_dic['sidebar']['scenarios']['options'][2], "value": 'Increased Water Productivity'},
+        {"label": language_dic['sidebar']['scenarios']['options'][3], "value": 'Yield Trends'},
+        {"label": language_dic['sidebar']['scenarios']['options'][4], "value": "Desalination Wastewater Reuse"},
+        {"label": language_dic['sidebar']['scenarios']['options'][5], "value": "Reference Wastewater Reuse"}
     ]
     climate = data_current['level']
     if not climate:

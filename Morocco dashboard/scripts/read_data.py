@@ -23,6 +23,7 @@ def load_data(path, scenario, climate, phaseout_year, pv_level,
     if from_server:
         path = server
     init_year = 2020
+    end_year = 2050
     butane_scenario = f'phaseout_{phaseout_year}' if phaseout_year != 2050 else 'phaseout_None'
     if not climate:
         climate = ['Trend']
@@ -38,7 +39,7 @@ def load_data(path, scenario, climate, phaseout_year, pv_level,
 
     if len(files) == 1:
         dff = pd.read_csv(get_path([data, files[0]], from_server))
-        dff = dff.loc[dff.Year >= init_year]
+        # dff = dff.loc[(dff.Year >= init_year) & (dff.Year <= end_year)]
         output = dff
     else:
         output = []
@@ -52,6 +53,6 @@ def load_data(path, scenario, climate, phaseout_year, pv_level,
                                             file], from_server))
             else:
                 dff = pd.read_csv(get_path([data, file], from_server))
-            dff = dff.loc[dff.Year >= init_year]
+            # dff = dff.loc[(dff.Year >= init_year) & (dff.Year <= end_year)]
             output.append(dff)
     return output

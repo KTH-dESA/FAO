@@ -7,6 +7,7 @@ sidebar:
       - Referencia
       - Agua desalinizada
       - Intensificación de la irrigación
+      - Yield Trends
       - Desalinización & reuso de agua
       - Referencia & reuso de agua
   climate:
@@ -34,8 +35,9 @@ results:
   scenarios:
     Reference: Referencia
     Desalination: Agua desalinizada
-    Irrigation intensification: Intensificación de la irrigación
-    Desalination Wastewater reuse: Desalinización, reuso de agua
+    Increased Water Productivity: Intensificación de la irrigación
+    Yield Trends: Yield trends
+    Desalination Wastewater Reuse: Desalinización, reuso de agua
     Reference Wastewater Reuse: Referencia, reuso de agua
   climate:
     historical trend: tendencia historica

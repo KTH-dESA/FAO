@@ -6,7 +6,8 @@ sidebar:
     options:
       - Reference
       - Desalinated water
-      - Irrigation Intensification
+      - Increased water productivity
+      - Yield trends
       - Desalination & wastewater reuse
       - Reference & wastewater reuse
   climate:
@@ -34,7 +35,8 @@ results:
   scenarios:
     Reference: Reference
     Desalination: Desalinated water
-    Irrigation intensification: Irrigation Intensification
+    Increased Water Productivity: Increased water productivity
+    Yield Trends: Yield trends
     Desalination Wastewater Reuse: Desalination, wastewater reuse
     Reference Wastewater Reuse: Reference, wastewater reuse
   climate:

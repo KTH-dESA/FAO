@@ -27,7 +27,7 @@ souss_massa = nexus_tool.Model(df)
 
 #Define the diameter of the pipelines. The first is general for all and the following specific for each case
 souss_massa.df['Pipe_diameter'] = 0.4
-souss_massa.df.loc[souss_massa.df['type'].str.contains('GW'), 'Pipe_diameter'] = 1
+souss_massa.df.loc[souss_massa.df['type'].str.contains('GW'), 'Pipe_diameter'] = 1000
 souss_massa.df.loc[souss_massa.df['type'].str.contains('Pipeline'), 'Pipe_diameter'] = 1.2
 souss_massa.df.loc[souss_massa.df['type'].str.contains('DS'), 'Pipe_diameter'] = 1
 
