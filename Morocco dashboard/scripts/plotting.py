@@ -18,7 +18,7 @@ def water_supply_compare_plot(water_delivered, time_frame, title):
     for t in df['type'].unique():
         if df.loc[df['type'] == t, 'sswd'].sum() == 0:
             df = df.loc[df['type'] != t]
-    fig = px.area(df, x='Year', y='sswd', color='type', facet_col='Scenario', facet_row='Reuse',
+    fig = px.bar(df, x='Year', y='sswd', color='type', facet_col='Scenario', facet_row='Reuse',
                   labels={"sswd": "Water (Mm<sup>3</sup>)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.Dark2)
     fig.update_layout(height=600)
@@ -43,9 +43,9 @@ def energy_demand_compare_plot(water_delivered, wwtp_data, desal_data, time_fram
         if dff_energy.loc[dff_energy['type'] == t, 'swpa_e'].sum() == 0:
             dff_energy = dff_energy.loc[dff_energy['type'] != t]
 
-    fig = px.area(dff_energy, x='Year', y='swpa_e', color='type', facet_col='Scenario', facet_row='Reuse',
+    fig = px.bar(dff_energy, x='Year', y='swpa_e', color='type', facet_col='Scenario', facet_row='Reuse',
                   labels={"swpa_e": "Energy (GWh)"}, title=title,
-                  facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.T10)
+                  facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.Set2)
     fig.update_layout(height=600)
     return fig
 
@@ -284,9 +284,9 @@ def water_delivered_plot(water_delivered, time_frame, layout):
         dff_delivered_cat)
 
     df = dff_delivered_cat.reset_index()
-    fig = px.area(df, x=time_frame, y='sswd', color='category',
+    fig = px.bar(df, x=time_frame, y='sswd', color='category',
                   color_discrete_sequence=px.colors.qualitative.Dark2)
-    fig.update_traces(fill='tonexty')
+    # fig.update_traces(fill='tonexty')
     fig.update_layout(layout)
     return fig
 
@@ -327,10 +327,9 @@ def water_supply_plot(water_delivered, time_frame, layout, by='type'):
 
     df = dff_delivered.reset_index()
 
-    fig = px.area(df, x=time_frame, y='sswd', color=by,
+    fig = px.bar(df, x=time_frame, y='sswd', color=by,
                   color_discrete_sequence=px.colors.qualitative.Set2)
-    fig.update_traces(fill='tonexty',
-                      hovertemplate='<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}')
+    fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}')
     fig.update_layout(layout)
 
     return fig
@@ -355,8 +354,8 @@ def energy_demand_plot(water_delivered, wwtp_data, desal_data,
     df.reset_index(inplace=True)
     df = df.loc[df['swpa_e'] != 0]
 
-    fig = px.area(df.reset_index(), x=time_frame, y='swpa_e', color=group_by,
-                  color_discrete_sequence=px.colors.qualitative.T10)
+    fig = px.bar(df.reset_index(), x=time_frame, y='swpa_e', color=group_by,
+                  color_discrete_sequence=px.colors.qualitative.Set2)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
     fig.update_layout(layout)
@@ -430,7 +429,7 @@ def plot_pipelines(df):
 
 def choroplet_map(geojson, df):
     fig = px.choropleth_mapbox(df, geojson=geojson, locations='id',
-                               color='id',
+                               color='color',
                                color_continuous_scale=px.colors.sequential.Viridis,
                                custom_data=['id'],
                                opacity=0.8)
@@ -440,12 +439,14 @@ def choroplet_map(geojson, df):
         xanchor="right", x=1,
         yanchor='bottom', y=0.1,
         thickness=10,
-    ))
+        ),
+        coloraxis_showscale=False
+    )
     return fig
 
 
 def wastewater_treated(df, layout, colors):
-    fig = px.area(df, x='Year', y='water',
+    fig = px.bar(df, x='Year', y='water',
                   color_discrete_sequence=colors,
                   labels={'water': 'Water (Mm<sup>3</sup>)',
                           'energy': 'Energy (GWh)'})
@@ -458,9 +459,9 @@ def water_delivered(df, layout, group_by='type'):
     df.loc[df['type'].str.contains('GW'), 'type'] = 'Groundwater'
     df.loc[df['type'].str.contains('DS'), 'type'] = 'Desalinated water'
     df.loc[df['type'].str.contains('WWR'), 'type'] = 'Reused Wastewater'
-    fig = px.area(df, x='Year', y='water',
+    fig = px.bar(df, x='Year', y='water',
                   color=group_by,
-                  color_discrete_sequence=px.colors.qualitative.Dark2,
+                  color_discrete_sequence=px.colors.qualitative.Set2,
                   labels={'water': 'Water (Mm<sup>3</sup>)',
                           'energy': 'Energy (GWh)'})
     fig.update_layout(layout)
@@ -468,7 +469,7 @@ def water_delivered(df, layout, group_by='type'):
 
 
 def wastewater_supply(df, layout):
-    fig = px.area(df, x='Year', y='water', color='Demand point',
+    fig = px.bar(df, x='Year', y='water', color='Demand point',
                   labels={'water': 'Water (Mm<sup>3</sup>)',
                           'energy': 'Energy (GWh)'}
                   )
@@ -477,7 +478,7 @@ def wastewater_supply(df, layout):
 
 
 def wwt_energy(df, layout, colors):
-    fig = px.area(df, x='Year', y='energy',
+    fig = px.bar(df, x='Year', y='energy',
                   color_discrete_sequence=colors,
                   labels={'water': 'Water (Mm<sup>3</sup>)',
                           'energy': 'Energy (GWh)'}
@@ -494,7 +495,7 @@ def desal_energy(df, layout):
     dff = dff.groupby(['Year', 'variable'])['value'].sum() / 1000000
     dff = dff.reset_index()
 
-    fig = px.area(dff, x='Year', y='value', color='variable',
+    fig = px.bar(dff, x='Year', y='value', color='variable',
                   color_discrete_sequence=["#F9ADA0"])
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -508,7 +509,7 @@ def pumping_energy(df, layout):
     dff = df.groupby(['Year', 'Supply point'])['swpa_e'].sum() / 1000000
     dff = dff.reset_index()
 
-    fig = px.area(dff, x='Year', y='swpa_e',
+    fig = px.bar(dff, x='Year', y='swpa_e',
                   color_discrete_sequence=["#F9ADA0"])
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -524,8 +525,8 @@ def crop_production(df, group_by, layout):
               '#000075', '#808080', '#ffffff', '#000000']
     dff = df.groupby(['Year', group_by])[['production_kg']].sum() / 1000
     dff = dff.reset_index()
-    fig = px.area(dff, x='Year', y='production_kg', color=group_by,
-                  color_discrete_sequence=colors,
+    fig = px.bar(dff, x='Year', y='production_kg', color=group_by,
+                  color_discrete_sequence=px.colors.qualitative.T10,
                   labels={'production_kg': 'Production (ton)'})
 
     fig.update_layout(layout)
@@ -542,7 +543,7 @@ def crop_production_per_crop(df, group_by, layout):
     dff = dff.loc[dff['production_kg'] > 0.0001]
     fig = px.bar(dff, x='production_kg', y=group_by, color='Province',
                  orientation="h",
-                 color_discrete_sequence=colors)
+                 color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_layout(layout, height=500,
                       yaxis={'categoryorder': 'total ascending'},
                       legend=dict(

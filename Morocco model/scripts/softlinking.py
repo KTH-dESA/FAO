@@ -15,6 +15,9 @@ production_data_output = str(snakemake.output.production_data)
 spatial_folder = demand_points.split(os.path.basename(demand_points))[0]
 output_folder = demand_data_output.split(os.path.basename(demand_data_output))[0]
 
+init_year = 2020
+end_year = 2050
+
 def integrate_data(data, sheet_name, category, dff_dict, var_name='links', target='point'):
     df = data.parse(sheet_name, skiprows=3)
     df.rename(columns={'Unnamed: 0': 'Date'}, inplace=True)
@@ -39,6 +42,8 @@ def integrate_data(data, sheet_name, category, dff_dict, var_name='links', targe
     if 'Sum' in df.columns:
         drop_columns.append('Sum')
     df.drop(columns=drop_columns, inplace=True)
+    
+    df = df.loc[(df.Year >= init_year) & (df.Year <= end_year)]
 
     df = df.melt(id_vars=['Date', 'Year', 'Month'])
     
@@ -133,7 +138,8 @@ df_wwtp.loc[df_wwtp['point'].isin(['Ouled Teima WWTP', 'ELGuerdane WWTP',
 df_wwtp.loc[df_wwtp['point'].isin(['Drargua WWTP']),
             'Province'] = 'Inezgane-Ait Melloul'
 
-sheet_names = {'AgWaterDemand': 'Agriculture', 
+sheet_names = {
+               # 'AgWaterDemand': 'Agriculture', 
                'DomSupplyReq': 'Domestic'}
 
 df_required = pd.DataFrame()
@@ -141,6 +147,22 @@ for sheet_name, category in sheet_names.items():
     df_required = df_required.append(integrate_data(data, sheet_name, category, {'Demand point': demand_links}, 'point', 'point'))
 
 df['water_required'] = df.set_index(['Date','Demand point']).index.map(df_required.set_index(['Date','point']).value)
+
+# Process agricultural water requirements
+df_ag_req = data.parse('AgWaterDemand', skiprows=3)
+df_ag_req.rename(columns={'Unnamed: 0': 'Year'}, inplace=True)
+df_ag_req.columns = df_ag_req.columns.str.replace('"', '').str.strip()
+df_ag_req = df_ag_req.loc[df_ag_req.Year!='Sum']
+df_ag_req.drop(columns='Sum', inplace=True)
+df_ag_req = df_ag_req.loc[(df_ag_req.Year >= init_year) & (df_ag_req.Year <= end_year)]
+df_ag_req = df_ag_req.melt(id_vars=['Year'])
+df_ag_req.rename(columns={'variable': 'Demand point',
+                          'value': 'water_required'}, inplace=True)
+df_ag_req['type'] = 'Agriculture'
+df_ag_req['water_required'] /= 12
+
+filter = df['type'].str.contains('Agriculture')
+df.loc[filter, 'water_required'] = df.loc[filter].set_index(['Year','Demand point']).index.map(df_ag_req.set_index(['Year','Demand point']).water_required)
 
 df_unmet_month = 1 - (df.groupby(['Date', 'Demand point'])['value'].sum() / \
                df.groupby(['Date', 'Demand point'])['water_required'].mean())
@@ -165,10 +187,11 @@ df_production.rename(columns={'Unnamed: 0': 'Year'}, inplace=True)
 df_production.columns = df_production.columns.str.replace('"', '').str.strip()
 df_production = df_production.loc[df_production.Year!='Sum']
 df_production.drop(columns='Sum', inplace=True)
+df_production = df_production.loc[(df_production.Year >= init_year) & (df_production.Year <= end_year)]
 df_production = df_production.melt(id_vars=['Year'])
 df_production['point'] = [row[0] for row in df_production['variable'].str.split('\\')]
 df_production['crop'] = [row[-1] for row in df_production['variable'].str.split('\\')]
-df_production['group'] = [row[1] for row in df_production['variable'].str.split('\\')]
+# df_production['group'] = [row[1] for row in df_production['variable'].str.split('\\')]
 df_production.rename(columns={'value': 'production_kg'}, inplace=True)
 df_production.drop(columns='variable', inplace=True)
 df_production['crop'] = df_production['crop'].str.replace('_', ' ')

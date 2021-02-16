@@ -108,7 +108,7 @@ def plot_pipelines(df):
 
 
 def water_delivered(df, layout, title):
-    fig = px.area(df, x='Year', y='value', color='type',
+    fig = px.bar(df, x='Year', y='value', color='type',
                   color_discrete_sequence=px.colors.qualitative.Dark2)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -133,7 +133,7 @@ def wtd_plot(df, layout, title):
 
 
 def groundwater_extraction(df, layout, title):
-    fig = px.area(df, x='Year', y='value', color='point',
+    fig = px.bar(df, x='Year', y='value', color='point',
                   color_discrete_sequence=px.colors.qualitative.G10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -151,7 +151,7 @@ def energy_demand(df, layout, title):
     #     df['valueWithEff'] = df['value'] / df['Eff']
     # else:
     #     df['valueWithEff'] = df['value'] / 0.45
-    fig = px.area(df, x='Year', y='value', color='type',
+    fig = px.bar(df, x='Year', y='value', color='type',
                   color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -254,11 +254,13 @@ def plot_production(df, layout, title, color):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    fig = px.area(df, x='Year', y='production',
+    fig = px.bar(df, x='Year', y='production',
                  color=color,
                  title=title,
                  color_discrete_sequence=colors)
-    fig.update_layout(layout, height=450, bargap=0)
+    fig.update_layout(layout, height=450,
+                      # bargap=0
+                      )
     return fig
 
 def plot_production_by_gov(df, layout, title, y, color):
