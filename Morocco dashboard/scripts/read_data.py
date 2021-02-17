@@ -5,6 +5,7 @@ import pandas as pd
 from_server = False
 server = 's3://souss-massa-dev'
 
+
 def get_path(path, from_server):
     if from_server:
         return ('/').join(path)
