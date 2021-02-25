@@ -5,31 +5,28 @@ import os.path
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
-import numpy as np
 import pandas as pd
-import yaml
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 from dash_extensions import Download
 from dash_extensions.snippets import send_data_frame
 import plotly.graph_objects as go
-import plotly.io as pio
 import json
 import boto3
 
 from scripts import plotting
-from scripts.read_data import load_summary_data, load_data
+from scripts.read_data import load_summary_data, load_data, get_language
 
-from app import app
-
-pio.templates.default = "plotly_white"
+from app import app, my_path
+from apps import about
 
 client = boto3.client('s3')
-my_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
+
 # my_path = os.path.join('..', 'Morocco model', 'test dash results')
 spatial_data = os.path.join(my_path, 'spatial_data')
 
 points_coords = pd.read_csv(os.path.join(spatial_data, 'points_coords.csv'))
+# TODO: move this assignment of type to the softlinking script
 points_coords.loc[points_coords['type'] == 'Catchment', 'type'] = 'Agriculture'
 points_coords.loc[points_coords['type'] == 'Demand site', 'type'] = 'Municipality'
 points_coords.loc[points_coords['type'] == 'Other supply', 'type'] = 'Desalination plant'
@@ -41,6 +38,7 @@ with open(os.path.join(spatial_data, 'Admin', 'provinces.geojson')) as response:
         value['id'] = value['properties']['id']
 
 button_color = 'primary'
+# TODO: create environment variable for token
 token = open(os.path.join(my_path, '.mapbox_token')).read()
 
 charts_layout = dict(
@@ -62,6 +60,7 @@ info_ids = []
 title_ids = []
 
 
+# Helper funtions
 def title_info(title_id, info_id, modal_size):
     info_ids.append(info_id)
     title_ids.append(title_id)
@@ -81,26 +80,76 @@ def title_info(title_id, info_id, modal_size):
                     )])
 
 
+def plot_map(background, map_type):
+    layout_map = {}
+
+    if map_type == 'schematic':
+        fig = go.Figure()
+        fig.add_traces(plotting.plot_borders(provinces))
+        fig.add_traces(plotting.plot_pipelines(pipe_coords))
+        fig.add_traces(plotting.plot_points(points_coords))
+
+    else:
+        df = pd.DataFrame(provinces['features'])
+        df['color'] = range(len(df['id']))
+        fig = plotting.choroplet_map(provinces, df)
+
+    layout_map["mapbox"] = {"center": {"lon": -8.9, 'lat': 30.2}, 'zoom': 7,
+                            'style': background, 'accesstoken': token}
+
+    layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
+    layout_map['clickmode'] = 'select+event'
+    layout_map['legend'] = dict(font=dict(size=12),
+                                title='',
+                                orientation="h", x=0, y=0)
+
+    fig.update_layout(layout_map)
+    fig.update_traces(marker=dict(size=10),
+                      selector=dict(mode="markers"))
+    return fig
+
+
+def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe,
+               butane_data, crop_data):
+    data['water delivered'] = plotting.water_delivered_plot(water_delivered, 'Year', charts_layout)
+    data['unmet water'] = plotting.unmet_demand_plot(water_delivered, 'Year', charts_layout)
+    data['water supplied'] = plotting.water_supply_plot(water_delivered, 'Year', charts_layout)
+    data['energy demand'] = plotting.energy_demand_plot(water_delivered, wwtp_data, desal_data, 'Year', charts_layout)
+    data['depth to groundwater'] = plotting.wtd_plot(water_delivered, 'Date', charts_layout)
+    data['crop production'] = plotting.crop_production(crop_data, 'crop', charts_layout)
+    data['energy ag'] = plotting.energy_demand_ag(butane_data, charts_layout)
+    data['pv capacity'] = plotting.pv_installed_capacity(butane_data, charts_layout)
+    data['emissions ag'] = plotting.emissions_ag(butane_data, charts_layout)
+    # data = lcoe_plot(data, ag_lcoe)
+    return data
+
+
 # we use the Row and Col components to construct the sidebar header
 # it consists of a title, and a toggle, the latter is hidden on large screens
 sidebar_header = dbc.Row(
     [
         dbc.Col([html.H3("Souss-Massa"), html.H6('NEXUS model', id='title', style={'color': 'gray'})]),
-        dbc.Col(
+        dbc.Col(dbc.Row(
             [
-                dbc.Button(
-                    html.Span(className="fa fa-bars"),
-                    color="secondary",
-                    outline=True,
-                    id="navbar-toggle",
-                ),
-                dbc.Button(
-                    html.Span(className="fa fa-bars"),
-                    color="secondary",
-                    outline=True,
-                    id="sidebar-toggle",
-                ),
-            ],
+                dbc.Col([
+                    dbc.Button(
+                        html.Span(className="fa fa-home"),
+                        color="primary",
+                        className='info',
+                        outline=True,
+                        href='/',
+                        id="sidebar-return",
+                        style=dict(fontSize='20px')
+                    ),
+                    dbc.Button(
+                        html.Span(className="fa fa-bars"),
+                        color="secondary",
+                        outline=True,
+                        className='info',
+                        id="navbar-toggle",
+                        style=dict(fontSize='20px', marginRight='1em')
+                    )]),
+            ]),
             # the column containing the toggle will be only as wide as the
             # toggle, resulting in the toggle being right aligned
             width="auto",
@@ -263,24 +312,8 @@ scenario_tools = html.Div(
         butane_options,
         html.Hr(),
         pv_options
-        # unit_options,
-        # html.Hr(),
-        # map_options,
-        # html.Hr(),
-        # compare_scenarios
     ],
     id='tools',
-)
-
-visual_tools = html.Div(
-    # [
-    #     unit_options,
-    #     html.Hr(),
-    #     map_options,
-    #     html.Hr(),
-    #     compare_scenarios
-    # ],
-    id='visual-tools',
 )
 
 footer = dbc.Row(
@@ -300,16 +333,13 @@ sidebar = html.Div(
         sidebar_header,
         dbc.Nav(
             [
-                dbc.NavItem(dbc.NavLink("Scenario options", active=True, href="#", id='page-1', className='tabs')),
+                dbc.NavItem(dbc.NavLink("Scenario options", active=True, id='page-1', className='tabs')),
                 # dbc.NavItem(dbc.NavLink("Visualisation", href="#", id='page-2', className='tabs')),
             ],
             id="tabs",
         ),
         dbc.Collapse([
             scenario_tools,
-            visual_tools,
-            # dbc.Input(type='range', className='custom-range')
-            # use the Collapse component to animate hiding / revealing links
         ],
             id="collapse",
         ),
@@ -427,107 +457,31 @@ map = html.Div(
     id='map-div',
     className='col-xl-7 col-lg-12',
 )
-# map = dcc.Graph(id="map",
-#                className='col-xl-7 col-lg-12',
-#                config=dict(showSendToCloud=True,
-#                            toImageButtonOptions=dict(format='png', filename='map', height=700,
-#                                                      width=700, scale=2)
-#                            )
-#                )
 
 
-graphs = html.Div([dcc.Store(id='current-language'), dbc.Nav([dbc.DropdownMenu(
-    [dbc.DropdownMenuItem(["English ", html.I(className='fa fa-language')], className="drop-items", id="english"),
-     dbc.DropdownMenuItem(["Spanish ", html.I(className='fa fa-language')], className="drop-items", id="spanish"),
-     dbc.DropdownMenuItem(["French ", html.I(className='fa fa-language')], className="drop-items", id="french")],
-    label="Language", id='language', nav=True),
-    dbc.NavLink("About", id='about', href="#"),
-    dbc.Modal(
-        [
-            dbc.ModalHeader(id='about-title'),
-            dbc.ModalBody(id='about-body'),
-            dbc.ModalFooter(
-                dbc.Button("Close", id="about-close", className="ml-auto")
-            ),
-        ],
-        size="lg",
-        id="about-modal",
-    )
-],
-    horizontal='end', style={'margin-bottom': '0em'}, id='about-nav'),
+graphs = html.Div([dbc.Nav(about.layout,
+                           horizontal='end', style={'margin-bottom': '0em'}, id='about-nav'),
                    results_header,
                    html.Div(dbc.Col(dcc.Loading(id='graphs', type="default")),
                             id='graphs-container'),
                    footer_results
                    ],
                   id='results-container',
-                  className='col-xl-5 col-lg-12')
+                  className='col-xl-5 col-lg-12'
+                  )
 
 content = html.Div([map, graphs], id="page-content")
 
-layout = html.Div([dcc.Store(id='current'), sidebar, content])
-
-
-# Helper funtions
-def get_language(language):
-    file = f"assets/{language}.yaml"
-    with open(file, 'rt', encoding='utf8') as yml:
-        language_dic = yaml.load(yml, Loader=yaml.FullLoader)
-    return language_dic
-
-
-def plot_map(background, map_type):
-    layout_map = {}
-
-    if map_type == 'schematic':
-        fig = go.Figure()
-        fig.add_traces(plotting.plot_borders(provinces))
-        fig.add_traces(plotting.plot_pipelines(pipe_coords))
-        fig.add_traces(plotting.plot_points(points_coords))
-
-    else:
-        df = pd.DataFrame(provinces['features'])
-        df['color'] = range(len(df['id']))
-        fig = plotting.choroplet_map(provinces, df)
-
-    layout_map["mapbox"] = {"center": {"lon": -8.9, 'lat': 30.2}, 'zoom': 7,
-                            'style': background, 'accesstoken': token}
-
-    layout_map["margin"] = {"r": 0, "t": 0, "l": 0, "b": 0}
-    layout_map['clickmode'] = 'select+event'
-    layout_map['legend'] = dict(font=dict(size=12),
-                                title='',
-                                orientation="h", x=0, y=0)
-
-    fig.update_layout(layout_map)
-    fig.update_traces(marker=dict(size=10),
-                      selector=dict(mode="markers"))
-    return fig
-
-
-def get_graphs(data, water_delivered, wwtp_data, desal_data, ag_lcoe,
-               butane_data, crop_data):
-    data['water delivered'] = plotting.water_delivered_plot(water_delivered, 'Year', charts_layout)
-    data['unmet water'] = plotting.unmet_demand_plot(water_delivered, 'Year', charts_layout)
-    data['water supplied'] = plotting.water_supply_plot(water_delivered, 'Year', charts_layout)
-    data['energy demand'] = plotting.energy_demand_plot(water_delivered, wwtp_data, desal_data, 'Year', charts_layout)
-    data['depth to groundwater'] = plotting.wtd_plot(water_delivered, 'Date', charts_layout)
-    data['crop production'] = plotting.crop_production(crop_data, 'crop', charts_layout)
-    data['energy ag'] = plotting.energy_demand_ag(butane_data, charts_layout)
-    data['pv capacity'] = plotting.pv_installed_capacity(butane_data, charts_layout)
-    data['emissions ag'] = plotting.emissions_ag(butane_data, charts_layout)
-    # data = lcoe_plot(data, ag_lcoe)
-    return data
+layout = html.Div([dcc.Store(id='current'), sidebar, content], dir='ltr')
 
 
 @app.callback(
-    [Output("current", "data"), Output('map', 'selectedData')],
+    Output("current", "data"),
     [
         Input("button-apply", "n_clicks"),
     ],
     [State('rate-wind', 'value'), State('rate-pv', 'value'), State('rate-grid', 'value'), State('rb-scenario', 'value'),
      State('climate-input', 'value'), State('butane-year', 'value'), State('pv-share', 'value')]
-    # State("map-options", 'value'), State('cho-map-drop', 'value')]
 )
 def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate, butane_year, pv_share):
     water_delivered, wwtp_data, desal_data, butane_data, crop_data = load_data(my_path, scenario, climate,
@@ -538,18 +492,7 @@ def update_current_data(n_1, rate_wind, rate_pv, rate_grid, scenario, climate, b
 
     data_dict = dict(graphs=graphs, scenario=scenario, level=climate, pv_share=pv_share,
                      butane_year=butane_year)
-    return data_dict, None
-
-
-@app.callback(
-    Output("sidebar", "className"),
-    [Input("sidebar-toggle", "n_clicks")],
-    [State("sidebar", "className")],
-)
-def toggle_classname(n, classname):
-    if n and classname == "":
-        return "collapsed"
-    return ""
+    return data_dict
 
 
 @app.callback(
@@ -659,7 +602,6 @@ def update_results(selection, ts2, map_type, language, data_current):
             df = crop_data.loc[crop_data['point'] == name]
             data['crop production'] = plotting.crop_production(df, 'crop', charts_layout)
 
-
     elif selection['points'][0]['customdata'][0] in ['Groundwater supply',
                                                      'Surfacewater withdrawal',
                                                      'Reservoir supply']:
@@ -702,7 +644,6 @@ def update_results(selection, ts2, map_type, language, data_current):
         df = df.loc[df['Province'] == name]
         data['water delivered'] = plotting.water_delivered_plot(df, 'Year', charts_layout)
 
-
         df_crop = pd.merge(crop_data,
                            water_delivered.groupby('Demand point').agg({'Province': 'first'}).reset_index(),
                            left_on='point', right_on='Demand point')
@@ -730,22 +671,34 @@ def update_results(selection, ts2, map_type, language, data_current):
 
 # TODO: use calback context read dash documentation!
 @app.callback(
-    [Output("map", "figure"), Output("loading-1", "children")],
+    Output('map', 'selectedData'),
+    [
+        Input('current', 'modified_timestamp'),
+        Input('map-selection', 'value'),
+    ],
+)
+def clear_selected(n, n2):
+    return None
+
+
+@app.callback(
+    Output("map", "figure"),
     [
         Input('map-background', 'value'),
         Input('map-selection', 'value'),
-        Input("button-apply", "n_clicks"),
-    ]
+        # Input('current', 'modified_timestamp'),
+    ],
+    # prevent_initial_call=True
 )
-def update_level_dropdown(background, map_type, n):
+def update_level_dropdown(background, map_type):
     map = plot_map(background, map_type)
-    return {}, dcc.Graph(figure=map, id="map",
-                         config=dict(showSendToCloud=True,
-                                     toImageButtonOptions=dict(format='png',
-                                                               filename='map',
-                                                               height=700,
-                                                               width=700,
-                                                               scale=2)))
+    return map #dcc.Graph(figure=map, id="map",
+                        # config=dict(showSendToCloud=True,
+                                    # toImageButtonOptions=dict(format='png',
+                                                            #  filename='map',
+                                                              # height=700,
+                                                              # width=700,
+                                                             #  scale=2)))
 
 
 for info_id in info_ids:
@@ -759,7 +712,7 @@ for info_id in info_ids:
             return not is_open
         return is_open
 
-for modal_id in ['about', 'compare']:
+for modal_id in ['compare']:
     @app.callback(
         Output(f"{modal_id}-modal", "is_open"),
         [Input(modal_id, "n_clicks"), Input(f"{modal_id}-close", "n_clicks")],
@@ -780,8 +733,6 @@ for modal_id in ['about', 'compare']:
         Output('rate-grid', 'value'),
         Output('butane-year', 'value'),
         Output('pv-share', 'value'),
-        # Output('map-options', 'value')
-        # Output('compare-options', 'value'),
     ],
     [Input('button-reset', 'n_clicks')],
 )
@@ -881,35 +832,17 @@ def func(ts):
 
 
 @app.callback(
-    Output('current-language', 'data'),
-    [Input(language, 'n_clicks_timestamp') for language in ['english', 'spanish', 'french']]
-)
-def current_language(n1, n2, n3):
-    language_list = ['english', 'spanish', 'french']
-    n_list = []
-    for n in [n1, n2, n3]:
-        if n is None:
-            n_list.append(0)
-        else:
-            n_list.append(n)
-
-    language_index = np.array(n_list).argmax()
-    language = language_list[language_index]
-    return language
-
-
-@app.callback(
     [Output('title', "children"), Output('page-1', 'children'), Output('scenarios-title', "children"),
      Output('rb-scenario', "options"), Output('climate', "children"), Output('cost-reduction', "children"),
      Output('wind-title', 'children'), Output('pv-title', 'children'), Output('price-increase', 'children'),
      Output('grid-title', 'children'), Output('butane-title', 'children'), Output('butane-phaseout', 'children'),
      Output('pv-adoption-title', 'children'), Output('pv-adoption', 'children'),
      Output('button-reset', 'children'), Output('button-apply', 'children'),
-     Output('language', 'label'), Output('about', 'children'),
+     # Output('about', 'children'),
      Output('resultsTitle', 'children'), Output('button-download', 'children'), Output('scenarioTitle', 'children')] +
     [Output(f'{i}-title', 'children') for i in info_ids] + [Output(f'{i}-body', 'children') for i in info_ids] +
-    [Output(f'{i}-close', 'children') for i in info_ids] + [Output(f'about-{i}', 'children') for i in
-                                                            ['title', 'body', 'close']] +
+    [Output(f'{i}-close', 'children') for i in info_ids] +
+    # [Output(f'about-{i}', 'children') for i in ['title', 'close']] +
     [Output('compare', 'children'), Output('compare-close', 'children')] +
     [Output(f'tab-{i + 1}', 'label') for i in range(4)],
     # [Input(language, "n_clicks_timestamp") for language in ['english', 'spanish', 'french']] + [
@@ -966,16 +899,16 @@ def update_language(ts, ts2, language, data_current):
                             * {language_dic['information']['pv adoption']['body'][3]}
                             '''))]
 
-    about_content = [html.P(language_dic['about']['body'][0]), html.P(language_dic['about']['body'][1]),
-                     html.P(language_dic['about']['body'][2]), html.P(language_dic['about']['body'][3]),
-                     dbc.Row([dbc.Col(html.A(html.Img(src='../assets/kth.png', style={'height': '130px'}),
-                                             href='https://www.energy.kth.se/energy-systems/about-the-division-of-energy-systems-1.937036'),
-                                      width=3),
-                              dbc.Col(html.A(html.Img(src='../assets/sei.png', style={'height': '130px'}),
-                                             href='https://www.sei.org/'), width=4),
-                              dbc.Col(html.A(html.Img(src='../assets/fao.png', style={'height': '130px'}),
-                                             href='http://www.fao.org/home/en/'), width=2)], justify="center")
-                     ]
+    # about_content = [html.P(language_dic['about']['body'][0]), html.P(language_dic['about']['body'][1]),
+    #                  html.P(language_dic['about']['body'][2]), html.P(language_dic['about']['body'][3]),
+    #                  dbc.Row([dbc.Col(html.A(html.Img(src='../assets/kth.png', style={'height': '130px'}),
+    #                                          href='https://www.energy.kth.se/energy-systems/about-the-division-of-energy-systems-1.937036'),
+    #                                   width=3),
+    #                           dbc.Col(html.A(html.Img(src='../assets/sei.png', style={'height': '130px'}),
+    #                                          href='https://www.sei.org/'), width=4),
+    #                           dbc.Col(html.A(html.Img(src='../assets/fao.png', style={'height': '130px'}),
+    #                                          href='http://www.fao.org/home/en/'), width=2)], justify="center")
+    #                  ]
 
     return language_dic['sidebar']['title'], language_dic['sidebar']['options'], \
            language_dic['sidebar']['scenarios']['title'], \
@@ -986,7 +919,6 @@ def update_language(ts, ts2, language, data_current):
            language_dic['sidebar']['pv adoption']['title'], language_dic['sidebar']['pv adoption']['share'], \
            [html.I(className='fa fa-redo-alt'), f" {language_dic['sidebar']['reset']}"], \
            [html.I(className='fa fa-check-double'), f" {language_dic['sidebar']['apply']}"], \
-           language_dic['language'], language_dic['about']['header'], \
            language_dic['results']['title'], \
            [html.I(className='fa fa-download'), f" {language_dic['results']['download']}"], \
            results_string[language], language_dic['information']['scenarios']['title'], \
@@ -998,7 +930,6 @@ def update_language(ts, ts2, language, data_current):
            language_dic['information']['close'], language_dic['information']['close'], \
            language_dic['information']['close'], language_dic['information']['close'], \
            language_dic['information']['close'], language_dic['information']['close'], \
-           language_dic['about']['title'], about_content, language_dic['about']['close'], \
            [html.I(className='fa fa-chart-pie'), f" {language_dic['results']['compare']}"], \
            language_dic['compare']['close'], language_dic['compare']['tabs'][0], \
            language_dic['compare']['tabs'][1], language_dic['compare']['tabs'][2], \

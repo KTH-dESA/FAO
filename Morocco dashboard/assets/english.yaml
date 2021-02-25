@@ -1,3 +1,11 @@
+front page:
+  explore: Explore the model
+  content menu: Content
+  sections:
+    - First section
+    - Second section
+    - Third section
+
 sidebar:
   title: NEXUS model
   options: Scenario options

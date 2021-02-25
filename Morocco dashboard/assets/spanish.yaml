@@ -1,3 +1,11 @@
+front page:
+  explore: Explore el modelo
+  content menu: Contenido
+  sections:
+    - Primera sección
+    - Segunda sección
+    - Tercera sección
+
 sidebar:
   title: Modelo NEXUS
   options: Opciones de escenario

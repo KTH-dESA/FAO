@@ -1,6 +1,7 @@
 import os.path
 
 import pandas as pd
+import yaml
 
 from_server = False
 server = 's3://souss-massa-dev'
@@ -57,3 +58,10 @@ def load_data(path, scenario, climate, phaseout_year, pv_level,
             # dff = dff.loc[(dff.Year >= init_year) & (dff.Year <= end_year)]
             output.append(dff)
     return output
+
+
+def get_language(language):
+    file = f"assets/{language}.yaml"
+    with open(file, 'rt', encoding='utf8') as yml:
+        language_dic = yaml.load(yml, Loader=yaml.FullLoader)
+    return language_dic

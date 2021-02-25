@@ -58,6 +58,14 @@ button {
   border-color: var(--primary);
 }
 
+#content-front-page {
+  padding: 2rem 2rem;
+}
+
+#about {
+  cursor: pointer;
+}
+
 #sidebar {
   text-align: left;
   padding: 0rem 0rem;
@@ -234,6 +242,23 @@ button:focus + .popover-map {
 .info:hover {
   background-color: #F0F0F0; /* Green */
   color: var(--secondary);
+}
+
+.header {
+  color: var(--secondary);
+}
+
+.content {
+  color: var(--secondary);
+  font-size: 18px;
+}
+
+.section-hr {
+    border: none;
+    height: 4px;
+    /* Set the hr color */
+    color: #e5e5e5; /* old IE */
+    background-color: #e5e5e5; /* Modern Browsers */
 }
 
 @media (min-width: 75em) {    

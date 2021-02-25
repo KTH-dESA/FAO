@@ -22,6 +22,11 @@ def water_supply_compare_plot(water_delivered, time_frame, title):
                   labels={"sswd": "Water (Mm<sup>3</sup>)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.Dark2)
     fig.update_layout(height=600)
+    for axis in fig.layout:
+        if type(fig.layout[axis]) == go.layout.YAxis:
+            fig.layout[axis].title.text = ''
+        if type(fig.layout[axis]) == go.layout.XAxis:
+            fig.layout[axis].title.text = ''
     return fig
 
 
