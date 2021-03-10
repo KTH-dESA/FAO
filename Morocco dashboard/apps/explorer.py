@@ -2,6 +2,7 @@
 
 import os.path
 
+import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
@@ -364,7 +365,7 @@ results_header = dbc.Row(
 footer_results = dbc.Row(
     [
         dbc.Button([html.I(className='fa fa-chart-pie'), " Compare"], color=button_color, outline=True,
-                   className="mr-1", style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='compare'),
+                   className="mr-1", style={'fontSize': '0.85rem', 'fontWeight': '600', 'display': 'none'}, id='compare'),
         dbc.Modal(
             [
                 dbc.ModalBody([dbc.Tabs([dbc.Tab(tab_id="tab-1", id="tab-1"),
@@ -385,8 +386,8 @@ footer_results = dbc.Row(
             id="compare-modal",
         ),
         Download(id="download"),
-        dbc.Button([html.I(className='fa fa-download'), " Download"], color=button_color,
-                   className="mr-1", style={'fontSize': '0.85rem', 'fontWeight': '600'}, id='button-download'),
+        dbc.DropdownMenu(label="Download", direction="up", color=button_color,
+                         className="mr-1", id='button-download'),
     ],
     align='center',
     justify="around",
@@ -451,7 +452,7 @@ map = html.Div(
                                            toImageButtonOptions=dict(format='png',
                                                                      filename='map',
                                                                      height=700,
-                                                                     width=700, scale=2)))
+                                                                     width=700, scale=4)))
         ),
     ],
     id='map-div',
@@ -664,7 +665,7 @@ def update_results(selection, ts2, map_type, language, data_current):
 
         plots.append(dcc.Graph(figure=value, config=dict(toImageButtonOptions=dict(
             format='png', filename=key, height=400,
-            width=400, scale=2))))
+            width=400, scale=4))))
 
     return plots, name
 
@@ -686,11 +687,11 @@ def clear_selected(n, n2):
     [
         Input('map-background', 'value'),
         Input('map-selection', 'value'),
-        # Input('current', 'modified_timestamp'),
+        Input('current', 'modified_timestamp'),
     ],
-    # prevent_initial_call=True
+    prevent_initial_call=True
 )
-def update_level_dropdown(background, map_type):
+def update_level_dropdown(background, map_type, ts):
     map = plot_map(background, map_type)
     return map #dcc.Graph(figure=map, id="map",
                         # config=dict(showSendToCloud=True,
@@ -823,12 +824,58 @@ def switch_tab(at, n, data):
                                                                 height=500, width=900, scale=2)))]
 
 
-@app.callback(Output("download", "data"), [Input("button-download", "n_clicks_timestamp")])
-def func(ts):
-    if ts is None:
+@app.callback(Output("download", "data"),
+              [Input("download-main", "n_clicks"),
+               Input("download-desal", "n_clicks"),
+               Input("download-wwt", "n_clicks"),
+               Input("download-production", "n_clicks"),
+               Input("download-butane", "n_clicks")],
+              [State('current', 'data')],
+              prevent_initial_call=True)
+def func(n1, n2, n3, n4, n5, data):
+    ctx = dash.callback_context
+
+    if not (n1 or n2 or n3 or n4 or n5):
         raise PreventUpdate
-    df_butane = pd.read_csv('s3://souss-massa-project/compare_butane.gz')
-    return send_data_frame(df_butane.to_csv, "butan_phaseout.csv")
+    else:
+        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    if button_id == 'download-main':
+        df = load_data(my_path, data['scenario'],
+                       data['level'],
+                       data['butane_year'],
+                       data['pv_share'],
+                       ['results.gz'])
+        name = 'main_results.csv'
+    elif button_id == 'download-desal':
+        df = load_data(my_path, data['scenario'],
+                       data['level'],
+                       data['butane_year'],
+                       data['pv_share'],
+                       ['desal_data.gz'])
+        name = 'desal_data.csv'
+    elif button_id == 'download-wwt':
+        df = load_data(my_path, data['scenario'],
+                       data['level'],
+                       data['butane_year'],
+                       data['pv_share'],
+                       ['wwtp_data.gz'])
+        name = 'wwtp_data.csv'
+    elif button_id == 'download-production':
+        df = load_data(my_path, data['scenario'],
+                       data['level'],
+                       data['butane_year'],
+                       data['pv_share'],
+                       ['production.gz'])
+        name = 'crop_production.csv'
+    elif button_id == 'download-butane':
+        df = load_data(my_path, data['scenario'],
+                       data['level'],
+                       data['butane_year'],
+                       data['pv_share'],
+                       ['summary_results.gz'])
+        name = 'butan_phaseout.csv'
+    return send_data_frame(df.to_csv, name)
 
 
 @app.callback(
@@ -856,11 +903,11 @@ def update_language(ts, ts2, language, data_current):
 
     options = [
         {"label": language_dic["sidebar"]["scenarios"]["options"][0], "value": 'Reference'},
-        {"label": language_dic['sidebar']['scenarios']['options'][1], "value": 'Desalination'},
-        {"label": language_dic['sidebar']['scenarios']['options'][2], "value": 'Increased Water Productivity'},
-        {"label": language_dic['sidebar']['scenarios']['options'][3], "value": 'Yield Trends'},
-        {"label": language_dic['sidebar']['scenarios']['options'][4], "value": "Desalination Wastewater Reuse"},
-        {"label": language_dic['sidebar']['scenarios']['options'][5], "value": "Reference Wastewater Reuse"}
+        {"label": language_dic['sidebar']['scenarios']['options'][1], "value": "Reference Wastewater Reuse"},
+        {"label": language_dic['sidebar']['scenarios']['options'][2], "value": 'Desalination'},
+        {"label": language_dic['sidebar']['scenarios']['options'][3], "value": "Desalination Wastewater Reuse"},
+        {"label": language_dic['sidebar']['scenarios']['options'][4], "value": 'Increased Water Productivity'},
+        # {"label": language_dic['sidebar']['scenarios']['options'][3], "value": 'Yield Trends'},
     ]
     climate = data_current['level']
     if not climate:
@@ -899,16 +946,16 @@ def update_language(ts, ts2, language, data_current):
                             * {language_dic['information']['pv adoption']['body'][3]}
                             '''))]
 
-    # about_content = [html.P(language_dic['about']['body'][0]), html.P(language_dic['about']['body'][1]),
-    #                  html.P(language_dic['about']['body'][2]), html.P(language_dic['about']['body'][3]),
-    #                  dbc.Row([dbc.Col(html.A(html.Img(src='../assets/kth.png', style={'height': '130px'}),
-    #                                          href='https://www.energy.kth.se/energy-systems/about-the-division-of-energy-systems-1.937036'),
-    #                                   width=3),
-    #                           dbc.Col(html.A(html.Img(src='../assets/sei.png', style={'height': '130px'}),
-    #                                          href='https://www.sei.org/'), width=4),
-    #                           dbc.Col(html.A(html.Img(src='../assets/fao.png', style={'height': '130px'}),
-    #                                          href='http://www.fao.org/home/en/'), width=2)], justify="center")
-    #                  ]
+    download_items = [dbc.DropdownMenuItem([html.I(className='fa fa-download'), "  Main results"],
+                                           className="drop-items", id='download-main'),
+                      dbc.DropdownMenuItem([html.I(className='fa fa-download'), "  Desalination energy"],
+                                           className="drop-items", id='download-desal'),
+                      dbc.DropdownMenuItem([html.I(className='fa fa-download'), "  Wastewater treatment"],
+                                           className="drop-items", id='download-wwt'),
+                      dbc.DropdownMenuItem([html.I(className='fa fa-download'), "  Crop production"],
+                                           className="drop-items", id='download-production'),
+                      dbc.DropdownMenuItem([html.I(className='fa fa-download'), "  Butane phase-out"],
+                                           className="drop-items", id='download-butane')]
 
     return language_dic['sidebar']['title'], language_dic['sidebar']['options'], \
            language_dic['sidebar']['scenarios']['title'], \
@@ -920,7 +967,7 @@ def update_language(ts, ts2, language, data_current):
            [html.I(className='fa fa-redo-alt'), f" {language_dic['sidebar']['reset']}"], \
            [html.I(className='fa fa-check-double'), f" {language_dic['sidebar']['apply']}"], \
            language_dic['results']['title'], \
-           [html.I(className='fa fa-download'), f" {language_dic['results']['download']}"], \
+           download_items, \
            results_string[language], language_dic['information']['scenarios']['title'], \
            language_dic['information']['climate']['title'], language_dic['information']['cost']['title'], \
            language_dic['information']['price']['title'], language_dic['information']['butane']['title'], \

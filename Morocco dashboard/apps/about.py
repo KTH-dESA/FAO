@@ -12,7 +12,7 @@ layout = dbc.Nav([
         [dbc.DropdownMenuItem(["English ", html.I(className='fa fa-language')], className="drop-items", id="english"),
          dbc.DropdownMenuItem(["Spanish ", html.I(className='fa fa-language')], className="drop-items", id="spanish"),
          dbc.DropdownMenuItem(["French ", html.I(className='fa fa-language')], className="drop-items", id="french")],
-        label="Language", id='language', nav=True, className="ml-2"
+        label="Language", id='language', nav=True, className="ml-2", disabled=True,
     ),
     dbc.NavItem(dbc.NavLink("About", id='about'), className="ml-2"),
     dbc.Modal(

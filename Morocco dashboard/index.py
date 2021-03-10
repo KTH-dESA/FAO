@@ -32,7 +32,8 @@ def display_page(pathname):
     if pathname == '/explorer':
         return explorer.layout
     else:
-        return front_page.layout
+        # return front_page.layout
+        return explorer.layout
 
 
 if __name__ == '__main__':

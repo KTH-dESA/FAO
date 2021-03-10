@@ -133,7 +133,6 @@ button {
 
 .footer {
   position: relative;
-  z-index: 100;
   flex: 0 1 auto;
   padding: 1rem 1rem;
   margin: 0;

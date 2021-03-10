@@ -28,6 +28,7 @@ def integrate_data(data, sheet_name, category, dff_dict, var_name='links', targe
     df.columns = df.columns.str.replace('GW of ','')
     df.columns = df.columns.str.replace('GW ','')
     df.columns = df.columns.str.replace('I_TRSPD','I_Traditional Rehabilite du Souss Perimetre Diffus')
+    # df.columns = df.columns.str.replace('I_Traditional Rehabilite I','I_Traditional Rehabilite Issen')
 
     for link in demand_links.links:
         if np.array(df.columns[df.columns.str.contains(link)]).size > 0:
@@ -139,7 +140,7 @@ df_wwtp.loc[df_wwtp['point'].isin(['Drargua WWTP']),
             'Province'] = 'Inezgane-Ait Melloul'
 
 sheet_names = {
-               # 'AgWaterDemand': 'Agriculture', 
+               'AgWaterDemand': 'Agriculture', 
                'DomSupplyReq': 'Domestic'}
 
 df_required = pd.DataFrame()
@@ -149,20 +150,20 @@ for sheet_name, category in sheet_names.items():
 df['water_required'] = df.set_index(['Date','Demand point']).index.map(df_required.set_index(['Date','point']).value)
 
 # Process agricultural water requirements
-df_ag_req = data.parse('AgWaterDemand', skiprows=3)
-df_ag_req.rename(columns={'Unnamed: 0': 'Year'}, inplace=True)
-df_ag_req.columns = df_ag_req.columns.str.replace('"', '').str.strip()
-df_ag_req = df_ag_req.loc[df_ag_req.Year!='Sum']
-df_ag_req.drop(columns='Sum', inplace=True)
-df_ag_req = df_ag_req.loc[(df_ag_req.Year >= init_year) & (df_ag_req.Year <= end_year)]
-df_ag_req = df_ag_req.melt(id_vars=['Year'])
-df_ag_req.rename(columns={'variable': 'Demand point',
-                          'value': 'water_required'}, inplace=True)
-df_ag_req['type'] = 'Agriculture'
-df_ag_req['water_required'] /= 12
+# df_ag_req = data.parse('AgWaterDemand', skiprows=3)
+# df_ag_req.rename(columns={'Unnamed: 0': 'Year'}, inplace=True)
+# df_ag_req.columns = df_ag_req.columns.str.replace('"', '').str.strip()
+# df_ag_req = df_ag_req.loc[df_ag_req.Year!='Sum']
+# df_ag_req.drop(columns='Sum', inplace=True)
+# df_ag_req = df_ag_req.loc[(df_ag_req.Year >= init_year) & (df_ag_req.Year <= end_year)]
+# df_ag_req = df_ag_req.melt(id_vars=['Year'])
+# df_ag_req.rename(columns={'variable': 'Demand point',
+                          # 'value': 'water_required'}, inplace=True)
+# df_ag_req['type'] = 'Agriculture'
+# df_ag_req['water_required'] /= 12
 
-filter = df['type'].str.contains('Agriculture')
-df.loc[filter, 'water_required'] = df.loc[filter].set_index(['Year','Demand point']).index.map(df_ag_req.set_index(['Year','Demand point']).water_required)
+# filter = df['type'].str.contains('Agriculture')
+# df.loc[filter, 'water_required'] = df.loc[filter].set_index(['Year','Demand point']).index.map(df_ag_req.set_index(['Year','Demand point']).water_required)
 
 df_unmet_month = 1 - (df.groupby(['Date', 'Demand point'])['value'].sum() / \
                df.groupby(['Date', 'Demand point'])['water_required'].mean())
