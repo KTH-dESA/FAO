@@ -1,3 +1,11 @@
+front page:
+  explore: Explore the model
+  content menu: Content
+  sections:
+    - First section
+    - Second section
+    - Third section
+
 sidebar:
   title: NEXUS modèle
   options: Options de scénario
@@ -5,11 +13,11 @@ sidebar:
     title: Sélectionnez un scénario
     options:
       - Référence
+      - Réutilisation de référence et des eaux usées
       - Eau dessalée
+      - Dessalement et réutilisation des eaux usées
       - Intensification de l'irrigation
       - Yield Trends
-      - Dessalement et réutilisation des eaux usées
-      - Réutilisation de référence et des eaux usées
   climate:
     title: Augmentation des épisodes de sécheresse
   cost reduction:

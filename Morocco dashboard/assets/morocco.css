@@ -108,11 +108,26 @@ box-shadow:0 0 0 .1rem var(--cfs-bs-focus)
   outline: 0;
 }
 
+.menu-items {
+  text-transform: capitalize;
+  color: var(--secondary);
+  font-size: 18px;
+}
+
+.menu-items:hover {
+  background-color: #F0F0F0;
+  color: var(--secondary);
+}
+
+.menu-items:active {
+  background-color: var(--primary);
+}
+
 a {
   color: var(--secondary);
-  font-size: 0.8em
 }
 
 a:hover {
-  color: var(--primary)
+  color: var(--primary);
+  text-decoration: none;
 }

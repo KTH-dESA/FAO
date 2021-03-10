@@ -1,15 +1,23 @@
+front page:
+  explore: Explore the model
+  content menu: Content
+  sections:
+    - First section
+    - Second section
+    - Third section
+
 sidebar:
   title: NEXUS model
   options: Scenario options
   scenarios:
     title: Select scenario
     options:
-      - Reference
+      - No intervention
+      - Wastewater reuse
       - Desalinated water
-      - Increased water productivity
+      - Desal & wastewater reuse
+      - Desal & Increased water productivity
       - Yield trends
-      - Desalination & wastewater reuse
-      - Reference & wastewater reuse
   climate:
     title: Increased droughts events
   cost reduction:
@@ -69,11 +77,11 @@ information:
   scenarios:
     title: Scenario information
     body:
-      - Reference scenario
+      - No intervention
       - Domestic demands are assumed to increase over time with growing population of 1.4% per year and the total irrigated area is assumed to stay constant.
       - Desalination scenario
       - Addition of 275,000 m3/day of desalination capacity in 2021, of which 150,000 m3/day for Agadir and 125,000 for m3/day for Chtouka agriculture. Expands to 450,000 m3/day in 2030 with equal share between both regions.
-      - Irrigation Intensification scenario
+      - Desalination & increased water productivity
       - Includes the desalination project and considers expansion of greenhouses for vegetable crops in Chtouka and Souss sub-basins. The levels of greenhouses increases from 5,409 ha in 2020 to 14,919 ha in 2030.
   climate:
     title: Climate change variables information

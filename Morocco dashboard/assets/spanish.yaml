@@ -1,3 +1,11 @@
+front page:
+  explore: Explore el modelo
+  content menu: Contenido
+  sections:
+    - Primera sección
+    - Segunda sección
+    - Tercera sección
+
 sidebar:
   title: Modelo NEXUS
   options: Opciones de escenario
@@ -5,11 +13,11 @@ sidebar:
     title: Seleccione escenario
     options:
       - Referencia
+      - Referencia & reuso de agua
       - Agua desalinizada
+      - Desalinización & reuso de agua
       - Intensificación de la irrigación
       - Yield Trends
-      - Desalinización & reuso de agua
-      - Referencia & reuso de agua
   climate:
     title: Periodos de sequía
   cost reduction:

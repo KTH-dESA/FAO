@@ -22,6 +22,11 @@ def water_supply_compare_plot(water_delivered, time_frame, title):
                   labels={"sswd": "Water (Mm<sup>3</sup>)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.Dark2)
     fig.update_layout(height=600)
+    for axis in fig.layout:
+        if type(fig.layout[axis]) == go.layout.YAxis:
+            fig.layout[axis].title.text = ''
+        if type(fig.layout[axis]) == go.layout.XAxis:
+            fig.layout[axis].title.text = ''
     return fig
 
 
@@ -236,14 +241,14 @@ def energy_demand_ag(df, layout):
 
 def pv_installed_capacity(df, layout):
     df = df
-    df.loc[df.Year == 2020, 'PV_new_cap(MW)'] = 0
-    df['previous_capacity(MW)'] = df['cap_a(MW)'] - df['PV_new_cap(MW)']
-    df = df.melt(value_vars=['previous_capacity(MW)', 'PV_new_cap(MW)'], id_vars=['Year'])
+    # df.loc[df.Year == 2020, 'PV_new_cap(MW)'] = 0
+    # df['previous_capacity(MW)'] = df['cap_a(MW)'] - df['PV_new_cap(MW)']
+    # df = df.melt(value_vars=['previous_capacity(MW)', 'PV_new_cap(MW)'], id_vars=['Year'])
+    #
+    # df.loc[df['variable'] == 'previous_capacity(MW)', 'variable'] = 'Previous capacity'
+    # df.loc[df['variable'] == 'PV_new_cap(MW)', 'variable'] = 'New capacity'
 
-    df.loc[df['variable'] == 'previous_capacity(MW)', 'variable'] = 'Previous capacity'
-    df.loc[df['variable'] == 'PV_new_cap(MW)', 'variable'] = 'New capacity'
-
-    fig = px.bar(df, x='Year', y='value', color='variable',
+    fig = px.bar(df, x='Year', y='PV_installed_cap(MW)', #color='variable',
                  color_discrete_sequence=px.colors.qualitative.Pastel,
                  )
     fig.update_layout(layout)
@@ -304,18 +309,28 @@ def unmet_demand_plot(water_delivered, time_frame, layout):
                          water_req_year)
 
     df = unmet_demand.reset_index().rename(columns={0: 'unmet_demand'})
-    # df.loc[df['unmet_demand']<0.001, 'unmet_demand'] = 0
+    df['unmet_demand'] = df['unmet_demand'].round(4)
+    df.loc[df['unmet_demand'] < 0, 'unmet_demand'] = 0
 
     fig = px.line(df, x=time_frame, y='unmet_demand', color='category',
                   color_discrete_sequence=px.colors.qualitative.T10)
+
+    # fig = px.line(water_req_year.reset_index(), x=time_frame, y='water_required', color='category',
+    #               color_discrete_sequence=px.colors.qualitative.T10)
+
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:,.2%}' + '<br><b>Year</b>: %{x}')
-    fig.update_layout(layout, yaxis={'tickformat': '%'})
+    fig.update_layout(layout,
+                      yaxis={'tickformat': '%'}
+                      )
 
     return fig
 
 
 def water_supply_plot(water_delivered, time_frame, layout, by='type'):
     dff_delivered = water_delivered.copy()
+
+    # dff_delivered = dff_delivered.loc[dff_delivered['type'].str.contains('Agriculture')]
+
     dff_delivered.loc[dff_delivered['type'].str.contains('SW|Aquifer'), 'type'] = 'Surface water'
     dff_delivered.loc[dff_delivered['type'].str.contains('GW'), 'type'] = 'Groundwater'
     dff_delivered.loc[dff_delivered['type'].str.contains('DS'), 'type'] = 'Desalinated water'
@@ -343,6 +358,8 @@ def energy_demand_plot(water_delivered, wwtp_data, desal_data,
     dff_energy.loc[dff_energy['type'].str.contains('Pipeline'), 'type'] = 'Surface water conveyance'
     dff_energy.loc[dff_energy['type'].str.contains('DS'), 'type'] = 'Desalinated water conveyance'
     dff_energy = dff_energy.loc[~dff_energy['Supply point'].str.contains('Complexe Aoulouz Mokhtar Soussi')]
+    dff_energy = dff_energy.loc[~dff_energy[group_by].str.contains('SW')]
+    dff_energy = dff_energy.loc[~dff_energy[group_by].str.contains('WWR')]
     dff_energy = dff_energy[[time_frame, group_by, 'swpa_e']]
     wwtp_data['type'] = 'Wastewater treatment'
     desal_data['type'] = 'Desalination energy'
@@ -352,7 +369,7 @@ def energy_demand_plot(water_delivered, wwtp_data, desal_data,
 
     df = dff_energy.groupby([time_frame, group_by])[['swpa_e']].sum() / 1000000
     df.reset_index(inplace=True)
-    df = df.loc[df['swpa_e'] != 0]
+    # df = df.loc[df['swpa_e'] != 0]
 
     fig = px.bar(df.reset_index(), x=time_frame, y='swpa_e', color=group_by,
                   color_discrete_sequence=px.colors.qualitative.Set2)
@@ -361,6 +378,7 @@ def energy_demand_plot(water_delivered, wwtp_data, desal_data,
     fig.update_layout(layout)
 
     return fig
+
 
 def wtd_plot(water_delivered, time_frame, layout):
     dff_wtd = water_delivered.copy()

@@ -1,8 +1,9 @@
 import os.path
 
 import pandas as pd
+import yaml
 
-from_server = False
+from_server = True
 server = 's3://souss-massa-dev'
 
 
@@ -39,16 +40,22 @@ def load_data(path, scenario, climate, phaseout_year, pv_level,
         files = [files]
 
     if len(files) == 1:
-        dff = pd.read_csv(get_path([data, files[0]], from_server))
+        if files[0] == 'summary_results.gz':
+            dff = pd.read_csv(get_path([data,
+                                        'Butane Calculations',
+                                        butane_scenario,
+                                        f'{pv_level}_PV',
+                                        files[0]], from_server))
+        else:
+            dff = pd.read_csv(get_path([data, files[0]], from_server))
         # dff = dff.loc[(dff.Year >= init_year) & (dff.Year <= end_year)]
         output = dff
     else:
         output = []
         for file in files:
             if file == 'summary_results.gz':
-                dff = pd.read_csv(get_path([path,
-                                            'data',
-                                            'Butane_calculations',
+                dff = pd.read_csv(get_path([data,
+                                            'Butane Calculations',
                                             butane_scenario,
                                             f'{pv_level}_PV',
                                             file], from_server))
@@ -57,3 +64,10 @@ def load_data(path, scenario, climate, phaseout_year, pv_level,
             # dff = dff.loc[(dff.Year >= init_year) & (dff.Year <= end_year)]
             output.append(dff)
     return output
+
+
+def get_language(language):
+    file = f"assets/{language}.yaml"
+    with open(file, 'rt', encoding='utf8') as yml:
+        language_dic = yaml.load(yml, Loader=yaml.FullLoader)
+    return language_dic
