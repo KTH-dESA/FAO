@@ -96,4 +96,35 @@ distribution = gpd.sjoin(distribution, demand, how='inner', op='intersects')
 distribution.drop(columns='index_right', inplace=True)
 distribution['type'] = 'Distribution link'    
 
+#Split segment in the pipeline system
+points_coords = points.geometry.unary_union
+list_gdf = []
+i = 0
+
+for pipeline in diversion.iterrows():
+    split_pipeline = shapely.ops.split(pipeline[1].geometry, points_coords)
+    segments = [feature for feature in split_pipeline]
+    index = list(range(i, len(segments) + i))
+    gdf_segments = gpd.GeoDataFrame(index, geometry=segments)
+    gdf_segments.columns = ['index', 'geometry']
+    gdf_segments['pipeline'] = pipeline[1].diversion
+    gdf_segments['pl_length_m'] = pipeline[1].pl_length_m
+    gdf_segments.crs = f'epsg:{PalestineBelt}'
+    intersections = gpd.sjoin(gdf_segments, points, how='inner', op='intersects')
+    list_gdf.append(intersections)
+    i = list_gdf[-1]['index'].max() + 1
+    
+pipelines = gpd.GeoDataFrame(pd.concat(list_gdf, ignore_index=True))
+pipelines.crs = supply.crs
+
+#Calculate each segment lenght
+pipelines = gpd.GeoDataFrame(pd.concat(list_gdf, ignore_index=True))
+pipelines['segment_length_m'] = pipelines.length
+
+#Save the spatial layers
+#Define the output folder path
+folder = os.path.join('..', 'Jordan dashboard', 'spatial_data')
+demand.to_file(os.path.join(folder, 'Demand_points.gpkg'), driver='GPKG')
+supply.to_file(os.path.join(folder, 'Supply_points.gpkg'), driver='GPKG')
+pipelines.to_file(os.path.join(folder, 'Pipelines.gpkg'), driver='GPKG')
               
