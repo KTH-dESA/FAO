@@ -6,14 +6,14 @@ import numpy as np
 
 
 def load_data(path, scenario, eto, level, files='all'):
-    data_folder = os.path.join(path, 'data')
+    data_folder = os.path.join(path, 'data_test')
     if not eto:
-        eto = ['Without Eto trend']
+        eto = ['Historical Trend']
     data = os.path.join(data_folder, scenario, eto[0], level)
 
     if files == 'all':
-        files = ['Water_delivered.csv', 'Water_requirements.csv',
-                 'Groundwater_pumping.csv', 'Pipelines_data.csv',
+        files = ['water_delivered.csv', 'water_requirements.csv',
+                 'groundwater_pumping.csv', 'pipelines_data.csv',
                  'wwtp_data.csv', 'desal_data.csv', 'crop_production.csv']
     if isinstance(files, str):
         files = [files]
@@ -29,16 +29,12 @@ def load_data(path, scenario, eto, level, files='all'):
 
 def data_merging(demand_points, supply_points, pipelines):
     df1 = demand_points.groupby('point').agg({'type': 'first',
-                                              'elevation_m': 'first',
                                               'geometry': 'first'}).reset_index()
 
     df2 = supply_points.groupby('point').agg({'type': 'first',
-                                              'elevation_m': 'first',
                                               'geometry': 'first'}).reset_index()
 
-    df_pipelines = pipelines.groupby('index').agg({'pipeline': 'first',
-                                                   'segment_length_m': 'first',
-                                                   'geometry': 'first'}).reset_index()
+    df_pipelines = pipelines.groupby('index').agg({'geometry': 'first'}).reset_index()
 
     df = df1.append(df2, ignore_index=True)
     df['lon'] = [point.xy[0][0] for point in df.geometry]
@@ -58,8 +54,8 @@ def data_merging(demand_points, supply_points, pipelines):
 
 def choroplet_map(geojson, df):
     fig = px.choropleth_mapbox(df, geojson=geojson, locations='id',
-                               color='color',
-                               color_continuous_scale=px.colors.sequential.Viridis,
+                               color='id',
+                               color_discrete_sequence=px.colors.sequential.Viridis,
                                custom_data=['id'])
 
     fig.update_layout(coloraxis_colorbar=dict(
@@ -125,7 +121,7 @@ def unmet_demand(df, layout, title):
 
 
 def wtd_plot(df, layout, title):
-    fig = px.line(df, x='Year', y='wtd', color='point',
+    fig = px.line(df, x='Year', y='wtd_m', color='point',
                   color_discrete_sequence=px.colors.qualitative.Vivid)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}')
     fig.update_layout(layout, yaxis=dict(range=[520, 0]), title=title)
@@ -227,9 +223,9 @@ def plot_depth_groundwater(df, layout, title):
     :param title: title of the plot
     :return: Plotly figure object
     """
-    fig = px.line(df, x='Date', y='wtd')
-    fig.update_layout(layout, title=title, yaxis={'range': [df.wtd.max() * 1.1,
-                                                            df.wtd.min() * 0.9]})
+    fig = px.line(df, x='Date', y='wtd_m')
+    fig.update_layout(layout, title=title, yaxis={'range': [df.wtd_m.max() * 1.1,
+                                                            df.wtd_m.min() * 0.9]})
     return fig
 
 
@@ -254,7 +250,7 @@ def plot_production(df, layout, title, color):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    fig = px.bar(df, x='Year', y='production',
+    fig = px.bar(df, x='Year', y='value',
                  color=color,
                  title=title,
                  color_discrete_sequence=colors)
@@ -268,7 +264,7 @@ def plot_production_by_gov(df, layout, title, y, color):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    fig = px.bar(df, x='production', y=y, color=color,
+    fig = px.bar(df, x='value', y=y, color=color,
                  title=title, orientation="h",
                  color_discrete_sequence=colors)
     fig.update_layout(layout, height=500, yaxis={'categoryorder': 'total ascending'},

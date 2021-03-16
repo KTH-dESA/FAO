@@ -1,0 +1,2267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>River Withdrawals.kml</name>
+	<Style id="Introduction">
+		<BalloonStyle>
+			<text><![CDATA[<style><--{}
+		table.data { border-color: #EEEEEE; }
+		table.inner td { padding: 0 4px; }
+		table.data td { padding: 0 4px; font-size: 8pt; }
+	--></style>
+	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
+    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
+    <tr><td align="center">
+	     <table border="0" width="630" cellspacing="0" cellpadding="2">
+		     <tr><td align="left">$[MainText]</td></tr>
+      </table>
+    </td></tr>
+	   <tr><td align="center">
+    </td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 7 November 2019</td></tr>
+ </table>]]></text>
+			<bgColor>ff80a5b3</bgColor>
+		</BalloonStyle>
+	</Style>
+	<Folder>
+		<name>River Withdrawals</name>
+		<Icon>
+			<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+		</Icon>
+		<Placemark id="Object-597-Introduction">
+			<name>PL_AqebIrbidBwaidah2ROUMF</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_AqebIrbidBwaidah2ROUMF</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.10927,32.39168,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-593-Introduction">
+			<name>PL_AqebIrbidUmLulu2MF_ROU</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_AqebIrbidUmLulu2MF_ROU</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.12677,32.38509,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-601-Introduction">
+			<name>PL_AqebIrbidZatari2MF_ROU</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_AqebIrbidZatari2MF_ROU</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.28449,32.32694,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1629-Introduction">
+			<name>PL_WadiAIr2IR_AghwarShm</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WadiAIr2IR_AghwarShm</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.69294,32.57247,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-496-Introduction">
+			<name>PL_WadiAIr2IR_ROUIrbid</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WadiAIr2IR_ROUIrbid</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.79993,32.52913,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-219-Introduction">
+			<name>PL_WLibMadaba2MD_Arid</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WLibMadaba2MD_Arid</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.77016,31.56611,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-212-Introduction">
+			<name>PL_WLibMadaba2MD_QMadaba</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WLibMadaba2MD_QMadaba</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.79095,31.654,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-216-Introduction">
+			<name>PL_WLibMadaba2MD_Theeban</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WLibMadaba2MD_Theeban</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.7673,31.55034,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-524-Introduction">
+			<name>PL_BaniKinana2IR_BaniKinana</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_BaniKinana2IR_BaniKinana</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.82227,32.71449,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-243-Introduction">
+			<name>PL_ToKhaw2AzraqWL</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToKhaw2AzraqWL</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.79081,31.89754,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-239-Introduction">
+			<name>PL_ToKhaw2ZA_Azraq</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToKhaw2ZA_Azraq</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.76178,31.87142,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-273-Introduction">
+			<name>PL_ToKhaw2ZA_Hashmiyya</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToKhaw2ZA_Hashmiyya</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.20256,32.08278,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1398-Introduction">
+			<name>PL_ToKhaw2ZA_QZarqa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToKhaw2ZA_QZarqa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.06284,32.03813,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1433-Introduction">
+			<name>PL_ToKhaw2ZA_RC_Azraq</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToKhaw2ZA_RC_Azraq</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.57174,31.92672,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1502-Introduction">
+			<name>PL_ToKhaw2ZA_Rusaifa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToKhaw2ZA_Rusaifa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.05791,32.03418,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-257-Introduction">
+			<name>PS_Halabat2ZA_Dulayl</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Halabat2ZA_Dulayl</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.40923,32.07945,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-291-Introduction">
+			<name>PS_QunayyaWell2MF_ROU</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_QunayyaWell2MF_ROU</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.1242,32.17829,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-287-Introduction">
+			<name>PS_QunayyaWell2ZA_Hashemiyya</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_QunayyaWell2ZA_Hashemiyya</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.09383,32.14941,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2131-Introduction">
+			<name>Withdrawal Node 2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Withdrawal Node 2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.13566,32.18755,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-362-Introduction">
+			<name>PS_Awayan2ZA_QZarqa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Awayan2ZA_QZarqa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.0898,32.0289,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-359-Introduction">
+			<name>PS Zarqa Outflow</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS Zarqa Outflow</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.0768,32.1232,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-327-Introduction">
+			<name>PS_AlBasateen2ZA_Rusaifa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AlBasateen2ZA_Rusaifa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.00401,32.0327,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-355-Introduction">
+			<name>PS_UmRummaneh2ZA_Bereyn</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_UmRummaneh2ZA_Bereyn</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.91616,32.10656,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-519-Introduction">
+			<name>PS_Ajloun2AJ_ROU</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Ajloun2AJ_ROU</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.77936,32.35571,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-515-Introduction">
+			<name>To Irbid_Yarmoukwells</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>To Irbid_Yarmoukwells</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.88117,32.57653,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-491-Introduction">
+			<name>PL_Ramtha2IR_Ramtha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Ramtha2IR_Ramtha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.04608,32.5962,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1441-Introduction">
+			<name>PL_ZatariRam2IR_RC_CCity</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZatariRam2IR_RC_CCity</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.00588,32.50286,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1438-Introduction">
+			<name>PL_ZatariRamtha2IR_RC_KAPark</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZatariRamtha2IR_RC_KAPark</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.0131,32.53154,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-571-Introduction">
+			<name>PS_NorthBadia2ROU_NB</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_NorthBadia2ROU_NB</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.60757,32.28399,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-617-Introduction">
+			<name>PS_Mafraq2MF_ROU</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Mafraq2MF_ROU</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.21985,32.28331,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-724-Introduction">
+			<name>PS_ShJan2BQ_ShJanou</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_ShJan2BQ_ShJanou</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.57931,31.89816,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-670-Introduction">
+			<name>PS_DairAllaDistrict2BQ_DeirAlla</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_DairAllaDistrict2BQ_DeirAlla</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.5871,32.12333,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-685-Introduction">
+			<name>PS_Salt2BQ_ROUSalt</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Salt2BQ_ROUSalt</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.68443,32.01113,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1890-Introduction">
+			<name>PS_AbuNus2BQ_AinBasha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AbuNus2BQ_AinBasha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.85822,32.08073,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-747-Introduction">
+			<name>PS_AinAlAzraq2BQ_MahisFuhais</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AinAlAzraq2BQ_MahisFuhais</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.7476,31.98771,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-766-Introduction">
+			<name>PL_DisiAq2AQ_AqQuw</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_DisiAq2AQ_AqQuw</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.53481,29.72352,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-800-Introduction">
+			<name>PS_Qa2MA_Ail</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Qa2MA_Ail</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.53126,30.25837,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-805-Introduction">
+			<name>PS_Qa2MA_WMusa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Qa2MA_WMusa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.54864,30.2632,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-820-Introduction">
+			<name>PS_Maan2MA_Maan</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Maan2MA_Maan</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.79945,30.10105,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-846-Introduction">
+			<name>PS_Hasa2TA_Bus</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Hasa2TA_Bus</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.77598,30.8123,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-837-Introduction">
+			<name>PS_Hasa2TA_Hasa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Hasa2TA_Hasa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.79955,30.81058,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-841-Introduction">
+			<name>PS_Hasa2TA_Qasabat</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Hasa2TA_Qasabat</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.76017,30.81233,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-877-Introduction">
+			<name>PS_Qasr2KA_AlQasr</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Qasr2KA_AlQasr</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.729,31.33106,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-874-Introduction">
+			<name>PS_Qasr2KA_Fqou</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Qasr2KA_Fqou</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.72699,31.3226,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-935-Introduction">
+			<name>PL_GhwQasr2KA_Ayy_M</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_GhwQasr2KA_Ayy_M</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.73546,31.23091,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2110-Introduction">
+			<name>Withdrawal Node 1</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Withdrawal Node 1</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.73262,31.24053,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-979-Introduction">
+			<name>PSAinGhazal2AM_SZ01</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PSAinGhazal2AM_SZ01</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.02228,31.97606,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-992-Introduction">
+			<name>PSAinGhazal2AM_SZ02</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PSAinGhazal2AM_SZ02</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.00105,31.94788000000001,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1015-Introduction">
+			<name>PSAinGhazal2AM_SZ08</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PSAinGhazal2AM_SZ08</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.0347,31.98617,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1067-Introduction">
+			<name>PS_AbuAlanda2AM_SZ04</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AbuAlanda2AM_SZ04</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.02496,31.88809,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1827-Introduction">
+			<name>PS_AbuAlanda2ZA_QZarqa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AbuAlanda2ZA_QZarqa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.03665,31.88948,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1494-Introduction">
+			<name>WadiShueib2BQ_AgriJV</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>WadiShueib2BQ_AgriJV</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.64342,31.93996,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1225-Introduction">
+			<name>KAC2BQ_AgriJV</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>KAC2BQ_AgriJV</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.55869,32.09061,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1232-Introduction">
+			<name>KAC2IR_AgriJV</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>KAC2IR_AgriJV</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.56795,32.40514,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1497-Introduction">
+			<name>WadiKafrein2BQ_AgriJV</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>WadiKafrein2BQ_AgriJV</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.66162,31.85867,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1736-Introduction">
+			<name>SGhorWadis2KA_Industry</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>SGhorWadis2KA_Industry</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.46828,31.2988,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1450-Introduction">
+			<name>SouthernGhorWadis2KA_AgriJV</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>SouthernGhorWadis2KA_AgriJV</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.48071,31.29585,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1490-Introduction">
+			<name>ZC32IR_AgriJV</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>ZC32IR_AgriJV</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.57718,32.38187,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-913-Introduction">
+			<name>PS_Ghwair2KA_Qatraneh</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Ghwair2KA_Qatraneh</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.88716,31.25079,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1096-Introduction">
+			<name>PL_KarakAm2AM_UmAlBas</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KarakAm2AM_UmAlBas</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.90368,31.79955,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-958-Introduction">
+			<name>PL_KarakAmman2AM_Jiza</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KarakAmman2AM_Jiza</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.02288,31.52231,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1045-Introduction">
+			<name>PL_KarakAmman2AM_SZ03_Outflow</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KarakAmman2AM_SZ03_Outflow</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.89106,31.83045,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1059-Introduction">
+			<name>PL_KarakAmman2AM_SZ06</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KarakAmman2AM_SZ06</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.85823,31.90445,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-964-Introduction">
+			<name>PL_KarakAmman2AM_SahabMqar</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KarakAmman2AM_SahabMqar</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.92858,31.7409,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1649-Introduction">
+			<name>PS_AinGhasal_SZ022AM_SZ02</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AinGhasal_SZ022AM_SZ02</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.00386,31.92271,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-408-Introduction">
+			<name>PS_Jerash2JA_ROUJerash</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Jerash2JA_ROUJerash</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.87813,32.29388,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1834-Introduction">
+			<name>PLKarakAmman2KA_Qatraneh</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PLKarakAmman2KA_Qatraneh</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.06075,31.37018,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1055-Introduction">
+			<name>PL_Dabouq_AinGh2AM_SZ05</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Dabouq_AinGh2AM_SZ05</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.87974,32.0078,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1038-Introduction">
+			<name>PL_Dabouq_AinGhazal2AM_SZ07</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Dabouq_AinGhazal2AM_SZ07</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.9049,32.01332,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1871-Introduction">
+			<name>PS_ZaraMain2AM_SZ01</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_ZaraMain2AM_SZ01</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.95243,31.89778,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1700-Introduction">
+			<name>PS_ZaraMain2AM_SZ02</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_ZaraMain2AM_SZ02</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.96645,31.90247,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1696-Introduction">
+			<name>PS_ZaraMain2AM_SZ05</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_ZaraMain2AM_SZ05</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.89633,31.88187,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2037-Introduction">
+			<name>ZM2BQShJan</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>ZM2BQShJan</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.61464,31.81854,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2008-Introduction">
+			<name>RedDead2MA_QMaan</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>RedDead2MA_QMaan</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.92516,30.05285,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2083-Introduction">
+			<name>MF_ROU_Mafraq Withdrawal</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>MF_ROU_Mafraq Withdrawal</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.21719,32.29963,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2142-Introduction">
+			<name>Withdrawal Node 3</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Withdrawal Node 3</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.86734,32.54396,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2149-Introduction">
+			<name>Withdrawal Node 4</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/River-Withdrawal.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>River-Withdrawal-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>River Withdrawal</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Withdrawal Node 4</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.90156,32.48641,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
