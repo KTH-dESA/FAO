@@ -54,8 +54,8 @@ def data_merging(demand_points, supply_points, pipelines):
 
 def choroplet_map(geojson, df):
     fig = px.choropleth_mapbox(df, geojson=geojson, locations='id',
-                               color='color',
-                               color_continuous_scale=px.colors.sequential.Viridis,
+                               color='id',
+                               color_discrete_sequence=px.colors.sequential.Viridis,
                                custom_data=['id'])
 
     fig.update_layout(coloraxis_colorbar=dict(

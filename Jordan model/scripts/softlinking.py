@@ -9,10 +9,10 @@ import scripts.softlinking_functions as sf
 
 ## Read processed schematic files
 
-sp_folder = os.path.join('..', 'Jordan dashboard', 'spatial_data')
-demand = gpd.read_file(os.path.join(sp_folder, 'Demand_points.gpkg'))
-supply = gpd.read_file(os.path.join(sp_folder, 'Supply_points.gpkg'))
-pipelines = gpd.read_file(os.path.join(sp_folder, 'Pipelines.gpkg'))
+gis_folder = os.path.join('data', 'GIS', 'Processed layers')
+demand = gpd.read_file(os.path.join(gis_folder, 'Demand_points.gpkg'))
+supply = gpd.read_file(os.path.join(gis_folder, 'Supply_points.gpkg'))
+pipelines = gpd.read_file(os.path.join(gis_folder, 'Pipelines.gpkg'))
 
 ## Read WEAP input data file
 
@@ -32,6 +32,15 @@ sheet_names = {'Supply Delivered_AG': 'Agriculture',
                'Supply Delivered_Muni': 'Municipality', 
                'Supply Delivered_Ind': 'Industry'}
 delivered_demand = sf.get_data(sheet_names, data, demand, 'point', '{}')
+
+delivered_demand['point'] = delivered_demand['point'].str.replace('BALQA', 'BQ')
+delivered_demand['point'] = delivered_demand['point'].str.replace('MADABA', 'MD')
+delivered_demand['point'] = delivered_demand['point'].str.replace('JERASH', 'JA')
+
+governorates = {'AJ': 'Ajlun', 'AM': 'Amman', 'AQ': 'Aqaba', 'BQ': 'Balqa', 
+                'IR': 'Irbid', 'JA': 'Jarash', 'KA': 'Karak', 'MA': 'Ma`an', 
+                'MD': 'Madaba', 'MF': 'Mafraq', 'TA': 'Tafilah', 'ZA': 'Zarqa'}
+delivered_demand['Governorate'] = [governorates[i[0:2]] for i in delivered_demand['point']]
 
 ## Mapping elevation from spatial layer to dataframe
 
@@ -151,16 +160,24 @@ pl_flow.loc[pl_flow['point'].isin(_point), 'type'] = 'River/pipeline supply'
 sheet_names = {'Production': 'Crop production'}
 crop_production =  sf.get_data(sheet_names, data, demand, 'point', '^{}', {'Unnamed: 0': 'Year'}, ['Year'])
 
+crop_production['variable'] = crop_production['variable'].str.replace('Summer ', '')
+crop_production['variable'] = crop_production['variable'].str.replace('Winter ', '')
+crop_production['Governorate'] = [governorates[i[0:2]] for i in crop_production['point']]
+
 ## Save the processed results
 
 output_folder = os.path.join('Data', 'Processed results', 'Reference', 'Climate Change', 'level_1')
 os.makedirs(output_folder, exist_ok=True)
 
-desalination.to_csv(os.path.join(output_folder, 'desalination.csv'), index=False)
-wwtp_inflow.to_csv(os.path.join(output_folder, 'wwtp_inflow.csv'), index=False)
-surface_water.to_csv(os.path.join(output_folder, 'surface_water_supply.csv'), index=False)
-gw_supply.to_csv(os.path.join(output_folder, 'groundwater_supply.csv'), index=False)
-delivered_demand.to_csv(os.path.join(output_folder, 'delivered_demand.csv'), index=False)
-required_demand.to_csv(os.path.join(output_folder, 'required_demand.csv'), index=False)
-pl_flow.to_csv(os.path.join(output_folder, 'pipelines_flow.csv'), index=False)
-crop_production.to_csv(os.path.join(output_folder, 'production.csv'), index=False)
+sf.save_dataframe(desalination, 2020, 2050, output_folder, 'desalination.csv')
+sf.save_dataframe(wwtp_inflow, 2020, 2050, output_folder, 'wwtp_inflow.csv')
+# sf.save_dataframe(surface_water, 2020, 2050, output_folder, 'surface_water_supply.csv')
+sf.save_dataframe(gw_supply, 2020, 2050, output_folder, 'groundwater_supply.csv')
+sf.save_dataframe(pl_flow, 2020, 2050, output_folder, 'pipelines_flow.csv')
+
+output_folder = os.path.join('..', 'Jordan dashboard', 'data_test', 'Reference', 'Climate Change', 'level_1')
+os.makedirs(output_folder, exist_ok=True)
+
+sf.save_dataframe(crop_production, 2020, 2050, output_folder, 'crop_production.csv')
+sf.save_dataframe(delivered_demand, 2020, 2050, output_folder, 'water_delivered.csv')
+sf.save_dataframe(required_demand, 2020, 2050, output_folder, 'water_requirements.csv')

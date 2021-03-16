@@ -705,17 +705,18 @@ def update_results(selection, map_type, data_current):
             data['WaterDeliveredGov'] = plotting.plot_water_delivered_by_gov(df, layout,
                                                                              'Annual water delivered by Governorate (Mm3)',)
 
-            df = crop_production.groupby(['Year', 'Governorate'])[['production']].sum() / 1000000
+            df = crop_production.groupby(['Year', 'Governorate'])[['value']].sum() / 1000000
             df.reset_index(inplace=True)
 
             data['CropProduction'] = plotting.plot_production(df, layout,
-                                                              'Annual cropland production by type (kton)',
+                                                              'Annual cropland production by Governorate (kton)',
                                                               'Governorate')
 
-            df = crop_production.groupby(['Governorate', 'variable'])[['production']].sum() / 1000000000
+            df = crop_production.groupby(['Governorate', 'Year', 'variable'])[['value']].sum() / 1000000
             df.reset_index(inplace=True)
+            df = df.groupby(['Governorate', 'variable'])[['value']].mean().reset_index()
             data['CropProductionByType'] = plotting.plot_production_by_gov(df, layout,
-                                                                                  'Total cropland production (Mton)',
+                                                                                  'Annual average cropland production (kton)',
                                                                                   'variable', 'Governorate')
 
             # data['CropProductionByGovernorate'] = plotting.plot_production_by_gov(df, layout,
@@ -754,7 +755,7 @@ def update_results(selection, map_type, data_current):
         data[f'{name}EnergyDemand'] = plotting.plot_energy_for_pumping(dff, [colors['energy']], layout,
                                                                        'Energy for pumping (GWh)')
 
-    elif selection['points'][0]['customdata'][0] in ['WWTP']:
+    elif selection['points'][0]['customdata'][0] in ['Wastewater plant']:
         name = selection['points'][0]['customdata'][1]
         wwtp_data = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
                                        data_current['level'], 'wwtp_data.csv')
@@ -804,6 +805,17 @@ def update_results(selection, map_type, data_current):
         data[f'{name}WaterSupplied'] = plotting.plot_water_supply(dff, [colors['water']], layout,
                                                                   'Water supplied (Mm3)')
 
+    elif selection['points'][0]['customdata'][0] in ['Other supply']:
+        name = selection['points'][0]['customdata'][1]
+        water_delivered = plotting.load_data(my_path, data_current['scenario'],
+                                             data_current['eto'], data_current['level'],
+                                             ['Water_delivered.csv'])
+        dff = water_delivered.loc[water_delivered['point'] == name]
+        dff = dff.groupby(['Year', 'type', 'point'])[['value']].sum() / 1000000
+        dff.reset_index(inplace=True)
+        data[f'{name}WaterSupplied'] = plotting.plot_water_supply(dff, [colors['water']],
+                                                                  layout, 'Water conveyed (Mm3)')
+
     else:
         name = selection['points'][0]['customdata'][0]
 
@@ -818,7 +830,7 @@ def update_results(selection, map_type, data_current):
                                                                  'Annual water delivered (Mm3)')
 
         df = crop_production.loc[crop_production['Governorate']==name]
-        df = df.groupby(['Year', 'variable'])[['production']].sum() / 1000000
+        df = df.groupby(['Year', 'variable'])[['value']].sum() / 1000000
         df.reset_index(inplace=True)
         data[f'{name}CropProduction'] = plotting.plot_production(df, layout,
                                                                  'Annual cropland production by type (kton)',
