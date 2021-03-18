@@ -9,12 +9,12 @@ def load_data(path, scenario, eto, level, files='all'):
     data_folder = os.path.join(path, 'data_test')
     if not eto:
         eto = ['Historical Trend']
-    data = os.path.join(data_folder, scenario, eto[0], level)
+    data = os.path.join(data_folder, f'{scenario}{level}', eto[0])
 
     if files == 'all':
-        files = ['water_delivered.csv', 'water_requirements.csv',
-                 'groundwater_pumping.csv', 'pipelines_data.csv',
-                 'wwtp_data.csv', 'desal_data.csv', 'crop_production.csv']
+        files = ['water_delivered.gz', 'water_requirements.gz',
+                 'groundwater_pumping.gz', 'pipelines_data.gz',
+                 'wwtp_data.gz', 'desal_data.gz', 'crop_production.gz']
     if isinstance(files, str):
         files = [files]
 

@@ -155,6 +155,7 @@ scenario_options = html.Div(
                     {"label": "Improved agricultural efficiency", "value": 'Improve AG eff'},
                     {"label": "New water resources", "value": 'New Resources'},
                     {"label": "Reduce non-revenue water", "value": 'Reduce NRW'},
+                    {"label": "Increased water productivity", "value": 'Increased Water Productivity'},
                 ],
                 value='Reference',
                 className='checklist-selected-style',
@@ -205,10 +206,10 @@ level_options = html.Div(
             dcc.Dropdown(
                 id="drop-level",
                 options=[
-                    {"label": "Level 1", "value": 'level_1'},
+                    {"label": "Select...", "value": ''},
                     # {"label": "Level 2", "value": 2},
                 ],
-                value='level_1',
+                value='',
                 clearable=False,
             ),
         ),
@@ -257,87 +258,6 @@ energy_options = html.Div(
     className='options'
 )
 
-# unit_options = html.Div(
-# [
-# title_info(title='Select display units', info_id='units-info',
-# info_title='Units info', modal_content='This is the content of the modal'),
-# dbc.InputGroup(
-# [
-# dbc.InputGroupAddon("Water demand", addon_type="prepend"),
-# dbc.Select(id='water-units',
-# options=[
-# {"label": "Mm3", "value": "Mm3"},
-# {"label": "m3", "value": "m3"},
-# ],
-# value='Mm3',
-# className='form-control'
-# ),
-# ],
-# size="sm",
-# style={'marginBottom': '1em'}
-# ),
-# dbc.InputGroup(
-# [
-# dbc.InputGroupAddon("Energy demand", addon_type="prepend"),
-# dbc.Select(id='energy-units',
-# options=[
-# {"label": "GWh", "value": "GWh"},
-# {"label": "MWh", "value": "MWh"},
-# {"label": "Wh", "value": "Wh"},
-# {"label": "PJ", "value": "PJ"},
-# ],
-# value='GWh'
-# ),
-# ],
-# size="sm"
-# ),
-# ],
-# className='options'
-# )
-
-# map_options = html.Div(
-# [
-# title_info(title='Map visualization options', info_id='map-info',
-# info_title='Map visualization info', modal_content='This is the content of the modal'),
-# html.Div(
-# dbc.RadioItems(
-# id="map-options",
-# options=[
-# {"label": "System schematic", "value": 'sch-map'},
-# {"label": "Choropleth map", "value": 'cho-map'},
-# ],
-# value='sch-map',
-# className='checklist-selected-style',
-# ),
-# ),
-# dbc.Collapse(dbc.Card(dbc.CardBody(
-# [
-# dcc.Dropdown(id='cho-map-drop',
-# options=[
-# {"label": "Cropland density", "value": 'crop'},
-# {"label": "Water delivered", "value": 'water'},
-# {"label": "Energy demand", "value": 'energy'},
-# ],
-# value='crop',
-# placeholder='Select variable...',
-# clearable=False,
-# style={'marginBottom': '1em'}
-# ),
-# dcc.Dropdown(id='cho-map-filter',
-# options=[
-# {"label": "Governorate", "value": 'gov'},
-# {"label": "Water basin", "value": 'basin'},
-# ],
-# value='crop',
-# placeholder='Filter by...',
-# clearable=False
-# ),
-# ])),
-# id="cho-map-collapse",
-# ),
-# ],
-# className='options'
-# )
 
 save_scenario = html.Div(
     [
@@ -394,10 +314,6 @@ scenario_tools = html.Div(
 
 visual_tools = html.Div(
     [
-        # unit_options,
-        # html.Hr(),
-        # map_options,
-        # html.Hr(),
         save_scenario,
         html.Hr(),
         compare_scenarios,
@@ -696,7 +612,7 @@ def update_results(selection, map_type, data_current):
             name = 'Jordan country'
             dff_delivered, crop_production = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
                                                                 data_current['level'],
-                                                                ['Water_delivered.csv', 'crop_production.csv'])
+                                                                ['Water_delivered.gz', 'crop_production.gz'])
 
             df = dff_delivered.groupby(['Year', 'Governorate'])[['value']].sum() / 1000000
             df.reset_index(inplace=True)
@@ -727,7 +643,7 @@ def update_results(selection, map_type, data_current):
         name = selection['points'][0]['customdata'][1]
         water_delivered, water_required = plotting.load_data(my_path, data_current['scenario'],
                                                              data_current['eto'], data_current['level'],
-                                                             ['Water_delivered.csv', 'Water_requirements.csv'])
+                                                             ['water_delivered.gz', 'water_requirements.gz'])
 
         dff, dff_unmet = plotting.get_demand_data(water_delivered, water_required, name)
 
@@ -738,7 +654,7 @@ def update_results(selection, map_type, data_current):
         name = selection['points'][0]['customdata'][1]
         gw_pumped = plotting.load_data(my_path, data_current['scenario'],
                                        data_current['eto'], data_current['level'],
-                                       'Groundwater_pumping.csv')
+                                       'Groundwater_pumping.gz')
         dff = gw_pumped.loc[gw_pumped['point'] == name]
         dff = dff.groupby(['Year', 'type', 'point']).agg({'value': lambda x: sum(x) / 1000000,
                                                           'SWPA_E_': lambda x: sum(x) / 1000000,
@@ -758,7 +674,7 @@ def update_results(selection, map_type, data_current):
     elif selection['points'][0]['customdata'][0] in ['Wastewater plant']:
         name = selection['points'][0]['customdata'][1]
         wwtp_data = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
-                                       data_current['level'], 'wwtp_data.csv')
+                                       data_current['level'], 'wwtp_data.gz')
         dff = wwtp_data.loc[wwtp_data['point'] == name]
         dff = dff.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
         dff = dff.reset_index()
@@ -770,7 +686,7 @@ def update_results(selection, map_type, data_current):
     elif selection['points'][0]['customdata'][0] in ['Desalination']:
         name = selection['points'][0]['customdata'][1]
         desal_data = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
-                                        data_current['level'], 'desal_data.csv')
+                                        data_current['level'], 'desal_data.gz')
         dff = desal_data.loc[desal_data['point'] == name]
         dff = dff.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
         dff = dff.reset_index()
@@ -782,7 +698,7 @@ def update_results(selection, map_type, data_current):
     elif selection['points'][0]['customdata'][0] in ['pipeline']:
         name = selection['points'][0]['customdata'][1]
         pl_flow = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
-                                     data_current['level'], 'Pipelines_data.csv')
+                                     data_current['level'], 'Pipelines_data.gz')
         dff = pl_flow.loc[pl_flow['pipeline'] == name]
         dff = dff.groupby(['Year', 'pipeline']).agg({'water_use': lambda value: sum(value) / 1000000,
                                                      'SWPA_E_': lambda value: sum(value) / 1000000,
@@ -797,7 +713,7 @@ def update_results(selection, map_type, data_current):
     elif selection['points'][0]['customdata'][0] in ['River/pipeline supply']:
         name = selection['points'][0]['customdata'][1]
         pl_flow = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
-                                     data_current['level'], 'Pipelines_data.csv')
+                                     data_current['level'], 'Pipelines_data.gz')
         dff = pl_flow.loc[pl_flow['point'] == name]
         dff = dff.groupby(['Year', 'type', 'point'])[['water_use']].sum() / 1000000
         dff.rename(columns={'water_use': 'value'}, inplace=True)
@@ -809,7 +725,7 @@ def update_results(selection, map_type, data_current):
         name = selection['points'][0]['customdata'][1]
         water_delivered = plotting.load_data(my_path, data_current['scenario'],
                                              data_current['eto'], data_current['level'],
-                                             ['Water_delivered.csv'])
+                                             ['Water_delivered.gz'])
         dff = water_delivered.loc[water_delivered['point'] == name]
         dff = dff.groupby(['Year', 'type', 'point'])[['value']].sum() / 1000000
         dff.reset_index(inplace=True)
@@ -820,7 +736,7 @@ def update_results(selection, map_type, data_current):
         name = selection['points'][0]['customdata'][0]
 
         dff_delivered, crop_production = plotting.load_data(my_path, data_current['scenario'], data_current['eto'],
-                                             data_current['level'], ['Water_delivered.csv', 'crop_production.csv'])
+                                             data_current['level'], ['Water_delivered.gz', 'crop_production.gz'])
 
         df = dff_delivered.loc[dff_delivered['Governorate']==name]
         df = df.groupby(['Year', 'type'])['value'].sum() / 1000000
@@ -851,17 +767,20 @@ def update_results(selection, map_type, data_current):
     [Input('rb-scenario', 'value')]
 )
 def update_level_dropdown(scenario):
-    level_dict = {'Reference': {'Select...': 'level_1'},
-                  'Improve AG eff': {'by 10 percent': 'level_1',
-                                     'by 20 percent': 'level_2'},
-                  'New Resources': {'Select...': 'level_1'},
-                  'Reduce NRW': {'to 40 percent': 'level_1',
-                                 'to 20 percent': 'level_2'}}
+    level_dict = {'Reference': {'Select...': ''},
+                  'Improve AG eff': {'Select...': '',
+                                     'by 10 percent': ' by 10percent',
+                                     'by 20 percent': ' by 20percent'},
+                  'New Resources': {'Select...': ''},
+                  'Reduce NRW': {'Select...': '',
+                                 'to 30 percent': ' to 30 percent',
+                                 'to 20 percent': ' to 20 percent'},
+                  'Increased Water Productivity': {'Select...': ''}}
     options = [{"label": key, 'value': value} for key, value in level_dict[scenario].items()]
     disable = False
     if len(level_dict[scenario].keys()) == 1:
         disable = True
-    return options, disable, 'level_1'
+    return options, disable, ''
 
 
 @app.callback(
@@ -876,12 +795,15 @@ def update_level_dropdown(ts, data):
         raise PreventUpdate
     if ts is None:
         raise PreventUpdate
-    level_dict = {'Reference': {'level_1': ''},
-                  'Improve AG eff': {'level_1': 'by 10 percent',
-                                     'level_2': 'by 20 percent'},
-                  'New Resources': {'level_1': ''},
-                  'Reduce NRW': {'level_1': 'to 40 percent',
-                                 'level_2': 'to 20 percent'}}
+    level_dict = {'Reference': {'': ''},
+                  'Improve AG eff': {'': '',
+                                     ' by 10percent': 'by 10 percent',
+                                     ' by 20percent': 'by 20 percent'},
+                  'New Resources': {'': ''},
+                  'Reduce NRW': {'': '',
+                                 ' to 30 percent': 'to 30 percent',
+                                 ' to 20 percent': 'to 20 percent'},
+                  'Increased Water Productivity': {'': ''}}
     scenario = data['scenario']
     level = data['level']
     name = f' - {scenario} {level_dict[scenario][level]} scenario'

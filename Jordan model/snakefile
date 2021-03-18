@@ -12,10 +12,6 @@ SCENARIOS = ['Reference', 'Reduce NRW to 30 percent', 'Reduce NRW to 20 percent'
 
 rule all:
     input: 
-        # "Data/GIS/Processed layers/Demand_points.gpkg", \
-        # "Data/GIS/Water Table Depth/Jordan_wtd_projected.tif"
-        # expand("{dash_folder}/data_test/{scenario}/{climate}/{level}/results.gz",
-               # scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
           expand("{dash_folder}/data_test/{scenario}/{climate}/pipelines_data.gz",
                  scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
                
@@ -63,11 +59,6 @@ rule energy_model:
            pipelines_flow="Data/Processed results/{scenario}/{climate}/pipelines_flow.gz"
     output: pipelines_data=f"{dash_folder}/data_test/{{scenario}}/{{climate}}/pipelines_data.gz"
     script: 'scripts/energy_model.py'
-    
-    
-    
-    
-    
     
     
     
