@@ -5,18 +5,17 @@ import pandas as pd
 import numpy as np
 import nexus_tool.weap_tools as wp
 import os
-import scripts.softlinking_functions as sf
+import softlinking_functions as sf
 
 ## Read processed schematic files
 
-gis_folder = os.path.join('data', 'GIS', 'Processed layers')
-demand = gpd.read_file(os.path.join(gis_folder, 'Demand_points.gpkg'))
-supply = gpd.read_file(os.path.join(gis_folder, 'Supply_points.gpkg'))
-pipelines = gpd.read_file(os.path.join(gis_folder, 'Pipelines.gpkg'))
+demand = gpd.read_file(str(snakemake.input.demand_points))
+supply = gpd.read_file(str(snakemake.input.supply_points))
+pipelines = gpd.read_file(str(snakemake.input.pipelines))
 
 ## Read WEAP input data file
 
-data_file = os.path.join('Data', 'WEAP Results', 'March 2021', 'WEAPResults - Reference.xlsx')
+data_file = str(snakemake.input.data)
 data = pd.ExcelFile(data_file)
 
 ## Read required water data sheets
@@ -166,18 +165,20 @@ crop_production['Governorate'] = [governorates[i[0:2]] for i in crop_production[
 
 ## Save the processed results
 
-output_folder = os.path.join('Data', 'Processed results', 'Reference', 'Climate Change', 'level_1')
+desalination_output = str(snakemake.output.desalination_data)
+output_folder = desalination_output.split(os.path.basename(desalination_output))[0]
 os.makedirs(output_folder, exist_ok=True)
 
-sf.save_dataframe(desalination, 2020, 2050, output_folder, 'desalination.csv')
-sf.save_dataframe(wwtp_inflow, 2020, 2050, output_folder, 'wwtp_inflow.csv')
+sf.save_dataframe(desalination, 2020, 2050, output_folder, 'desalination.gz')
+sf.save_dataframe(wwtp_inflow, 2020, 2050, output_folder, 'wwtp_inflow.gz')
 # sf.save_dataframe(surface_water, 2020, 2050, output_folder, 'surface_water_supply.csv')
-sf.save_dataframe(gw_supply, 2020, 2050, output_folder, 'groundwater_supply.csv')
-sf.save_dataframe(pl_flow, 2020, 2050, output_folder, 'pipelines_flow.csv')
+sf.save_dataframe(gw_supply, 2020, 2050, output_folder, 'groundwater_supply.gz')
+sf.save_dataframe(pl_flow, 2020, 2050, output_folder, 'pipelines_flow.gz')
 
-output_folder = os.path.join('..', 'Jordan dashboard', 'data_test', 'Reference', 'Climate Change', 'level_1')
+production_output = str(snakemake.output.production_data)
+output_folder = production_output.split(os.path.basename(production_output))[0]
 os.makedirs(output_folder, exist_ok=True)
 
-sf.save_dataframe(crop_production, 2020, 2050, output_folder, 'crop_production.csv')
-sf.save_dataframe(delivered_demand, 2020, 2050, output_folder, 'water_delivered.csv')
-sf.save_dataframe(required_demand, 2020, 2050, output_folder, 'water_requirements.csv')
+sf.save_dataframe(crop_production, 2020, 2050, output_folder, 'crop_production.gz')
+sf.save_dataframe(delivered_demand, 2020, 2050, output_folder, 'water_delivered.gz')
+sf.save_dataframe(required_demand, 2020, 2050, output_folder, 'water_requirements.gz')

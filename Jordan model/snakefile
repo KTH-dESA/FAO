@@ -1,0 +1,80 @@
+workdir: sys.path[0] #this line it to set the working directory to the location of the snakefile
+
+######################### User defined parameters #############################
+dash_folder = "../Jordan dashboard" #set the dashboard folder
+
+CLIMATE = ['Historical Trend', 'Climate Change'] #define the list of climates to run
+SCENARIOS = ['Reference', 'Reduce NRW to 30 percent', 'Reduce NRW to 20 percent', \
+             'New Resources', 'Increased Water Productivity', \
+             'Improve AG Eff by 20percent', 'Improve AG Eff by 10percent']
+
+###############################################################################
+
+rule all:
+    input: 
+        # "Data/GIS/Processed layers/Demand_points.gpkg", \
+        # "Data/GIS/Water Table Depth/Jordan_wtd_projected.tif"
+        # expand("{dash_folder}/data_test/{scenario}/{climate}/{level}/results.gz",
+               # scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
+          expand("{dash_folder}/data_test/{scenario}/{climate}/pipelines_data.gz",
+                 scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
+               
+
+rule schematic_processing:
+    input: demand_sites="Data/Schematic/Demand Sites.kml", \
+           diversion_outflows="Data/Schematic/Diversion Outflows.kml", \
+           diversion="Data/Schematic/Diversions.kml", \
+           groundwater="Data/Schematic/Groundwater.kml", \
+           other_supply="Data/Schematic/Other Supplies.kml", \
+           river_withdrawals="Data/Schematic/River Withdrawals.kml", \
+           links="Data/Schematic/Transmission Links.kml", \
+           tributary_inflows="Data/Schematic/Tributary Inflows.kml", \
+           wwtp="Data/Schematic/Wastewater Treatment Plants.kml"
+    output: demand_points="Data/GIS/Processed layers/Demand_points.gpkg", \
+            points_coords=f"{dash_folder}/spatial_data/points_coords.csv"
+    script: 'scripts/schematic_processing.py'
+    
+
+rule raster_processing:
+    input: country_border="Data/GIS/Admin/JOR_adm0.shp", \
+           wtd="Data/GIS/Water Table Depth/Eurasia_model_wtd_v2.nc", \
+           dem="Data/GIS/DEM/DEM.tif"
+    output: wtd_masked="Data/GIS/Water Table Depth/Jordan_wtd.tif", \
+            dem_masked="Data/GIS/DEM/Jordan_DEM.tif", \
+            wtd_mask_projected="Data/GIS/Water Table Depth/Jordan_wtd_projected.tif", \
+            dem_projected="Data/GIS/DEM/DEM_projected.tif", \
+            dem_mask_projected="Data/GIS/DEM/Jordan_DEM_projected.tif"
+    script: 'scripts/raster_processing.py'
+    
+    
+rule softlinking:
+    input: data="Data/WEAP Results/March 2021/WEAPResults - {scenario} - {climate}.xlsx", \
+           demand_points="Data/GIS/Processed layers/Demand_points.gpkg", \
+           supply_points="Data/GIS/Processed layers/Supply_points.gpkg", \
+           pipelines="Data/GIS/Processed layers/Pipelines.gpkg"
+    output: desalination_data="Data/Processed results/{scenario}/{climate}/desalination.gz", \
+            pipelines_flow="Data/Processed results/{scenario}/{climate}/pipelines_flow.gz", \
+            production_data=f"{dash_folder}/data_test/{{scenario}}/{{climate}}/crop_production.gz"
+    script: 'scripts/softlinking.py'
+    
+
+rule energy_model:
+    input: desalination="Data/Processed results/{scenario}/{climate}/desalination.gz", \
+           pipelines_flow="Data/Processed results/{scenario}/{climate}/pipelines_flow.gz"
+    output: pipelines_data=f"{dash_folder}/data_test/{{scenario}}/{{climate}}/pipelines_data.gz"
+    script: 'scripts/energy_model.py'
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
