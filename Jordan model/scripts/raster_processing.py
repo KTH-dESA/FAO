@@ -7,39 +7,36 @@ import nexus_tool.weap_tools as wp
 import matplotlib.pyplot as plt
 import os
 
-gis_folder = os.path.join('Data', 'GIS') #define path to gis data folder
+
+country_border = str(snakemake.input.country_border)
+wtd = str(snakemake.input.wtd)
+dem = str(snakemake.input.dem)
+
+wtd_masked = str(snakemake.output.wtd_masked )
+dem_masked  = str(snakemake.output.dem_masked )
+wtd_mask_projected = str(snakemake.output.wtd_mask_projected)
+dem_projected = str(snakemake.output.dem_projected)
+dem_mask_projected = str(snakemake.output.dem_mask_projected)
 
 ## Mask rasters into country boundaries
 
 #Masking water table depth from the Euroasian model v2 to Jordan boundaries
-out_image, out_meta = wp.mask_raster(raster_path=os.path.join(gis_folder, 
-                                                              'Water Table Depth', 
-                                                              'Eurasia_model_wtd_v2.nc'), 
-                                     mask_path=os.path.join(gis_folder, 
-                                                            'Admin', 
-                                                            'JOR_adm0.shp'), 
+out_image, out_meta = wp.mask_raster(raster_path=wtd, 
+                                     mask_path=country_border, 
                                      crs='EPSG:4326')
 
 #Writing masked raster to file
-with rasterio.open(os.path.join(gis_folder, 
-                                'Water Table Depth', 
-                                'Jordan_wtd.tif'), 
+with rasterio.open(wtd_masked, 
                    "w", **out_meta) as dest:
     dest.write(out_image)
 
 #Masking elevation from DEM model to Jordan boundaries
-out_image, out_meta = wp.mask_raster(os.path.join(gis_folder, 
-                                                  'DEM', 
-                                                  'DEM.tif'), 
-                                     os.path.join(gis_folder, 
-                                                  'Admin', 
-                                                  'JOR_adm0.shp'), 
+out_image, out_meta = wp.mask_raster(dem,
+                                     country_border, 
                                      'EPSG:4326')
 
 #Writing masked raster to file
-with rasterio.open(os.path.join(gis_folder, 
-                                'DEM', 
-                                'Jordan_DEM.tif'), 
+with rasterio.open(dem_masked, 
                    "w", **out_meta) as dest:
     dest.write(out_image)
 
@@ -47,12 +44,12 @@ with rasterio.open(os.path.join(gis_folder,
 
 dst_crs = 'EPSG:28192' #Define crs system (28192=PalestineBelt)
 
-wp.reproject_raster(os.path.join(gis_folder, 'Water Table Depth', 'Jordan_wtd.tif'), 
+wp.reproject_raster(wtd_masked, 
                     dst_crs, 
-                    os.path.join(gis_folder, 'Water Table Depth', 'Jordan_wtd_projected.tif'))
-wp.reproject_raster(os.path.join(gis_folder, 'DEM', 'DEM.tif'),
+                    wtd_mask_projected)
+wp.reproject_raster(dem,
                     dst_crs, 
-                    os.path.join(gis_folder, 'DEM', 'DEM_projected.tif'))
-wp.reproject_raster(os.path.join(gis_folder, 'DEM', 'Jordan_DEM.tif'),
+                    dem_projected)
+wp.reproject_raster(dem_masked,
                     dst_crs, 
-                    os.path.join(gis_folder, 'DEM', 'Jordan_DEM_projected.tif'))
+                    dem_mask_projected)

@@ -10,18 +10,22 @@ import os
 ## Reading files
 
 gis_folder = os.path.join('Data', 'GIS')
-sch_folder = os.path.join('Data', 'Schematic')
 
 governorates = gpd.read_file(os.path.join(gis_folder, 'Admin', 'JOR_adm1.shp'))
-links = gpd.read_file(os.path.join(sch_folder, 'Transmission Links.kml'))
-groundwater = gpd.read_file(os.path.join(sch_folder, 'Groundwater.kml'))
-river_withdrawals = gpd.read_file(os.path.join(sch_folder, 'River Withdrawals.kml'))
-wwtp = gpd.read_file(os.path.join(sch_folder, 'Wastewater Treatment Plants.kml'))
-other_supply = gpd.read_file(os.path.join(sch_folder, 'Other Supplies.kml'))
-demand_sites = gpd.read_file(os.path.join(sch_folder, 'Demand Sites.kml'))
-tributary_inflows = gpd.read_file(os.path.join(sch_folder, 'Tributary Inflows.kml'))
-diversion_outflows = gpd.read_file(os.path.join(sch_folder, 'Diversion Outflows.kml'))
-diversion = gpd.read_file(os.path.join(sch_folder, 'Diversions.kml'))
+links = gpd.read_file(str(snakemake.input.links))
+groundwater = gpd.read_file(str(snakemake.input.groundwater))
+river_withdrawals = gpd.read_file(str(snakemake.input.river_withdrawals))
+wwtp = gpd.read_file(str(snakemake.input.wwtp))
+other_supply = gpd.read_file(str(snakemake.input.other_supply))
+demand_sites = gpd.read_file(str(snakemake.input.demand_sites))
+tributary_inflows = gpd.read_file(str(snakemake.input.tributary_inflows))
+diversion_outflows = gpd.read_file(str(snakemake.input.diversion_outflows))
+diversion = gpd.read_file(str(snakemake.input.diversion))
+
+output_demand_points = str(snakemake.output.demand_points)
+output_folder = output_demand_points.split(os.path.basename(output_demand_points))[0]
+output_points_coords = str(snakemake.output.points_coords)
+dash_folder = output_points_coords.split(os.path.basename(output_points_coords))[0]
 
 ## Converting geometries and dropping unecesary columns
 
@@ -109,13 +113,6 @@ distribution = gpd.sjoin(distribution, demand, how='inner', op='intersects')
 distribution.drop(columns='index_right', inplace=True)
 distribution['type'] = 'Distribution link'
 
-## Plotting the system
-
-base = governorates.plot(color='white', edgecolor='black', figsize=(12, 12))
-data = distribution.append([supply, demand, diversion, diversion_outflows], ignore_index=True, sort=False)
-data.plot(ax=base, column='type', cmap='Spectral_r', legend=True)
-plt.show()
-
 ## Split segment in the pipeline system
 
 points_coords = points.geometry.unary_union
@@ -140,21 +137,7 @@ pipelines.crs = supply.crs
 
 ## Calculate each segment lenght
 
-pipelines = gpd.GeoDataFrame(pd.concat(list_gdf, ignore_index=True))
 pipelines['segment_length_m'] = pipelines.length
-
-## Plot the pipeline segments
-
-x = []
-
-for name in pipelines.pipeline.unique():
-    _df = pipelines.loc[pipelines.pipeline==name].copy()
-    for index in _df['index'].unique():
-        _df2 = _df.loc[pipelines['index']==index]
-        if _df2.shape[0] == 1:
-            x.append(_df2.index.values[0])
-            
-pipelines.loc[~pipelines.index.isin(x)].plot(figsize=(12,12), column='pipeline', categorical=True)
 
 ## Standardizing names
 
@@ -162,11 +145,10 @@ demand['point'] = demand['point'].str.replace('Agriculture', 'Agri')
 
 ## Save the spatial layers
 
-folder = os.path.join(gis_folder, 'Processed layers') #Define the output folder path
-os.makedirs(folder, exist_ok=True)
-demand.to_file(os.path.join(folder, 'Demand_points.gpkg'), driver='GPKG')
-supply.to_file(os.path.join(folder, 'Supply_points.gpkg'), driver='GPKG')
-pipelines.to_file(os.path.join(folder, 'Pipelines.gpkg'), driver='GPKG')
+os.makedirs(output_folder, exist_ok=True)
+demand.to_file(os.path.join(output_folder, 'Demand_points.gpkg'), driver='GPKG')
+supply.to_file(os.path.join(output_folder, 'Supply_points.gpkg'), driver='GPKG')
+pipelines.to_file(os.path.join(output_folder, 'Pipelines.gpkg'), driver='GPKG')
 
 ## Save coordinates for visualization
 
@@ -185,6 +167,6 @@ for name, point in zip(pipelines.pipeline, pipelines.to_crs(epsg=4326).geometry)
     pipe_coords = pipe_coords.append(df_temp, ignore_index=True)
 pipe_coords['type'] = 'pipeline'
 
-folder = os.path.join('..', 'Jordan dashboard', 'spatial_data')
-all_points_coords.to_csv(os.path.join(folder, 'points_coords.csv'), index=False)
-pipe_coords.to_csv(os.path.join(folder, 'pipe_coords.csv'), index=False)
+os.makedirs(dash_folder, exist_ok=True)
+all_points_coords.to_csv(output_points_coords, index=False)
+pipe_coords.to_csv(os.path.join(dash_folder, 'pipe_coords.csv'), index=False)
