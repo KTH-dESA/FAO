@@ -75,7 +75,7 @@ def wtd_plot(df, layout, title):
     fig = px.line(df, x='Year', y='wtd_m', color='point',
                   color_discrete_sequence=px.colors.qualitative.Vivid)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}')
-    fig.update_layout(layout, yaxis=dict(range=[520, 0]), title=title)
+    fig.update_layout(layout, yaxis=dict(range=[df['wtd_m'].max()*1.1, df['wtd_m'].min()*0.9]), title=title)
     return fig
 
 
