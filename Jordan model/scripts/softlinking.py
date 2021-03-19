@@ -83,7 +83,7 @@ for point in gw_thickness.point.unique():
                                          float(groundwater.loc[groundwater.point==point,'wtd_m'].mean())
 
 #Merge datasets on groundwater supply and level change (thickness)
-gw_supply = gw_supply.merge(gw_thickness, on=['Year','Month','point','variable'])
+gw_supply = gw_supply.merge(gw_thickness, on=['Year','Month', 'Date','point','variable'])
 
 ## Read and process pipeline supply and wastewater treatment plants data sheets
 
