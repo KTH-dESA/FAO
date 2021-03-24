@@ -36,7 +36,9 @@ def special_conditions(df, sheet_name):
         df["PL_ZaraMain2SZ09SZ06 0 \ Reach"] = df["PL_ZaraMain2SZ09SZ06 0 \ Headflow"]
     
     
-def get_data(sheet_names, data, spatial_data, variable, regex, rename={'Unnamed: 0': 'Date'}, melt_on=['Date', 'Year', 'Month']):
+def get_data(sheet_names, data, spatial_data, variable, regex, 
+             rename={'Unnamed: 0': 'Date'}, melt_on=['Date', 'Year', 'Month'], 
+             look_in_sector=False):
     merged_data = pd.DataFrame()
     for sheet_name, value in sheet_names.items():
         data_temp = data.parse(sheet_name, skiprows=3)
@@ -50,7 +52,14 @@ def get_data(sheet_names, data, spatial_data, variable, regex, rename={'Unnamed:
         data_temp.columns = data_temp.columns.str.replace('  ', ' ')
         data_temp.columns = data_temp.columns.str.strip()
         special_conditions(data_temp, sheet_name)
-        merged_data_temp = extract_points_data(data_temp, spatial_data, variable, melt_on, regex)
+        if look_in_sector:
+            merged_data_temp = extract_points_data(data_temp, 
+                                                   spatial_data.loc[spatial_data['type']==value], 
+                                                   variable, melt_on, regex)
+        else:
+            merged_data_temp = extract_points_data(data_temp, 
+                                                   spatial_data, 
+                                                   variable, melt_on, regex)
         merged_data_temp['variable'] = [i.split('[')[0].strip() for i in merged_data_temp.variable]
         merged_data_temp['type'] = value
         merged_data_temp.loc[merged_data_temp['type']=='variable', 'type'] = merged_data_temp.loc[merged_data_temp['type']=='variable', 'variable']
