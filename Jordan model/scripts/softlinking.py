@@ -23,14 +23,14 @@ data = pd.ExcelFile(data_file)
 sheet_names = {'Supply Requirement_AG': 'Agriculture', 
                'Supply Requirement_Muni': 'Municipality', 
                'Supply Requirement_Ind': 'Industry'}
-required_demand = sf.get_data(sheet_names, data, demand, 'point', '{}')
+required_demand = sf.get_data(sheet_names, data, demand, 'point', '{}', look_in_sector=True)
 
 ## Read delivered water data sheets
 
 sheet_names = {'Supply Delivered_AG': 'Agriculture', 
                'Supply Delivered_Muni': 'Municipality', 
                'Supply Delivered_Ind': 'Industry'}
-delivered_demand = sf.get_data(sheet_names, data, demand, 'point', '{}')
+delivered_demand = sf.get_data(sheet_names, data, demand, 'point', '{}', look_in_sector=True)
 
 delivered_demand['point'] = delivered_demand['point'].str.replace('BALQA', 'BQ')
 delivered_demand['point'] = delivered_demand['point'].str.replace('MADABA', 'MD')
@@ -88,10 +88,10 @@ gw_supply = gw_supply.merge(gw_thickness, on=['Year','Month', 'Date','point','va
 ## Read and process pipeline supply and wastewater treatment plants data sheets
 
 sheet_names = {'Wadis': 'River/pipeline supply'}
-surface_water =  sf.get_data(sheet_names, data, supply, 'point', '{}')
+surface_water =  sf.get_data(sheet_names, data, supply, 'point', '{}', look_in_sector=True)
 
-sheet_names = {'WWTP Inflow': 'WWTP'}
-wwtp_inflow =  sf.get_data(sheet_names, data, supply, 'point', '{}')
+sheet_names = {'WWTP Inflow': 'Wastewater plant'}
+wwtp_inflow =  sf.get_data(sheet_names, data, supply, 'point', '{}', look_in_sector=True)
 
 ## Pipeline flow processing
 

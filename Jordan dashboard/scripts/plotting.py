@@ -1,6 +1,7 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
+import numpy as np
 
 
 def choroplet_map(geojson, df):
@@ -72,7 +73,7 @@ def unmet_demand(df, layout, title):
 
 
 def wtd_plot(df, layout, title):
-    fig = px.line(df, x='Year', y='wtd_m', color='point',
+    fig = px.line(df, x='Date', y='wtd_m', color='point',
                   color_discrete_sequence=px.colors.qualitative.Vivid)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}')
     fig.update_layout(layout, yaxis=dict(range=[df['wtd_m'].max()*1.1, df['wtd_m'].min()*0.9]), title=title)
@@ -88,7 +89,19 @@ def groundwater_extraction(df, layout, title):
     return fig
 
 
-def energy_demand(df, layout, title):
+def pumping_efficiency(df, initial_eff, final_eff, init_year, end_year):
+    if initial_eff < final_eff:
+        eff = np.arange(initial_eff, final_eff, (final_eff - initial_eff) / (end_year - init_year))
+    else:
+        eff = np.repeat(initial_eff, (end_year - init_year))
+
+    eff = np.append(eff, final_eff)
+    df_eff = pd.DataFrame({'Year': range(2020, 2051), 'eff': eff})
+    dff = pd.merge(df, df_eff, on='Year')
+    dff.loc[~dff['type'].isin(['Water conveyance', 'Groundwater supply']), 'eff'] = 1
+    return dff
+
+def energy_demand(df, layout, title, initial_eff, final_eff):
     # eff_val = 0.65
     # if eff_val > 0.45:
     #     eff = np.arange(0.45, eff_val+0.00001, (eff_val-0.45) / (2050-2020))
@@ -98,6 +111,9 @@ def energy_demand(df, layout, title):
     #     df['valueWithEff'] = df['value'] / df['Eff']
     # else:
     #     df['valueWithEff'] = df['value'] / 0.45
+    df = pumping_efficiency(df, initial_eff, final_eff, 2020, 2050)
+    df['value'] /= df['eff']
+
     fig = px.bar(df, x='Year', y='value', color='type',
                   color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
@@ -162,7 +178,7 @@ def plot_depth_groundwater(df, layout, title):
     return fig
 
 
-def plot_energy_for_pumping(df, colors, layout, title):
+def plot_energy_for_pumping(df, colors, layout, title, initial_eff, final_eff):
     """
     :param df: tidy dataframe containing year and energy demand (SWPA_E_) for
     pumping
@@ -171,7 +187,9 @@ def plot_energy_for_pumping(df, colors, layout, title):
     :param title: title of the plot
     :return: Plotly figure object
     """
-    df['value'] = round(df['SWPA_E_'], 4)
+    # df['value'] = round(df['SWPA_E_'], 4)
+    df = pumping_efficiency(df, initial_eff, final_eff, 2020, 2050)
+    df['SWPA_E_'] /= df['eff']
     fig = px.area(df, x='Year', y='SWPA_E_',
                   color_discrete_sequence=colors)
     fig.update_layout(layout, title=title)

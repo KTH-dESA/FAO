@@ -47,6 +47,8 @@ jordan.get_f(inplace=True, axis=0)
 jordan.get_sw_tdh(inplace = True, axis=0)
 jordan.get_SWpumping_energy(inplace = True, axis=0)
 
+jordan.df.loc[(df['pipeline']=='KAC'), 'SWPA_E_'] = 0 #Setting energy for canal to 0
+
 ## 6. Create nexus model for groundwater pumping
 
 file_path = os.path.join(input_folder, 'groundwater_supply.gz')

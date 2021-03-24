@@ -64,6 +64,7 @@ other_supply = other_supply.loc[other_supply['type']!='Other supply']
 demand_sites['type'] = 'Municipality'
 demand_sites.loc[demand_sites['point'].str.contains('Agri'), 'type'] = 'Agriculture'
 demand_sites.loc[demand_sites['point'].str.contains('Ind'), 'type'] = 'Industry'
+demand_sites.loc[demand_sites['point'] == 'KA_Agri HL', 'point'] = 'KA_AgriHL'
 tributary_inflows['type'] = 'Tributary inflow'
 diversion['type'] = 'Transmission Pipeline'
 diversion_outflows['type'] = 'Diversion Outflow'
