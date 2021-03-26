@@ -2,16 +2,14 @@
 .Rhistory
 __pycache__
 .ipynb_checkpoints
-NWSAS model/*results/*
-*/Plots/*
-*/Dashboard/data*
-*/Dashboard/.idea/*
-*/Data/WEAP Results/*
-*/Data/GIS/*
-*/Data/Processed results/*
-*/Data/Ordered results/*
-*/Data/Cropland and Builtarea/*
+*/dashboard/data*
+*/dashboard/.idea/*
+*/data/WEAP results/*
+*/data/gis/*
+*/data/processed results/*
+*/data/cropland/*
 *Old
 */test dash results/
 Prototyping.ipynb
 */High level results/*
+*results_explorer.ipynb
