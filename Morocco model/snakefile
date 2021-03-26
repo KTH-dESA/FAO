@@ -1,21 +1,21 @@
 workdir: sys.path[0] #this line it to set the working directory to the location of the snakefile
 
 ######################### User defined parameters #############################
-dash_folder = "../Morocco dashboard" #set the dashboard folder
+dash_folder = "test dash results" #set the dashboard folder
 
 # SCENARIOS = ['Reference', 'Desalination','Irrigation Intensification'] #define the list of scenarios to run
 # W_RATE = [0, 0.3, 0.5, 0.7] #define the list of wind technology cost reduction rate
 # PV_RATE = [0, 0.3, 0.5, 0.7] #define the list of solar PV technology cost reduction rate
 # GRID_RATE = [0, -0.3, -0.5, -0.7] #define the list of grid price increment rate
-CLIMATE = ['Trend', 'Climate Change'] #define the list of climates to run
+CLIMATE = ['Trend'] #, 'Climate Change'] #define the list of climates to run
 # CLIMATE = ['Trend']
-# SCENARIOS = ['Reference', 'Desalination', 'Reference Wastewater Reuse', \
-             # 'Desalination Wastewater Reuse', 'Increased Water Productivity', \
-             # 'Yield Trends']
-SCENARIOS = ['Desalination Wastewater Reuse']
+SCENARIOS = ['Reference'] #, 'Desalination','Irrigation Intensification', 'Reference Wastewater Reuse', 'Desalination Wastewater Reuse']
 W_RATE = [0]
+BT_RATE = [0]
 PV_RATE = [0]
 GRID_RATE = [0]
+PV_LEVELS = [10,20,50]
+BUTANE_PHASEOUT_SCENARIOS = [None, 2040, 2030]
 ###############################################################################
 
 rule all:
@@ -26,8 +26,10 @@ rule all:
         # expand("{dash_folder}/data/{scenario}/{climate}/W{w_rate}_PV{pv_rate}_Grid{grid_rate}/least-cost-2050.png", \
                   # scenario=SCENARIOS, climate=CLIMATE, w_rate=W_RATE, \
                   # pv_rate=PV_RATE, grid_rate=GRID_RATE, dash_folder=dash_folder), \
-        expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
-               scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
+        #expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
+               #scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
+        expand("{dash_folder}/data/{scenario}/{climate}/Butane_Calculations/{butane_phaseout}/{pv_level}/summary_results.gz",
+               scenario=SCENARIOS, climate=CLIMATE, butane_phaseout=BUTANE_PHASEOUT_SCENARIOS , pv_level=PV_LEVELS , dash_folder=dash_folder)
 
 rule schematic_processing:
     input: provinces="Data/GIS/Admin/Provinces.gpkg", \
@@ -40,23 +42,21 @@ rule schematic_processing:
            diversions="Data/Schematic/Diversions.kml", \
            reservoirs="Data/Schematic/Reservoirs.kml", \
            links="Data/Schematic/Transmission Links.kml"
-    output: demand_points="Data/GIS/Processed layers/Demand_points.gpkg"
+    output: demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg"
     script: 'scripts/schematic_processing.py'
     
 rule cropland_processing:
-    input: demand_points="Data/GIS/Processed layers/Demand_points.gpkg", \
+    input: demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg", \
            cropland="Data/GIS/Processed layers/cropland_2013_processed_20200227.csv"
     output: "Data/Cropland and Builtarea/cropland.gz"
     script: 'scripts/cropland_processing.py'
 
 rule softlinking:
     input: data="Data/WEAP Results/Results - {scenario} - {climate}.xlsx", \
-           demand_points="Data/GIS/Processed layers/Demand_points.gpkg"
-    params: scenario="{scenario}", climate="{climate}", \
-			spatial_output=f"{dash_folder}/spatial_data"
+           demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg"
+    params: scenario="{scenario}", climate="{climate}"
     output: demand_data="Data/Processed results/{scenario}/{climate}/demand_data.gz", \
-            wwtp_inflow="Data/Processed results/{scenario}/{climate}/wwtp_inflow.gz", \
-            production_data=f"{dash_folder}/data/{{scenario}}/{{climate}}/production.gz"
+            wwtp_inflow="Data/Processed results/{scenario}/{climate}/wwtp_inflow.gz"
     script: 'scripts/softlinking.py'
     
 rule energy_model:
@@ -81,3 +81,11 @@ rule lcoe_maps:
             pv_rate="{pv_rate}", grid_rate="{grid_rate}"
     output: f"{dash_folder}/data/{{scenario}}/{{climate}}/W{{w_rate}}_PV{{pv_rate}}_Grid{{grid_rate}}/least-cost-2050.png"
     script: 'scripts/lcoe_maps.py' 
+
+rule butane_calculations:
+    input: results="test dash results/data/{scenario}/{climate}/results.gz", \
+            cropland=r"Data\Cropland and Builtarea\cropland.gz"
+    params: scenario="{scenario}", climate="{climate}", \
+            butane_phaseout="{butane_phaseout}", pv_level="{pv_level}"
+    output: f"{dash_folder}/data/{{scenario}}/{{climate}}/Butane_Calculations/{{butane_phaseout}}/{{pv_level}}/summary_results.gz"
+    script: 'scripts/butane_calculations.py' 
