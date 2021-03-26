@@ -1,0 +1,132 @@
+front page:
+  explore: Explore el modelo
+  content menu: Contenido
+  sections:
+    - Primera sección
+    - Segunda sección
+    - Tercera sección
+
+sidebar:
+  title: Modelo NEXUS
+  options: Opciones de escenario
+  scenarios:
+    title: Seleccione escenario
+    options:
+      - Referencia
+      - Referencia & reuso de agua
+      - Agua desalinizada
+      - Desalinización & reuso de agua
+      - Intensificación de la irrigación
+      - Yield Trends
+  climate:
+    title: Periodos de sequía
+  cost reduction:
+    title: Seleccione la reducción de costo para el año 2040
+    wind: Energía eólica
+    pv: Paneles solares
+  price increase:
+    title: Seleccione el incremento de precio para el año 2040
+    grid: Electricidad
+  butane:
+    title: Eliminación del uso de Butano
+    year: Año
+  pv adoption:
+    title: Adopción de paneles solares para el año 2040
+    share: Contribución
+  reset: Resetear
+  apply: Aplicar
+
+results:
+  title: Resumen de resultados
+  download: Descargar
+  compare: Comparar
+  scenarios:
+    Reference: Referencia
+    Desalination: Agua desalinizada
+    Increased Water Productivity: Intensificación de la irrigación
+    Yield Trends: Yield trends
+    Desalination Wastewater Reuse: Desalinización, reuso de agua
+    Reference Wastewater Reuse: Referencia, reuso de agua
+  climate:
+    historical trend: tendencia historica
+    Climate Change: cambio climatico
+
+graphs:
+  water delivered: Agua entregada (Mm<sup>3</sup>)
+  unmet water: Demanda de agua no cumplida (%)
+  water supplied: Suministro de agua (Mm<sup>3</sup>)
+  water treated: Agua tratada (Mm<sup>3</sup>)
+  depth to groundwater: Profundidad del aquifero (mbgl)
+  crop production: Production de cultivos (ton)
+  crop production 2: Crop average production (ton)
+  energy demand: Demanda de energía (GWh)
+  least-cost: Technología de menor costo<br>de generación de energía en Agricultura
+  energy ag: Energía para bombeo en agricultura (GWh)
+  pv capacity: Capacidad instalada de paneles solares (MW)
+  emissions ag: Emisiones anuales en agricultura (MtCO2)
+  water supply compare: Suministro de agua en Souss-Massa
+  energy demand compare: Demanda de energía en Souss-Massa
+  unmet demand compare: Demanda de agua no cumplida en agricultura Souss-Massa
+  total costs compare: Costo total en diferentes escenarios de eliminación de butano y adopción de PV
+  energy share compare: Fuentes de energía en diferentes escenarios de eliminación del butano y adopción de energía fotovoltaica
+  emissions compare: Emisiones anuales bajo diferentes escenarios de eliminación de butano y adopción fotovoltaica
+  total emissions compare: Emisiones totales bajo diferentes escenarios de eliminación de butano y adopción fotovoltaica
+  emissions vs costs compare: Emisiones vs costos totales bajo diferentes escenarios de eliminación de butano y adopción de PV
+
+information:
+  scenarios:
+    title: Información sobre escenarios
+    body:
+      - Escenario de Referencia
+      - Se asume que la demanda doméstica aumentará con el tiempo con una población creciente de 1.4% por año y se asume que la superficie total irrigada se mantendrá constante.
+      - Escenario de Agua desalinizada
+      - Adición de 275.000 m3 / día de capacidad de desalinización en 2021, de los cuales 150.000 m3 / día serán para Agadir y 125.000 m3 / día para agricultura en Chtouka. Se expande a 450.000 m3 / día en 2030 con una participación equitativa entre ambas regiones.
+      - Escenario de Intensificación de la irrigación
+      - Incluye el proyecto de desalinización y contempla la ampliación de invernaderos para cultivos de hortalizas en las subcuencas de Chtouka y Souss. La cantidad de invernaderos aumentan de 5.409 ha en 2020 a 14.919 ha en 2030.
+  climate:
+    title: Información sobre variables de cambio climatico
+    body:
+      - Los escenarios se ejecutan bajo dos futuros de cambio climático
+      - Proyección de la temperatura actual y precipitación histórica (1980-2010).
+      - Una mayor tasa de aumento de temperatura y período históricos de sequía mas recurrentes a futuro (1980-1987).
+  cost:
+    title: Información sobre reducción de costo de las tecnologías
+    body: Este parámetro representa una tendencia futura en la reducción de costos debido a la caída del precio de mercado y la madurez de la tecnología.
+  price:
+    title: Información sobre incremento del precio de la electrícidad de la red
+    body: Este parámetro representa un aumento en el precio de la electricidad de la red debido a factores como nuevas políticas, reducción de subsidios o aumento en los costos de generación de energía.
+  butane:
+    title: Información sobre la eliminación del uso de butano
+    body:
+      - Se pueden explorar tres escenarios de eliminación del butano de la siguiente manera
+      - Escenario de referencia, que asume que la proporción actual de uso de butano continuará en el futuro
+      - Eliminación tardía, que supone la eliminación completa del butano para el año 2040.
+      - Eliminación temprana, que supone la eliminación completa del butano para el año 2030.
+  pv adoption:
+    title: Información sobre adopción de paneles solares
+    body:
+      - Se pueden explorar dos niveles de participación de paneles solares en la región.
+      - Baja adopción de paneles solares, que asume que el nivel actual de paneles del 10% continuará en el futuro.
+      - Moderada adopción de PV, que supone un aumento del porcentaje de PV del 10% al 20% para el año 2040.
+      - Alta adopción de PV, que supone un aumento del porcentaje de PV del 10% al 50% para el año 2040.
+  close: cerrar
+
+language: Idioma
+
+about:
+  header: Acerca de
+  title: Sobre el modelo NEXUS de Souss-Massa
+  body:
+    - Esta plataforma proporciona los medios para explorar los resultados del modelado del proyecto “Implementación de la Agenda 2030 para la eficiencia / productividad del agua y la sostenibilidad del agua en los países NENA” en Souss-Massa, Marruecos. El proyecto está financiado por la Organización de las Naciones Unidas para la Agricultura y la Alimentación (FAO). El Instituto Real de Tecnología (KTH) y el Instituto Ambiental de Estocolmo (SEI) que proporcionan análisis y apoyo en la toma de decisiones en las esferas del clima, la tierra, la energía y el agua.
+    - El análisis Nexus desarrollado para la región marroquí de Souss-Massa, enlaza un modelo de balance hídrologico desarrollado por el SEI utilizando el sistema de Evaluación y Planificación de Agua (WEAP), y un modelo energético basado en GIS desarrollado por KTH.
+    - El modelo utiliza WEAP para estimar los suministros de agua basados en rutinas hidrológicas impulsadas por el clima que calculan la escorrentía de lluvia y la recarga de agua subterránea. Estima los patrones de uso de los principales sectores del agua, evalúa la productividad de los sistemas de cultivo en diferentes futuros climáticos y evalúa su impacto en los sistemas de energía y agua.
+    - Además, el componente de energía implementa metodologías basadas en GIS para estimar los requerimientos de energía para el bombeo de aguas subterráneas y superficiales, nuevos proyectos de desalinización de agua y las principales plantas de tratamiento de aguas residuales. Finalmente, se identifican tecnologías de generación de menor costo para el suministro de energía eléctrica para los sectores de agua y agrícola.
+  close: cerrar
+
+compare:
+  tabs:
+    - Demanda de agua
+    - Demanda de energía
+    - Demanda de agua no cumplida
+    - Eliminación del Butano
+  close: cerrar
