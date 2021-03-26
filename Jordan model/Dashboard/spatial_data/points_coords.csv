@@ -1,0 +1,215 @@
+point,type,lon,lat
+AJ_Agri,Agriculture,35.69936210417227,32.26906742763034
+AJ_ROU Ajloun,Municipality,35.73562,32.35097
+AMMAN_Industry,Industry,36.17585,31.742700000000006
+AM_Agri,Agriculture,36.086,31.717389999999998
+AM_Al Jiza,Municipality,36.1465,31.615449999999996
+AM_Mwaqqar,Municipality,36.23117,31.80964000000001
+AM_SZ01,Municipality,35.92929,31.97497
+AM_SZ02,Municipality,35.95368,31.943940000000005
+AM_SZ03,Municipality,35.92916,31.854979999999994
+AM_SZ04,Municipality,36.04108,31.91663000000001
+AM_SZ05,Municipality,35.88426,31.956000000000007
+AM_SZ06,Municipality,35.8425,31.90023
+AM_SZ07,Municipality,35.91956,32.05214000000001
+AM_SZ08,Municipality,35.98077,31.992299999999993
+AM_SZ09,Municipality,35.8106,31.925369999999997
+AM_UmBasateyn,Municipality,35.86978,31.788059999999994
+AQABA_Ind_Fertilizer,Industry,35.04104,29.390620000000006
+AQABA_Industry,Industry,35.08681998116183,29.46060987909347
+AQ_Agri,Agriculture,35.59939998174103,29.77408988042906
+AQ_Al Quwayra,Municipality,35.43874998149924,29.785999880504274
+AQ_QAqaba,Municipality,35.02142998105905,29.471499879151946
+BALQA_Industry,Industry,35.660069980629444,32.126559891403495
+BQ_AgriHL,Agriculture,35.76466,32.121
+BQ_AgriJV,Agriculture,35.585089980544005,32.060549891090474
+BQ_Ain Al Basha,Municipality,35.8226,32.09945999999999
+BQ_Deir Alla,Municipality,35.60033998055044,32.096189891260586
+BQ_Mahis Fuhais,Municipality,35.79309,32.00233000000001
+BQ_ROU_Salt,Municipality,35.67194998071959,31.980279890701556
+BQ_ShJanoubia,Municipality,35.5822099806336,31.87033989018098
+IRBID_Industry,Industry,35.7513,32.65097999999999
+IR_AgriHL,Agriculture,35.90065,32.62301999999999
+IR_AgriJV,Agriculture,35.59585998038701,32.415999892800215
+IR_Al Aghwar Sh,Municipality,35.61991998035559,32.55989989349551
+IR_Bani Kinana,Municipality,35.75568,32.69848000000001
+IR_Bani Obeid,Municipality,35.91444,32.5036
+IR_Koura,Municipality,35.64575998043371,32.48326989312358
+IR_RC_C City,Municipality,36.03124,32.504
+IR_RC_KAP,Municipality,36.02652,32.52644
+IR_ROU_Irbid,Municipality,35.83699,32.56213000000001
+IR_Ramtha,Municipality,36.00124,32.60119000000001
+JA_Agri,Agriculture,35.76251,32.22296000000001
+JA_ROU Jerash,Municipality,35.85573,32.30581000000001
+JERASH_Industry,Industry,35.91655,32.23159999999999
+KARAK_Ind_Potash,Industry,35.406819980670875,31.258999887298067
+KARAK_Industry,Industry,36.03315,31.139340000000008
+KA_AgriHL,Agriculture,35.67608998107975,31.267589887317396
+KA_AgriJV,Agriculture,35.47392998076513,31.276759887376237
+KA_Al MazarJan,Municipality,35.635309981129126,31.047249886286213
+KA_Al Qasr,Municipality,35.78874,31.334830000000007
+KA_Al Qatrana,Municipality,36.03137,31.252979999999997
+KA_AlAg Janoub,Municipality,35.518929980942886,31.064929886378874
+KA_Ayy,Municipality,35.61904998105859,31.137299886709567
+KA_Fqou,Municipality,35.67263998104172,31.332769887624767
+KA_Ghor Al Mazraa,Municipality,35.50633998083438,31.238849887195457
+KA_Ind_OilShale,Industry,35.9405,31.034530000000007
+KA_Q  Al Karak,Municipality,35.67995998110694,31.225289887118024
+MAAN_Industry,Industry,35.75964,30.364000000000004
+MADABA_Industry,Industry,35.80099,31.549840000000007
+MAFRAQ_Industry,Industry,36.32331,32.205960000000005
+MA_Agri,Agriculture,35.5302199813244,30.365259883132826
+MA_Ail,Municipality,35.53513998143603,30.168229882229245
+MA_Al Jafer,Municipality,36.17982,30.383499999999998
+MA_Al Muraygha,Municipality,35.583499981564295,30.061399881735763
+MA_AlHusayniyya,Municipality,35.73603,30.559659999999997
+MA_AshShobak,Municipality,35.54610998127564,30.50316988376609
+MA_QMaan,Municipality,35.74281,30.062079999999995
+MA_Wadi Musa,Municipality,35.46966998125465,30.32628988296068
+MD_Agri,Agriculture,35.79966,31.59731
+MD_Arid,Municipality,35.657219980917304,31.534139888577684
+MD_Qasabat Madaba,Municipality,35.73869,31.670200000000005
+MD_Theeban,Municipality,35.72222,31.485600000000005
+MF_Agri,Agriculture,36.35269,32.36866
+MF_RC_MAF,Municipality,36.45197,32.226029999999994
+MF_RC_Zatari,Municipality,36.32864,32.279
+MF_ROU_Mafraq,Municipality,36.17766,32.29455
+MF_ROU_NB,Municipality,36.58656,32.31083
+MF_Rweyshid,Municipality,38.13622,32.46301999999999
+TAFILEH_Industry,Industry,36.03743,30.822579999999995
+TA_Agri,Agriculture,35.54332998104893,30.931139885751666
+TA_Al Hasa,Municipality,35.7572,30.756030000000003
+TA_Busayrah,Municipality,35.58520998123143,30.700619884675472
+TA_Qasabat At Tafilah,Municipality,35.63079998121289,30.869949885458457
+ZARQA_Ind_Nuclear,Industry,36.14546,32.11971
+ZARQA_Industry,Industry,36.13727,32.08883
+ZA_Agri,Agriculture,36.54505,32.05684
+ZA_Azraq,Municipality,36.7875,31.81331
+ZA_Azraq Wetland,Municipality,36.95543,31.842500000000012
+ZA_Bereyn,Municipality,35.94646,32.1441
+ZA_Dulayl,Municipality,36.37360000000001,32.0804
+ZA_Hashmiyya,Municipality,36.18422,32.15492
+ZA_Ind_OilShale,Industry,36.65437,31.862740000000002
+ZA_Qasabat Zarqa,Municipality,36.05137,32.07568
+ZA_RC_Azraq,Municipality,36.57632,31.90888
+ZA_Rusaifa,Municipality,36.02562000000001,32.01813
+GW_AmmanZarqa_A1A6,Groundwater supply,35.83502,32.24173
+GW_AmmanZarqa_A7B2,Groundwater supply,36.19698,31.941629999999993
+GW_AmmanZarqa_Basalt,Groundwater supply,36.46483,32.3139
+GW_AmmanZarqa_Kurnub,Groundwater supply,36.01094,32.23534999999999
+GW_Azraq_A7B2,Groundwater supply,36.52987000000001,31.85514
+GW_Azraq_B4B5,Groundwater supply,36.75188,31.940160000000002
+GW_Azraq_Basalt,Groundwater supply,36.73172,32.11683
+GW_Azraq_Kurnub,Groundwater supply,36.63406,31.811400000000003
+GW_DeadSea_A1A6,Groundwater supply,35.73071,31.771029999999993
+GW_DeadSea_A7B2,Groundwater supply,35.93867,31.3434
+GW_DeadSea_Alluvium,Groundwater supply,35.487469980834156,31.182799886933818
+GW_DeadSea_Kurnub,Groundwater supply,35.93443,31.10448
+GW_DeadSea_Ram,Groundwater supply,35.92275,31.15564000000001
+GW_Jafer_A7B2,Groundwater supply,35.655509981528326,30.33183988296538
+GW_Jafer_B4,Groundwater supply,36.27444,30.2888
+GW_JordanValley_Alluvium,Groundwater supply,35.55808998052678,32.00954989084759
+GW_Sarhan_B4B5,Groundwater supply,37.96202,32.31668
+GW_SideWadis_A1A6,Groundwater supply,35.66596998066145,32.07996989117959
+GW_SideWadis_A7B2,Groundwater supply,35.63279998048404,32.33685989241678
+GW_SideWadis_Kurnub,Groundwater supply,35.64004998060969,32.10261989128951
+GW_SideWadis_Rum,Groundwater supply,35.75979,31.8197
+GW_Sirhan_Kurnub,Groundwater supply,36.173880000000004,32.13772
+GW_Southern Desert_Ram,Groundwater supply,35.71711,29.516589999999997
+GW_Yarmouk_A7B2,Groundwater supply,35.82323,32.60189
+PL_AqebIrbidBwaidah2ROUMF,River/pipeline supply,36.10927,32.391679999999994
+PL_AqebIrbidUmLulu2MF_ROU,River/pipeline supply,36.12677,32.38509
+PL_AqebIrbidZatari2MF_ROU,River/pipeline supply,36.28449,32.32693999999999
+PL_WadiAIr2IR_AghwarShm,River/pipeline supply,35.69378904511715,32.5727215652781
+PL_WadiAIr2IR_ROUIrbid,River/pipeline supply,35.79993,32.52913000000001
+PL_WLibMadaba2MD_Arid,River/pipeline supply,35.77016,31.566110000000002
+PL_WLibMadaba2MD_QMadaba,River/pipeline supply,35.79095,31.653999999999993
+PL_WLibMadaba2MD_Theeban,River/pipeline supply,35.7673,31.550340000000006
+PL_BaniKinana2IR_BaniKinana,River/pipeline supply,35.82227,32.71449
+PL_ToKhaw2AzraqWL,River/pipeline supply,36.79081,31.89754
+PL_ToKhaw2ZA_Azraq,River/pipeline supply,36.76178,31.87142
+PL_ToKhaw2ZA_Hashmiyya,River/pipeline supply,36.202560000000005,32.08278000000001
+PL_ToKhaw2ZA_QZarqa,River/pipeline supply,36.06284,32.038129999999995
+PL_ToKhaw2ZA_RC_Azraq,River/pipeline supply,36.57174,31.92672
+PL_ToKhaw2ZA_Rusaifa,River/pipeline supply,36.05791,32.034180000000006
+PS_Halabat2ZA_Dulayl,River/pipeline supply,36.40923,32.07945
+PS_QunayyaWell2MF_ROU,River/pipeline supply,36.1242,32.17829
+PS_QunayyaWell2ZA_Hashemiyya,River/pipeline supply,36.09383,32.14941
+Withdrawal Node 2,River/pipeline supply,36.13566,32.18755
+PS_Awayan2ZA_QZarqa,River/pipeline supply,36.0898,32.02889999999999
+PS Zarqa Outflow,River/pipeline supply,36.0768,32.1232
+PS_AlBasateen2ZA_Rusaifa,River/pipeline supply,36.00401,32.0327
+PS_UmRummaneh2ZA_Bereyn,River/pipeline supply,35.91616,32.10656
+PS_Ajloun2AJ_ROU,River/pipeline supply,35.77936,32.35571000000001
+To Irbid_Yarmoukwells,River/pipeline supply,35.88117,32.576530000000005
+PL_Ramtha2IR_Ramtha,River/pipeline supply,36.04608,32.596199999999996
+PL_ZatariRam2IR_RC_CCity,River/pipeline supply,36.00588,32.50286
+PL_ZatariRamtha2IR_RC_KAPark,River/pipeline supply,36.01310000000001,32.53154000000001
+PS_NorthBadia2ROU_NB,River/pipeline supply,36.60757,32.283989999999996
+PS_Mafraq2MF_ROU,River/pipeline supply,36.21985,32.28331
+PS_ShJan2BQ_ShJanou,River/pipeline supply,35.57930998061525,31.89815989031395
+PS_DairAllaDistrict2BQ_DeirAlla,River/pipeline supply,35.587099980516264,32.12332989139147
+PS_Salt2BQ_ROUSalt,River/pipeline supply,35.684429980724,32.01112989084865
+PS_AbuNus2BQ_AinBasha,River/pipeline supply,35.85822,32.08073
+PS_AinAlAzraq2BQ_MahisFuhais,River/pipeline supply,35.7476,31.98771
+PL_DisiAq2AQ_AqQuw,River/pipeline supply,35.534809981673924,29.723519880209206
+PS_Qa2MA_Ail,River/pipeline supply,35.53125998138247,30.258369882642207
+PS_Qa2MA_WMusa,River/pipeline supply,35.54863998140574,30.263199882662366
+PS_Maan2MA_Maan,River/pipeline supply,35.79945,30.101049999999997
+PS_Hasa2TA_Bus,River/pipeline supply,35.77598,30.812300000000004
+PS_Hasa2TA_Hasa,River/pipeline supply,35.79955,30.81058
+PS_Hasa2TA_Qasabat,River/pipeline supply,35.76017,30.812329999999992
+PS_Qasr2KA_AlQasr,River/pipeline supply,35.729,31.331060000000004
+PS_Qasr2KA_Fqou,River/pipeline supply,35.72699,31.322599999999994
+PL_GhwQasr2KA_Ayy_M,River/pipeline supply,35.73546,31.23091
+Withdrawal Node 1,River/pipeline supply,35.73262,31.24053
+PSAinGhazal2AM_SZ01,River/pipeline supply,36.02228,31.976060000000007
+PSAinGhazal2AM_SZ02,River/pipeline supply,36.00105,31.947880000000023
+PSAinGhazal2AM_SZ08,River/pipeline supply,36.0347,31.986170000000005
+PS_AbuAlanda2AM_SZ04,River/pipeline supply,36.02496,31.888090000000005
+PS_AbuAlanda2ZA_QZarqa,River/pipeline supply,36.03665,31.88948
+WadiShueib2BQ_AgriJV,River/pipeline supply,35.64341998069481,31.93995989051015
+KAC2BQ_AgriJV,River/pipeline supply,35.55868998048763,32.0906098912359
+KAC2IR_AgriJV,River/pipeline supply,35.567949980347926,32.40513989274887
+WadiKafrein2BQ_AgriJV,River/pipeline supply,35.66161998076323,31.858669890120776
+SGhorWadis2KA_Industry,River/pipeline supply,35.46827998074514,31.298799887480335
+SouthernGhorWadis2KA_AgriJV,River/pipeline supply,35.48070998076579,31.29584988746547
+ZC32IR_AgriJV,River/pipeline supply,35.577179980373934,32.38186989263616
+PS_Ghwair2KA_Qatraneh,River/pipeline supply,35.88716,31.250789999999995
+PL_KarakAm2AM_UmAlBas,River/pipeline supply,35.90368,31.799549999999996
+PL_KarakAmman2AM_Jiza,River/pipeline supply,36.02288,31.522310000000004
+PL_KarakAmman2AM_SZ03_Outflow,River/pipeline supply,35.89106,31.830449999999985
+PL_KarakAmman2AM_SZ06,River/pipeline supply,35.85823,31.904450000000008
+PL_KarakAmman2AM_SahabMqar,River/pipeline supply,35.92858,31.7409
+PS_AinGhasal_SZ022AM_SZ02,River/pipeline supply,36.00386,31.922709999999995
+PS_Jerash2JA_ROUJerash,River/pipeline supply,35.87813,32.29388
+PLKarakAmman2KA_Qatraneh,River/pipeline supply,36.06075,31.370179999999994
+PL_Dabouq_AinGh2AM_SZ05,River/pipeline supply,35.87974,32.007799999999996
+PL_Dabouq_AinGhazal2AM_SZ07,River/pipeline supply,35.9049,32.01332000000001
+PS_ZaraMain2AM_SZ01,River/pipeline supply,35.95243,31.897779999999994
+PS_ZaraMain2AM_SZ02,River/pipeline supply,35.96645,31.90247
+PS_ZaraMain2AM_SZ05,River/pipeline supply,35.89633,31.881869999999992
+ZM2BQShJan,River/pipeline supply,35.61463998070989,31.81853988993204
+RedDead2MA_QMaan,River/pipeline supply,35.92516,30.05285
+MF_ROU_Mafraq Withdrawal,River/pipeline supply,36.21719,32.29963
+Withdrawal Node 3,River/pipeline supply,35.86734,32.54396
+Withdrawal Node 4,River/pipeline supply,35.90156,32.48641
+WWTP Wadi Seer,Wastewater plant,35.79877,31.89701
+WWTP_Al Baqa,Wastewater plant,35.81577,32.134119999999996
+WWTP_Al Jiza,Wastewater plant,36.1978,31.62358
+WWTP_Aqaba,Wastewater plant,34.99166,29.429809999999993
+WWTP_Fuhais,Wastewater plant,35.77535,31.952820000000003
+WWTP_Irbid Central,Wastewater plant,35.80294,32.59076999999999
+WWTP_Karak,Wastewater plant,35.6138599810048,31.22767988713444
+WWTP_Kufranja,Wastewater plant,35.70915,32.31883
+WWTP_Madaba,Wastewater plant,35.73568,31.635379999999998
+WWTP_Mafraq,Wastewater plant,36.23013,32.41054999999999
+WWTP_Salt,Wastewater plant,35.72345,31.992229999999996
+WWTP_Samra,Wastewater plant,36.06757,32.103920000000016
+WWTP_Tafileh,Wastewater plant,35.53605998107148,30.866159885449495
+WWTP_Wadi Arab,Wastewater plant,35.671879980415376,32.60780989372612
+WWTP_Wadi Hassan,Wastewater plant,35.93742,32.52529
+WWTP_Wadi Musa,Wastewater plant,35.46864998123311,30.363969883133763
+WWTP_Wadi Sh,Wastewater plant,35.89436,32.67853
+Aqaba Desal,Desalination,35.031889981049645,29.51520987934545
+RedDead,Desalination,34.99770998097,29.56614987957823

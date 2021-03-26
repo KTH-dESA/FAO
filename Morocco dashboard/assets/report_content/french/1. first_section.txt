@@ -1,7 +1,0 @@
-##### How could the combination of desalination and wastewater reuse reduce water scarcity?
-
-Here goes text blablabla that describes the outcomes of a the model, for example:
-* Around 30.65 million cubic meters of treated wastewater could be reused in agriculture annually.
-* Around 44 million cubic meters of groundwater could be saved annually.
-* The overall water deliveries could increase in average by 5.3% annually.
-* التغييرات التي تمت في التعديلات الأخيرة من النمذجة
