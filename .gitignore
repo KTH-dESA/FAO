@@ -3,8 +3,8 @@
 __pycache__
 .ipynb_checkpoints
 */dashboard/data*
-*/dashboard/.idea/*
-*/data/WEAP results/*
+*/*/.idea/*
+*/.idea/*
 */data/gis/*
 */data/processed results/*
 */data/cropland/*
@@ -13,3 +13,4 @@ __pycache__
 Prototyping.ipynb
 */High level results/*
 *results_explorer.ipynb
+Jordan model/data/WEAP results/*
