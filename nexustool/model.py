@@ -285,7 +285,7 @@ class Model():
                 self.df[_tdh_sw].replace(0, np.nan, inplace=True)
         else:
             if friction:
-                f_losses = (self.df[self.f] * self.df[self.L] * 16 * ((self.df[self.sswd] / (30 * self.pumping_hours_per_day * 60 * 60)) ** 2)) / ((self.df[self.D] ** 5) * 2 * self.g * (pi ** 2))
+                f_losses = (self.df[self.f] * self.df[self.L] * (self.df[self.mV] ** 2)) / (self.df[self.D] * 2 * self.g)
             else:
                 f_losses = 0
             self.df[self.tdh] = self.df[self.elevation_diff] + f_losses
