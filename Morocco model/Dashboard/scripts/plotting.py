@@ -360,18 +360,17 @@ def energy_demand_plot(water_delivered, wwtp_data, desal_data,
     dff_energy = dff_energy.loc[~dff_energy['Supply point'].str.contains('Complexe Aoulouz Mokhtar Soussi')]
     dff_energy = dff_energy.loc[~dff_energy[group_by].str.contains('SW')]
     dff_energy = dff_energy.loc[~dff_energy[group_by].str.contains('WWR')]
-    dff_energy = dff_energy[[time_frame, group_by, 'swpa_e']]
+    dff_energy = dff_energy[[time_frame, group_by, 'pa_e']]
     wwtp_data['type'] = 'Wastewater treatment'
     desal_data['type'] = 'Desalination energy'
     for df in [wwtp_data, desal_data]:
-        dff = df[[time_frame, group_by, 'swpa_e']]
+        dff = df[[time_frame, group_by, 'pa_e']]
         dff_energy = dff_energy.append(dff, sort=False)
 
-    df = dff_energy.groupby([time_frame, group_by])[['swpa_e']].sum() / 1000000
+    df = dff_energy.groupby([time_frame, group_by])[['pa_e']].sum() / 1000000
     df.reset_index(inplace=True)
-    # df = df.loc[df['swpa_e'] != 0]
 
-    fig = px.bar(df.reset_index(), x=time_frame, y='swpa_e', color=group_by,
+    fig = px.bar(df.reset_index(), x=time_frame, y='pa_e', color=group_by,
                   color_discrete_sequence=px.colors.qualitative.Set2)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
