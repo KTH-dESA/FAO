@@ -53,7 +53,7 @@ rule cropland_processing:
 
 rule softlinking:
     input: data="data/WEAP Results/Results - {scenario} - {climate}.xlsx", \
-           demand_points=f"{dash_folder}/spatial_data/Demand_points.gpkg"
+           demand_points="data/gis/processed layers/demand_points.gpkg"
     params: scenario="{scenario}", climate="{climate}"
     output: demand_data="data/processed results/{scenario}/{climate}/demand_data.gz", \
             wwtp_inflow="data/processed results/{scenario}/{climate}/wwtp_inflow.gz"

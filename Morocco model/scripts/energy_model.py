@@ -1,9 +1,7 @@
 import sys, os
 sys.path.append("..") #this is to add the avobe folder to the package directory
-import nexus_tool
-from nexus_tool.weap_tools import create_learning_curve
+import nexustool
 import pandas as pd
-import numpy as np
 
 scenario = str(snakemake.params.scenario)
 climate = str(snakemake.params.climate)
@@ -11,15 +9,11 @@ demand_data = str(snakemake.input.demand_data)
 wwtp_inflow = str(snakemake.input.wwtp_inflow)
 output = str(snakemake.output)
 
-# load_folder = os.path.join('Data', 'Processed results', scenario, climate)
-# results_folder = os.path.join('..', 'Morocco dashboard', 'data', scenario, climate)
-# results_folder = output.split('results.gz')[0]
 results_folder = output.split(os.path.basename(output))[0]
 
 os.makedirs(results_folder, exist_ok = True)
 
 #Define the path to read the scenario input data and reads it in
-# file_path = os.path.join(load_folder, 'demand_data.gz')
 df = nexus_tool.read_csv(demand_data)
 
 #Creates the nexus model with the input dataframe
@@ -36,42 +30,42 @@ souss_massa.elevation = 'elevation_diff' #for the case of GW, the elevation_diff
 souss_massa.L = 'distance' #for the case of GW, the distance is set to be the wtd
 
 #Defines the name of the variable for Peak Water Demand and Seasonal Water demand (monthly)
+souss_massa.elevation_diff = 'elevation_diff' #for the case of GW, the elevation_diff is set to be the wtd
+souss_massa.L = 'distance' #for the case of GW, the distance is set to be the wtd
+
+#Defines the name of the variable for Peak Water Demand and Seasonal Scheme Water demand (monthly)
 souss_massa.pwd = 'pwd'
 souss_massa.sswd = 'sswd'
-souss_massa.df.rename(columns={'value': 'sswd'}, inplace=True)
-souss_massa.peak_Q = souss_massa.pwd #This is a work around so we are able to calculat all energy demand with the SW_pumping method
-souss_massa.avg_Q = souss_massa.sswd #This is a work around so we are able to calculat all energy demand with the SW_pumping method
-souss_massa.swpp_e = 'swpp_e'
-souss_massa.pd_e = 'swpp_e'
-souss_massa.swpa_e = 'swpa_e'
+souss_massa.df.rename(columns={'value': 'sswd'}, inplace=True) #Renames the name of the column value to sswd 
+souss_massa.pp_e = 'pp_e' #
+souss_massa.pa_e = 'pa_e'
 souss_massa.pumping_hours_per_day = 10
 souss_massa.SWpump_eff = 0.6
 
 #Defines the PWD. It is defined as double the seasonal demand for agricultural sites
-souss_massa.df[souss_massa.pwd] = souss_massa.df[souss_massa.sswd] / 3600 / 30 / souss_massa.pumping_hours_per_day #to convert to cubic meter per second [m3/s]
+souss_massa.df[souss_massa.pwd] = souss_massa.df[souss_massa.sswd] / 30 / souss_massa.pumping_hours_per_day / 3600 #to convert to cubic meter per second [m3/s]
 souss_massa.df.loc[souss_massa.df['type']=='Agriculture', souss_massa.pwd] *= 2
 
 #Calculates some required parameters
-souss_massa.get_A(inplace=True)
-souss_massa.get_V(inplace=True, axis=0)
-souss_massa.get_Re(inplace=True, axis=0)
-souss_massa.get_f(inplace=True, axis=0)
+souss_massa.pipe_area()
+souss_massa.flow_velocity()
+souss_massa.reynolds()
+souss_massa.friction_factor()
 
-souss_massa.get_sw_tdh(inplace = True, axis=0) #this is called sw but it calculets for gw too. I still need to change the names
-souss_massa.get_SWpumping_energy(inplace = True, axis=0) #the same here
+souss_massa.get_tdh()
+souss_massa.get_pumping_energy()
 
-souss_massa.df.loc[souss_massa.df.swpp_e<0, souss_massa.swpp_e] = 0
-souss_massa.df.loc[souss_massa.df.swpa_e<0, souss_massa.swpa_e] = 0
+souss_massa.df.loc[souss_massa.df.pp_e<0, souss_massa.pp_e] = 0 # ensures no negative energy values are considered
+souss_massa.df.loc[souss_massa.df.pa_e<0, souss_massa.pa_e] = 0 # ensures no negative power values are considered
 
 #Define energy intensity for seawater desalination project
-desalination_energy_int = 3.31 # kWh/m3
-#We compute the energy demand for deslination multiplying the monthly water requirement by the energy intensity, 
-#and add it to the current energy requirements for desalinated water pumping
-sm_desal = nexus_tool.Model(souss_massa.df.loc[souss_massa.df['type'].str.contains('DS')].copy())
+desal_energy_int = 3.31 # kWh/m3
 
-sm_desal.df[souss_massa.swpa_e] = sm_desal.df[souss_massa.sswd] * desalination_energy_int
-#Then we divide the total energy requiered for desalination by the daily pumping hours and the days of the month
-sm_desal.df[souss_massa.swpp_e] = desalination_energy_int
+#Create a new nexus Model with the data relevant to the desalination plant only, filtering by the key work DS (Desalination)
+sm_desal = nexustool.Model(souss_massa.df.loc[souss_massa.df['type'].str.contains('DS')].copy())
+
+#Multiply the sswd by the energy intensity for treatment
+sm_desal.df[souss_massa.pa_e] = sm_desal.df[souss_massa.sswd] * desal_energy_int
 
 #Here we load the WWTP inflow data
 # file_path = os.path.join(load_folder, 'wwtp_inflow.gz')
@@ -80,15 +74,15 @@ df_wwtp = pd.read_csv(wwtp_inflow)
 #We define an energy intensity for wastewater treatment and compute the energy demand
 if 'Reuse' in scenario:
     wwtp_energy_int = 0.8 # kWh/m3
-    df_wwtp['swpa_e'] = df_wwtp.value * wwtp_energy_int
-    df_wwtp.loc[df_wwtp['point']=='Agadir WWTP', 'swpa_e'] = df_wwtp.loc[df_wwtp['point']=='Agadir WWTP'].value * 0.6
+    df_wwtp['pa_e'] = df_wwtp.value * wwtp_energy_int
+    df_wwtp.loc[df_wwtp['point']=='Agadir WWTP', 'pa_e'] = df_wwtp.loc[df_wwtp['point']=='Agadir WWTP'].value * 0.6
 else:
     wwtp_energy_int = 0.1 # kWh/m3
-    df_wwtp['swpa_e'] = df_wwtp.value * wwtp_energy_int
+    df_wwtp['pa_e'] = df_wwtp.value * wwtp_energy_int
     
-souss_massa.df.loc[souss_massa.df['type'].str.contains('WWR'), 'swpa_e'] = None
-souss_massa.df.loc[souss_massa.df['type'].str.contains('SW'), 'swpa_e'] = None
-souss_massa.df.loc[souss_massa.df['Supply point'].str.contains('Complexe Aoulouz Mokhtar Soussi'), 'swpa_e'] = None
+souss_massa.df.loc[souss_massa.df['type'].str.contains('WWR'), 'pa_e'] = None
+souss_massa.df.loc[souss_massa.df['type'].str.contains('SW'), 'pa_e'] = None
+souss_massa.df.loc[souss_massa.df['Supply point'].str.contains('Complexe Aoulouz Mokhtar Soussi'), 'pa_e'] = None
 
 souss_massa.df.to_csv(output, index=False)
 sm_desal.df.to_csv(os.path.join(results_folder, 'desal_data.gz'), index=False)

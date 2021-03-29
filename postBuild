@@ -1,0 +1,5 @@
+curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/cropland.gz" --create-dirs -o "data/cropland/cropland.gz"
+
+curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/demand_data.gz" --create-dirs -o "data/processed results/Desalination/Climate Change/demand_data.gz"
+
+curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/wwtp_inflow.gz" --create-dirs -o "data/processed results/Desalination/Climate Change/wwtp_inflow.gz"
