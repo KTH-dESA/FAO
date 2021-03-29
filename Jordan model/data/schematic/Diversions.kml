@@ -1,0 +1,2450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Diversions.kml</name>
+	<Style id="Introduction">
+		<BalloonStyle>
+			<text><![CDATA[<style><--{}
+		table.data { border-color: #EEEEEE; }
+		table.inner td { padding: 0 4px; }
+		table.data td { padding: 0 4px; font-size: 8pt; }
+	--></style>
+	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
+    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
+    <tr><td align="center">
+	     <table border="0" width="630" cellspacing="0" cellpadding="2">
+		     <tr><td align="left">$[MainText]</td></tr>
+      </table>
+    </td></tr>
+	   <tr><td align="center">
+    </td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 7 November 2019</td></tr>
+ </table>]]></text>
+			<bgColor>ff80a5b3</bgColor>
+		</BalloonStyle>
+	</Style>
+	<Folder>
+		<name>Diversions</name>
+		<Icon>
+			<href>http://www.weap21.org/img/Diversion.png</href>
+		</Icon>
+		<Placemark id="Object-27-Introduction">
+			<name>PL_Aqeb_Irbid</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Aqeb_Irbid</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.58087,32.22838,0 36.56873,32.23177,0 36.55322,32.23572,0 36.54648,32.23742,0 36.5377,32.24082,0 36.48276,32.2564,0 36.45399,32.26566,0 36.41255,32.27989,0 36.32404,32.31294,0 36.30802,32.3181,0 36.2975,32.32202,0 36.28449,32.32694,0 36.21833,32.34864,0 36.16158,32.36981,0 36.12677,32.38509,0 36.10927,32.39168,0 36.10346,32.394,0 36.09441,32.39689,0 36.06719,32.40886,0 36.048,32.40923,0 35.98697,32.43624,0 35.94948,32.4501,0 35.91532,32.46234,0 35.90616,32.4655,0 35.89523,32.46961,0 35.88552,32.47317,0 35.87783,32.47656,0 35.87165,32.47773,0 35.86043,32.4819,0 35.85777,32.48313,0 35.84989,32.48533,0 35.84189,32.49686,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-84-Introduction">
+			<name>PL_WadiArab_Irbid</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WadiArab_Irbid</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.67161,32.58539,0 35.68685,32.57631,0 35.69294,32.57247,0 35.69763,32.56939,0 35.70388,32.5662,0 35.72001,32.55558,0 35.74103,32.54205,0 35.76023,32.53576,0 35.77122,32.5343,0 35.79993,32.52913,0 35.81872,32.53102,0 35.83819,32.53189,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-195-Introduction">
+			<name>PL_WLibMadaba</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WLibMadaba</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.76225,31.51263,0 35.76241,31.51525,0 35.76222,31.51847,0 35.763,31.52819,0 35.76498,31.5351,0 35.7673,31.55034,0 35.77016,31.56611,0 35.79095,31.654,0 35.79135,31.66407,0 35.79305,31.66556,0 35.79127,31.66994,0 35.79605,31.7128,0 35.81221,31.77504,0 35.89976,31.8086,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-225-Introduction">
+			<name>PL_BaniKinana</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_BaniKinana</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.85526,32.68551,0 35.85132,32.69358,0 35.84738,32.70165,0 35.84046,32.70507,0 35.82227,32.71449,0 35.81312,32.71909,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-232-Introduction">
+			<name>PL_ToKhaw</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToKhaw</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.81551,31.9193,0 36.80898,31.91185000000001,0 36.79081,31.89754,0 36.76178,31.87142,0 36.72754,31.88811,0 36.67608,31.89679,0 36.57174,31.92672,0 36.43766,32.00363,0 36.42487,32.01,0 36.41841,32.0125,0 36.37522,32.03298,0 36.35811,32.04166,0 36.32033,32.05914,0 36.2941,32.05775,0 36.27176,32.06723,0 36.26461,32.07001,0 36.25281,32.07484,0 36.24947,32.07579,0 36.23551,32.07969,0 36.21816,32.08066,0 36.20256,32.08278,0 36.18659,32.08414,0 36.17728,32.08376,0 36.11086,32.0549,0 36.10006,32.05333,0 36.09697,32.04955,0 36.08962,32.04702,0 36.08464,32.04485,0 36.08212,32.044,0 36.08008,32.04251,0 36.07585,32.04084,0 36.07116,32.0389,0 36.06898,32.03836,0 36.06284,32.03813,0 36.05978,32.03743,0 36.05791,32.03418,0 36.0552,32.03235,0 36.05414,32.03183,0 36.05256,32.03065,0 36.04824,32.02713,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-260-Introduction">
+			<name>PS_Halabat</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Halabat</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.45314,32.11381,0 36.45779,32.10404,0 36.46288,32.09314,0 36.44351,32.08354,0 36.40923,32.07945,0 36.39278,32.0572,0 36.37522,32.03298,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-279-Introduction">
+			<name>PS_QunayyaWell</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_QunayyaWell</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.06969,32.14205,0 36.08249,32.14166,0 36.09383,32.14941,0 36.10516,32.16014,0 36.11417,32.16961,0 36.1242,32.17829,0 36.13088,32.1837,0 36.13566,32.18755,0 36.13948,32.19036,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-303-Introduction">
+			<name>PS_Awayan</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Awayan</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.11926,32.02031,0 36.09989,32.02566,0 36.0898,32.0289,0 36.07876,32.031,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-311-Introduction">
+			<name>PS_Zarqa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Zarqa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.11388,32.13314,0 36.10338,32.13104,0 36.09376,32.12664,0 36.0768,32.1232,0 36.0557,32.13358,0 36.05073,32.13317,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-320-Introduction">
+			<name>PS_AlBasateen</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AlBasateen</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.04175,32.04259,0 36.03717,32.04462,0 36.03349,32.04452,0 36.03089,32.04558,0 36.01562,32.04484,0 36.00401,32.0327,0 35.99506,32.02887,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-331-Introduction">
+			<name>PS_UmRummaneh</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_UmRummaneh</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.95555,32.09821,0 35.94856,32.09577,0 35.9316,32.09917,0 35.92349,32.09866,0 35.91616,32.10656,0 35.90696,32.10668,0 35.89983,32.10702,0 35.89459,32.10482,0 35.8912,32.09974,0 35.88284,32.0932,0 35.88116,32.09283,0 35.87822,32.09172,0 35.87406,32.08918,0 35.86986,32.08518,0 35.85965,32.07385,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-346-Introduction">
+			<name>PL_BereinJarash</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_BereinJarash</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.89983,32.10702,0 35.89462,32.13921,0 35.88522,32.21218,0 35.88544,32.21771,0 35.89632,32.233,0 35.91586,32.2614,0 35.9306,32.28386,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-381-Introduction">
+			<name>PL_UmLulu_Jerash</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_UmLulu_Jerash</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.09441,32.39689,0 36.04129,32.35927,0 36.00087,32.33532,0 35.954,32.32784,0 35.89992,32.32234,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-413-Introduction">
+			<name>PS_Ajloun</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Ajloun</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.77247,32.31005,0 35.77725,32.31198,0 35.78634,32.31786,0 35.79029,32.32976,0 35.78686,32.34019,0 35.77936,32.35571,0 35.77577,32.36251,0 35.77314,32.36931,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-420-Introduction">
+			<name>PL_Hofa_Ajloun</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Hofa_Ajloun</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.84989,32.48533,0 35.84654,32.47741,0 35.83793,32.45352,0 35.83551,32.44901,0 35.83206,32.43294,0 35.82821,32.42524,0 35.80062,32.36969,0 35.78686,32.34019,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-437-Introduction">
+			<name>PL_Yarmouk Wells Irbid</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Yarmouk Wells Irbid</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.88488,32.59139,0 35.88613,32.58448,0 35.88117,32.57653,0 35.88052,32.56598,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-472-Introduction">
+			<name>PL_Ramtha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Ramtha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.02047,32.56094,0 36.03419,32.5693,0 36.04299,32.58174,0 36.04608,32.5962,0 36.17126,32.42627,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-479-Introduction">
+			<name>PL_ZatariRamtha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZatariRamtha</value>
+				</Data>
+				<Data name="MainText">
+					<value><![CDATA[Supply and Resources\River\PL_ZatariRamtha\Flow Requirements\FR_ZatariRamtha:Minimum Flow Requirement[CMM]/3600/24/Days<br><br>If(Y<2018,Supply and Resources\River\PL_ZatariRamtha\Flow Requirements\FR_ZatariRamtha:Minimum Flow Requirement[CMM]/3600/24/Days,-9999)<br>]]></value>
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.98697,32.43624,0 35.99948,32.47759,0 36.00588,32.50286,0 36.0131,32.53154,0 36.02386,32.55108,0 36.03419,32.5693,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-562-Introduction">
+			<name>PS_NorthBadia</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_NorthBadia</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.55322,32.23572,0 36.56329,32.24422,0 36.56729,32.25123,0 36.58143,32.26458,0 36.5881,32.2679,0 36.59387,32.2743,0 36.60104,32.28193,0 36.60757,32.28399,0 36.62772,32.30008,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-579-Introduction">
+			<name>PL_ZatariKhaw</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZatariKhaw</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.30802,32.3181,0 36.29744,32.29998,0 36.2738,32.2672,0 36.2626,32.23905,0 36.21816,32.08066,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-606-Introduction">
+			<name>PS_Mafraq</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Mafraq</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.24076,32.23236,0 36.23698,32.23816,0 36.22717,32.2525,0 36.2233,32.26213,0 36.21876,32.27141,0 36.21985,32.28331,0 36.21862,32.29485,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-626-Introduction">
+			<name>PS_ShJanoub</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_ShJanoub</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.55939,31.91222,0 35.56482,31.90697,0 35.56828,31.90566,0 35.56964,31.90437,0 35.57201,31.90129,0 35.57626,31.89866,0 35.57931,31.89816,0 35.58655,31.89905,0 35.60376,31.89905,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-640-Introduction">
+			<name>PL_KACToZay</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KACToZay</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.57548,32.23232,0 35.58633,32.21772,0 35.59379,32.20979,0 35.60023,32.20392,0 35.60526,32.2001,0 35.61271,32.19256,0 35.61664,32.19033,0 35.62248,32.18527,0 35.62697,32.17995,0 35.68361,32.1363,0 35.71669,32.09604,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-650-Introduction">
+			<name>PS_DeirAllaDistrict</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_DeirAllaDistrict</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.58005,32.1659,0 35.58178,32.16133,0 35.58477,32.15148,0 35.58753,32.1405,0 35.58926,32.13364,0 35.58703,32.12833,0 35.5871,32.12333,0 35.59517,32.11978,0 35.60002,32.11756,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-674-Introduction">
+			<name>PS_Salt</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Salt</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.6593,32.04055,0 35.67371,32.03442,0 35.68681,32.02937,0 35.69034,32.02534,0 35.68443,32.01113,0 35.66703,32.00572,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-694-Introduction">
+			<name>PS_SafutM_AbuNusair</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_SafutM_AbuNusair</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.84077,32.04481,0 35.84269,32.04732,0 35.84269,32.05223,0 35.84699,32.05544,0 35.8539,32.06515,0 35.85965,32.07385,0 35.85822,32.08073,0 35.85326,32.10399,0 35.84537,32.12568,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-706-Introduction">
+			<name>PL_ZayDabouqToBasha</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZayDabouqToBasha</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.79956,32.03651,0 35.80923,32.03572,0 35.82362,32.03717,0 35.84077,32.04481,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-728-Introduction">
+			<name>PS_Ain Al Azraq</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Ain Al Azraq</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.74233,32.01529,0 35.74362,32.01087,0 35.74429,32.00645,0 35.74441,31.99732,0 35.7476,31.98771,0 35.7491,31.97786,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-735-Introduction">
+			<name>PL_DeirAlla_Fuhais</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_DeirAlla_Fuhais</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.78535,32.045,0 35.78096,32.03899,0 35.77719,32.03384,0 35.74441,31.99732,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-755-Introduction">
+			<name>PL_DisiAqaba</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_DisiAqaba</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.57515,29.601,0 35.575,29.60779000000001,0 35.57493,29.61656,0 35.57197,29.63381,0 35.54436,29.70016,0 35.53481,29.72352,0 35.53364,29.79635,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-785-Introduction">
+			<name>PS_Qa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Qa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.55403,30.30839,0 35.55337,30.30357,0 35.54874,30.29569,0 35.55145,30.29012,0 35.55289,30.28629,0 35.55703,30.27826,0 35.55774,30.27412,0 35.54864,30.2632,0 35.53126,30.25837,0 35.50606,30.25252,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-809-Introduction">
+			<name>PS_Maan</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Maan</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.71474,30.12982,0 35.74747,30.12422,0 35.77888,30.11506,0 35.79945,30.10105,0 35.8118,30.09288,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-826-Introduction">
+			<name>PS_Hasa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Hasa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.85148,30.78875,0 35.84206,30.79472,0 35.82887,30.80266,0 35.79955,30.81058,0 35.79198,30.81289,0 35.786,30.81258,0 35.77598,30.8123,0 35.76808,30.81226,0 35.76017,30.81233,0 35.73991,30.81175,0 35.72395,30.8072,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-869-Introduction">
+			<name>PS_Al Qasr</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Al Qasr</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.71018,31.28868,0 35.71435,31.29502,0 35.7192,31.30085,0 35.72012,31.30306,0 35.72422,31.30789,0 35.72632,31.31331,0 35.72699,31.3226,0 35.729,31.33106,0 35.73144,31.34682,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-886-Introduction">
+			<name>PL_GhwairQasr</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_GhwairQasr</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.77471,31.17193,0 35.76551,31.17572,0 35.75969,31.18683,0 35.75793,31.1907,0 35.75301,31.20072,0 35.74065,31.21525,0 35.73617,31.22687,0 35.73546,31.23091,0 35.73456,31.23689,0 35.73262,31.24053,0 35.73135,31.24306,0 35.7303,31.24883,0 35.71435,31.29502,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1006-Introduction">
+			<name>PS_Ain Ghazal</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Ain Ghazal</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.07592,32.00764,0 36.07439,32.00738,0 36.07099,32.00535,0 36.06784,32.00376,0 36.05812,31.99832,0 36.05278,31.99594,0 36.0448,31.99173,0 36.0347,31.98617,0 36.02904,31.98387,0 36.02329,31.97763000000001,0 36.02228,31.97606,0 36.01585,31.96909,0 36.01037,31.96057,0 36.00817,31.95766,0 36.00105,31.94788000000001,0 35.99461,31.9377,0 35.99376,31.9361,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1019-Introduction">
+			<name>PS_Abu Alanda</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Abu Alanda</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.96709,31.88505,0 35.96745,31.88474,0 35.9732,31.88448,0 35.97948,31.88311,0 35.98687,31.88215,0 35.99194,31.88305,0 35.99681,31.8835,0 36.00413,31.88489,0 36.01532,31.88541,0 36.02496,31.88809,0 36.03665,31.88948,0 36.04232,31.89167,0 36.05042,31.89306,0 36.05185,31.89338,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1083-Introduction">
+			<name>PL_ToDeirAlla</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ToDeirAlla</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.61664,32.19033,0 35.60907,32.18335,0 35.60221,32.17814,0 35.59932,32.17435,0 35.5945,32.17136,0 35.58178,32.16133,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1208-Introduction">
+			<name>KAC</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>KAC</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.58135,32.6453,0 35.58317,32.63528,0 35.59003,32.58762,0 35.59104,32.58387,0 35.58872,32.5417,0 35.56795,32.40514,0 35.57457,32.24056,0 35.57548,32.23232,0 35.57019,32.18495,0 35.55869,32.09061,0 35.55881,32.08312,0 35.55186,32.0688,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1370-Introduction">
+			<name>PL_Disi</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Disi</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.86226,29.55803,0 35.87983,29.64328,0 35.95959,30.02548,0 36.09227,30.63446,0 36.14242,30.98118,0 36.15305,31.13862,0 36.16662,31.29723,0 36.17764,31.4149,0 35.99131,31.82065,0 35.98415,31.83377,0 35.97838,31.84409,0 35.97473,31.852,0 35.97321,31.85491,0 35.96965,31.87012,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1388-Introduction">
+			<name>Yarmouk2KAC</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Yarmouk2KAC</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.60011,32.6675,0 35.59225,32.658,0 35.58135,32.6453,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1484-Introduction">
+			<name>ZC3</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>ZC3</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.66301,32.1866,0 35.57718,32.38187,0 35.57655,32.39508,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1546-Introduction">
+			<name>PL_DeirAllaSalt</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_DeirAllaSalt</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.73613,32.07561,0 35.7036,32.0706,0 35.6593,32.04055,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1590-Introduction">
+			<name>PS_Ghwair</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Ghwair</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.93066,31.23719,0 35.90098,31.24541,0 35.89939,31.24601,0 35.88716,31.25079,0 35.86061,31.2594,0 35.82033,31.26972,0 35.80656,31.27520000000001,0 35.79831,31.27719,0 35.77529,31.25985,0 35.74065,31.21525,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1594-Introduction">
+			<name>PL_KarakAmman</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KarakAmman</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.07094,31.40273,0 36.06752,31.41217,0 36.06349,31.42256,0 36.06141,31.42741,0 36.05884,31.43644000000001,0 36.05471,31.44635,0 36.05219,31.45392,0 36.04436,31.46913,0 36.02288,31.52231,0 36.00023,31.57683,0 35.94015,31.71708,0 35.92858,31.7409,0 35.90368,31.79955,0 35.89976,31.8086,0 35.89592,31.81787,0 35.89106,31.83045,0 35.85823,31.90445,0 35.84491,31.93513,0 35.84359,31.93739,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1601-Introduction">
+			<name>PL_ZaraMain2SZ09SZ06</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZaraMain2SZ09SZ06</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.80439,31.85429,0 35.84158,31.83944,0 35.89592,31.81787,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1613-Introduction">
+			<name>PL_ZayDabouq2Russeifa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZayDabouq2Russeifa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.04562,32.00886,0 36.04397,32.01374,0 36.05132,32.01825,0 36.07116,32.0389,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1636-Introduction">
+			<name>Disi2AbuAlanda</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>Disi2AbuAlanda</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.99131,31.82065,0 35.98576,31.85071,0 35.98435,31.85962,0 35.9856,31.86521,0 35.98684,31.87079,0 35.98687,31.88215,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1647-Introduction">
+			<name>PS_AinGhasal_AMSZ02</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_AinGhasal_AMSZ02</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.03528,31.93942,0 36.02017,31.92982,0 36.00386,31.92271,0 36.00122,31.92029,0 35.9928,31.91713,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1654-Introduction">
+			<name>PL_WadiArab2Hofa</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_WadiArab2Hofa</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.81872,32.53102,0 35.88174,32.48407,0 35.8997,32.47079,0 35.90298,32.4682,0 35.90616,32.4655,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1664-Introduction">
+			<name>PL_Hofa Jarash</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Hofa Jarash</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.86043,32.4819,0 35.87453,32.42591,0 35.88414,32.39149,0 35.88472,32.35494,0 35.88567,32.30359,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1676-Introduction">
+			<name>PL_DISI2Dabouq</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_DISI2Dabouq</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.97321,31.85491,0 35.90109,31.92298,0 35.86975,31.95697,0 35.85286,32.00138,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1690-Introduction">
+			<name>PS_Jerash</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Jerash</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.94708,32.26405,0 35.93858,32.27466,0 35.9306,32.28386,0 35.92758,32.28937,0 35.92114,32.29398,0 35.91688,32.3005,0 35.90858,32.3103,0 35.90326,32.31728,0 35.89992,32.32234,0 35.88567,32.30359,0 35.87813,32.29388,0 35.8758,32.29049,0 35.87042,32.28417,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1762-Introduction">
+			<name>PL_Khaw2AinGhsal</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Khaw2AinGhsal</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.08212,32.044,0 36.07005,32.02665,0 36.06667,32.02374,0 36.05772,32.00895,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1797-Introduction">
+			<name>PL_Karak2AmmanbeforeDISI</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Karak2AmmanbeforeDISI</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.04947,31.2784,0 36.05337,31.30598,0 36.05369,31.30792,0 36.05387,31.30968,0 36.05425,31.31223,0 36.06023,31.3584,0 36.06075,31.37018,0 36.06271,31.38099,0 36.06752,31.41217,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1816-Introduction">
+			<name>PL_AbuAlanda2Khaw</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_AbuAlanda2Khaw</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.04232,31.89167,0 36.05515,31.88936,0 36.07087,31.8922,0 36.08668,31.89045,0 36.12017,31.89446,0 36.16116,31.90655,0 36.43766,32.00363,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1858-Introduction">
+			<name>PL_ZaytoDabouq</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_ZaytoDabouq</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.71669,32.09604,0 35.73613,32.07561,0 35.78535,32.045,0 35.79956,32.03651,0 35.81629,32.01892,0 35.82887,32.00474,0 35.83779,31.99689,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1860-Introduction">
+			<name>PL_Dab_AinGhazal</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Dab_AinGhazal</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.8293,31.99479,0 35.83779,31.99689,0 35.85286,32.00138,0 35.87974,32.0078,0 35.9049,32.01332,0 35.93693,32.02287,0 35.94795,32.0249,0 36.03709,32.009,0 36.04562,32.00886,0 36.05772,32.00895,0 36.07235,32.00759,0 36.07439,32.00738,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1875-Introduction">
+			<name>PS_ZaraMain</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_ZaraMain</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.57897,31.78039,0 35.58155,31.7867,0 35.59503,31.79857,0 35.6019,31.81265,0 35.61464,31.81854,0 35.64261,31.82167000000001,0 35.69244,31.83214,0 35.70186,31.83401,0 35.73381,31.84046,0 35.75543,31.84466,0 35.79637,31.8537,0 35.80439,31.85429,0 35.81097,31.85586,0 35.81358,31.85597,0 35.89633,31.88187,0 35.95243,31.89778,0 35.95999,31.90131,0 35.96645,31.90247,0 35.98667,31.89555,0 35.99279,31.89421,0 36.01532,31.88541,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1894-Introduction">
+			<name>New Resource North</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>New Resource North</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.59104,32.58387,0 35.61711,32.58456,0 35.63881,32.58569,0 35.67161,32.58539,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1972-Introduction">
+			<name>PL_RedDead</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_RedDead</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.03566,29.60915,0 35.05906,29.62232,0 35.08125,29.63512,0 35.09935,29.64596,0 35.67382,29.97768,0 35.74872,29.97215,0 35.90412,29.95682,0 35.92516,30.05285,0 36.06209,30.71300000000001,0 36.07014,30.74613,0 36.12226,31.17976,0 36.15056,31.40998,0 36.01064,31.71833,0 35.97039,31.81676,0 35.95815,31.84944,0 35.9732,31.88448,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1981-Introduction">
+			<name>PL_RedDeadToTafileh</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_RedDeadToTafileh</value>
+				</Data>
+				<Data name="MainText">
+					<value><![CDATA[The maximum volume diverted to Tafileh from Red Dead Sea project should be 1 MCM per year.<br>]]></value>
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.06209,30.71300000000001,0 36.03868,30.72113,0 35.84206,30.79472,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-1987-Introduction">
+			<name>PL_RedDeadToKarak</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_RedDeadToKarak</value>
+				</Data>
+				<Data name="MainText">
+					<value><![CDATA[The maximum volume diverted to Karak from Red Dead Sea project should be 10 MCM per year.<br>]]></value>
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.12226,31.17976,0 36.08113,31.19308,0 36.03361,31.20883,0 35.9573,31.22953,0 35.93066,31.23719,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-2059-Introduction">
+			<name>PL_KhawZaatari</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_KhawZaatari</value>
+				</Data>
+				<Data name="MainText">
+					<value><![CDATA[If(Y <2022,Supply and Resources\River\PL_KhawZaatari\Flow Requirements\FR_KhawZaatari:Minimum Flow Requirement[CMM]/(3600*Days*24),30000000)<br>]]></value>
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.23551,32.07969,0 36.24502,32.11305,0 36.26217,32.17208,0 36.27517,32.21607,0 36.28107,32.23507,0 36.28113,32.2371,0 36.28791,32.25017,0 36.32404,32.31294,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-2079-Introduction">
+			<name>pl_khaldiah</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>pl_khaldiah</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.28107,32.23507,0 36.28044,32.23542,0 36.27298,32.24345,0 36.21719,32.29963,0 36.20866,32.30909,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-2116-Introduction">
+			<name>PS_Amman2Madaba</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PS_Amman2Madaba</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					36.00023,31.57683,0 36.00023,31.57683,0 35.96896,31.57192,0 35.76498,31.5351,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="Object-2136-Introduction">
+			<name>PL_Mafraq2Irbid</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Diversion.png</href>
+					</Icon>
+				</IconStyle>
+				<LineStyle>
+					<color>ff0099ff</color>
+					<width>4</width>
+				</LineStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Diversion-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Diversion</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>PL_Mafraq2Irbid</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>
+					35.91532,32.46234,0 35.90613,32.47888,0 35.90156,32.48641,0 35.86734,32.54396,0 35.86108,32.5536,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
