@@ -1,6 +1,0 @@
-##### Como la combinación de desalinización y reuso de agua residual tratada puede reducir la escases de agua?
-
-Aca va el texto blablabla describiendo los resultadosdel modelo, por ejemplo:
-* Al rededor de 30.65 millones de metro cubicos de agua residual tratada podría ser reutilizada en agricultura anualmente.
-* Aproximadamente 44 millones de metros cubicos de agua de aquifers podría ser salvada anualmente.
-* El suministro de agua podria incremetar en promedio un 5.3% anualmente.
