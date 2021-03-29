@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Groundwater.kml</name>
+	<Style id="Introduction">
+		<BalloonStyle>
+			<text><![CDATA[<style><--{}
+		table.data { border-color: #EEEEEE; }
+		table.inner td { padding: 0 4px; }
+		table.data td { padding: 0 4px; font-size: 8pt; }
+	--></style>
+	<table border="0" width="630" cellspacing="0" cellpadding="6" bgcolor="#EFE6CE">
+    <tr><td align="center"><a href="http://www.weap21.org"><img src="http://www.weap21.org/img/logo4.gif" border="0"></a></td></tr>
+    <tr><td align="center"><font size="+2"><b>$[ObjectType]: $[ObjectName]</font></td></tr>
+    <tr><td align="center">
+	     <table border="0" width="630" cellspacing="0" cellpadding="2">
+		     <tr><td align="left">$[MainText]</td></tr>
+      </table>
+    </td></tr>
+	   <tr><td align="center">
+    </td></tr>
+   <tr><td align="center">Exported from <a href="http://www.weap21.org">WEAP</a> on 7 November 2019</td></tr>
+ </table>]]></text>
+			<bgColor>ff80a5b3</bgColor>
+		</BalloonStyle>
+	</Style>
+	<Folder>
+		<name>Groundwater</name>
+		<Icon>
+			<href>http://www.weap21.org/img/Groundwater.png</href>
+		</Icon>
+		<Placemark id="Object-310-Introduction">
+			<name>GW_AmmanZarqa_A1A6</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_AmmanZarqa_A1A6</value>
+				</Data>
+				<Data name="MainText">
+					<value><![CDATA[Only A1/2, A4 are considered Aquifers<br>The share of volume is roughly 60%<br>]]></value>
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.83502,32.24173,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-30-Introduction">
+			<name>GW_AmmanZarqa_A7B2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_AmmanZarqa_A7B2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.19698,31.94163,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-29-Introduction">
+			<name>GW_AmmanZarqa_Basalt</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_AmmanZarqa_Basalt</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.46483,32.3139,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-278-Introduction">
+			<name>GW_AmmanZarqa_Kurnub</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_AmmanZarqa_Kurnub</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.01094,32.23535,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-118-Introduction">
+			<name>GW_Azraq_A7B2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Azraq_A7B2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.52987,31.85514,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-119-Introduction">
+			<name>GW_Azraq_B4B5</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Azraq_B4B5</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.75188,31.94016,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-54-Introduction">
+			<name>GW_Azraq_Basalt</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Azraq_Basalt</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.73172,32.11683,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2048-Introduction">
+			<name>GW_Azraq_Kurnub</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Azraq_Kurnub</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.63406,31.8114,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1042-Introduction">
+			<name>GW_DeadSea_A1A6</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_DeadSea_A1A6</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.73071,31.77103,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-825-Introduction">
+			<name>GW_DeadSea_A7B2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_DeadSea_A7B2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.93867,31.3434,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-865-Introduction">
+			<name>GW_DeadSea_Alluvium</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_DeadSea_Alluvium</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.48747,31.1828,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2175-Introduction">
+			<name>GW_DeadSea_B3</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_DeadSea_B3</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.01115,31.47411,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2052-Introduction">
+			<name>GW_DeadSea_Kurnub</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_DeadSea_Kurnub</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.93443,31.10448,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-939-Introduction">
+			<name>GW_DeadSea_Ram</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_DeadSea_Ram</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.92275,31.15564,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-781-Introduction">
+			<name>GW_Jafer_A7B2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Jafer_A7B2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.65551,30.33184,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-771-Introduction">
+			<name>GW_Jafer_B4</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Jafer_B4</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.27444,30.2888,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-630-Introduction">
+			<name>GW_JordanValley_Alluvium</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_JordanValley_Alluvium</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.55809,32.00955,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-367-Introduction">
+			<name>GW_Sarhan_B4B5</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Sarhan_B4B5</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>37.96202,32.31668,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-628-Introduction">
+			<name>GW_SideWadis_A1A6</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_SideWadis_A1A6</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.66597,32.07997,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-83-Introduction">
+			<name>GW_SideWadis_A7B2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_SideWadis_A7B2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.6328,32.33686,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-629-Introduction">
+			<name>GW_SideWadis_Kurnub</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_SideWadis_Kurnub</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.64005,32.10262,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1922-Introduction">
+			<name>GW_SideWadis_Rum</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_SideWadis_Rum</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.75979,31.8197,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-1965-Introduction">
+			<name>GW_Sirhan_Kurnub</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Sirhan_Kurnub</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>36.17388,32.13772,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-751-Introduction">
+			<name>GW_Southern Desert_Ram</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Southern Desert_Ram</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.71711,29.51659,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-13-Introduction">
+			<name>GW_Yarmouk_A7B2</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Yarmouk_A7B2</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.82323,32.60189,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="Object-2265-Introduction">
+			<name>GW_Yarmouk_B3</name>
+			<Snippet maxLines="0"></Snippet>
+			<styleUrl>#Introduction</styleUrl>
+			<Style>
+				<IconStyle>
+					<scale>1</scale>
+					<Icon>
+						<href>http://www.weap21.org/img/Groundwater.png</href>
+					</Icon>
+				</IconStyle>
+			</Style>
+			<ExtendedData>
+				<Data name="BalloonGroupBanner">
+					<value>Groundwater-header.gif</value>
+				</Data>
+				<Data name="ObjectType">
+					<value>Groundwater</value>
+				</Data>
+				<Data name="ObjectName">
+					<value>GW_Yarmouk_B3</value>
+				</Data>
+				<Data name="MainText">
+				</Data>
+			</ExtendedData>
+			<Point>
+				<coordinates>35.71367,32.62435,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>

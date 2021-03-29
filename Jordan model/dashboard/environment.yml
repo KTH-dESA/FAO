@@ -1,0 +1,18 @@
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - jmcmurray
+  - anaconda
+dependencies:
+  - dash
+  - dash-bootstrap-components
+  - dash-renderer
+  - geopandas
+  - json
+  - openpyxl
+  - pip
+  - pip:
+    - dash-extensions
+  - xlrd
+  
