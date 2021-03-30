@@ -219,6 +219,30 @@ def energy_resources_share_plot(df, title):
                  )
     fig.update_layout(height=600, bargap=0)
     return fig
+    
+    
+def costs_plot(df, title):
+    dff = df.melt(value_vars=['butane_Subsidy(mMAD)', 'grid_cost(mMAD)', 'PV_Capex(mMAD)'],
+                  id_vars=['Year'])
+
+    dff.loc[dff['variable'] == "butane_Subsidy(mMAD)", 'variable'] = "Butane"
+    dff.loc[dff['variable'] == "grid_cost(mMAD)", 'variable'] = "Grid"
+    dff.loc[dff['variable'] == "PV_Capex(mMAD)", 'variable'] = "PV"
+
+    fig = px.bar(dff, x='Year', y='value', color='variable',
+                 # facet_col='pv_adoption', title=title,
+                 color_discrete_sequence=px.colors.qualitative.Set2,
+                 labels={
+                     "butane_phaseout": "Butane phase-out",
+                     "pv_adoption": "PV adoption by 2040",
+                     "value": "Total costs (mMAD)",
+                     "variable": 'Source'
+                 }
+                 )
+    fig.update_layout(xaxis={'categoryorder': 'total descending'})
+    # fig.update_layout(height=600)
+    return fig
+    
 
 
 def energy_demand_ag(df, layout):

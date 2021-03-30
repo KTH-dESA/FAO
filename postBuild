@@ -3,3 +3,5 @@ curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/cropland.gz"
 curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/demand_data.gz" --create-dirs -o "Morocco model/data/processed results/Desalination/Climate Change/demand_data.gz"
 
 curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/wwtp_inflow.gz" --create-dirs -o "Morocco model/data/processed results/Desalination/Climate Change/wwtp_inflow.gz"
+
+curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/production.gz" --create-dirs -o "Morocco model/data/processed results/Desalination/Climate Change/production.gz"
