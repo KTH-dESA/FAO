@@ -112,3 +112,17 @@ def create_learning_curve(iyear, eyear, cc, rates, method, order=2):
             learning_curve.loc[learning_curve.Year>=year, 'rate'] = rate
         learning_curve['capital_cost'] = (1-learning_curve['rate']) * cc
     return learning_curve.set_index('Year').capital_cost
+
+
+def create_tech_dist(iyear, eyear, share1, rates, method, order=2):
+    tech_dist = pd.DataFrame({'Year': range(iyear, eyear+1)})
+    if method!='step':
+        for year, rate in rates.items():
+            tech_dist.loc[tech_dist.Year==year, 'rate'] = rate
+        tech_dist['share'] = (1-tech_dist['rate']) * share1
+        tech_dist['share'] = tech_dist.share.interpolate(method=method, order=order)
+    else:
+        for year, rate in rates.items():
+            tech_dist.loc[tech_dist.Year>=year, 'rate'] = rate
+        tech_dist['share'] = (1-tech_dist['rate']) * share1
+    return tech_dist.set_index('Year').share
