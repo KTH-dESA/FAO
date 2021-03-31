@@ -6,7 +6,7 @@ channels:
 dependencies:
   - contextily
   - descartes
-  - geopandas
+  - geopandas==0.8.1
   - json
   - matplotlib
   - notebook
