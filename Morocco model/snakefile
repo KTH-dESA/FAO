@@ -52,11 +52,12 @@ rule cropland_processing:
     script: 'scripts/cropland_processing.py'
 
 rule softlinking:
-    input: data="data/WEAP Results/Results - {scenario} - {climate}.xlsx", \
+    input: data="data/WEAP results/Results - {scenario} - {climate}.xlsx", \
            demand_points="data/gis/processed layers/demand_points.gpkg"
     params: scenario="{scenario}", climate="{climate}"
     output: demand_data="data/processed results/{scenario}/{climate}/demand_data.gz", \
-            wwtp_inflow="data/processed results/{scenario}/{climate}/wwtp_inflow.gz"
+            wwtp_inflow="data/processed results/{scenario}/{climate}/wwtp_inflow.gz", \
+            production_data="dashboard/data/{scenario}/{climate}/production_data.gz",
     script: 'scripts/softlinking.py'
     
 rule energy_model:
