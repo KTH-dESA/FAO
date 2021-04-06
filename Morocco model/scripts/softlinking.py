@@ -2,16 +2,25 @@ import os
 import pandas as pd
 import geopandas as gpd
 import numpy as np
+from softlinking_functions import integrate_data, data_merging
 
 scenario = str(snakemake.params.scenario)
 climate = str(snakemake.params.climate)
 data_file = str(snakemake.input.data)
-demand_points = str(snakemake.input.demand_points)
 demand_data_output = str(snakemake.output.demand_data)
 wwtp_inflow_output = str(snakemake.output.wwtp_inflow)
 production_data_output = str(snakemake.output.production_data)
 
-spatial_folder = demand_points.split(os.path.basename(demand_points))[0]
+demand_points_path = str(snakemake.input.demand_points)
+spatial_folder = demand_points_path.split(os.path.basename(demand_points_path))[0]
+
+demand_links = gpd.read_file(demand_points_path)
+supply_links = gpd.read_file(os.path.join(spatial_folder, 'supply_points.gpkg'))
+wwtp = gpd.read_file(os.path.join(spatial_folder, 'wwtp.gpkg'))
+diversions = gpd.read_file(os.path.join(spatial_folder, 'pipelines.gpkg'))
+groundwater = gpd.read_file(os.path.join(spatial_folder, 'groundwater.gpkg'))
+all_points = gpd.read_file(os.path.join(spatial_folder, 'all_points.gpkg'))
+
 output_folder = demand_data_output.split(os.path.basename(demand_data_output))[0]
 
 ## Defining the years of the simulation

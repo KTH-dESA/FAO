@@ -27,7 +27,6 @@ from nexustool.weap_tools import create_learning_curve, create_tech_dist
 from nexustool.gis_tools import disaggregate_data
 import pandas as pd
 import numpy as np
-from dashboard.scripts.plotting import pv_installed_capacity, energy_demand_ag, emissions_ag, costs_plot
 
 
 # ## Step 1:Reading the input files
@@ -89,9 +88,9 @@ discount_rate = 0.05
 # In[ ]:
 
 
-if butane_phaseout:
+if butane_phaseout!='None':
     butane_share = 1
-    year = butane_phaseout
+    year = int(butane_phaseout)
 else:
     butane_share = 0
     year = 2050

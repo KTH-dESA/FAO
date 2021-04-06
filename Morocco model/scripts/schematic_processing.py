@@ -2,9 +2,10 @@ import sys
 sys.path.append("..") #this is to add the avobe folder to the package directory
 import os
 import geopandas as gpd
-import nexus_tool.weap_tools as wp
+import rasterio
+import nexustool.weap_tools as wp
 from nexustool.gis_tools import download_data
-from scripts.softlinking_functions import integrate_data, data_merging
+from softlinking_functions import integrate_data, data_merging
 import fiona
 fiona.drvsupport.supported_drivers['LIBKML'] = 'rw' # enable KML support which is disabled by default
 
@@ -19,10 +20,10 @@ diversion = gpd.read_file(str(snakemake.input.diversions), encoding='utf-8')
 reservoirs = gpd.read_file(str(snakemake.input.reservoirs), encoding='utf-8')
 links = gpd.read_file(str(snakemake.input.links), encoding='utf-8')
 
-
+gis_folder = os.path.join('data', 'gis')
 output_demand_points = str(snakemake.output.demand_points)
 output_folder = output_demand_points.split(os.path.basename(output_demand_points))[0]
-spatial_output = str(snakemake.params.spatial_output)
+spatial_output = str(snakemake.output.spatial_output)
 
 ## Downloading the GIS data
 
@@ -112,19 +113,11 @@ out_image, out_meta = wp.mask_raster(os.path.join(gis_folder, 'wtd', 'Africa_mod
 with rasterio.open(os.path.join(gis_folder, 'wtd', 'Souss-Massa WTD.tif'), 'w', **out_meta) as dest:
     dest.write(out_image)
 
-with rasterio.open(os.path.join(gis_folder, 'wtd', 'Souss-Massa WTD.tif')) as src:
-    fig, ax = plt.subplots(figsize=(12, 12))
-    show(src, ax=ax, aspect='auto', cmap='gist_earth')
-
 dem_path = os.path.join(gis_folder, 'dem', 'Souss-Massa DEM.tif')
 if not os.path.exists(dem_path):
     wp.merge_rasters(os.path.join(gis_folder, 'dem', '*', '*.hgt'), 
                      'EPSG:4326', 
                      dem_path)
-
-with rasterio.open(os.path.join(gis_folder, 'dem', 'Souss-Massa DEM.tif')) as src:
-    fig, ax = plt.subplots(figsize=(12, 12))
-    show(src, ax=ax, aspect='auto', cmap='terrain')
 
 ## Sampling raster data
 

@@ -14,7 +14,6 @@ sys.path.append("..") #this is to add the avobe folder to the package directory
 import os
 import nexustool
 import pandas as pd
-from dashboard.scripts.plotting import water_delivered_plot, unmet_demand_plot, water_supply_plot, wtd_plot, energy_demand_plot, crop_production
 
 
 # ## 1. Read scenario data
@@ -79,8 +78,8 @@ souss_massa.pa_e = 'pa_e' # Pumping Average Energy
 
 
 souss_massa.df['Pipe_diameter'] = 1
-souss_massa.df.loc[souss_massa.df['type'].str.contains('GW'), 'Pipe_diameter'] = 1.5
-souss_massa.df.loc[souss_massa.df['type'].str.contains('DS'), 'Pipe_diameter'] = 1
+souss_massa.df.loc[souss_massa.df['type'].str.contains('GW'), 'Pipe_diameter'] = 1000 # in here we use a large number to disregar friction losses in groundwater pumping
+souss_massa.df.loc[souss_massa.df['type'].str.contains('DS'), 'Pipe_diameter'] = 1.5
 souss_massa.df.loc[souss_massa.df['type'].str.contains('Pipeline'), 'Pipe_diameter'] = 1.7
 
 souss_massa.pumping_hours_per_day = 10

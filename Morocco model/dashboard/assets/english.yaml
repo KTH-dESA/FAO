@@ -17,6 +17,8 @@ sidebar:
       - Desalinated water
       - Desal & wastewater reuse
       - Desal & Increased water productivity
+      - Integrated strategies
+      - Green generation
       - Yield trends
   climate:
     title: Increased droughts events
@@ -47,6 +49,8 @@ results:
     Yield Trends: Yield trends
     Desalination Wastewater Reuse: Desalination, wastewater reuse
     Reference Wastewater Reuse: Reference, wastewater reuse
+    Integrated Strategies: Integrated strategies
+    Green Generation: Green generation
   climate:
     historical trend: historical trend
     Climate Change: climate change

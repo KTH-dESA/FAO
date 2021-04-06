@@ -36,20 +36,20 @@ def energy_demand_compare_plot(water_delivered, wwtp_data, desal_data, time_fram
     dff_energy.loc[dff_energy['type'].str.contains('SW|Pipeline'), 'type'] = 'Surface water conveyance'
     dff_energy.loc[dff_energy['type'].str.contains('DS'), 'type'] = 'Desalinated water conveyance'
     dff_energy.loc[dff_energy['type'].str.contains('WWR'), 'type'] = 'Wastewater reuse conveyance'
-    dff_energy = dff_energy.groupby(['Scenario', time_frame, 'type', 'Reuse'])['swpa_e'].sum() / 1000000
+    dff_energy = dff_energy.groupby(['Scenario', time_frame, 'type', 'Reuse'])['pa_e'].sum() / 1000000
     dff_energy = dff_energy.reset_index()
     wwtp_data['type'] = 'Wastewater treatment'
     desal_data['type'] = 'Desalination energy'
     for df in [wwtp_data, desal_data]:
-        dff = df.groupby(['Scenario', time_frame, 'type', 'Reuse'])['swpa_e'].sum() / 1000000
+        dff = df.groupby(['Scenario', time_frame, 'type', 'Reuse'])['pa_e'].sum() / 1000000
         dff = dff.reset_index()
         dff_energy = dff_energy.append(dff, sort=False)
     for t in dff_energy['type'].unique():
-        if dff_energy.loc[dff_energy['type'] == t, 'swpa_e'].sum() == 0:
+        if dff_energy.loc[dff_energy['type'] == t, 'pa_e'].sum() == 0:
             dff_energy = dff_energy.loc[dff_energy['type'] != t]
 
-    fig = px.bar(dff_energy, x='Year', y='swpa_e', color='type', facet_col='Scenario', facet_row='Reuse',
-                  labels={"swpa_e": "Energy (GWh)"}, title=title,
+    fig = px.bar(dff_energy, x='Year', y='pa_e', color='type', facet_col='Scenario', facet_row='Reuse',
+                  labels={"pa_e": "Energy (GWh)"}, title=title,
                   facet_col_spacing=0.06, color_discrete_sequence=px.colors.qualitative.Set2)
     fig.update_layout(height=600)
     return fig
@@ -530,7 +530,7 @@ def wwt_energy(df, layout, colors):
 
 def desal_energy(df, layout):
     # emission_factor = 1.76
-    names = {'swpa_e': 'Desalination energy'}
+    names = {'pa_e': 'Desalination energy'}
     dff = df.rename(columns=names).melt(id_vars=['Year', 'Supply point'],
                                         value_vars=names.values())
     dff = dff.groupby(['Year', 'variable'])['value'].sum() / 1000000
@@ -547,10 +547,10 @@ def desal_energy(df, layout):
 
 def pumping_energy(df, layout):
     # emission_factor = 1.76
-    dff = df.groupby(['Year', 'Supply point'])['swpa_e'].sum() / 1000000
+    dff = df.groupby(['Year', 'Supply point'])['pa_e'].sum() / 1000000
     dff = dff.reset_index()
 
-    fig = px.bar(dff, x='Year', y='swpa_e',
+    fig = px.bar(dff, x='Year', y='pa_e',
                   color_discrete_sequence=["#F9ADA0"])
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')

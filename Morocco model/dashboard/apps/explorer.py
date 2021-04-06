@@ -534,7 +534,7 @@ def update_results(selection, ts2, map_type, language, data_current):
                                                                           data_current['level'],
                                                                           data_current['butane_year'],
                                                                           data_current['pv_share'],
-                                                                          ['results.gz', 'production.gz',
+                                                                          ['results.gz', 'production_data.gz',
                                                                            'wwtp_data.gz', 'desal_data.gz'])
 
             df = water_delivered.loc[water_delivered['type'] != 'Transmission Pipeline']
@@ -599,7 +599,7 @@ def update_results(selection, ts2, map_type, language, data_current):
                                   data_current['level'],
                                   data_current['butane_year'],
                                   data_current['pv_share'],
-                                  ['production.gz'])
+                                  ['production_data.gz'])
             df = crop_data.loc[crop_data['point'] == name]
             data['crop production'] = plotting.crop_production(df, 'crop', charts_layout)
 
@@ -638,7 +638,7 @@ def update_results(selection, ts2, map_type, language, data_current):
                                                                       data_current['level'],
                                                                       data_current['butane_year'],
                                                                       data_current['pv_share'],
-                                                                      ['results.gz', 'production.gz',
+                                                                      ['results.gz', 'production_data.gz',
                                                                        'wwtp_data.gz', 'desal_data.gz'])
 
         df = water_delivered.loc[water_delivered['type'] != 'Transmission Pipeline']
@@ -745,6 +745,7 @@ def reset_output(n):
               [Input("current-language", "modified_timestamp")],
               [State('current-language', 'data')])
 def read_compare_data(ts, language):
+    raise PreventUpdate
     if language is None:
         raise PreventUpdate
 
@@ -866,14 +867,14 @@ def func(n1, n2, n3, n4, n5, data):
                        data['level'],
                        data['butane_year'],
                        data['pv_share'],
-                       ['production.gz'])
+                       ['production_data.gz'])
         name = 'crop_production.csv'
     elif button_id == 'download-butane':
         df = load_data(my_path, data['scenario'],
                        data['level'],
                        data['butane_year'],
                        data['pv_share'],
-                       ['summary_results.gz'])
+                       ['butane.gz'])
         name = 'butan_phaseout.csv'
     return send_data_frame(df.to_csv, name)
 
@@ -907,6 +908,8 @@ def update_language(ts, ts2, language, data_current):
         {"label": language_dic['sidebar']['scenarios']['options'][2], "value": 'Desalination'},
         {"label": language_dic['sidebar']['scenarios']['options'][3], "value": "Desalination Wastewater Reuse"},
         {"label": language_dic['sidebar']['scenarios']['options'][4], "value": 'Increased Water Productivity'},
+        {"label": language_dic['sidebar']['scenarios']['options'][5], "value": 'Integrated Strategies'},
+        {"label": language_dic['sidebar']['scenarios']['options'][6], "value": 'Green Generation'},
         # {"label": language_dic['sidebar']['scenarios']['options'][3], "value": 'Yield Trends'},
     ]
     climate = data_current['level']

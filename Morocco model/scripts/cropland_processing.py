@@ -33,7 +33,7 @@ output_folder = output_file.split(os.path.basename(output_file))[0]
 ## Convert coordenate reference system (crs)
 
 MerchidSudMoroc = 26192
-for gdf in [provinces, demand_sites]:
+for gdf in [provinces, provinces]:
     gdf.to_crs(epsg=MerchidSudMoroc, inplace=True)
 
 cropland = cropland.loc[cropland.area_m2>=100] #choose
@@ -66,9 +66,10 @@ df_cropland = create_time_data(cropland, 2019, 2050)
 
 ## Calculating the area share of each croplan area within each province
 
-cropland_temp = cropland.copy()
-cropland_temp.loc[cropland_temp['province']=='Inezgane-Aït Melloul', 'province'] = 'Taroudannt' #Including Inezgane-Aït Melloul irrigated area into results from Taroudant due to lack of data for the former
-df_cropland['area_share'] = df_cropland['Demand point'].map(get_area_share(cropland_temp, 'province', 'area_m2'))
+cropland.loc[cropland['province']=='Inezgane-Aït Melloul', 'province'] = 'Taroudannt' #Including Inezgane-Aït Melloul irrigated area into results from Taroudant due to lack of data for the former
+cropland['area_share'] = get_area_share(cropland, 'province', 'area_m2')
+
+df_cropland = pd.merge(df_cropland, cropland[['Demand point', 'area_share']], on='Demand point')
 
 os.makedirs(output_folder, exist_ok = True)
 df_cropland.to_csv(output_file, index=False)
