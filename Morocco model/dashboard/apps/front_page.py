@@ -20,21 +20,6 @@ pio.templates.default = "plotly_white"
 
 content_folder = os.path.join(my_path, 'assets', 'report_content')
 
-df_results = load_summary_data(my_path, 'compare_results.gz')
-df_desal = load_summary_data(my_path, 'compare_desal.gz')
-df_wwtp = load_summary_data(my_path, 'compare_wwtp.gz')
-
-df_results = df_results.loc[df_results.Year >= 2020]
-df_desal = df_desal.loc[df_desal.Year >= 2020]
-df_wwtp = df_wwtp.loc[df_wwtp.Year >= 2020]
-
-fig_supply = plotting.water_supply_compare_plot(df_results, 'Year', 'Water supply (Mm3)')
-fig_supply.update_layout(charts_layout)
-fig_supply.update_layout(height=500)
-
-fig_unmet = plotting.unmet_demand_compare_plot(df_results, 'Year', 'Unmet demand (%)')
-fig_unmet.update_layout(charts_layout)
-
 
 def results_element(body, chart):
     element = html.Div(
@@ -162,7 +147,7 @@ def toggle_popover(ts, language):
     content = [html.H4(language_dic['front page']['sections'][0], id='first', className='header'),
                results_element(
                    open(os.path.join(content_folder, language, '1. first_section.txt'), encoding="utf-8").read(),
-                   fig_unmet),
+                   {}),
                dcc.Graph(figure=fig),
                html.Br(),
                html.Hr(),
@@ -174,7 +159,7 @@ def toggle_popover(ts, language):
                html.H4(language_dic['front page']['sections'][1], className='header'),
                results_element(
                    open(os.path.join(content_folder, language, '2. first_section.txt'), encoding="utf-8").read(),
-                   fig_unmet),
+                   {}),
                html.Br(),
                html.Hr(className='section-hr', id='third'),
                html.H4(language_dic['front page']['sections'][2], className='header')

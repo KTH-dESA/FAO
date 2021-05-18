@@ -13,11 +13,12 @@ sidebar:
     title: Sélectionnez un scénario
     options:
       - Référence
-      - Réutilisation de référence et des eaux usées
+      - Réutilisation des eaux usées
       - Eau dessalée
       - Dessalement et réutilisation des eaux usées
-      - Intensification de l'irrigation
-      - Yield Trends
+      - Dessalement et Augmentation de la productivité de l'eau
+      - Intégré stratégies
+      - Génération verte
   climate:
     title: Augmentation des épisodes de sécheresse
   cost reduction:
@@ -32,7 +33,7 @@ sidebar:
     year: Année #d'élimination progressive
   pv adoption:
     title: Adoption du solaire PV d'ici 2040
-    share: Partage PV
+    share: Partage PV (%)
   reset: Réinitialiser
   apply: Appliquer
 
@@ -43,10 +44,12 @@ results:
   scenarios:
     Reference: Référence
     Desalination: Eau dessalée
-    Increased Water Productivity: Intensification de l'irrigation
+    Increased Water Productivity: Dessalement et Augmentation de la productivité de l'eau
     Yield Trends: Yield trends
     Desalination Wastewater Reuse: Dessalement, réutilisation des eaux usées
-    Reference Wastewater Reuse: Référence, réutilisation des eaux usées
+    Reference Wastewater Reuse: Réutilisation des eaux usées
+    Integrated Strategies: Intégré stratégies
+    Green Generation: Génération verte
   climate:
     historical trend: tendance historique
     Climate Change: changement climatique
@@ -57,13 +60,14 @@ graphs:
   water supplied: Eau fournie (Mm<sup>3</sup>)
   water treated: Eau traitée (Mm<sup>3</sup>)
   depth to groundwater: Profondeur jusqu'aux eaux souterraines (mbgl)
-  crop production: Crop production (ton)
-  crop production 2: Crop average production (ton)
+  crop production:  La production agricole (ton)
+  crop production 2: Moyenne de la production agricole (ton)
   energy demand: La demande d'énergie (GWh)
   least-cost: Technologie énergétique la moins coûteuse pour l'agriculture
   energy ag: Énergie pour le pompage de l'eau agricole (GWh)
   pv capacity: Capacité installée des panneaux solaires (MW)
   emissions ag: Émissions annuelles dans l'agriculture (MtCO2)
+  costs: Coût annuel total du système (mMAD)
   water supply compare: Eau fournie à Souss-Massa
   energy demand compare: La demande d'énergie à Souss-Massa
   unmet demand compare: Demande d'eau non satisfaite dans l'agriculture à Souss-Massa
@@ -77,12 +81,12 @@ information:
   scenarios:
     title: Informations sur le scénario
     body:
-      - Scénario de référence
-      - On suppose que la demande intérieure augmente avec le temps avec une population croissante de 1,4% par an et que la superficie totale irriguée reste constante.
-      - Scénario de dessalement
-      - Ajout de 275 000 m3 / jour de capacité de dessalement en 2021, dont 150 000 m3 / jour pour Agadir et 125 000 m3 / jour pour l'agriculture de Chtouka. S'étend à 450 000 m3 / jour en 2030 avec une part égale entre les deux régions.
-      - Scénario d'intensification de l'irrigation
-      - Comprend le projet de dessalement et envisage l'extension des serres pour les cultures maraîchères dans les sous-bassins de Chtouka et Souss. Le niveau des serres passe de 5 409 ha en 2020 à 14 919 ha en 2030.
+      Scénario de référence: On suppose que la demande intérieure augmente avec le temps avec une population croissante de 1,4% par an et que la superficie totale irriguée reste constante.
+      Réutilisation des eaux usées: Ce scénario examine les implications de l'augmentation de l'approvisionnement en eau d'irrigation avec les effluents des usines de traitement des eaux usées existantes et prévues. Pour évaluer le plein potentiel de la réutilisation des eaux usées pour répondre aux demandes en eau dans le bassin, nous avons supposé que tous les rejets de ces installations pourraient être utilisés pour répondre aux besoins d'irrigation dans les périmètres d'irrigation les plus proches de l'usine de traitement.
+      Scénario de dessalement: Ajout de 275 000 m3 / jour de capacité de dessalement en 2021, dont 150 000 m3 / jour pour Agadir et 125 000 m3 / jour pour l'agriculture de Chtouka. S'étend à 450 000 m3 / jour en 2030 avec une part égale entre les deux régions.
+      Augmentation de la productivité de l'eau: Pour de nombreuses cultures pratiquées dans le bassin du Souss-Massa, les améliorations apportées à l'irrigation, à l'application d'engrais, au travail du sol et aux pratiques agricoles ont entraîné une augmentation soutenue des rendements au cours des deux dernières décennies. Ce scénario explore le potentiel de ces progrès pour atténuer la surutilisation des ressources en eau dans le bassin (principalement le découvert des eaux souterraines). En d'autres termes, dans quelle mesure le prélèvement des eaux souterraines et les coûts de pompage associés peuvent-ils diminuer si l'on peut utiliser moins d'eau pour maintenir le niveau actuel de production agricole dans le bassin?
+      Intégré stratégies: Ce scénario envisage les stratégies combinées d'augmentation de l'approvisionnement en eau par le biais du dessalement de l'eau de mer et de la réutilisation des eaux usées, et d'atténuation de la demande en eau d'irrigation grâce à une productivité accrue de l'eau.
+      Génération verte: Ce scénario prolonge le scénario intégré en considérant l'expansion du stockage du réservoir (à Mohktar Soussi) de 167 millions de m3 et la reconversion de 35 000 ha de zones agricoles au solaire PV.
   climate:
     title: Informations sur les variables du changement climatique
     body:
