@@ -13,7 +13,7 @@ from dash_extensions import Download
 from dash_extensions.snippets import send_data_frame
 import plotly.graph_objects as go
 import json
-import boto3
+from decouple import config
 
 from scripts import plotting
 from scripts.read_data import load_summary_data, load_data, get_language
@@ -21,7 +21,6 @@ from scripts.read_data import load_summary_data, load_data, get_language
 from app import app, my_path
 from apps import about
 
-client = boto3.client('s3')
 
 # my_path = os.path.join('..', 'Morocco model', 'test dash results')
 spatial_data = os.path.join(my_path, 'spatial_data')
@@ -39,8 +38,7 @@ with open(os.path.join(spatial_data, 'admin', 'provinces.geojson')) as response:
         value['id'] = value['properties']['id']
 
 button_color = 'primary'
-# TODO: create environment variable for token
-token = open(os.path.join(my_path, '.mapbox_token')).read()
+token = config('MAPBOX_TOKEN')
 
 charts_layout = dict(
     autosize=True,    height=350,
