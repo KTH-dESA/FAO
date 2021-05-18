@@ -14,6 +14,7 @@ dependencies:
   - pip
   - pip:
     - dash-extensions
+  - python-decouple
   - s3fs
   - xlrd
   
