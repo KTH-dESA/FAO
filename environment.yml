@@ -6,7 +6,8 @@ channels:
 dependencies:
   - contextily
   - descartes
-  - geopandas
+  - fiona==1.8.13
+  - geopandas==0.8.1
   - json
   - matplotlib
   - notebook
