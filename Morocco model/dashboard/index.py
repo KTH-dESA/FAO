@@ -8,7 +8,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 import plotly.io as pio
 
-from app import app
+from app import app, server
 from apps import explorer, front_page
 
 pio.templates.default = "plotly_white"

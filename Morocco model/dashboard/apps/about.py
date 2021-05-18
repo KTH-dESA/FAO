@@ -10,9 +10,9 @@ from scripts.read_data import get_language
 layout = dbc.Nav([
     dbc.DropdownMenu(
         [dbc.DropdownMenuItem(["English ", html.I(className='fa fa-language')], className="drop-items", id="english"),
-         dbc.DropdownMenuItem(["Spanish ", html.I(className='fa fa-language')], className="drop-items", id="spanish"),
+         # dbc.DropdownMenuItem(["Spanish ", html.I(className='fa fa-language')], className="drop-items", id="spanish"),
          dbc.DropdownMenuItem(["French ", html.I(className='fa fa-language')], className="drop-items", id="french")],
-        label="Language", id='language', nav=True, className="ml-2", disabled=True,
+        label="Language", id='language', nav=True, className="ml-2", disabled=False,
     ),
     dbc.NavItem(dbc.NavLink("About", id='about'), className="ml-2"),
     dbc.Modal(
@@ -43,19 +43,19 @@ def toggle_popover(n_1, n_2, is_open):
 
 @app.callback(
     Output('current-language', 'data'),
-    [Input(language, 'n_clicks_timestamp') for language in ['english', 'spanish', 'french']],
+    [Input(language, 'n_clicks_timestamp') for language in ['english', 'french']],
     [State('current-language', 'data')],
     prevent_initial_call=True
 )
-def current_language(n1, n2, n3, language):
-    language_list = ['english', 'spanish', 'french']
+def current_language(n1, n2, language):
+    language_list = ['english', 'french']
     n_list = []
-    for n in [n1, n2, n3]:
+    for n in [n1, n2]:
         if n is None:
             n_list.append(0)
         else:
             n_list.append(n)
-    if (n1 == n2) and (n1 == n3) and language:
+    if (n1 == n2) and language:
         language = language
     else:
         language_index = np.array(n_list).argmax()

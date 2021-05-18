@@ -8,13 +8,14 @@ dash_folder = "dashboard" #set the dashboard folder
 # PV_RATE = [0, 0.3, 0.5, 0.7] #define the list of solar PV technology cost reduction rate
 # GRID_RATE = [0, -0.3, -0.5, -0.7] #define the list of grid price increment rate
 CLIMATE = ['Trend', 'Climate Change'] #define the list of climates to run
-# CLIMATE = ['Trend']
-SCENARIOS = ['Reference', 'Desalination','Irrigation Intensification', 'Reference Wastewater Reuse', 'Desalination Wastewater Reuse']
+SCENARIOS = ['Reference', 'Desalination','Increased Water Productivity', \
+             'Reference Wastewater Reuse', 'Desalination Wastewater Reuse', \
+             'Integrated Strategies', 'Green Generation']
 W_RATE = [0]
 BT_RATE = [0]
 PV_RATE = [0]
 GRID_RATE = [0]
-PV_LEVELS = [10,20,50]
+PV_LEVELS = [10, 20, 40, 60]
 BUTANE_PHASEOUT_SCENARIOS = [None, 2040, 2030]
 ###############################################################################
 
@@ -28,8 +29,10 @@ rule all:
                   # pv_rate=PV_RATE, grid_rate=GRID_RATE, dash_folder=dash_folder), \
         #expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
                #scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
-        expand("{dash_folder}/data/{scenario}/{climate}/Butane Calculations/{butane_phaseout}/{pv_level}/summary_results.gz",
-               scenario=SCENARIOS, climate=CLIMATE, butane_phaseout=BUTANE_PHASEOUT_SCENARIOS , pv_level=PV_LEVELS , dash_folder=dash_folder)
+        expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
+               scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
+        # expand("{dash_folder}/data/{scenario}/{climate}/Butane Calculations/{butane_phaseout}/{pv_level}/butane.gz",
+               # scenario=SCENARIOS, climate=CLIMATE, butane_phaseout=BUTANE_PHASEOUT_SCENARIOS, pv_level=PV_LEVELS , dash_folder=dash_folder)
 
 rule schematic_processing:
     input: provinces="data/gis/admin/provinces.gpkg", \
@@ -42,13 +45,14 @@ rule schematic_processing:
            diversions="data/schematic/Diversions.kml", \
            reservoirs="data/schematic/Reservoirs.kml", \
            links="data/schematic/Transmission Links.kml"
-    output: demand_points="data/gis/processed layers/demand_points.gpkg"
+    output: demand_points="data/gis/processed layers/demand_points.gpkg", \
+            spatial_output="dashboard/spatial_data/points_coords.csv"
     script: 'scripts/schematic_processing.py'
     
 rule cropland_processing:
     input: demand_points="data/gis/processed layers/demand_points.gpkg", \
            cropland="data/gis/cropland/cropland.csv"
-    output: "data/gis/processed layers/cropland.gz"
+    output: "data/cropland/cropland.gz"
     script: 'scripts/cropland_processing.py'
 
 rule softlinking:
@@ -84,9 +88,9 @@ rule lcoe_maps:
     script: 'scripts/lcoe_maps.py' 
 
 rule butane_calculations:
-    input: results=f"{dash_folder}/data/{scenario}/{climate}/results.gz", \
+    input: results=f"{dash_folder}/data/{{scenario}}/{{climate}}/results.gz", \
             cropland=r"data\cropland\cropland.gz"
     params: scenario="{scenario}", climate="{climate}", \
             butane_phaseout="{butane_phaseout}", pv_level="{pv_level}"
-    output: f"{dash_folder}/data/{{scenario}}/{{climate}}/Butane_Calculations/{{butane_phaseout}}/{{pv_level}}/summary_results.gz"
+    output: f"{dash_folder}/data/{{scenario}}/{{climate}}/Butane Calculations/{{butane_phaseout}}/{{pv_level}}/butane.gz"
     script: 'scripts/butane_calculations.py' 
