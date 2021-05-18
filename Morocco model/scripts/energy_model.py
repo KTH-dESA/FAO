@@ -201,7 +201,11 @@ sm_desal.df[souss_massa.pa_e] = sm_desal.df[souss_massa.sswd] * desal_energy_int
 df_wwtp = pd.read_csv(wwtp_inflow)
 
 #We define an energy intensity for wastewater treatment and compute the energy demand
-wwtp_energy_int = 0.1 # kWh/m3
+if scenario in ['Reference Wastewater Reuse', 'Desalination Wastewater Reuse',
+                'Integrated Strategies', 'Green Generation']:
+    wwtp_energy_int = 0.8 # kWh/m3
+else:
+    wwtp_energy_int = 0.1 # kWh/m3
 df_wwtp['pa_e'] = df_wwtp.value * wwtp_energy_int
 
 

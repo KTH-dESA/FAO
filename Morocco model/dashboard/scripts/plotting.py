@@ -221,8 +221,8 @@ def energy_resources_share_plot(df, title):
     return fig
     
     
-def costs_plot(df, title):
-    dff = df.melt(value_vars=['butane_Subsidy(mMAD)', 'grid_cost(mMAD)', 'PV_Capex(mMAD)'],
+def costs_plot(df, layout):
+    dff = df.melt(value_vars=['PV_Capex(mMAD)', 'butane_Subsidy(mMAD)', 'grid_cost(mMAD)'],
                   id_vars=['Year'])
 
     dff.loc[dff['variable'] == "butane_Subsidy(mMAD)", 'variable'] = "Butane"
@@ -239,7 +239,7 @@ def costs_plot(df, title):
                      "variable": 'Source'
                  }
                  )
-    fig.update_layout(xaxis={'categoryorder': 'total descending'})
+    fig.update_layout(layout)
     # fig.update_layout(height=600)
     return fig
     

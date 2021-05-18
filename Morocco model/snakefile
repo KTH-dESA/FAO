@@ -11,12 +11,11 @@ CLIMATE = ['Trend', 'Climate Change'] #define the list of climates to run
 SCENARIOS = ['Reference', 'Desalination','Increased Water Productivity', \
              'Reference Wastewater Reuse', 'Desalination Wastewater Reuse', \
              'Integrated Strategies', 'Green Generation']
-# SCENARIOS = ['Increased Water Productivity']
 W_RATE = [0]
 BT_RATE = [0]
 PV_RATE = [0]
 GRID_RATE = [0]
-PV_LEVELS = [10, 20, 50, 60]
+PV_LEVELS = [10, 20, 40, 60]
 BUTANE_PHASEOUT_SCENARIOS = [None, 2040, 2030]
 ###############################################################################
 
@@ -30,8 +29,10 @@ rule all:
                   # pv_rate=PV_RATE, grid_rate=GRID_RATE, dash_folder=dash_folder), \
         #expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
                #scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
-        expand("{dash_folder}/data/{scenario}/{climate}/Butane Calculations/{butane_phaseout}/{pv_level}/butane.gz",
-               scenario=SCENARIOS, climate=CLIMATE, butane_phaseout=BUTANE_PHASEOUT_SCENARIOS, pv_level=PV_LEVELS , dash_folder=dash_folder)
+        expand("{dash_folder}/data/{scenario}/{climate}/results.gz",
+               scenario=SCENARIOS, climate=CLIMATE, dash_folder=dash_folder)
+        # expand("{dash_folder}/data/{scenario}/{climate}/Butane Calculations/{butane_phaseout}/{pv_level}/butane.gz",
+               # scenario=SCENARIOS, climate=CLIMATE, butane_phaseout=BUTANE_PHASEOUT_SCENARIOS, pv_level=PV_LEVELS , dash_folder=dash_folder)
 
 rule schematic_processing:
     input: provinces="data/gis/admin/provinces.gpkg", \

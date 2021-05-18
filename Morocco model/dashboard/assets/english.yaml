@@ -34,7 +34,7 @@ sidebar:
     year: Phase-out year
   pv adoption:
     title: Solar PV adoption by year 2040
-    share: PV share
+    share: PV share (%)
   reset: Reset
   apply: Apply
 
@@ -43,7 +43,7 @@ results:
   download: Download
   compare: Compare
   scenarios:
-    Reference: Reference
+    Reference: No intervention
     Desalination: Desalinated water
     Increased Water Productivity: Increased water productivity
     Yield Trends: Yield trends
@@ -68,6 +68,7 @@ graphs:
   energy ag: Energy for agriculture water pumping (GWh)
   pv capacity: PV installed capacity (MW)
   emissions ag: Yearly emissions in agriculture (MtCO2)
+  costs: Total annual system cost (mMAD)
   water supply compare: Water supply in Souss-Massa
   energy demand compare: Energy demand in Souss-Massa
   unmet demand compare: Unmet demand in agriculture Souss-Massa
@@ -81,12 +82,12 @@ information:
   scenarios:
     title: Scenario information
     body:
-      - No intervention
-      - Domestic demands are assumed to increase over time with growing population of 1.4% per year and the total irrigated area is assumed to stay constant.
-      - Desalination scenario
-      - Addition of 275,000 m3/day of desalination capacity in 2021, of which 150,000 m3/day for Agadir and 125,000 for m3/day for Chtouka agriculture. Expands to 450,000 m3/day in 2030 with equal share between both regions.
-      - Desalination & increased water productivity
-      - Includes the desalination project and considers expansion of greenhouses for vegetable crops in Chtouka and Souss sub-basins. The levels of greenhouses increases from 5,409 ha in 2020 to 14,919 ha in 2030.
+      No intervention: Domestic demands are assumed to increase over time with growing population of 1.4% per year and the total irrigated area is assumed to stay constant.
+      Wastewater reuse: This scenario considers the implications of augmenting irrigation water supplies with effluent from existing and planned wastewater treatment plants. To assess the full potential of wastewater reuse to meet water demands within the basin, we assumed that all of the discharge from these facilities could be used to meet irrigation requirements within irrigation perimeters closest to the treatment plant.
+      Desalination scenario: Addition of 275,000 m3/day of desalination capacity in 2021, of which 150,000 m3/day for Agadir and 125,000 for m3/day for Chtouka agriculture. Expands to 450,000 m3/day in 2030 with equal share between both regions.
+      Increased water productivity: For many of the crops that are grown within the Souss-Massa basin, improvements in irrigation, fertilizer application, soil tillage, and farming practices have resulted in sustained increased in yields over the past couple of decades. This scenario explores the potential for these advances to mitigate the overuse of water resources within the basin (primarily groundwater overdraft). That is, to what extent can groundwater drawdown and associated pumping costs decrease if less water can be used to maintain the current level of agricultural production within the basin?
+      Itegrated strategies: This scenario considers the combined strategies of augmenting water supplies through seawater desalination and wastewater reuse and mitigating irrigation water demands through increased water productivity.
+      Green generation: This scenario extends the integrated scenario by considering the expansion of reservoir storage (at Mohktar Soussi) by 167 million m3 and reconversion of 35,000 ha of agricultural areas to solar PV.
   climate:
     title: Climate change variables information
     body:
