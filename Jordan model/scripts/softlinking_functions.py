@@ -3,7 +3,7 @@ sys.path.append("..") #this is to add the avobe folder to the package directory
 import geopandas as gpd
 import pandas as pd
 import numpy as np
-import nexus_tool.weap_tools as wp
+import nexustool.weap_tools as wp
 import re
 from functools import reduce
 import os

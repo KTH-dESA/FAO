@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def load_data(path, scenario, eto, level, files='all'):
-    data_folder = os.path.join(path, 'data_test')
+    data_folder = os.path.join(path, 'data')
     if not eto:
         eto = ['Historical Trend']
     data = os.path.join(data_folder, f'{scenario}{level}', eto[0])
@@ -52,16 +52,16 @@ def data_merging(demand_points, supply_points, pipelines):
 
 def get_demand_data(water_delivered, water_required, name):
     dff_delivered = water_delivered.loc[water_delivered['point'] == name]
-    dff_delivered = dff_delivered.groupby(['Year', 'type', 'point'])['value'].sum() / 1000000
+    dff_delivered = dff_delivered.groupby(['Year', 'type', 'point'])['sswd'].sum() / 1000000
     dff_delivered = dff_delivered.reset_index()
     dff_delivered['label'] = 'Water delivered'
     dff_required = water_required.loc[water_required['point'] == name]
-    dff_required = dff_required.groupby(['Year', 'type', 'point'])['value'].sum() / 1000000
+    dff_required = dff_required.groupby(['Year', 'type', 'point'])['sswd'].sum() / 1000000
     dff_required = dff_required.reset_index()
     dff_required['label'] = 'Water required'
     dff = dff_delivered.append(dff_required, ignore_index=True)
 
-    unmet = round((dff_required['value'] - dff_delivered['value']) / dff_required['value'], 4)
+    unmet = round((dff_required['sswd'] - dff_delivered['sswd']) / dff_required['sswd'], 4)
     dff_unmet = pd.DataFrame({'Year': dff_required['Year'],
                               'Unmet demand': unmet})
     dff_unmet['Unmet demand'].fillna(1, inplace=True)
