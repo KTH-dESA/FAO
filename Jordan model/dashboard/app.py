@@ -8,7 +8,7 @@ from dash_extensions import Download
 from dash_extensions.snippets import send_data_frame
 import plotly.graph_objects as go
 import plotly.io as pio
-from dash_extensions.snippets import send_file
+
 import json
 import pandas as pd
 
@@ -26,13 +26,6 @@ with open(os.path.join(spatial_data, 'Admin', 'governorates.geojson')) as respon
     governorates = json.load(response)
 with open(os.path.join(spatial_data, 'Admin', 'borders.geojson')) as response:
     borders = json.load(response)
-# demand_points = gpd.read_file(os.path.join(spatial_data, 'Demand_points.gpkg'))  # TEST: changed from geojson
-# supply_points = gpd.read_file(os.path.join(spatial_data, 'Supply_points.gpkg'))
-# pipelines = gpd.read_file(os.path.join(spatial_data, 'Pipelines.gpkg'))
-WebMercator = 4326
-
-# for gdf in [demand_points, supply_points, pipelines]:
-#     gdf.to_crs(epsg=WebMercator, inplace=True)
 
 points_coords = pd.read_csv(os.path.join(spatial_data, 'points_coords.csv'))
 pipe_coords = pd.read_csv(os.path.join(spatial_data, 'pipe_coords.csv'))

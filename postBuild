@@ -13,16 +13,16 @@ curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/water_r
 curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/wwtp_inflow.gz" --create-dirs -o "Jordan model/data/processed results/Reference/wwtp_inflow.gz"
 
 
-curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/pipelines_flow.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/pipelines_flow.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New+Resources/pipelines_flow.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/pipelines_flow.gz"
 
-curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/crop_production.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/crop_production.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New+Resources/crop_production.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/crop_production.gz"
 
-curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/desalination.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/desalination.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New+Resources/desalination.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/desalination.gz"
 
-curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/groundwater_supply.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/groundwater_supply.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New+Resources/groundwater_supply.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/groundwater_supply.gz"
 
-curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/water_delivered.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/water_delivered.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New+Resources/water_delivered.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/water_delivered.gz"
 
-curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/water_requirements.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/water_requirements.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New+Resources/water_requirements.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/water_requirements.gz"
 
-curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/wwtp_inflow.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/wwtp_inflow.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New+Resources/wwtp_inflow.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/wwtp_inflow.gz"
