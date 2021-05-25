@@ -212,13 +212,52 @@ class Model():
                                     end=self.end, crop_share=self.crop_share)
 
     ####### energy related methods ########### 
-    def set_efficiency_goal(self, dff, initial_eff, final_eff, 
+    def create_efficiency_goal(self, dff, initial_eff, final_eff, 
                             init_year, end_year):
-        years = np.arange(year2 - year1 + 1) + 2020
+        if initial_eff > final_eff:
+            final_eff = initial_eff
+        years = np.arange(end_year - init_year + 1) + init_year
         efficiencies = np.linspace(initial_eff, final_eff, 
                                    end_year - init_year + 1)
         df_eff = pd.DataFrame({'Year': years, self.pump_eff: efficiencies})
-    return dff.merge(df_eff, on='Year')[self.pump_eff]
+        dff = dff.copy().drop(columns=[self.pump_eff])
+        dff = dff.merge(df_eff, how="left")
+        return np.array(dff[self.pump_eff])
+        
+    
+    def set_efficiency_goal(self, category, efficiency_goal, names=None):
+        if category == 'pipeline':
+            feature = self.pipeline
+        elif category == 'well':
+            feature = self.well
+            
+        if isinstance(names, type(None)):
+            for index, group in self.df.groupby(feature):
+                self.df.loc[self.df[feature]==index, self.pump_eff] = \
+                                              self.create_efficiency_goal(group, 
+                                              group[self.pump_eff].min(), 
+                                              efficiency_goal['efficiency'], 
+                                              efficiency_goal['init_year'], 
+                                              efficiency_goal['end_year'])
+        elif isinstance(names, list):
+            for name in names:
+                dff = self.df.loc[self.df[feature]==name]
+                self.df.loc[self.df[feature]==name, self.pump_eff] = \
+                                              self.create_efficiency_goal(dff, 
+                                              dff[self.pump_eff].min(), 
+                                              efficiency_goal['efficiency'], 
+                                              efficiency_goal['init_year'], 
+                                              efficiency_goal['end_year'])
+        elif isinstance(names, str):
+            dff = self.df.loc[self.df[feature]==names]
+            self.df.loc[self.df[feature]==names, self.pump_eff] = \
+                                              self.create_efficiency_goal(dff, 
+                                              dff[self.pump_eff].min(), 
+                                              efficiency_goal['efficiency'], 
+                                              efficiency_goal['init_year'], 
+                                              efficiency_goal['end_year'])
+        else:
+            raise TypeError(f'Invalid type {type(names)} for names. Names should be a string or a list of strings')
     
     
     def set_specifications(self, category, diameter, pumping_hours_per_day=None, 
@@ -257,15 +296,7 @@ class Model():
         if isinstance(names, type(None)):
             self.df[self.D] = diameter #in m
             self.df[self.pumping_hours_per_day] = pumping_hours_per_day
-            if efficiency_goal:
-                for index, group in self.df.groupby(['Year', feature]):
-                    group[self.pump_eff] = set_efficiency_goal(group, 
-                                                               pump_efficiency, 
-                                                               efficiency_goal['efficiency'], 
-                                                               efficiency_goal['init_year'], 
-                                                               efficiency_goal['end_year'])
-            else:
-                self.df[self.pump_eff] = pump_efficiency
+            self.df[self.pump_eff] = pump_efficiency
             if distribute=='proportionally':
                 dff = self.df.groupby(['Year', feature])[['sswd']].sum().reset_index()
                 df_amount = dff.loc[dff['Year']==2020].copy()
@@ -288,6 +319,9 @@ class Model():
                 self.df.loc[self.df[feature]==names, 'pipe_amount'] = amount
         else:
             raise TypeError(f'Invalid type {type(names)} for names. Names should be a string or a list of strings')
+        
+        if efficiency_goal:
+            self.set_efficiency_goal(category, efficiency_goal, names)
     
     def pipe_area(self):
         self.df[self.A] = (pi*self.df[self.D]**2)/4
