@@ -1,7 +1,28 @@
-curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/cropland.gz" --create-dirs -o "Morocco model/data/cropland/cropland.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/pipelines_flow.gz" --create-dirs -o "Jordan model/data/processed results/Reference/pipelines_flow.gz"
 
-curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/demand_data.gz" --create-dirs -o "Morocco model/data/processed results/Desalination/Climate Change/demand_data.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/crop_production.gz" --create-dirs -o "Jordan model/data/processed results/Reference/crop_production.gz"
 
-curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/wwtp_inflow.gz" --create-dirs -o "Morocco model/data/processed results/Desalination/Climate Change/wwtp_inflow.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/desalination.gz" --create-dirs -o "Jordan model/data/processed results/Reference/desalination.gz"
 
-curl "https://souss-massa-dev.s3.us-east-2.amazonaws.com/post_build/production.gz" --create-dirs -o "Morocco model/data/processed results/Desalination/Climate Change/production.gz"
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/groundwater_supply.gz" --create-dirs -o "Jordan model/data/processed results/Reference/groundwater_supply.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/water_delivered.gz" --create-dirs -o "Jordan model/data/processed results/Reference/water_delivered.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/water_requirements.gz" --create-dirs -o "Jordan model/data/processed results/Reference/water_requirements.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/Reference/wwtp_inflow.gz" --create-dirs -o "Jordan model/data/processed results/Reference/wwtp_inflow.gz"
+
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/pipelines_flow.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/pipelines_flow.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/crop_production.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/crop_production.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/desalination.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/desalination.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/groundwater_supply.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/groundwater_supply.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/water_delivered.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/water_delivered.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/water_requirements.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/water_requirements.gz"
+
+curl "https://jordan-nexus.s3.us-east-2.amazonaws.com/training/New Resources/wwtp_inflow.gz" --create-dirs -o "Jordan model/data/processed results/New Resources/wwtp_inflow.gz"

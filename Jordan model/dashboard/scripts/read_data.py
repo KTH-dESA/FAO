@@ -66,31 +66,3 @@ def get_demand_data(water_delivered, water_required, name):
                               'Unmet demand': unmet})
     dff_unmet['Unmet demand'].fillna(1, inplace=True)
     return dff, dff_unmet
-    
-    
-def merge_scenario_data(path, scenarios):
-    path = 'dashboard'
-
-    files = ['results.gz', 'wwtp_data.gz', 'desal_data.gz',
-             'summary_results.gz', 'production.gz']
-
-    all_results = [pd.DataFrame()] * 7
-    for scenario, climate in scenarios.items():
-        results = load_data(path, scenario, [climate], '', 'all')
-
-        for dff in results: 
-            dff['Scenario'] = scenario
-            dff['Climate'] = climate
-
-        for i, dff in enumerate(results):
-            all_results[i] = all_results[i].append(dff, ignore_index=True)
-
-    df_delivered = all_results[0]
-    df_required = all_results[1]
-    df_gw = all_results[2]
-    df_pipelines = all_results[3]
-    df_wwtp = all_results[4]
-    df_desal = all_results[5]
-    df_crop = all_results[6]
-    
-    return df_delivered, df_required, df_gw, df_pipelines, df_wwtp, df_desal, df_crop
