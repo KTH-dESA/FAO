@@ -60,6 +60,8 @@ class Model():
     kc_dict = {}
     pipeline = 'pipeline'
     well = 'point'
+    wwtp = 'point'
+    desal_plant = 'point'
     pumping_hours_per_day = 'pumpng_hours_per_day'
     deff = 1
     aeff = 0.45
@@ -86,6 +88,8 @@ class Model():
     Ken_visc = 1.004e-06
     dens = 1000
     k = 0.061e-3  # roughness for ductile iron pipe
+    ww_energy_int = 'ww_energy_int'
+    desal_energy_int = 'desal_energy_int'
     start_year = 0
     end_year = 30
 
@@ -208,8 +212,18 @@ class Model():
                                     end=self.end, crop_share=self.crop_share)
 
     ####### energy related methods ########### 
-    def set_specifications(self, category, diameter, pumping_hours_per_day, 
-                           pump_efficiency=1, amount=None, distribute=None, names=None):
+    def set_efficiency_goal(self, dff, initial_eff, final_eff, 
+                            init_year, end_year):
+        years = np.arange(year2 - year1 + 1) + 2020
+        efficiencies = np.linspace(initial_eff, final_eff, 
+                                   end_year - init_year + 1)
+        df_eff = pd.DataFrame({'Year': years, self.pump_eff: efficiencies})
+    return dff.merge(df_eff, on='Year')[self.pump_eff]
+    
+    
+    def set_specifications(self, category, diameter, pumping_hours_per_day=None, 
+                           pump_efficiency=1, efficiency_goal=None, amount=None, 
+                           distribute=None, names=None):
         '''Sets the specification for pipelines or wells
 
         Parameters
@@ -243,7 +257,15 @@ class Model():
         if isinstance(names, type(None)):
             self.df[self.D] = diameter #in m
             self.df[self.pumping_hours_per_day] = pumping_hours_per_day
-            self.df[self.pump_eff] = pump_efficiency
+            if efficiency_goal:
+                for index, group in self.df.groupby(['Year', feature]):
+                    group[self.pump_eff] = set_efficiency_goal(group, 
+                                                               pump_efficiency, 
+                                                               efficiency_goal['efficiency'], 
+                                                               efficiency_goal['init_year'], 
+                                                               efficiency_goal['end_year'])
+            else:
+                self.df[self.pump_eff] = pump_efficiency
             if distribute=='proportionally':
                 dff = self.df.groupby(['Year', feature])[['sswd']].sum().reset_index()
                 df_amount = dff.loc[dff['Year']==2020].copy()
@@ -335,7 +357,48 @@ class Model():
                 self.df[self.pp_e] = ((self.df[self.pwd] * self.df[self.tdh] * self.g * self.dens) / (self.df[self.pump_eff] * 1000))
             self.df[self.pa_e] = ((self.df[self.sswd] * self.df[self.tdh] * self.g * self.dens) / (self.df[self.pump_eff] * 1000 * 3600))
             self.df.loc[self.df[self.pa_e]<0, self.pa_e] = 0
+            
+    def set_treatment_energy(self, category, energy_int, names=None):
+        '''Sets the specification for pipelines or wells
 
+        Parameters
+        ----------
+        category : ['wastewater', 'desalination']
+            The category to configure
+        energy_int : float
+            Energy intensity of treatment
+        names: string, list
+            Contains the name or names of the treatment plants to configure
+
+        Raises
+        ------
+        TypeError
+            Invalid type for names
+        '''
+        if category == 'wastewater':
+            feature = self.wwtp
+            energy_feature = self.ww_energy_int
+        elif category == 'desalination':
+            feature = self.desal_plant
+            energy_feature = self.desal_energy_int
+        
+        if isinstance(names, type(None)):
+            self.df[energy_feature] = energy_int
+        elif isinstance(names, list):
+            for name in names:
+                self.df.loc[self.df[feature]==name, energy_feature] = energy_int #in m
+        elif isinstance(names, str):
+            self.df.loc[self.df[feature]==names, energy_feature] = energy_int #in m
+        else:
+            raise TypeError(f'Invalid type {type(names)} for names. Names should be a string or a list of strings')
+
+    def get_treatment_energy(self, category):
+        if category == 'wastewater':
+            energy_feature = self.ww_energy_int
+        elif category == 'desalination':
+            energy_feature = self.desal_energy_int
+            
+        self.df[self.pa_e] = self.df[self.sswd] * self.df[energy_feature]
 
     ####### technologies and LCOE related methods #########
     def create_wind_turbine(self, wind_turbine, life, om_cost,
