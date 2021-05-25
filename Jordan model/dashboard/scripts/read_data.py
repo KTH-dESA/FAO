@@ -1,13 +1,29 @@
-import os
-
 import pandas as pd
+import boto3, gzip
+from decouple import config
+
+from_server = True
+server = 'jordan-nexus'
+
+AWS_ACCESS_ID = config('AWS_ACCESS_ID')
+AWS_SECRET_KEY = config('AWS_SECRET_KEY')
+AWS_REGION = config('AWS_REGION')
+
+resource = boto3.resource(
+    's3',
+    aws_access_key_id=AWS_ACCESS_ID,
+    aws_secret_access_key=AWS_SECRET_KEY,
+    region_name=AWS_REGION
+)
 
 
-def load_data(path, scenario, eto, level, files='all'):
-    data_folder = os.path.join(path, 'data')
+def load_data(scenario, eto, efficiency, files='all'):
+    data_folder = 'data'
+    efficiencies = {0.5: 'Current Efficiency', 0.6: '60% Efficiency',
+                    0.7: '70% Efficiency', 0.8: '80% Efficiency'}
     if not eto:
         eto = ['Historical Trend']
-    data = os.path.join(data_folder, f'{scenario}{level}', eto[0])
+    data = '/'.join([data_folder, scenario, eto[0], efficiencies[efficiency]])
 
     if files == 'all':
         files = ['water_delivered.gz', 'water_requirements.gz',
@@ -17,11 +33,15 @@ def load_data(path, scenario, eto, level, files='all'):
         files = [files]
 
     if len(files) == 1:
-        output = pd.read_csv(os.path.join(data, files[0]))
+        obj = resource.Object(server, '/'.join([data, files[0]]))
+        with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
+            output = pd.read_csv(gzipfile)
     else:
         output = []
         for file in files:
-            output.append(pd.read_csv(os.path.join(data, file)))
+            obj = resource.Object(server, '/'.join([data, file]))
+            with gzip.GzipFile(fileobj=obj.get()["Body"]) as gzipfile:
+                output.append(pd.read_csv(gzipfile))
     return output
 
 
@@ -54,15 +74,15 @@ def get_demand_data(water_delivered, water_required, name):
     dff_delivered = water_delivered.loc[water_delivered['point'] == name]
     dff_delivered = dff_delivered.groupby(['Year', 'type', 'point'])['sswd'].sum() / 1000000
     dff_delivered = dff_delivered.reset_index()
-    dff_delivered['label'] = 'Water delivered'
+    # dff_delivered['label'] = 'Water delivered'
     dff_required = water_required.loc[water_required['point'] == name]
     dff_required = dff_required.groupby(['Year', 'type', 'point'])['sswd'].sum() / 1000000
     dff_required = dff_required.reset_index()
-    dff_required['label'] = 'Water required'
-    dff = dff_delivered.append(dff_required, ignore_index=True)
+    # dff_required['label'] = 'Water required'
+    # dff = dff_delivered.append(dff_required, ignore_index=True)
 
     unmet = round((dff_required['sswd'] - dff_delivered['sswd']) / dff_required['sswd'], 4)
     dff_unmet = pd.DataFrame({'Year': dff_required['Year'],
                               'Unmet demand': unmet})
     dff_unmet['Unmet demand'].fillna(1, inplace=True)
-    return dff, dff_unmet
+    return dff_delivered, dff_unmet
