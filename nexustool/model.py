@@ -58,7 +58,11 @@ class Model():
     crop_column = 'crop'
     ky_dict = {}
     kc_dict = {}
-    pumping_hours_per_day = 10
+    pipeline = 'pipeline'
+    well = 'point'
+    wwtp = 'point'
+    desal_plant = 'point'
+    pumping_hours_per_day = 'pumpng_hours_per_day'
     deff = 1
     aeff = 0.45
     ky_values = {}
@@ -77,52 +81,20 @@ class Model():
     Re = 'Re'
     f = 'f'
     trans_eff = 0
-    pump_eff = 0.6
+    pump_eff = 'pump_eff'
     technologies = {}
     discount_rate = 0
     g = 9.81  # gravitational acceleration in(m/sec2)
     Ken_visc = 1.004e-06
     dens = 1000
-    k = 0.26  # roughness for cast iron
+    k = 0.061e-3  # roughness for ductile iron pipe
+    ww_energy_int = 'ww_energy_int'
+    desal_energy_int = 'desal_energy_int'
     start_year = 0
     end_year = 30
 
-    def __init__(self, df, eto=eto, lat=lat, elevation_diff=elevation_diff,
-                 wind=wind, srad=srad, tmin=tmin, tmax=tmax,
-                 tavg=tavg, crop_share=crop_share, crop_area=crop_area,
-                 seasons=seasons, start=start, end=end,
-                 crop_calendar=crop_calendar, crop_column=crop_column,
-                 pumping_hours_per_day=pumping_hours_per_day,
-                 deff=deff, aeff=aeff, gw_depth=gw_depth,
-                 des_int=des_int, des_ener=des_ener, pp_e=pp_e,
-                 pa_e=pa_e, trans_eff=trans_eff,
-                 pump_eff=pump_eff):
+    def __init__(self, df):
         self.df = df
-        self.eto = eto
-        self.lat = lat
-        self.elevation_diff = elevation_diff
-        self.wind = wind
-        self.srad = srad
-        self.tmin = tmin
-        self.tmax = tmax
-        self.tavg = tavg
-        self.crop_share = crop_share
-        self.crop_area = crop_area
-        self.seasons = seasons
-        self.start = start
-        self.end = end
-        self.crop_calendar = crop_calendar
-        self.crop_column = crop_column
-        self.pumping_hours_per_day = pumping_hours_per_day
-        self.deff = deff
-        self.aeff = aeff
-        self.gw_depth = gw_depth
-        self.des_int = des_int
-        self.des_ener = des_ener
-        self.pp_e = pp_e
-        self.pa_e = pa_e  # new
-        self.trans_eff = trans_eff
-        self.pump_eff = pump_eff  # changed from self.pump_eff = trans_eff
 
     def print_properties(self):
         print('Properties names:')
@@ -240,6 +212,83 @@ class Model():
                                     end=self.end, crop_share=self.crop_share)
 
     ####### energy related methods ########### 
+    def set_efficiency_goal(self, dff, initial_eff, final_eff, 
+                            init_year, end_year):
+        years = np.arange(year2 - year1 + 1) + 2020
+        efficiencies = np.linspace(initial_eff, final_eff, 
+                                   end_year - init_year + 1)
+        df_eff = pd.DataFrame({'Year': years, self.pump_eff: efficiencies})
+    return dff.merge(df_eff, on='Year')[self.pump_eff]
+    
+    
+    def set_specifications(self, category, diameter, pumping_hours_per_day=None, 
+                           pump_efficiency=1, efficiency_goal=None, amount=None, 
+                           distribute=None, names=None):
+        '''Sets the specification for pipelines or wells
+
+        Parameters
+        ----------
+        category : ['pipeline', 'well']
+            The category to configure
+        diameter : float, int
+            The diameter of the pipeline or well
+        pumping_hours_per_day : float, int
+            The average amount of hours pumped per day
+        pump_efficiency : float
+            Pumping energy efficiency
+        amount : int
+            Amount of pipelines or wells
+        distribute : [None, 'proportionally']
+            If 'proportionally, distributes the amount of specified wells 
+            proportionally based on the water extractions per well field
+        names: string, list
+            Contains the name or names of the pipelines/wells to configure
+
+        Raises
+        ------
+        TypeError
+            Invalid type for names
+        '''
+        if category == 'pipeline':
+            feature = self.pipeline
+        elif category == 'well':
+            feature = self.well
+        
+        if isinstance(names, type(None)):
+            self.df[self.D] = diameter #in m
+            self.df[self.pumping_hours_per_day] = pumping_hours_per_day
+            if efficiency_goal:
+                for index, group in self.df.groupby(['Year', feature]):
+                    group[self.pump_eff] = set_efficiency_goal(group, 
+                                                               pump_efficiency, 
+                                                               efficiency_goal['efficiency'], 
+                                                               efficiency_goal['init_year'], 
+                                                               efficiency_goal['end_year'])
+            else:
+                self.df[self.pump_eff] = pump_efficiency
+            if distribute=='proportionally':
+                dff = self.df.groupby(['Year', feature])[['sswd']].sum().reset_index()
+                df_amount = dff.loc[dff['Year']==2020].copy()
+                df_amount['pipe_amount'] = np.ceil(df_amount['sswd'] / df_amount['sswd'].sum() * amount)
+                self.df = self.df.merge(df_amount[[feature, 'pipe_amount']], on=feature)
+            else:
+                self.df['pipe_amount'] = amount
+        elif isinstance(names, list):
+            for name in names:
+                self.df.loc[self.df[feature]==name, self.D] = diameter #in m
+                self.df.loc[self.df[feature]==name, self.pumping_hours_per_day] = pumping_hours_per_day
+                self.df.loc[self.df[feature]==name, self.pump_eff] = pump_efficiency
+                if amount:
+                    self.df.loc[self.df[feature]==name, 'pipe_amount'] = amount
+        elif isinstance(names, str):
+            self.df.loc[self.df[feature]==names, self.D] = diameter #in m
+            self.df.loc[self.df[feature]==names, self.pumping_hours_per_day] = pumping_hours_per_day
+            self.df.loc[self.df[feature]==names, self.pump_eff] = pump_efficiency
+            if amount:
+                self.df.loc[self.df[feature]==names, 'pipe_amount'] = amount
+        else:
+            raise TypeError(f'Invalid type {type(names)} for names. Names should be a string or a list of strings')
+    
     def pipe_area(self):
         self.df[self.A] = (pi*self.df[self.D]**2)/4
 
@@ -248,9 +297,9 @@ class Model():
             for i in range(1, 13):
                 _avg_Q = '{}{}'.format(self.sswd, i)
                 _mV = '{}{}'.format(self.mV, i)
-                self.df[_mV] = self.df[_avg_Q] / (30 * self.pumping_hours_per_day * 60 * 60) / self.df[self.A]
+                self.df[_mV] = self.df[_avg_Q] / (30 * self.df[self.pumping_hours_per_day] * 60 * 60) / self.df[self.A]
         else:
-            self.df[self.mV] = self.df[self.sswd] / (30 * self.pumping_hours_per_day * 60 * 60) / self.df[self.A]  # convert m3/month to m3/s (30day*pump_hours_day*60min/h*60s/min)
+            self.df[self.mV] = self.df[self.sswd] / self.df['pipe_amount'] / (30 * self.df[self.pumping_hours_per_day] * 60 * 60) / self.df[self.A]  # convert m3/month to m3/s (30day*pump_hours_day*60min/h*60s/min)
 
     def reynolds(self, axis=0):
         if axis:
@@ -278,7 +327,7 @@ class Model():
                 _tdh_sw = '{}{}'.format(self.tdh, i)
 
                 if friction:
-                    f_losses = (self.df[_f] * self.df[self.L] * 16 * ((self.df[_avg_Q] / (30 * self.pumping_hours_per_day * 60 * 60)) ** 2)) / ((self.df[self.D] ** 5) * 2 * self.g * (pi ** 2))
+                    f_losses = (self.df[_f] * self.df[self.L] * 16 * ((self.df[_avg_Q] / (30 * self.df[self.pumping_hours_per_day] * 60 * 60)) ** 2)) / ((self.df[self.D] ** 5) * 2 * self.g * (pi ** 2))
                 else:
                     f_losses = 0
                 self.df[_tdh_sw] = self.df[self.elevation_diff] + f_losses
@@ -299,14 +348,57 @@ class Model():
                 _avg_Q = '{}{}'.format(self.sswd, i)  # average water flow in the pipeline. To be updated with WEAP output
                 _tdh_sw = '{}{}'.format(self.tdh, i)
 
-                self.df[_swpp_e] = ((self.df[_peak_Q] * self.df[_tdh_sw] * self.g * self.dens) / (self.pump_eff * 1000))  # to convert E from W to KW
+                self.df[_swpp_e] = ((self.df[_peak_Q] * self.df[_tdh_sw] * self.g * self.dens) / (self.df[self.pump_eff] * 1000))  # to convert E from W to KW
                 self.df[_swpa_e] = ((self.df[_avg_Q] * self.df[_tdh_sw] * self.g * self.dens) / (
-                            self.pump_eff * 1000 * 3600))  # to convert E from J to KWh
+                            self.df[self.pump_eff] * 1000 * 3600))  # to convert E from J to KWh
 
         else:
-            self.df[self.pp_e] = ((self.df[self.pwd] * self.df[self.tdh] * self.g * self.dens) / (self.pump_eff * 1000))
-            self.df[self.pa_e] = ((self.df[self.sswd] * self.df[self.tdh] * self.g * self.dens) / (self.pump_eff * 1000 * 3600))
+            if self.pwd in self.df.columns:
+                self.df[self.pp_e] = ((self.df[self.pwd] * self.df[self.tdh] * self.g * self.dens) / (self.df[self.pump_eff] * 1000))
+            self.df[self.pa_e] = ((self.df[self.sswd] * self.df[self.tdh] * self.g * self.dens) / (self.df[self.pump_eff] * 1000 * 3600))
+            self.df.loc[self.df[self.pa_e]<0, self.pa_e] = 0
+            
+    def set_treatment_energy(self, category, energy_int, names=None):
+        '''Sets the specification for pipelines or wells
 
+        Parameters
+        ----------
+        category : ['wastewater', 'desalination']
+            The category to configure
+        energy_int : float
+            Energy intensity of treatment
+        names: string, list
+            Contains the name or names of the treatment plants to configure
+
+        Raises
+        ------
+        TypeError
+            Invalid type for names
+        '''
+        if category == 'wastewater':
+            feature = self.wwtp
+            energy_feature = self.ww_energy_int
+        elif category == 'desalination':
+            feature = self.desal_plant
+            energy_feature = self.desal_energy_int
+        
+        if isinstance(names, type(None)):
+            self.df[energy_feature] = energy_int
+        elif isinstance(names, list):
+            for name in names:
+                self.df.loc[self.df[feature]==name, energy_feature] = energy_int #in m
+        elif isinstance(names, str):
+            self.df.loc[self.df[feature]==names, energy_feature] = energy_int #in m
+        else:
+            raise TypeError(f'Invalid type {type(names)} for names. Names should be a string or a list of strings')
+
+    def get_treatment_energy(self, category):
+        if category == 'wastewater':
+            energy_feature = self.ww_energy_int
+        elif category == 'desalination':
+            energy_feature = self.desal_energy_int
+            
+        self.df[self.pa_e] = self.df[self.sswd] * self.df[energy_feature]
 
     ####### technologies and LCOE related methods #########
     def create_wind_turbine(self, wind_turbine, life, om_cost,

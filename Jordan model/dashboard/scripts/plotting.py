@@ -56,7 +56,7 @@ def plot_pipelines(df):
 
 
 def water_delivered(df, layout, title):
-    fig = px.bar(df, x='Year', y='value', color='type',
+    fig = px.bar(df, x='Year', y='sswd', color='type',
                   color_discrete_sequence=px.colors.qualitative.Dark2)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -81,7 +81,7 @@ def wtd_plot(df, layout, title):
 
 
 def groundwater_extraction(df, layout, title):
-    fig = px.bar(df, x='Year', y='value', color='point',
+    fig = px.bar(df, x='Year', y='sswd', color='point',
                   color_discrete_sequence=px.colors.qualitative.G10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -112,9 +112,9 @@ def energy_demand(df, layout, title, initial_eff, final_eff):
     # else:
     #     df['valueWithEff'] = df['value'] / 0.45
     df = pumping_efficiency(df, initial_eff, final_eff, 2020, 2050)
-    df['value'] /= df['eff']
+    df['pa_e'] /= df['eff']
 
-    fig = px.bar(df, x='Year', y='value', color='type',
+    fig = px.bar(df, x='Year', y='pa_e', color='type',
                   color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
@@ -129,8 +129,8 @@ def plot_water_delivered(df, layout, title):
     :param title: title of the plot
     :return: Plotly figure object
     """
-    df['value'] = round(df['value'], 4)
-    fig = px.line(df, x='Year', y='value', color='label',
+    df['sswd'] = round(df['sswd'], 4)
+    fig = px.line(df, x='Year', y='sswd', color='label',
                   color_discrete_sequence=px.colors.qualitative.Dark2)
     fig.update_traces(fill='tonexty')
     fig.update_layout(layout, title=title)
@@ -158,8 +158,8 @@ def plot_water_supply(df, colors, layout, title):
     :param title: title of the plot
     :return: Plotly figure object
     """
-    df['value'] = round(df['value'], 4)
-    fig = px.area(df, x='Year', y='value', color_discrete_sequence=colors)
+    df['sswd'] = round(df['sswd'], 4)
+    fig = px.area(df, x='Year', y='sswd', color_discrete_sequence=colors)
     fig.update_layout(layout, title=title)
     return fig
 
@@ -189,8 +189,8 @@ def plot_energy_for_pumping(df, colors, layout, title, initial_eff, final_eff):
     """
     # df['value'] = round(df['SWPA_E_'], 4)
     df = pumping_efficiency(df, initial_eff, final_eff, 2020, 2050)
-    df['SWPA_E_'] /= df['eff']
-    fig = px.area(df, x='Year', y='SWPA_E_',
+    df['pa_e'] /= df['eff']
+    fig = px.area(df, x='Year', y='pa_e',
                   color_discrete_sequence=colors)
     fig.update_layout(layout, title=title)
     return fig
@@ -201,7 +201,7 @@ def plot_production(df, layout, title, color):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    fig = px.bar(df, x='Year', y='value',
+    fig = px.bar(df, x='Year', y='production',
                  color=color,
                  title=title,
                  color_discrete_sequence=colors)
@@ -215,7 +215,7 @@ def plot_production_by_gov(df, layout, title, y, color):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    fig = px.bar(df, x='value', y=y, color=color,
+    fig = px.bar(df, x='production', y=y, color=color,
                  title=title, orientation="h",
                  color_discrete_sequence=colors)
     fig.update_layout(layout, height=500, yaxis={'categoryorder': 'total ascending'},
@@ -234,7 +234,7 @@ def plot_water_delivered_by_gov(df, layout, title):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    fig = px.area(df, x='Year', y='value', color='Governorate',
+    fig = px.area(df, x='Year', y='sswd', color='Governorate',
                   title=title,
                   color_discrete_sequence=colors)
     fig.update_layout(layout)

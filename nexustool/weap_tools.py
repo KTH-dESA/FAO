@@ -23,15 +23,16 @@ def create_folder(path):
     if not os.path.exists(path):
         os.mkdir(path)
         
-def mask_raster(raster_path, mask_path, crs):
+def mask_raster(raster_path, mask_path, crs, fill_nan=False):
     with fiona.open(mask_path, "r") as shapefile:
         shapes = [feature["geometry"] for feature in shapefile]
 
     with rasterio.open(raster_path) as src:
         out_image, out_transform = rasterio.mask.mask(src, shapes, crop=True)
-        out_image[out_image<0] = np.nan
-        mask = (out_image!=0)
-        out_image = fillnodata(out_image, mask)
+        if fill_nan:
+            out_image[out_image<0] = np.nan
+            mask = (out_image!=0)
+            out_image = fillnodata(out_image, mask)
         out_meta = src.meta
 
     out_meta.update({"driver": "GTiff",

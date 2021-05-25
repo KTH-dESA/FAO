@@ -154,7 +154,7 @@ scenario_options = html.Div(
                     {"label": "Reference", "value": 'Reference'},
                     # {"label": "Improved agricultural efficiency", "value": 'Improve AG eff'},
                     {"label": "New water resources", "value": 'New Resources'},
-                    {"label": "Reduce non-revenue water", "value": 'Reduce NRW'},
+                    {"label": "Reduce non-revenue water", "value": 'Reduce NRW to 20 percent'},
                     {"label": "Increased water productivity", "value": 'Increased Water Productivity'},
                 ],
                 value='Reference',
@@ -495,14 +495,14 @@ def plot_map(background, map_type):
 def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow,
                wwtp_data, desal_data, crop_production, initial_eff, final_eff):
     emission_factor = 0.643924449
-    dff_delivered = water_delivered.groupby(['Year', 'type'])['value'].sum() / 1000000
+    dff_delivered = water_delivered.groupby(['Year', 'type'])['sswd'].sum() / 1000000
     dff_delivered = dff_delivered.reset_index()
-    dff_required = water_required.groupby(['Year', 'type'])['value'].sum() / 1000000
+    dff_required = water_required.groupby(['Year', 'type'])['sswd'].sum() / 1000000
     dff_required = dff_required.reset_index()
 
     dff_unmet = dff_required.copy()
-    dff_unmet['value'] = (dff_unmet.value - dff_unmet.set_index(['Year', 'type']).index.map(
-        dff_delivered.set_index(['Year', 'type']).value)) / dff_unmet.value
+    dff_unmet['value'] = (dff_unmet['sswd'] - dff_unmet.set_index(['Year', 'type']).index.map(
+        dff_delivered.set_index(['Year', 'type'])['sswd'])) / dff_unmet['sswd']
 
     df_production = crop_production.groupby(['Year', 'variable']).sum() / 1000000
     df_production.reset_index(inplace=True)
@@ -511,10 +511,10 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow,
     pl_flow['type'] = 'Water conveyance'
 
     for df in [wwtp_data, desal_data, gw_pumped, pl_flow]:
-        dff = df.groupby(['Year', 'type'])['SWPA_E_'].sum() / (1000000)
+        dff = df.groupby(['Year', 'type'])['pa_e'].sum() / (1000000)
         dff = dff.reset_index()
         dff_energy = dff_energy.append(dff, sort=False)
-    dff_energy.rename(columns={'SWPA_E_': 'value'}, inplace=True)
+    # dff_energy.rename(columns={'pa_e': 'value'}, inplace=True)
 
     data['WaterDelivered'] = plotting.water_delivered(dff_delivered, layout, 'Water delivered (Mm3)')
     data['UnmetDemand'] = plotting.unmet_demand(dff_unmet.reset_index(), layout, 'Unmet water demand (%)')
@@ -526,7 +526,7 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow,
 
     dff = gw_pumped.copy()
     dff['point'] = [x[1] for x in dff['point'].str.split('_')]
-    dff = dff.groupby(['Year', 'point'])['value'].sum() / 1000000
+    dff = dff.groupby(['Year', 'point'])['sswd'].sum() / 1000000
     dff = dff.reset_index()
     data['WaterExtraction'] = plotting.groundwater_extraction(dff, layout, 'Groundwater extraction (Mm3)')
 
@@ -619,23 +619,23 @@ def update_results(selection, map_type, data_current):
                                                                          data_current['level'],
                                                                          ['water_delivered.gz', 'crop_production.gz'])
 
-            df = dff_delivered.groupby(['Year', 'Governorate'])[['value']].sum() / 1000000
+            df = dff_delivered.groupby(['Year', 'Governorate'])[['sswd']].sum() / 1000000
             df.reset_index(inplace=True)
 
 
             data['WaterDeliveredGov'] = plotting.plot_water_delivered_by_gov(df, layout,
                                                                              'Annual water delivered by Governorate (Mm3)',)
 
-            df = crop_production.groupby(['Year', 'Governorate'])[['value']].sum() / 1000000
+            df = crop_production.groupby(['Year', 'Governorate'])[['production']].sum() / 1000000
             df.reset_index(inplace=True)
 
             data['CropProduction'] = plotting.plot_production(df, layout,
                                                               'Annual cropland production by Governorate (kton)',
                                                               'Governorate')
 
-            df = crop_production.groupby(['Governorate', 'Year', 'variable'])[['value']].sum() / 1000000
+            df = crop_production.groupby(['Governorate', 'Year', 'variable'])[['production']].sum() / 1000000
             df.reset_index(inplace=True)
-            df = df.groupby(['Governorate', 'variable'])[['value']].mean().reset_index()
+            df = df.groupby(['Governorate', 'variable'])[['production']].mean().reset_index()
             data['CropProductionByType'] = plotting.plot_production_by_gov(df, layout,
                                                                                   'Annual average cropland production (kton)',
                                                                                   'variable', 'Governorate')
@@ -651,7 +651,6 @@ def update_results(selection, map_type, data_current):
                                                                       ['water_delivered.gz', 'water_requirements.gz'])
 
         dff, dff_unmet = scripts.read_data.get_demand_data(water_delivered, water_required, name)
-        print(dff)
 
         data[f'{name}WaterDemand'] = plotting.plot_water_delivered(dff, layout, 'Water demand (Mm3)')
         data[f'{name}UnmetDemand'] = plotting.plot_unmet_demand(dff_unmet, layout, 'Unmet demand (%)')
@@ -661,7 +660,7 @@ def update_results(selection, map_type, data_current):
                                                     data_current['eto'], data_current['level'],
                                                     ['crop_production.gz'])
             df = crop_data.loc[crop_data['point'] == name]
-            df = df.groupby(['Year', 'variable'])[['value']].sum() / 1000000
+            df = df.groupby(['Year', 'variable'])[['production']].sum() / 1000000
             df.reset_index(inplace=True)
 
             data[f'{name}CropProduction'] = plotting.plot_production(df, layout,
@@ -674,8 +673,8 @@ def update_results(selection, map_type, data_current):
                                                 data_current['eto'], data_current['level'],
                                        'groundwater_pumping.gz')
         dff = gw_pumped.loc[gw_pumped['point'] == name]
-        dff = dff.groupby(['Year', 'type', 'point']).agg({'value': lambda x: sum(x) / 1000000,
-                                                          'SWPA_E_': lambda x: sum(x) / 1000000,
+        dff = dff.groupby(['Year', 'type', 'point']).agg({'sswd': lambda x: sum(x) / 1000000,
+                                                          'pa_e': lambda x: sum(x) / 1000000,
                                                           'wtd_m': 'mean'})
         dff = dff.reset_index()
         data['water'] = plotting.plot_water_supply(dff, [colors['water']], layout, 'Water supplied (Mm3)')
@@ -696,7 +695,7 @@ def update_results(selection, map_type, data_current):
         wwtp_data = scripts.read_data.load_data(my_path, data_current['scenario'], data_current['eto'],
                                                 data_current['level'], 'wwtp_data.gz')
         dff = wwtp_data.loc[wwtp_data['point'] == name]
-        dff = dff.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
+        dff = dff.groupby(['Year', 'type', 'point'])[['sswd', 'pa_e']].sum() / 1000000
         dff = dff.reset_index()
         data[f'{name}TreatedWastewater'] = plotting.plot_water_supply(dff, [colors['water']], layout,
                                                                       'Treated wastewater (Mm3)')
@@ -711,7 +710,7 @@ def update_results(selection, map_type, data_current):
         desal_data = scripts.read_data.load_data(my_path, data_current['scenario'], data_current['eto'],
                                                  data_current['level'], 'desal_data.gz')
         dff = desal_data.loc[desal_data['point'] == name]
-        dff = dff.groupby(['Year', 'type', 'point'])[['value', 'SWPA_E_']].sum() / 1000000
+        dff = dff.groupby(['Year', 'type', 'point'])[['sswd', 'pa_e']].sum() / 1000000
         dff = dff.reset_index()
         data[f'{name}DesalWater'] = plotting.plot_water_supply(dff, [colors['water']],
                                                                layout, 'Water desalinated (Mm3)')
@@ -727,9 +726,9 @@ def update_results(selection, map_type, data_current):
                                               data_current['level'], 'pipelines_data.gz')
         dff = pl_flow.loc[pl_flow['pipeline'] == name]
         dff = dff.groupby(['Year', 'pipeline']).agg({'water_use': lambda value: sum(value) / 1000000,
-                                                     'SWPA_E_': lambda value: sum(value) / 1000000,
+                                                     'pa_e': lambda value: sum(value) / 1000000,
                                                      'pipeline_length': 'first'}).reset_index()
-        dff.rename(columns={'water_use': 'value'}, inplace=True)
+        dff.rename(columns={'water_use': 'sswd'}, inplace=True)
         data[f'{name}WaterConveyed'] = plotting.plot_water_supply(dff, [colors['water']],
                                                                   layout, 'Water conveyed (Mm3)')
         data[f'{name}PumpingEnergy'] = plotting.plot_energy_for_pumping(dff, [colors['energy']],
@@ -745,7 +744,7 @@ def update_results(selection, map_type, data_current):
                                               data_current['level'], 'pipelines_data.gz')
         dff = pl_flow.loc[pl_flow['point'] == name]
         dff = dff.groupby(['Year', 'type', 'point'])[['water_use']].sum() / 1000000
-        dff.rename(columns={'water_use': 'value'}, inplace=True)
+        dff.rename(columns={'water_use': 'sswd'}, inplace=True)
         dff = dff.reset_index()
         data[f'{name}WaterSupplied'] = plotting.plot_water_supply(dff, [colors['water']], layout,
                                                                   'Water supplied (Mm3)')
@@ -756,7 +755,7 @@ def update_results(selection, map_type, data_current):
                                                       data_current['eto'], data_current['level'],
                                                       ['water_delivered.gz'])
         dff = water_delivered.loc[water_delivered['point'] == name]
-        dff = dff.groupby(['Year', 'type', 'point'])[['value']].sum() / 1000000
+        dff = dff.groupby(['Year', 'type', 'point'])[['sswd']].sum() / 1000000
         dff.reset_index(inplace=True)
         data[f'{name}WaterSupplied'] = plotting.plot_water_supply(dff, [colors['water']],
                                                                   layout, 'Water conveyed (Mm3)')
@@ -768,14 +767,14 @@ def update_results(selection, map_type, data_current):
                                                                      data_current['level'], ['water_delivered.gz', 'crop_production.gz'])
 
         df = dff_delivered.loc[dff_delivered['Governorate']==name]
-        df = df.groupby(['Year', 'type'])['value'].sum() / 1000000
+        df = df.groupby(['Year', 'type'])['sswd'].sum() / 1000000
         df = df.reset_index()
 
         data[f'{name}WaterDelivered'] = plotting.water_delivered(df, layout,
                                                                  'Annual water delivered (Mm3)')
 
         df = crop_production.loc[crop_production['Governorate']==name]
-        df = df.groupby(['Year', 'variable'])[['value']].sum() / 1000000
+        df = df.groupby(['Year', 'variable'])[['production']].sum() / 1000000
         df.reset_index(inplace=True)
         data[f'{name}CropProduction'] = plotting.plot_production(df, layout,
                                                                  'Annual cropland production by type (kton)',
@@ -801,7 +800,7 @@ def update_level_dropdown(scenario):
                                      'by 10 percent': ' by 10percent',
                                      'by 20 percent': ' by 20percent'},
                   'New Resources': {'Select...': ''},
-                  'Reduce NRW': {'Select...': ' to 20 percent',
+                  'Reduce NRW to 20 percent': {'Select...': '',
                                  'to 30 percent': ' to 30 percent',
                                  'to 20 percent': ' to 20 percent'},
                   'Increased Water Productivity': {'Select...': ''}}
@@ -829,7 +828,7 @@ def update_scenario_title(ts, data):
                                      ' by 10percent': 'by 10 percent',
                                      ' by 20percent': 'by 20 percent'},
                   'New Resources': {'': ''},
-                  'Reduce NRW': {'': '',
+                  'Reduce NRW to 20 percent': {'': '',
                                  ' to 30 percent': 'to 30 percent',
                                  ' to 20 percent': 'to 20 percent'},
                   'Increased Water Productivity': {'': ''}}
