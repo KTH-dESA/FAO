@@ -50,8 +50,8 @@ def plot_pipelines(df):
     color = 'rgb(100,100,100)'
     trace = px.line_mapbox(df, lat="lat", lon="lon", color='type',
                            color_discrete_map={'pipeline': color},
-                           custom_data=['type', 'name'], hover_name='name')
-    trace.update_traces(mode='markers+lines', marker={'opacity': 0})
+                           )
+    trace.update_traces(marker={'opacity': 0}, hoverinfo='skip')
     return trace.data
 
 
@@ -101,7 +101,7 @@ def pumping_efficiency(df, initial_eff, final_eff, init_year, end_year):
     dff.loc[~dff['type'].isin(['Water conveyance', 'Groundwater supply']), 'eff'] = 1
     return dff
 
-def energy_demand(df, layout, title, initial_eff, final_eff):
+def energy_demand(df, layout, title):
     # eff_val = 0.65
     # if eff_val > 0.45:
     #     eff = np.arange(0.45, eff_val+0.00001, (eff_val-0.45) / (2050-2020))
@@ -111,9 +111,6 @@ def energy_demand(df, layout, title, initial_eff, final_eff):
     #     df['valueWithEff'] = df['value'] / df['Eff']
     # else:
     #     df['valueWithEff'] = df['value'] / 0.45
-    df = pumping_efficiency(df, initial_eff, final_eff, 2020, 2050)
-    df['pa_e'] /= df['eff']
-
     fig = px.bar(df, x='Year', y='pa_e', color='type',
                   color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
@@ -130,9 +127,9 @@ def plot_water_delivered(df, layout, title):
     :return: Plotly figure object
     """
     df['sswd'] = round(df['sswd'], 4)
-    fig = px.line(df, x='Year', y='sswd', color='label',
+    fig = px.bar(df, x='Year', y='sswd', #color='label',
                   color_discrete_sequence=px.colors.qualitative.Dark2)
-    fig.update_traces(fill='tonexty')
+    # fig.update_traces(fill='tonexty')
     fig.update_layout(layout, title=title)
     return fig
 
@@ -159,7 +156,7 @@ def plot_water_supply(df, colors, layout, title):
     :return: Plotly figure object
     """
     df['sswd'] = round(df['sswd'], 4)
-    fig = px.area(df, x='Year', y='sswd', color_discrete_sequence=colors)
+    fig = px.bar(df, x='Year', y='sswd', color_discrete_sequence=colors)
     fig.update_layout(layout, title=title)
     return fig
 
@@ -178,7 +175,7 @@ def plot_depth_groundwater(df, layout, title):
     return fig
 
 
-def plot_energy_for_pumping(df, colors, layout, title, initial_eff, final_eff):
+def plot_energy_for_pumping(df, colors, layout, title):
     """
     :param df: tidy dataframe containing year and energy demand (SWPA_E_) for
     pumping
@@ -188,9 +185,8 @@ def plot_energy_for_pumping(df, colors, layout, title, initial_eff, final_eff):
     :return: Plotly figure object
     """
     # df['value'] = round(df['SWPA_E_'], 4)
-    df = pumping_efficiency(df, initial_eff, final_eff, 2020, 2050)
-    df['pa_e'] /= df['eff']
-    fig = px.area(df, x='Year', y='pa_e',
+
+    fig = px.bar(df, x='Year', y='pa_e',
                   color_discrete_sequence=colors)
     fig.update_layout(layout, title=title)
     return fig
@@ -234,7 +230,7 @@ def plot_water_delivered_by_gov(df, layout, title):
               '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
-    fig = px.area(df, x='Year', y='sswd', color='Governorate',
+    fig = px.bar(df, x='Year', y='sswd', color='Governorate',
                   title=title,
                   color_discrete_sequence=colors)
     fig.update_layout(layout)
