@@ -57,7 +57,7 @@ def plot_pipelines(df):
 
 def water_delivered(df, layout, title):
     fig = px.bar(df, x='Year', y='sswd', color='type',
-                  color_discrete_sequence=px.colors.qualitative.Dark2)
+                 color_discrete_sequence=px.colors.qualitative.Dark2)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
     fig.update_layout(layout, title=title)
@@ -76,13 +76,13 @@ def wtd_plot(df, layout, title):
     fig = px.line(df, x='Date', y='wtd_m', color='point',
                   color_discrete_sequence=px.colors.qualitative.Vivid)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' + '<br><b>Year</b>: %{x}')
-    fig.update_layout(layout, yaxis=dict(range=[df['wtd_m'].max()*1.1, df['wtd_m'].min()*0.9]), title=title)
+    fig.update_layout(layout, yaxis=dict(range=[df['wtd_m'].max() * 1.1, df['wtd_m'].min() * 0.9]), title=title)
     return fig
 
 
 def groundwater_extraction(df, layout, title):
     fig = px.bar(df, x='Year', y='sswd', color='point',
-                  color_discrete_sequence=px.colors.qualitative.G10)
+                 color_discrete_sequence=px.colors.qualitative.G10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
     fig.update_layout(layout, title=title)
@@ -101,6 +101,7 @@ def pumping_efficiency(df, initial_eff, final_eff, init_year, end_year):
     dff.loc[~dff['type'].isin(['Water conveyance', 'Groundwater supply']), 'eff'] = 1
     return dff
 
+
 def energy_demand(df, layout, title):
     # eff_val = 0.65
     # if eff_val > 0.45:
@@ -112,7 +113,7 @@ def energy_demand(df, layout, title):
     # else:
     #     df['valueWithEff'] = df['value'] / 0.45
     fig = px.bar(df, x='Year', y='pa_e', color='type',
-                  color_discrete_sequence=px.colors.qualitative.T10)
+                 color_discrete_sequence=px.colors.qualitative.T10)
     fig.update_traces(hovertemplate='<b>Value</b>: %{y:.2f}' +
                                     '<br><b>Year</b>: %{x}')
     fig.update_layout(layout, title=title)
@@ -127,8 +128,8 @@ def plot_water_delivered(df, layout, title):
     :return: Plotly figure object
     """
     df['sswd'] = round(df['sswd'], 4)
-    fig = px.bar(df, x='Year', y='sswd', #color='label',
-                  color_discrete_sequence=px.colors.qualitative.Dark2)
+    fig = px.bar(df, x='Year', y='sswd',  # color='label',
+                 color_discrete_sequence=px.colors.qualitative.Dark2)
     # fig.update_traces(fill='tonexty')
     fig.update_layout(layout, title=title)
     return fig
@@ -187,7 +188,7 @@ def plot_energy_for_pumping(df, colors, layout, title):
     # df['value'] = round(df['SWPA_E_'], 4)
 
     fig = px.bar(df, x='Year', y='pa_e',
-                  color_discrete_sequence=colors)
+                 color_discrete_sequence=colors)
     fig.update_layout(layout, title=title)
     return fig
 
@@ -205,6 +206,7 @@ def plot_production(df, layout, title, color):
                       # bargap=0
                       )
     return fig
+
 
 def plot_production_by_gov(df, layout, title, y, color):
     colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4',
@@ -231,7 +233,24 @@ def plot_water_delivered_by_gov(df, layout, title):
               '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
               '#000075', '#808080', '#ffffff', '#000000']
     fig = px.bar(df, x='Year', y='sswd', color='Governorate',
-                  title=title,
-                  color_discrete_sequence=colors)
+                 title=title,
+                 color_discrete_sequence=colors)
+    fig.update_layout(layout)
+    return fig
+
+
+def crop_per_drop(df, layout, title):
+    fig = px.line(df, x='Year', y='crop_per_drop',
+                  color_discrete_sequence=px.colors.qualitative.T10, title=title)
+    fig.update_layout(layout)
+    return fig
+
+def crop_per_drop_governorate(df, layout, title):
+    colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4',
+              '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#e6beff',
+              '#9a6324', '#fffac8', '#800000', '#aaffc3', '#808000', '#ffd8b1',
+              '#000075', '#808080', '#ffffff', '#000000']
+    fig = px.line(df, x='Year', y='crop_per_drop', color='Governorate',
+                  color_discrete_sequence=colors, title=title)
     fig.update_layout(layout)
     return fig
