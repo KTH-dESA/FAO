@@ -114,12 +114,10 @@ scenario_options = html.Div(
     [
         title_info(title='Select scenario', info_id='scenario-info', info_title='Scenario information',
                    modal_content=[
-                       html.P('Four scenarios have been analysed to date in order to explore nexus interactions and '
+                       html.P('Four scenarios were analysed in order to explore nexus interactions and '
                               'the impact any given nexus solution or policy measure targeted to one of the systems '
                               '(i.e. water, energy or agriculture), may have upon the other systems. '
-                              'The scenarios evaluated so far are a reference (Business as Usual), an improved '
-                              'agricultural efficiency and a new water resources scenario '
-                              '(i.e. New desalinated water), and are run for 30 years from 2020 to 2050.'),
+                              'The scenarios evaluated run for 30 years from 2020 to 2050.'),
                        html.H6('Reference scenario'),
                        html.P('This scenario takes a Business as Usual approach where the main trends '
                               '(in terms of demand, supply and growth) are kept unchanged. It assumes that '
@@ -135,7 +133,12 @@ scenario_options = html.Div(
                               'achieve by year 2050.'),
                        html.H6('New water resources scenario'),
                        html.P('This scenario assumes the realization of the Red Sea-Dead Sea project and new '
-                              'desalination plant Red-Dead (110 MCM/yr).')]),
+                              'desalination plant Red-Dead (110 MCM/yr).'),
+                       html.H6('Integrated strategies scenario'),
+                       html.P('This scenario considers combined strategies of augmenting water supplies '
+                              'through seawater desalination, reducing non-revenue and mitigating irrigation water '
+                              'demands through increased water productivity.')
+                   ]),
         html.Div(
             dbc.RadioItems(
                 id="rb-scenario",
@@ -145,6 +148,7 @@ scenario_options = html.Div(
                     {"label": "New water resources", "value": 'New Resources'},
                     {"label": "Reduce non-revenue water", "value": 'Reduce NRW to 20 percent'},
                     {"label": "Increased water productivity", "value": 'Increased Water Productivity'},
+                    {"label": "Integrated strategies", "value": 'Integrated NRW 20'},
                 ],
                 value='Reference',
                 className='checklist-selected-style',
@@ -236,7 +240,6 @@ energy_options = html.Div(
     className='options',
     # hidden=True,
 )
-
 
 save_scenario = html.Div(
     [
@@ -414,20 +417,24 @@ map = html.Div(
         dcc.Loading(
             id="loading-map",
             type="default",
-            children=dcc.Graph(id="map",
-                         config=dict(showSendToCloud=True,
-                                     toImageButtonOptions=dict(format='png',
-                                                               filename='map',
-                                                               height=700,
-                                                               width=700, scale=2)))
+            children=[html.Div(dcc.Graph(id="map",
+                               config=dict(showSendToCloud=True,
+                                           toImageButtonOptions=dict(format='png',
+                                                                     filename='map',
+                                                                     height=700,
+                                                                     width=700, scale=2))),
+                               id='map-container'),
+                      dcc.Store(id='current')
+                      ]
         )
+
     ],
     id='map-div',
     className='col-xl-7 col-lg-12',
 )
 
 graphs = html.Div([results_header,
-                   html.Div(dbc.Col(dcc.Loading(id='graphs', style=dict(height='10px'))), id='graphs-container'),
+                   html.Div(dcc.Loading(id='graphs'), id='graphs-container'),
                    footer_results
                    ],
                   id='results-container',
@@ -435,7 +442,7 @@ graphs = html.Div([results_header,
 
 content = html.Div([map, graphs], id="page-content")
 
-app.layout = html.Div([dcc.Store(id='current'), dcc.Store(id='compare', data={}), sidebar, content])
+app.layout = html.Div([dcc.Store(id='compare', data={}), sidebar, content])
 
 
 # Helper funtions
@@ -493,7 +500,12 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow,
         dff_energy = dff_energy.append(dff, sort=False)
     # dff_energy.rename(columns={'pa_e': 'value'}, inplace=True)
 
-    data['WaterDelivered'] = plotting.water_delivered(dff_delivered, layout, 'Water delivered (Mm3)')
+    dff_agri_delivered = water_delivered.loc[water_delivered['type'] == 'Agriculture']
+    dff_agri_delivered = dff_agri_delivered.groupby(['Year'])[['sswd']].sum() / 1000000
+    dff_agri_delivered['crop_per_drop'] = df_production.groupby('Year')['production'].sum() / dff_agri_delivered['sswd']
+    dff_agri_delivered.reset_index(inplace=True)
+
+    data['WaterDelivered'] = plotting.water_delivered(dff_delivered, layout, 'Water delivered (Mm<sup>3</sup>)')
     data['UnmetDemand'] = plotting.unmet_demand(dff_unmet.reset_index(), layout, 'Unmet water demand (%)')
 
     dff_wtd = gw_pumped.copy()
@@ -505,11 +517,14 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow,
     dff['point'] = [x[1] for x in dff['point'].str.split('_')]
     dff = dff.groupby(['Year', 'point'])['sswd'].sum() / 1000000
     dff = dff.reset_index()
-    data['WaterExtraction'] = plotting.groundwater_extraction(dff, layout, 'Groundwater extraction (Mm3)')
+    data['WaterExtraction'] = plotting.groundwater_extraction(dff, layout, 'Groundwater extraction (Mm<sup>3</sup>)')
 
     data['CropProduction'] = plotting.plot_production(df_production, layout,
                                                       'Annual cropland production by type (kton)',
                                                       'variable')
+
+    data['CropPerDrop'] = plotting.crop_per_drop(dff_agri_delivered, layout,
+                                                 'Agricultural water productivity (kg/m<sup>3</sup>)')
 
     data['EnergyDemand'] = plotting.energy_demand(dff_energy,
                                                   layout, 'Energy demand (GWh)')
@@ -517,10 +532,8 @@ def get_graphs(data, water_delivered, water_required, gw_pumped, pl_flow,
     return data
 
 
-##### need to change the compare scenarios logic to the calback of the compare modal
-#### also add logic to the save button and modal
 @app.callback(
-    [Output("current", "data"), Output('map', 'selectedData')],
+    Output("current", "data"),
     [
         Input("button-apply", "n_clicks"),
         # Input("popover-map-target", "n_clicks"),
@@ -546,7 +559,7 @@ def update_current_data(n_1, scenario, eto, efficiency):
     #     map = plot_map(water_delivered, water_required, gw_pumped, pl_flow, wwtp_data, desal_data)
     #     graphs = {}
     #     data_dict = dict(map=map, graphs=graphs, scenario=scenario, level=level, eff_end=eff_end, eff_init=eff_init)
-    return data_dict, None
+    return data_dict
 
 
 @app.callback(
@@ -573,8 +586,8 @@ def toggle_collapse(n, is_open):
 
 @app.callback(
     [Output("graphs", "children"), Output('resultsTitle', 'children')],
-    [Input('map', 'selectedData'), Input('map-selection', 'value')],
-    [State('current', 'data')],
+    [Input('map', 'selectedData')],
+    [State('map-selection', 'value'), State('current', 'data')],
     prevent_initial_call=True
 )
 def update_results(selection, map_type, data_current):
@@ -596,27 +609,27 @@ def update_results(selection, map_type, data_current):
             df = dff_delivered.groupby(['Year', 'Governorate'])[['sswd']].sum() / 1000000
             df.reset_index(inplace=True)
 
-
             data['WaterDeliveredGov'] = plotting.plot_water_delivered_by_gov(df, layout,
-                                                                             'Annual water delivered by Governorate (Mm3)',)
+                                                                             'Annual water delivered by Governorate (Mm3)', )
 
-            df = crop_production.groupby(['Year', 'Governorate'])[['production']].sum() / 1000000
-            df.reset_index(inplace=True)
+            df_production = crop_production.groupby(['Year', 'Governorate'])[['production']].sum() / 1000000
+            df_production.reset_index(inplace=True)
 
-            data['CropProduction'] = plotting.plot_production(df, layout,
+            df_production['crop_per_drop'] = df_production['production'] / df['sswd']
+
+            data['CropProduction'] = plotting.plot_production(df_production, layout,
                                                               'Annual cropland production by Governorate (kton)',
                                                               'Governorate')
+            data[f'{name}CropPerDrop'] = plotting.crop_per_drop_governorate(df_production, layout,
+                                                                   'Agricultural water productivity (kg/m<sup>3</sup>)')
 
             df = crop_production.groupby(['Governorate', 'Year', 'variable'])[['production']].sum() / 1000000
             df.reset_index(inplace=True)
             df = df.groupby(['Governorate', 'variable'])[['production']].mean().reset_index()
-            data['CropProductionByType'] = plotting.plot_production_by_gov(df, layout,
-                                                                                  'Annual average cropland production (kton)',
-                                                                                  'variable', 'Governorate')
 
-            # data['CropProductionByGovernorate'] = plotting.plot_production_by_gov(df, layout,
-            #                                                                       'Total cropland production (Mton)',
-            #                                                                       'Governorate', 'variable')
+            data['CropProductionByType'] = plotting.plot_production_by_gov(df, layout,
+                                                                           'Annual average cropland production (kton)',
+                                                                           'variable', 'Governorate')
 
     elif selection['points'][0]['customdata'][0] in ['Municipality', 'Industry', 'Agriculture']:
         name = selection['points'][0]['customdata'][1]
@@ -637,9 +650,15 @@ def update_results(selection, map_type, data_current):
             df = df.groupby(['Year', 'variable'])[['production']].sum() / 1000000
             df.reset_index(inplace=True)
 
+            df_productivity = df.groupby('Year')[['production']].sum()
+            df_productivity['crop_per_drop'] = df_productivity['production'] / dff.groupby('Year')['sswd'].sum()
+            df_productivity.reset_index(inplace=True)
+
             data[f'{name}CropProduction'] = plotting.plot_production(df, layout,
                                                                      'Annual cropland production by type (kton)',
                                                                      'variable')
+            data[f'{name}CropPerDrop'] = plotting.crop_per_drop(df_productivity, layout,
+                                                                'Agricultural water productivity (kg/m<sup>3</sup>)')
 
     elif selection['points'][0]['customdata'][0] in ['Groundwater supply']:
         name = selection['points'][0]['customdata'][1]
@@ -727,21 +746,29 @@ def update_results(selection, map_type, data_current):
         name = selection['points'][0]['customdata'][0]
 
         dff_delivered, crop_production = scripts.read_data.load_data(data_current['scenario'], data_current['eto'],
-                                                                     data_current['efficiency'], ['water_delivered.gz', 'crop_production.gz'])
+                                                                     data_current['efficiency'],
+                                                                     ['water_delivered.gz', 'crop_production.gz'])
 
-        df = dff_delivered.loc[dff_delivered['Governorate']==name]
+        df = dff_delivered.loc[dff_delivered['Governorate'] == name]
         df = df.groupby(['Year', 'type'])['sswd'].sum() / 1000000
         df = df.reset_index()
 
         data[f'{name}WaterDelivered'] = plotting.water_delivered(df, layout,
                                                                  'Annual water delivered (Mm3)')
 
-        df = crop_production.loc[crop_production['Governorate']==name]
-        df = df.groupby(['Year', 'variable'])[['production']].sum() / 1000000
-        df.reset_index(inplace=True)
-        data[f'{name}CropProduction'] = plotting.plot_production(df, layout,
+        df_production = crop_production.loc[crop_production['Governorate'] == name]
+        df_production = df_production.groupby(['Year', 'variable'])[['production']].sum() / 1000000
+        df_production.reset_index(inplace=True)
+
+        df_productivity = df_production.groupby('Year')[['production']].sum()
+        df_productivity['crop_per_drop'] = df_productivity['production'] / df.groupby('Year')['sswd'].sum()
+        df_productivity.reset_index(inplace=True)
+
+        data[f'{name}CropProduction'] = plotting.plot_production(df_production, layout,
                                                                  'Annual cropland production by type (kton)',
                                                                  'variable')
+        data[f'{name}CropPerDrop'] = plotting.crop_per_drop(df_productivity, layout,
+                                                            'Agricultural water productivity (kg/m<sup>3</sup>)')
 
     plots = []
     for key, value in data.items():
@@ -795,13 +822,15 @@ def update_scenario_title(ts, data):
 
 
 @app.callback(
-    [Output("map", "figure"), Output("loading-map", "children")],
+    [Output("map", "figure"), Output("map-container", "children")],
     [
         Input('map-background', 'value'),
         Input('map-selection', 'value'),
+        Input('current', 'modified_timestamp'),
     ],
+    prevent_initial_call=True
 )
-def update_map(background, map_type):
+def update_map(background, map_type, ts):
     map = plot_map(background, map_type)
     return {}, dcc.Graph(figure=map, id="map",
                          config=dict(showSendToCloud=True,
@@ -809,6 +838,7 @@ def update_map(background, map_type):
                                                                filename='map',
                                                                height=700,
                                                                width=700, scale=2)))
+
 
 
 # @app.callback(
