@@ -1,4 +1,3 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/KTH-dESA/FAO/HEAD)
 # Climate, Land and Energy Analytical study of Potential Nexus Issues in Jordan and Morocco
 This repository contains the working code for the “Implementing the 2030 Agenda 
 for water efficiency/productivity and water sustainability in NENA countries” project. 
