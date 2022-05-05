@@ -76,3 +76,13 @@ machine in a local host by running `python Morocco\ model/dashboard/index.py`
 Notice that you would need to create and environment using one of the `environment.yml` 
 files found inside each case dashboard folder, and activate it before running the 
 dashboard locally.
+
+## Credits
+
+**Conceptualization:** [Youssef Almulla](https://www.kth.se/profile/almulla), [Camilo Ramirez](https://www.kth.se/profile/camilorg), [Brian Joyce](https://www.sei.org/people/brian-joyce/), [Annette Huber-Lee](https://www.sei.org/people/annette-huber-lee/) <br /> and [Francesco Fuso-Nerini](https://www.kth.se/profile/ffn) <br />
+**Methodology:** [Youssef Almulla](https://www.kth.se/profile/almulla) and [Camilo Ramirez](https://github.com/camiloramirezgo) on the energy model, [Youssef Almulla](https://www.kth.se/profile/almulla) on the decarbonization strategies of the agricultural sector, [Camilo Ramirez](https://github.com/camiloramirezgo) on the softlinking of models, [Brian Joyce](https://www.sei.org/people/brian-joyce/) on the water-agriculture (WEAP-MABIA) model, all on the participatory approach and overall Nexus approach <br />
+**Software:** [Camilo Ramirez](https://github.com/camiloramirezgo) & [Youssef Almulla](https://github.com/JZF07) <br />
+**Management and Advisory support:** [Annette Huber-Lee](https://www.sei.org/people/annette-huber-lee/) & [Francesco Fuso-Nerini](https://www.kth.se/profile/ffn)<br />
+
+**Acknowledgements** <br />
+We would like to acknowledge the Food and Agricultural Organization (FAO), the Jordan Ministry of Water and Irrigation, the Regional Office for Agricultural Development in Souss-Massa (ORMVA), and a special thanks goes to Domitille Vallee and Jiro Ariyama (FAO), and Prof. Lahcen Kenny (FAO consultant) for their valuable contribution to this work by providing many of the input data and validating modelling assumptions.
