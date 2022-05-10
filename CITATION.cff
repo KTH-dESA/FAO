@@ -1,11 +1,14 @@
-@software{camilo_ramirez_2022_6521305,
-  author       = {Camilo Ramírez and
-                  Youssef Almulla},
-  title        = {Climate, Land and Energy Analytical study of Potential Nexus Issues in Jordan and Morocco},
-  month        = may,
-  year         = 2022,
-  publisher    = {Zenodo},
-  version      = {Version1.0},
-  doi          = {10.5281/zenodo.6521305},
-  url          = {https://doi.org/10.5281/zenodo.6521305}
-}
+cff-version: 1.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Ramírez "
+  given-names: "Camilo "
+  orcid: "https://orcid.org/0000-0002-7217-3838"
+- family-names: "Almulla"
+  given-names: "Youssef "
+  orcid: "https://orcid.org/0000-0003-3015-8610"
+title: "My Research Software"
+version: 1.0
+doi: 10.5281/zenodo.6521305
+date-released: 2022-05-03
+url: "https://doi.org/10.5281/zenodo.6521305"
